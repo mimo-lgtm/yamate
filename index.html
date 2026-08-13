@@ -56,13 +56,12 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </header>
 <main>
 <section id="home" class="page active">
-<!-- ★ イベントはこのサイトで完結 - 上部バナーは下のボードへスクロール -->
 <div style="background:linear-gradient(90deg,#fff3cd 0%, #ffe0a3 100%);border:3px solid #e8a33d;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 4px 12px rgba(232,163,61,0.3);">
 <div style="flex:1;min-width:220px;">
-<div style="font-size:14px;font-weight:900;color:#c1502f;display:flex;align-items:center;gap:6px;">🎉 山手町のイベントはこちら！</div>
+<div style="font-size:14px;font-weight:900;color:#c1502f;">🎉 山手町のイベントはこちら！</div>
 <div style="font-size:13px;color:#5a4a2f;margin-top:2px;">イベント情報はこのサイトで完結 - 下のイベントボードをチェック</div>
 </div>
-<button onclick="document.getElementById('event-board').scrollIntoView({behavior:'smooth',block:'start'});" style="display:inline-flex;align-items:center;gap:8px;background:#e8a33d;color:#1b1f1d;padding:14px 22px;border-radius:10px;border:none;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;white-space:nowrap;cursor:pointer;">📅 イベントを見る ↓</button>
+<button onclick="scrollToEventBoard()" style="display:inline-flex;align-items:center;gap:8px;background:#e8a33d;color:#1b1f1d;padding:14px 22px;border-radius:10px;border:none;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">📅 イベントを見る ↓</button>
 </div>
 
 <div class="card" style="background:#23282a;color:#eef0e4;border:none;">
@@ -85,62 +84,19 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
 <h2 style="margin:0;font-size:16px;">📌 使い方｜1分で分かる</h2>
-<span style="font-size:11px;border:1px solid #2f7a6b;padding:2px 8px;border-radius:999px;background:#fff;">匿名・無料・音声入力🎙対応</span>
+<span style="font-size:11px;border:1px solid #2f7a6b;padding:2px 8px;border-radius:999px;">3ステップ</span>
 </div>
 <div class="flow3">
-<div class="flow-step"><div style="font-size:11px;color:#c9821f;font-weight:800;">STEP 01</div><div style="font-size:24px;">✍</div><h4 style="margin:6px 0;">自由に書く</h4><p style="font-size:12px;color:#666;">形式は不要。思ったことをそのまま書くだけ。</p></div>
-<div class="flow-step"><div style="font-size:11px;color:#c9821f;font-weight:800;">STEP 02</div><div style="font-size:24px;">🤖</div><h4 style="margin:6px 0;">AIが整理</h4><p style="font-size:12px;color:#666;">5つの視点・要約・タイトル・テーマを自動生成。</p></div>
-<div class="flow-step"><div style="font-size:11px;color:#c9821f;font-weight:800;">STEP 03</div><div style="font-size:24px;">📌</div><h4 style="margin:6px 0;">ボードに掲示</h4><p style="font-size:12px;color:#666;">同じテーマは自動統合。履歴も保存されます。</p></div>
-</div>
-<div style="margin-top:12px;padding:10px 12px;background:#eef0e4;border-radius:8px;font-size:12px;line-height:1.7;">
-💬 声のボード：山手町への気づきは5テーマに自動整理されます。<br>
-🏙 芦屋市の課題：町内で解決できないことは市全体のハブへ。別ウィンドウで開くので戻るのが簡単です。<br>
-<span style="font-size:11px;color:#888;">※ボードの初期投稿はたたき台の模擬投稿です。実際の声が増えると統合・更新されます。</span>
-</div>
-<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-<button class="big-btn amber" style="padding:9px 16px;font-size:13px;" onclick="showPage('assist')">✍ 声を届けてみる</button>
-<button class="big-btn ghost" style="padding:9px 16px;font-size:13px;" onclick="showPage('tree', document.querySelector('nav button:nth-child(3)'))">📌 声のボードを見る</button>
-<a href="https://mimo-lgtm.github.io/ashiya-issues/" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;border:1.5px solid #23282a;color:#23282a;text-decoration:none;font-weight:700;font-size:13px;">🏙 芦屋市の課題を開く →</a>
-<a href="https://suzukazecho.jimdofree.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;background:#e8a33d;color:#1b1f1d;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 3px 0 #c9821f;">🏠 山手町 公式サイト - イベントはこちら →</a>
+<div class="flow-step"><div style="font-size:24px;">✍</div><div style="font-weight:800;">① 声を届ける</div><div style="font-size:12px;color:#666;">音声でもテキストでもOK</div></div>
+<div class="flow-step"><div style="font-size:24px;">🤖</div><div style="font-weight:800;">② AIが整理</div><div style="font-size:12px;color:#666;">200字要約＋5つの視点に</div></div>
+<div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;color:#666;">6つのテーマに自動で分類</div></div>
 </div>
 </div>
 
-<!-- ★ 独立イベントセクション - 住民が一番興味あることを最上位に -->
-<div style="background:#fff;border:3px solid #e8a33d;border-radius:14px;padding:20px 22px;margin-bottom:20px;box-shadow:0 6px 18px rgba(232,163,61,0.25);">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
-<div style="display:flex;align-items:center;gap:10px;">
-<div style="background:#e8a33d;color:#1b1f1d;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;">🎉</div>
-<div>
-<div style="font-size:18px;font-weight:900;">山手町 イベント・企画ボード</div>
-<div style="font-size:12px;color:#666;">住民が一番楽しみにしている、集まる機会をここに集約</div>
-</div>
-</div>
-<a href="https://suzukazecho.jimdofree.com/" target="_blank" style="background:#1b1f1d;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:800;font-size:13px;">公式サイトで日程を確認 →</a>
-</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:14px;">
-<div style="background:#fff8e1;border:1.5px solid #e8a33d;border-radius:10px;padding:12px;">
-<div style="font-size:12px;font-weight:800;color:#c9821f;">📅 定例イベント</div>
-<div style="font-size:13px;margin-top:4px;line-height:1.6;">・毎月清掃活動<br>・防犯パトロール<br>・ゴミ回収</div>
-</div>
-<div style="background:#eef0e4;border:1.5px solid #2f7a6b;border-radius:10px;padding:12px;">
-<div style="font-size:12px;font-weight:800;color:#2f7a6b;">🎊 季節イベント</div>
-<div style="font-size:13px;margin-top:4px;line-height:1.6;">・夏祭り<br>・餅つき大会<br>・ラジオ体操</div>
-</div>
-<div style="background:#f3e8ff;border:1.5px solid #6d5aa8;border-radius:10px;padding:12px;">
-<div style="font-size:12px;font-weight:800;color:#6d5aa8;">💡 企画募集中</div>
-<div style="font-size:13px;margin-top:4px;line-height:1.6;">・こんなイベントしたい<br>・子ども企画<br>・多世代交流</div>
-<a href="#" onclick="showPage('assist',document.querySelector('nav button:nth-child(2)'));document.getElementById('userInput').value='イベント企画：';return false;" style="display:inline-block;margin-top:6px;background:#6d5aa8;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:11px;font-weight:700;">企画を投稿する →</a>
-</div>
-</div>
-<div id="eventBoardPreview" style="background:#fafafa;border-radius:8px;padding:10px;"></div>
-</div>
-
-<div class="section-lead"><h2>🗺 6つのテーマ｜地図とアップデート</h2><span class="tag">クリックで200文字の説明 / イベントは独立＋6分類にも</span></div>
-<div 
 <div id="event-board" class="card" style="border:3px solid #e8a33d;background:#fffcf0;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
 <h2 style="margin:0;font-size:18px;font-weight:900;">📅 山手町 イベントボード</h2>
-<button onclick="toggleEventForm()" style="background:#2f7a6b;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-weight:800;font-size:13px;">＋ イベントを追加</button>
+<button onclick="toggleEventForm()" style="background:#2f7a6b;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;">＋ イベントを追加</button>
 </div>
 <div style="display:flex;gap:8px;margin-bottom:12px;">
 <button id="btn-upcoming" onclick="showEventTab('upcoming')" style="background:#e8a33d;border:none;padding:8px 16px;border-radius:20px;font-weight:800;font-size:13px;">📅 今後のイベント</button>
@@ -149,27 +105,27 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div id="event-upcoming-list"></div>
 <div id="event-ideas-list" style="display:none;"></div>
 <div id="eventFormCard" class="card" style="display:none;background:#fff;border:2px solid #2f7a6b;margin-top:16px;">
-<h3>📝 新しいイベントを追加</h3>
+<h3 style="margin-bottom:12px;">📝 新しいイベントを追加</h3>
 <div style="display:grid;gap:10px;">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
 <div><label style="font-size:12px;font-weight:800;">日付 *</label><input id="evDate" type="date" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 <div><label style="font-size:12px;font-weight:800;">時間</label><input id="evTime" type="text" placeholder="10:00-12:00" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 </div>
-<div><label style="font-size:12px;font-weight:800;">タイトル *</label><input id="evTitle" type="text" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
+<div><label style="font-size:12px;font-weight:800;">タイトル *</label><input id="evTitle" type="text" placeholder="例：南護岸一斉清掃" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-<div><label style="font-size:12px;font-weight:800;">場所</label><input id="evPlace" type="text" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
-<div><label style="font-size:12px;font-weight:800;">カテゴリ</label><select id="evCategory" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"><option>定例</option><option>季節</option><option>企画</option></select></div>
+<div><label style="font-size:12px;font-weight:800;">場所</label><input id="evPlace" type="text" placeholder="南護岸集合" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
+<div><label style="font-size:12px;font-weight:800;">カテゴリ</label><select id="evCategory" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"><option>定例</option><option>季節</option><option>企画</option><option>清掃</option><option>防災</option></select></div>
 </div>
-<div><label style="font-size:12px;font-weight:800;">ステータス</label><select id="evStatus" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"><option>参加者募集中</option><option>企画中</option></select></div>
-<div><label style="font-size:12px;font-weight:800;">詳細 *</label><textarea id="evDetail" rows="4" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>
-<div><label style="font-size:12px;font-weight:800;">パスワード *</label><input id="evPassword" type="password" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
-<div id="evStatusMsg" style="font-size:12px;"></div>
-<div style="display:flex;gap:10px;"><button onclick="submitEventForm()" class="big-btn amber">保存</button><button onclick="toggleEventForm()" class="big-btn ghost">キャンセル</button></div>
+<div><label style="font-size:12px;font-weight:800;">ステータス</label><select id="evStatus" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"><option>参加者募集中</option><option>企画中</option><option>アイデア募集中</option><option>予定</option></select></div>
+<div><label style="font-size:12px;font-weight:800;">詳細 *</label><textarea id="evDetail" rows="4" placeholder="詳細を入力" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>
+<div><label style="font-size:12px;font-weight:800;">パスワード *</label><input id="evPassword" type="password" placeholder="suzukaze2026" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
+<div id="evStatusMsg" style="font-size:12px;min-height:18px;color:#c44;"></div>
+<div style="display:flex;gap:10px;"><button onclick="submitEventForm()" class="big-btn amber">✅ 保存する</button><button onclick="toggleEventForm()" class="big-btn ghost">キャンセル</button></div>
 </div>
 </div>
 </div>
 
-id="mapUpdateWrap"></div>
+<div id="mapUpdateWrap"></div>
 </section>
 
 <section id="assist" class="page">
@@ -177,7 +133,7 @@ id="mapUpdateWrap"></div>
 <div class="card">
 <h2>ノート</h2>
 <div style="margin-bottom:10px;"><label style="font-size:12px;font-weight:700;">投稿者名（任意）</label><br><input type="text" id="authorName" placeholder="匿名" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<textarea id="userInput" placeholder="自由に書いてください...&#10;例：南護岸の松並木が綺麗だった、など小さな気づきでもOK" style="width:100%;min-height:160px;padding:10px;border:1px solid #ccc;border-radius:6px;"></textarea>
+<textarea id="userInput" placeholder="自由に書いてください...&#10;例：小さな気づき、何でもOK" style="width:100%;min-height:160px;padding:10px;border:1px solid #ccc;border-radius:6px;"></textarea>
 <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
 <button type="button" id="micBtn" class="big-btn ghost" style="padding:9px 14px;font-size:13px;" onclick="toggleMic()">🎙 音声で入力する</button>
 <span id="micStatus" style="font-size:12px;color:#666;"></span>
