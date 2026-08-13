@@ -111,9 +111,9 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div><label style="font-size:12px;font-weight:800;">日付 *</label><input id="evDate" type="date" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 <div><label style="font-size:12px;font-weight:800;">時間</label><input id="evTime" type="text" placeholder="10:00-12:00" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 </div>
-<div><label style="font-size:12px;font-weight:800;">タイトル *</label><input id="evTitle" type="text" placeholder="例：南護岸一斉清掃" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
+<div><label style="font-size:12px;font-weight:800;">タイトル *</label><input id="evTitle" type="text" placeholder="例：山手緑地一斉清掃" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-<div><label style="font-size:12px;font-weight:800;">場所</label><input id="evPlace" type="text" placeholder="南護岸集合" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
+<div><label style="font-size:12px;font-weight:800;">場所</label><input id="evPlace" type="text" placeholder="前山公園集合" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
 <div><label style="font-size:12px;font-weight:800;">カテゴリ</label><select id="evCategory" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"><option>定例</option><option>季節</option><option>企画</option><option>清掃</option><option>防災</option></select></div>
 </div>
 <div><label style="font-size:12px;font-weight:800;">ステータス</label><select id="evStatus" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"><option>参加者募集中</option><option>企画中</option><option>アイデア募集中</option><option>予定</option></select></div>
@@ -161,7 +161,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div style="display:grid;gap:10px;margin-top:10px;">
 <div><label style="font-size:12px;font-weight:700;">お名前（匿名可）</label><input type="text" id="hirobaAuthor" placeholder="匿名可" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
 <div><label style="font-size:12px;font-weight:700;">写真</label><input type="file" id="hirobaImage" accept="image/*" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><div id="hirobaImagePreview" style="margin-top:8px;"></div></div>
-<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：松並木が綺麗でした、ここからの眺めが最高！とか" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
+<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：大阪湾の眺望が綺麗でした、ここからの眺めが最高！とか" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
 <div style="display:flex;gap:8px;flex-wrap:wrap;">
 <select id="hirobaCategory" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
 <button class="big-btn amber" onclick="submitHiroba()">📸 投稿する</button>
@@ -212,10 +212,10 @@ BASE_CATEGORIES.forEach(c=>{
 let SEED_IDEAS = [
 {big:"BIG-1",mid:"防犯パトロール",title:"オリジナル腕章で子どもを守る防犯活動",summary:"防犯委員でオリジナル腕章を作成。夕方の見守りで子ども達の安全を確保。顔の見える防犯が安心を生む。"},
 {big:"BIG-1",mid:"安否確認体制",title:"LINEで安否確認を効率化",summary:"班長負担を減らすため、LINEグループで安否確認。既読で確認できる仕組みを。"},
-{big:"BIG-2",mid:"緑化・景観保護",title:"松並木を守る憩いの場づくり",summary:"松並木は散歩やジョギングに最適。ベンチを置いて憩いの場に。景観を守りながら世代間交流を。"},
+{big:"BIG-2",mid:"緑化・景観保護",title:"松並木を守る憩いの場づくり",summary:"ライト坂は散歩やジョギングに最適。ベンチを置いて憩いの場に。景観を守りながら世代間交流を。"},
 {big:"BIG-2",mid:"道路・側溝整備",title:"急斜面の側溝清掃で雨天時の安全確保",summary:"大雨時に側溝が溢れる。定期的な清掃と点検で安全な道路環境を維持したい。"},
-{big:"BIG-3",mid:"世代間交流",title:"朝活コーヒーで顔の見える関係づくり",summary:"松並木で朝活コーヒーを開催。早朝の挨拶から始まるつながりが高齢者の孤立を防ぐ。"},
-{big:"BIG-6",mid:"夏祭り・餅つき",title:"夏祭りを復活させたい！",summary:"コロナで中止になっていた夏祭りを復活。やぐらを組んで盆踊り、屋台で賑わいを。子ども達の思い出作りに。"},
+{big:"BIG-3",mid:"世代間交流",title:"朝活コーヒーで顔の見える関係づくり",summary:"山手緑地で朝活コーヒーを開催。早朝の挨拶から始まるつながりが高齢者の孤立を防ぐ。"},
+{big:"BIG-6",mid:"夏祭り・餅つき",title:"夏祭りを復活させたい！",summary:"夏祭りを復活。やぐらを組んで盆踊り、屋台で賑わいを。子ども達の思い出作りに。"},
 {big:"BIG-6",mid:"清掃・美化イベント",title:"一斉清掃をもっと楽しく",summary:"ゴミ回収だけでなく、終了後のお茶会や子ども向け宝探しを組み合わせて参加者を増やしたい。"}
 ];
 const MOCK_HIROBA = [
@@ -231,7 +231,7 @@ let openCat=null;
 let currentEventTab='upcoming';
 let isEventIdeaMode=false;
 let EVENT_DATA = [
-{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"南護岸 松並木集合",category:"定例",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。松並木から釣りエリアまでを住民で一斉清掃します。軍手・トングは自治会で用意。お子さん連れ歓迎。終了後はお茶会あり。"},
+{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"前山公園 集合",category:"定例",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。松並木から釣りエリアまでを住民で一斉清掃します。軍手・トングは自治会で用意。お子さん連れ歓迎。終了後はお茶会あり。"},
 {id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"山手町 夏祭り2026 - 盆踊りと屋台",place:"前山公園",category:"季節",status:"企画中",detail:"コロナで中止になっていた夏祭りを3年ぶりに復活！やぐらを組んで盆踊り、子ども達の模擬店、ビアガーデンも。実行委員募集中。"},
 {id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"海眺望景観",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。体操後はみんなで朝のコーヒー・お茶会。"},
 {id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してオリジナル腕章をつけてパトロール。楽しく防犯意識を高めます。お菓子配布あり。"},
