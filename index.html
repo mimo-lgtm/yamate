@@ -251,9 +251,12 @@ const BASE_DESC = {
 "将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、山手町らしい持続可能な未来を描きます。"
 };
 let SEED_IDEAS = [
-{big:"BIG-1",mid:"防犯パトロール",title:"オリジナル腕章で子どもを守る防犯活動",summary:"防犯委員でオリジナル腕章を作成。"},
-{big:"BIG-2",mid:"緑化・景観保護",title:"山手の坂道沿いの松並木を守る憩いの場づくり",summary:"松並木は散歩やジョギングに最適。"},
-{big:"BIG-6",mid:"夏祭り・餅つき",title:"夏祭りを復活させたい！",summary:"コロナで中止になっていた夏祭りを復活。"}
+{big:"BIG-1",mid:"防犯パトロール",title:"オリジナル腕章で子どもを守る防犯活動",summary:"防犯委員でオリジナル腕章を作成。夕方の見守りで子ども達の安全を確保。顔の見える防犯が安心を生む。"},
+{big:"BIG-2",mid:"緑化・景観保護",title:"松並木を守る憩いの場づくり",summary:"松並木は散歩やジョギングに最適。ベンチを置いて憩いの場に。景観を守りながら世代間交流を。"},
+{big:"BIG-2",mid:"道路・側溝整備",title:"急斜面の側溝清掃で雨天時の安全確保",summary:"大雨時に側溝が溢れる。定期的な清掃と点検で安全な道路環境を維持したい。"},
+{big:"BIG-3",mid:"世代間交流",title:"朝活コーヒーで顔の見える関係づくり",summary:"松並木で朝活コーヒーを開催。早朝の挨拶から始まるつながりが高齢者の孤立を防ぐ。"},
+{big:"BIG-6",mid:"夏祭り・餅つき",title:"夏祭りを復活させたい！",summary:"コロナで中止になっていた夏祭りを復活。やぐらを組んで盆踊り、屋台で賑わいを。子ども達の思い出作りに。"},
+{big:"BIG-6",mid:"清掃・美化イベント",title:"一斉清掃をもっと楽しく",summary:"ゴミ回収だけでなく、終了後のお茶会や子ども向け宝探しを組み合わせて参加者を増やしたい。"}
 ];
 const MOCK_HIROBA = [
 {timestamp:"2026-05-10T10:00:00",author:"環境美化委員会",summary:"ゴールデンウィークの一日、皆で清掃活動に励みました。",category:"環境",imageUrl:"https://www.city.ashiya.lg.jp/kodomo/kodomohoiku/images/iwazonohoukatu01.jpg",description:"先日来の強風のために、落葉が多く、雑草も元気に出てきています。初めて清掃活動に参加された方も一緒に、五月晴れの緑地公園で楽しく清掃しました！"},
@@ -371,5 +374,27 @@ function postIdeaFromAI(){
 async function loadFromGAS(){ if(gasUrl.includes('AKfycby') && gasUrl.includes('...')){ renderEvents(); return; } try{ const res=await fetch(gasUrl+"?action=list"); const json=await res.json(); if(json.events && json.events.length>0){ EVENT_DATA = json.events.map(ev=>({ id: ev.id || "evt"+Date.now()+Math.random(), date: ev.date || "", time: ev.time || "", title: ev.title || "", place: ev.place || "", category: ev.category || "定例", status: ev.status || "参加者募集中", detail: ev.detail || "" })); renderEvents(); } if(json.data && json.data.length>0){ hirobaPosts = [...json.data.map(r=>({timestamp:r.timestamp, author:r.author, summary:r.summary||r.comment.slice(0,20), category:r.category||r.location||'その他', imageUrl:r.imageUrl, description:r.comment})), ...MOCK_HIROBA]; renderHiroba(); } if(json.board && json.board.length>0){ const boardFromSheet = json.board.map(b=>({big:BASE_CATEGORIES.find(c=>c.label===b.big)?.key||'BIG-3', mid:b.mid, title:b.title, summary:b.summary})); SEED_IDEAS = [...boardFromSheet, ...SEED_IDEAS]; renderBoard(); } }catch(e){ console.log(e); renderEvents(); } }
 document.addEventListener("DOMContentLoaded",()=>{ renderMapUpdate();renderEvents();renderEventIdeas();renderBoard();renderHiroba(); loadFromGAS(); const imgEl=document.getElementById('hirobaImage'); if(imgEl){imgEl.addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{hirobaImageBase64=ev.target.result.split(',')[1];document.getElementById('hirobaImagePreview').innerHTML='<img src="'+ev.target.result+'" style="width:100%;max-height:200px;object-fit:cover;border-radius:8px;">';};reader.readAsDataURL(file);});} const evDateEl=document.getElementById('evDate'); if(evDateEl) evDateEl.valueAsDate=new Date(); });
 </script>
+<!-- Code for Ashiya 運営主体表示 - 全サイト共通 -->
+<footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
+  <div style="max-width:1120px;margin:0 auto;">
+    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="font-size:28px;">🏙</div>
+      <div>
+        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
+          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
+        </div>
+        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
+          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
+          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
+          誰もが参加できるオープンな活動を行っています。収集した声は個人が特定されない形で集約し、まちづくりに活かされます。
+          <br>
+          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
+          <span style="opacity:.5;margin:0 6px;">/</span>
+          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>    
 </body>
 </html>
