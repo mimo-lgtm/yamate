@@ -38,43 +38,39 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 .hiroba-tab.active{background:#2f7a6b;color:#fff;border-color:#2f7a6b;}
 .hiroba-form{background:#fff;border:2px solid var(--amber);border-radius:12px;padding:18px;margin-bottom:18px;}
 .year-header{font-size:14px;font-weight:900;margin:18px 0 8px;padding:6px 10px;background:#23282a;color:#fff;border-radius:6px;}
-.section-lead{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.section-lead{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;}
 .tag{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--teal-deep);border:1px solid var(--teal);padding:2px 9px;border-radius:999px;}
-.event-item{border:2px solid var(--line-light);border-radius:12px;background:#fff;margin-bottom:10px;overflow:hidden;cursor:pointer;transition:.12s;}
-.event-item:hover{border-color:var(--amber);transform:translateY(-1px);box-shadow:0 4px 10px rgba(0,0,0,.08);}
-.event-detail{display:none;padding:0 14px 14px 14px;border-top:1.5px dashed var(--line-light);background:#fffcf0;}
-.admin-card{background:#fff3f3;border:2px solid #c44;border-radius:12px;padding:16px;margin-bottom:16px;display:none;}
-.admin-card.open{display:block;}
 @media(max-width:800px){.flow3{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 <header class="topbar">
-<div class="brand"><span class="dot"></span><div><span class="city">ASHIYA CITY / SUZUKAZE</span><span class="town">芦屋市 山手町</span></div></div>
+<div class="brand"><span class="dot"></span><div><span class="city">ASHIYA CITY / YAMATE</span><span class="town">芦屋市 山手町</span></div></div>
 <nav>
 <button class="active" onclick="showPage('home',this)">ホーム</button>
 <button onclick="showPage('assist',this)">声を届ける</button>
 <button onclick="showPage('tree',this)">声のボード</button>
 <button onclick="showPage('hiroba',this)" style="background:#e8a33d;color:#1b1f1d;border-color:#e8a33d;">📸 みんなの広場</button>
+<a href="https://suzukazecho.jimdofree.com/" target="_blank" style="background:#fff;color:#c9821f;border:2px solid #e8a33d;padding:8px 14px;border-radius:6px;font-weight:800;font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:4px;">🏠 公式サイト・イベント →</a>
 </nav>
 </header>
 <main>
 <section id="home" class="page active">
-<!-- 上部バナー：イベントはこのサイトで完結 -->
+<!-- ★ イベントはこのサイトで完結 - 上部バナーは下のボードへスクロール -->
 <div style="background:linear-gradient(90deg,#fff3cd 0%, #ffe0a3 100%);border:3px solid #e8a33d;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 4px 12px rgba(232,163,61,0.3);">
 <div style="flex:1;min-width:220px;">
 <div style="font-size:14px;font-weight:900;color:#c1502f;display:flex;align-items:center;gap:6px;">🎉 山手町のイベントはこちら！</div>
-<div style="font-size:13px;color:#5a4a2f;margin-top:2px;">イベント情報はこのサイトで完結 - 下のイベントボードをチェック（公式サイトには載せていません）</div>
+<div style="font-size:13px;color:#5a4a2f;margin-top:2px;">イベント情報はこのサイトで完結 - 下のイベントボードをチェック</div>
 </div>
-<button onclick="scrollToEventBoard()" style="display:inline-flex;align-items:center;gap:8px;background:#e8a33d;color:#1b1f1d;padding:14px 22px;border-radius:10px;border:none;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;white-space:nowrap;cursor:pointer;">📅 イベントを見る ↓</button>
+<button onclick="document.getElementById('event-board').scrollIntoView({behavior:'smooth',block:'start'});" style="display:inline-flex;align-items:center;gap:8px;background:#e8a33d;color:#1b1f1d;padding:14px 22px;border-radius:10px;border:none;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;white-space:nowrap;cursor:pointer;">📅 イベントを見る ↓</button>
 </div>
 
 <div class="card" style="background:#23282a;color:#eef0e4;border:none;">
 <div style="font-size:22px;font-weight:800;margin-bottom:8px;">山手町の小さな気づきと未来のアイデア帳</div>
-<p style="color:#cfd6c9;font-size:13px;">癒しも、提案も、気軽にポスト。普段の気づきがInstagramに自動投稿され、みんなでシェアされます。イベントもこのサイトで完結管理します。</p>
+<p style="color:#cfd6c9;font-size:13px;">癒しも、提案も、気軽にポスト。普段の気づきがInstagramに自動投稿され、みんなでシェアされます。</p>
 <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-<button class="big-btn amber" onclick="showPage('assist', document.querySelector('nav button:nth-child(2)'))">✍ 声を届けてみる</button>
-<button class="big-btn" style="background:#eef0e4;color:#1b1f1d;" onclick="showPage('hiroba', document.querySelector('nav button:last-child'))">📸 写真を投稿する</button>
+<button class="big-btn amber" onclick="showPage('assist')">✍ 声を届けてみる</button>
+<button class="big-btn" style="background:#eef0e4;color:#1b1f1d;" onclick="showPage('hiroba')">📸 写真を投稿する</button>
 </div>
 </div>
 
@@ -83,7 +79,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <h2 style="margin:0 0 4px 0;font-size:18px;">📸 写真を投稿してみよう</h2>
 <p style="margin:0;font-size:13px;color:#eef0e4;">スマホから1分で投稿 → 自動で時系列・テーマ別に整理 → Instagramにも自動投稿 ✨</p>
 </div>
-<button class="big-btn" style="background:#fff;color:#1b1f1d;" onclick="showPage('hiroba', document.querySelector('nav button:last-child'))">投稿する ➔</button>
+<button class="big-btn" style="background:#fff;color:#1b1f1d;" onclick="showPage('hiroba')">投稿する ➔</button>
 </div>
 
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
@@ -97,103 +93,50 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div class="flow-step"><div style="font-size:11px;color:#c9821f;font-weight:800;">STEP 03</div><div style="font-size:24px;">📌</div><h4 style="margin:6px 0;">ボードに掲示</h4><p style="font-size:12px;color:#666;">同じテーマは自動統合。履歴も保存されます。</p></div>
 </div>
 <div style="margin-top:12px;padding:10px 12px;background:#eef0e4;border-radius:8px;font-size:12px;line-height:1.7;">
-💬 声のボード：山手町への気づきは6テーマに自動整理されます。<br>
-🎉 イベント：このサイトで完結管理。公式サイトには載せません。<br>
+💬 声のボード：山手町への気づきは5テーマに自動整理されます。<br>
 🏙 芦屋市の課題：町内で解決できないことは市全体のハブへ。別ウィンドウで開くので戻るのが簡単です。<br>
 <span style="font-size:11px;color:#888;">※ボードの初期投稿はたたき台の模擬投稿です。実際の声が増えると統合・更新されます。</span>
 </div>
 <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-<button class="big-btn amber" style="padding:9px 16px;font-size:13px;" onclick="showPage('assist', document.querySelector('nav button:nth-child(2)'))">✍ 声を届けてみる</button>
+<button class="big-btn amber" style="padding:9px 16px;font-size:13px;" onclick="showPage('assist')">✍ 声を届けてみる</button>
 <button class="big-btn ghost" style="padding:9px 16px;font-size:13px;" onclick="showPage('tree', document.querySelector('nav button:nth-child(3)'))">📌 声のボードを見る</button>
-<a href="https://mimo-lgtm.github.io/ashiya-issues/" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;border:1.5px solid #2f7a6b;color:#2f7a6b;text-decoration:none;font-weight:700;font-size:13px;">🏙 芦屋市の課題を開く →</a>
-<a href="https://suzukazecho.jimdofree.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;background:#e8a33d;color:#1b1f1d;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 3px 0 #c9821f;">🏠 山手町 公式サイトを開く →</a>
+<a href="https://mimo-lgtm.github.io/ashiya-issues/" target="_blank" style="display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;border:1.5px solid #23282a;color:#23282a;text-decoration:none;font-weight:700;font-size:13px;">🏙 芦屋市の課題を開く →</a>
+<a href="https://suzukazecho.jimdofree.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;background:#e8a33d;color:#1b1f1d;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 3px 0 #c9821f;">🏠 山手町 公式サイト - イベントはこちら →</a>
 </div>
 </div>
 
-<!-- ★★★ イベントボード本体 ★★★ -->
-<div id="event-board" style="background:#fff;border:3px solid #e8a33d;border-radius:14px;padding:20px 22px;margin-bottom:20px;box-shadow:0 6px 18px rgba(232,163,61,0.25); scroll-margin-top:90px;">
+<!-- ★ 独立イベントセクション - 住民が一番興味あることを最上位に -->
+<div style="background:#fff;border:3px solid #e8a33d;border-radius:14px;padding:20px 22px;margin-bottom:20px;box-shadow:0 6px 18px rgba(232,163,61,0.25);">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
 <div style="display:flex;align-items:center;gap:10px;">
 <div style="background:#e8a33d;color:#1b1f1d;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;">🎉</div>
 <div>
 <div style="font-size:18px;font-weight:900;">山手町 イベント・企画ボード</div>
-<div style="font-size:12px;color:#666;">タイトルをクリック → 日時・内容が開きます。このサイトで完結管理</div>
+<div style="font-size:12px;color:#666;">住民が一番楽しみにしている、集まる機会をここに集約</div>
 </div>
 </div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-<button onclick="showEventTab('upcoming')" id="btn-upcoming" style="background:#e8a33d;color:#1b1f1d;border:none;padding:8px 14px;border-radius:999px;font-weight:800;font-size:12px;">📅 今後のイベント</button>
-<button onclick="showEventTab('ideas')" id="btn-ideas" style="background:#fff;border:1.5px solid #ccc;padding:8px 14px;border-radius:999px;font-weight:700;font-size:12px;">💡 企画アイデア</button>
-<button onclick="toggleEventForm()" style="background:#c44;color:#fff;border:none;padding:8px 14px;border-radius:999px;font-weight:800;font-size:12px;">＋ イベント追加</button>
+<a href="https://suzukazecho.jimdofree.com/" target="_blank" style="background:#1b1f1d;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:800;font-size:13px;">公式サイトで日程を確認 →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:14px;">
+<div style="background:#fff8e1;border:1.5px solid #e8a33d;border-radius:10px;padding:12px;">
+<div style="font-size:12px;font-weight:800;color:#c9821f;">📅 定例イベント</div>
+<div style="font-size:13px;margin-top:4px;line-height:1.6;">・毎月清掃活動<br>・防犯パトロール<br>・南護岸ゴミ回収</div>
+</div>
+<div style="background:#eef0e4;border:1.5px solid #2f7a6b;border-radius:10px;padding:12px;">
+<div style="font-size:12px;font-weight:800;color:#2f7a6b;">🎊 季節イベント</div>
+<div style="font-size:13px;margin-top:4px;line-height:1.6;">・夏祭り<br>・餅つき大会<br>・ラジオ体操</div>
+</div>
+<div style="background:#f3e8ff;border:1.5px solid #6d5aa8;border-radius:10px;padding:12px;">
+<div style="font-size:12px;font-weight:800;color:#6d5aa8;">💡 企画募集中</div>
+<div style="font-size:13px;margin-top:4px;line-height:1.6;">・こんなイベントしたい<br>・子ども企画<br>・多世代交流</div>
+<a href="#" onclick="showPage('assist',document.querySelector('nav button:nth-child(2)'));document.getElementById('userInput').value='イベント企画：';return false;" style="display:inline-block;margin-top:6px;background:#6d5aa8;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:11px;font-weight:700;">企画を投稿する →</a>
 </div>
 </div>
-
-<div id="eventFormCard" class="admin-card">
-<h4 style="color:#c44;margin-bottom:8px;">📝 イベントを簡単追加（管理者用）</h4>
-<p style="font-size:11px;color:#666;margin-bottom:8px;">パスワード: yamate2026 / suzukaze2026 - GAS連携時はシート「イベント」に保存され、全員に共有されます。未設定ならこの端末に仮保存。</p>
-<div style="display:grid;gap:8px;">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-<div><label style="font-size:11px;font-weight:700;">日付</label><input type="date" id="evDate" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<div><label style="font-size:11px;font-weight:700;">時間</label><input type="text" id="evTime" placeholder="09:00-11:00" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-</div>
-<div><label style="font-size:11px;font-weight:700;">タイトル</label><input type="text" id="evTitle" placeholder="例: 山手緑地一斉清掃" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-<div><label style="font-size:11px;font-weight:700;">場所</label><input type="text" id="evPlace" placeholder="例: 松並木集合" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<div><label style="font-size:11px;font-weight:700;">カテゴリ</label><select id="evCategory" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><option value="定例">定例</option><option value="季節">季節</option><option value="企画">企画</option></select></div>
-</div>
-<div><label style="font-size:11px;font-weight:700;">詳細</label><textarea id="evDetail" rows="3" placeholder="詳細内容" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-<div><label style="font-size:11px;font-weight:700;">ステータス</label><select id="evStatus" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><option>参加者募集中</option><option>企画中</option><option>アイデア募集中</option><option>予定</option></select></div>
-<div><label style="font-size:11px;font-weight:700;">管理パスワード</label><input type="password" id="evPassword" placeholder="yamate2026" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-</div>
-<button class="big-btn amber" style="width:100%;justify-content:center;" onclick="submitEventForm()">📅 イベントを追加する</button>
-<div id="evStatusMsg" style="font-size:12px;color:#2f7a6b;min-height:18px;margin-top:6px;"></div>
-</div>
+<div id="eventBoardPreview" style="background:#fafafa;border-radius:8px;padding:10px;"></div>
 </div>
 
-<div id="event-upcoming-list"></div>
-<div id="event-ideas-list" style="display:none;"></div>
-
-<div style="margin-top:18px;background:linear-gradient(135deg,#6d5aa8 0%, #e8a33d 100%);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-<div style="color:#fff;">
-<div style="font-size:15px;font-weight:900;">💡 こんなイベントやってみたい！を投稿しよう</div>
-<div style="font-size:12px;opacity:.9;margin-top:2px;">あなたのアイデアが次のイベントになります</div>
-</div>
-<button onclick="showPage('assist',document.querySelector('nav button:nth-child(2)'));document.getElementById('userInput').focus();document.getElementById('userInput').value='イベント企画：';" style="background:#fff;color:#6d5aa8;border:none;padding:14px 24px;border-radius:10px;font-weight:900;font-size:15px;box-shadow:0 4px 0 rgba(0,0,0,.2);cursor:pointer;">✨ 企画を投稿する →</button>
-</div>
-</div>
-
-<div class="section-lead"><h2>🗺 6つのテーマ｜声のボードと連動</h2><span class="tag">クリックで説明 / イベントはこのサイトで完結</span></div>
+<div class="section-lead"><h2>🗺 6つのテーマ｜地図とアップデート</h2><span class="tag">クリックで200文字の説明 / イベントは独立＋6分類にも</span></div>
 <div id="mapUpdateWrap"></div>
-
-<!-- 芦屋市の課題 & 公式サイト 誘導（2カラム） -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:18px;">
-<div style="background:#fff;border:2px solid #2f7a6b;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;">
-<div style="display:flex;align-items:center;gap:8px;">
-<div style="background:#2f7a6b;color:#fff;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🏙</div>
-<div>
-<div style="font-size:14px;font-weight:900;">芦屋市全体の課題は市全体のハブへ</div>
-<div style="font-size:11px;color:#666;">町内で解決できないことはこちらへ</div>
-</div>
-</div>
-<div style="font-size:12px;color:#444;line-height:1.7;background:#eef0e4;border-radius:8px;padding:10px;">
-山手町だけで解決できない<br><strong>道路・急斜面・側溝・市の制度・広域防災</strong>などは、<br>芦屋市全体の課題ボードに集約しています。<br>投稿するとAIが整理し、市全体の地図とボードに掲示されます。<br><span style="font-size:11px;color:#666;">※別ウィンドウで開くので、このサイトに戻るのも簡単です。</span>
-</div>
-<a href="https://mimo-lgtm.github.io/ashiya-issues/" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#2f7a6b;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 3px 0 #22594e;">🏙 芦屋市の課題を開く →</a>
-</div>
-<div style="background:#fff;border:2px solid #e8a33d;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;">
-<div style="display:flex;align-items:center;gap:8px;">
-<div style="background:#e8a33d;color:#1b1f1d;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;">🏠</div>
-<div>
-<div style="font-size:14px;font-weight:900;">山手町 公式サイト</div>
-<div style="font-size:11px;color:#666;">正式なお知らせ・会則・行事日程</div>
-</div>
-</div>
-<div style="font-size:12px;color:#444;line-height:1.7;background:#fff8e1;border-radius:8px;padding:10px;">
-町内会の<strong>正式なお知らせ・会則・防犯パトロール当番表・回覧板</strong>などは、<br>従来の公式サイトでご確認いただけます。<br>イベントの正式告知もこちらで確認できます。<br><span style="font-size:11px;color:#666;">このアイデア帳は住民同士の気づきを集める共創の場、公式サイトは正式な連絡の場として使い分けています。</span>
-</div>
-<a href="https://sites.google.com/view/yamatechoasiya-city" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#e8a33d;color:#1b1f1d;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 3px 0 #c9821f;">🏠 山手町 公式サイトを開く →</a>
-</div>
-</div>
 </section>
 
 <section id="assist" class="page">
@@ -201,60 +144,63 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div class="card">
 <h2>ノート</h2>
 <div style="margin-bottom:10px;"><label style="font-size:12px;font-weight:700;">投稿者名（任意）</label><br><input type="text" id="authorName" placeholder="匿名" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<textarea id="userInput" placeholder="自由に書いてください...&#10;例：松並木が綺麗だった、イベント企画など" style="width:100%;min-height:160px;padding:10px;border:1px solid #ccc;border-radius:6px;"></textarea>
+<textarea id="userInput" placeholder="自由に書いてください...&#10;例：南護岸の松並木が綺麗だった、など小さな気づきでもOK" style="width:100%;min-height:160px;padding:10px;border:1px solid #ccc;border-radius:6px;"></textarea>
 <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
 <button type="button" id="micBtn" class="big-btn ghost" style="padding:9px 14px;font-size:13px;" onclick="toggleMic()">🎙 音声で入力する</button>
 <span id="micStatus" style="font-size:12px;color:#666;"></span>
 </div>
 <div style="margin-top:12px;"><button class="big-btn" id="runBtn" onclick="runAI()">🔧 AIに整理してもらう</button><span id="loadingMsg" style="display:none;margin-left:10px;">分析中…</span></div>
 </div>
-<div class="card"><h2>整理結果 - 5つの視点と格納先</h2><div id="slip"><p style="color:#888;font-size:13px;">ここに要約、5つの視点、どの分類に格納されるかが表示されます。</p></div></div>
+<div class="card">
+<h2>整理結果 - 5つの視点と格納先</h2>
+<div id="slip"><p style="color:#888;font-size:13px;">ここに要約、5つの視点、どの分類に格納されるかが表示されます。</p></div>
+</div>
 </section>
 
 <section id="tree" class="page">
 <div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
-<h2 style="color:#fff;margin:0;">📌 声のボード</h2><p style="color:#c7cdbb;font-size:12px;">クリックで各テーマの説明と投稿一覧が表示されます。</p>
+<h2 style="color:#fff;margin:0;">📌 声のボード</h2><p style="color:#c7cdbb;font-size:12px;">クリックで各テーマの200文字説明と投稿一覧が表示されます。</p>
 </div>
 <div id="corkGrid"></div>
 </section>
 
 <section id="hiroba" class="page">
 <h1>📸 山手町 みんなの広場</h1>
-<p style="font-size:13px;color:#555;margin-bottom:12px;">誰でもスマホから簡単に投稿できます。癒しの風景から防犯の取り組みまで、日常の気づきをシェア。</p>
+<p style="font-size:13px;color:#555;margin-bottom:12px;">誰でもスマホから簡単に投稿できます。癒しの風景から防犯の取り組みまで、日常の気づきをシェア。Instagramにも自動投稿されます。</p>
 <div class="hiroba-form">
 <h3>✍️ 投稿フォーム</h3>
 <div style="display:grid;gap:10px;margin-top:10px;">
 <div><label style="font-size:12px;font-weight:700;">お名前（匿名可）</label><input type="text" id="hirobaAuthor" placeholder="匿名可" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
 <div><label style="font-size:12px;font-weight:700;">写真</label><input type="file" id="hirobaImage" accept="image/*" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><div id="hirobaImagePreview" style="margin-top:8px;"></div></div>
-<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：松並木が綺麗でした" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
+<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：南護岸沿いの松並木が綺麗でした" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
 <div style="display:flex;gap:8px;flex-wrap:wrap;">
 <select id="hirobaCategory" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
 <button class="big-btn amber" onclick="submitHiroba()">📸 投稿する</button>
 </div>
-<div style="margin-top:12px;padding:10px 12px;background:#fff8e1;border:1.5px solid #e8a33d;border-radius:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<div style="margin-top:12px;padding:10px 12px;background:#fff8e1;border:1.5px solid #e8a33d;border-radius:8px;display:flex;align-items:center;gap:10px;">
 <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700;user-select:none;">
 <input type="checkbox" id="hirobaInstaCheck" checked style="width:18px;height:18px;accent-color:#e8a33d;">
 <span>📸 山手町インスタグラムに投稿する</span>
 </label>
 <span style="font-size:11px;color:#666;">デフォルトON / 外すと広場のみに投稿</span>
 </div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;
+</div>
 <div id="hirobaStatus" style="font-size:12px;color:#2f7a6b;min-height:18px;"></div>
 </div>
 </div>
-<h2>🕒 みんなの投稿</h2>
+<h2>🕒 みんなの投稿（既存の投稿）</h2>
 <div class="hiroba-tabs" id="hirobaFilterTabs">
 <div class="hiroba-tab active" onclick="filterHiroba('すべて',this)">すべて</div>
 <div class="hiroba-tab" onclick="filterHiroba('風景',this)">風景</div>
 <div class="hiroba-tab" onclick="filterHiroba('防犯',this)">防犯</div>
 <div class="hiroba-tab" onclick="filterHiroba('環境',this)">環境</div>
-<div class="hiroba-tab" onclick="filterHiroba('イベント',this)">イベント</div>
 </div>
 <div id="hirobaList"></div>
 </section>
 </main>
 <script>
-const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbwBpXJKQ9YRF10KZHiZoJrLuODUulMmEQT9kpTLCv-Qxf0SDK7ujZawcgr2kTUsxTVjow/exec";
-let gasUrl = GAS_URL_DEFAULT;
+
 const BASE_CATEGORIES = [
 {key:"BIG-1",icon:"🛡",label:"防災・防犯",sublabel:"安全で安心なまちづくり",baseSubs:["安否確認体制","自主防災訓練","防犯パトロール","災害備蓄強化"]},
 {key:"BIG-2",icon:"🏡",label:"インフラ・環境",sublabel:"住環境の維持と保全",baseSubs:["急斜面の安全","道路・側溝整備","ゴミステーション","緑化・景観保護"]},
@@ -264,21 +210,17 @@ const BASE_CATEGORIES = [
 {key:"BIG-6",icon:"🎉",label:"イベント・企画",sublabel:"みんなが集まる楽しい機会",baseSubs:["夏祭り・餅つき","清掃・美化イベント","防災・防犯イベント","子ども・多世代企画","新規イベント提案"]}
 ];
 const BASE_DESC = {
-"防災・防犯":"山手町は山に近く坂道も多い地域です。地震や津波、大雨時の安否確認、自主防災訓練、防犯パトロール、災害時の備蓄など、誰も取り残さない安全なまちづくりを目指します。オリジナル腕章で防犯活動を可視化し、不審者が近寄りにくい町づくりを進めています。",
-"インフラ・環境":"急斜面の安全対策、道路や側溝の補修、ゴミステーションのマナー向上、緑化や景観保護など、住み心地の良い環境を維持します。南護岸沿いの松並木は散歩やジョギングに最適で、住民の憩いの場です。ゴミ回収やマナー啓蒙活動を継続し、美しい景観を守ります。",
-"コミュニティ":"子どもから高齢者まで、世代を超えたつながりを大切にします。夏祭りや清掃活動、ラジオ体操、新住民歓迎会など、小さなきっかけが自然な交流を生みます。班長や役員の負担を減らし、誰もが気軽に参加できる自治会運営を目指し、温かいつながりのあるまちを作ります。",
-"福祉・見守り":"一人暮らしの高齢者や子育て世代、ペットを飼う家族など、誰もが安心して暮らせる環境を作ります。カーテンの開け閉めやゴミ出しの有無など、さりげない見守りで孤立を防ぎます。腕章をつけた人は安全な人だと子ども達にも分かりやすくし、困った時に声をかけられる関係を作ります。",
-"イベント・企画":"住民が最も楽しみにしているのがイベントです。夏祭り、餅つき、清掃活動、ラジオ体操、防犯パトロールなど、顔を合わせる機会が町の絆を作ります。新企画のアイデアも大歓迎。やってみたいことを気軽に提案してください。",
-"将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、山手町らしい持続可能な未来を描きます。いたるところから見える大阪湾のオーシャンビュー、生駒山系の眺めは私たちの誇りです。デジタル活用や次世代育成で、10年後も住みたいと思えるまちを共創します。"
+"防災・防犯":"山手町は海に近く坂道も多い地域です。地震や津波、大雨時の安否確認、自主防災訓練、防犯パトロール、災害時の備蓄など、誰も取り残さない安全なまちづくりを目指します。",
+"インフラ・環境":"急斜面の安全対策、道路や側溝の補修、ゴミステーションのマナー向上、緑化や景観保護など、住み心地の良い環境を維持します。",
+"コミュニティ":"子どもから高齢者まで、世代を超えたつながりを大切にします。夏祭りや清掃活動、ラジオ体操、新住民歓迎会など、小さなきっかけが自然な交流を生みます。",
+"福祉・見守り":"一人暮らしの高齢者や子育て世代、ペットを飼う家族など、誰もが安心して暮らせる環境を作ります。",
+"イベント・企画":"住民が最も楽しみにしているのがイベントです。夏祭り、餅つき、清掃活動、ラジオ体操、防犯パトロールなど、顔を合わせる機会が町の絆を作ります。",
+"将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、山手町らしい持続可能な未来を描きます。"
 };
 let SEED_IDEAS = [
-{big:"BIG-1",mid:"防犯パトロール",title:"オリジナル腕章で子どもを守る防犯活動",summary:"防犯委員でオリジナル腕章を作成。腕章を付けている人は山手町の人、安全な人だと子ども達にも分かりやすく。"},
-{big:"BIG-2",mid:"緑化・景観保護",title:"松並木を守る憩いの場づくり",summary:"松並木は散歩やジョギングに最適で住民の憩いの場。美しい景観を保全します。"},
-{big:"BIG-2",mid:"ゴミステーション",title:"通学路のマナー向上とゴミ回収",summary:"マナー向上啓蒙活動とゴミ回収活動について住民で取り組みます。"},
-{big:"BIG-6",mid:"夏祭り・餅つき",title:"夏祭りを復活させたい！子ども達の思い出作り",summary:"やぐらを組んで盆踊り、子ども達の模擬店を復活させたい。"},
-{big:"BIG-6",mid:"新規イベント提案",title:"朝活ヨガ＆モーニングコーヒー",summary:"朝ヨガをやってみたい。健康増進と交流の一石二鳥。"},
-{big:"BIG-6",mid:"子ども・多世代企画",title:"ハロウィン仮装で防犯パトロール",summary:"子ども達が仮装して腕章をつけてパトロール。楽しく防犯意識も高まる。"},
-{big:"BIG-2",mid:"緑化・景観保護",title:"大阪湾と生駒山系の眺望",summary:"大阪湾、生駒山系も美しい眺望を守ります。"}
+{big:"BIG-1",mid:"防犯パトロール",title:"オリジナル腕章で子どもを守る防犯活動",summary:"防犯委員でオリジナル腕章を作成。"},
+{big:"BIG-2",mid:"緑化・景観保護",title:"山手の坂道沿いの松並木を守る憩いの場づくり",summary:"松並木は散歩やジョギングに最適。"},
+{big:"BIG-6",mid:"夏祭り・餅つき",title:"夏祭りを復活させたい！",summary:"コロナで中止になっていた夏祭りを復活。"}
 ];
 const MOCK_HIROBA = [
 {timestamp:"2026-05-10T10:00:00",author:"環境美化委員会",summary:"ゴールデンウィークの一日、皆で清掃活動に励みました。",category:"環境",imageUrl:"https://www.city.ashiya.lg.jp/kodomo/kodomohoiku/images/iwazonohoukatu01.jpg",description:"先日来の強風のために、落葉が多く、雑草も元気に出てきています。初めて清掃活動に参加された方も一緒に、五月晴れの緑地公園で楽しく清掃しました！"},
@@ -286,18 +228,18 @@ const MOCK_HIROBA = [
 {timestamp:"2026-05-08T09:00:00",author:"イベント班",summary:"子ども12名、大人40名の参加者は全員、大満足のバスツアーでした。",category:"イベント",imageUrl:"https://prtimes.jp/i/607/559/resize/d607-559-107882-0.jpg",description:"圧巻は、西日本ではここ『須磨シ―ワールド』でしかみることのできない「オルカショー」。体重が3トンの“ステラ”と“ラン”の親子が巨体で見せてくれる数々の“芸”（パフォーマンス）は、巨大だけにその愛らしさ愛おしさが何十倍にも感じられました。帰路のお買い物も含めて、老若男女、笑顔のバスツアーでした！！"},
 {timestamp:"2026-05-07T14:00:00",author:"防犯委員",summary:"”地域で自分の街は自分で守る”",category:"防犯",imageUrl:"https://www.city.itako.lg.jp/data/img/2-1325645820_14.jpg",description:"防犯委員で、山手町町内会のオリジナルバッグを作成しました。山手町内の防犯、町の結束、不審者が近寄りにくい町づくり。そして子供達を守る！を目的に作成致しました。腕章を付けている人は山手町の人！安全な人だと子供達にもわかりやすくするため、キャラクターを作り、そのキャラクターを取り入れ子供達に認識してもらいやすいデザインにしました。画像を子供達に見せて「この腕章をつけてる人は町の人だよ〜」「困ったら声かけていいんだよ〜」とお伝えしてもらえると助かります♡"}
 ];
+
 let hirobaPosts=[...MOCK_HIROBA];
 let hirobaFilter="すべて";
 let hirobaImageBase64="";
 let openCat=null;
 let currentEventTab='upcoming';
 let EVENT_DATA = [
-{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"松並木集合",category:"定例",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。松並木を住民で一斉清掃します。軍手・ゴミ袋は自治会で用意します。終了後にお茶とお菓子を用意しています。お子様連れも大歓迎！"},
-{id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"山手町 夏祭り2026 - 盆踊りと屋台",place:"前山公園",category:"季節",status:"企画中",detail:"夏祭りを復活！やぐらを組んで盆踊り、子ども達の模擬店（かき氷・ヨーヨー釣り）、大人向けビアガーデンも。浴衣で参加するとお菓子プレゼント。ボランティアスタッフも募集中です。"},
-{id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー - 松並木で爽やかな朝",place:"松並木",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。体操後はみんなで朝のコーヒー・お茶会。朝の涼しい風を浴びながら、住民同士の交流を深めましょう。毎朝参加で皆勤賞あり！"},
-{id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してオリジナル腕章をつけてパトロール。『この腕章をつけてる人は町の人だよ〜困ったら声かけていいんだよ〜』を合言葉に、楽しく防犯意識を高めます。仮装コンテストも同時開催！"},
-{id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会。つきたてのお餅をみんなでいただきます。同時に防災炊き出し訓練も兼ねて、非常用炊飯袋の使い方を学びます。"}
+{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"山手の坂道一斉清掃",place:"山手の坂道 集合",category:"定例",status:"参加者募集中",detail:"清掃活動です。"}
 ];
+const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbzfs9l_Ev2i0DKqoHMj9Pa5ErdV2IGVi592ZMm_tu8gU1EUPwFPLGg9Tpmr5JuOyd7jMA/exec";
+let gasUrl = GAS_URL_DEFAULT;
+
 
 // ★★★ 共通修正版 script ★★★ yamate / suzukaze 両方で使えます
 function scrollToEventBoard(){ const el=document.getElementById('event-board'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
@@ -396,3 +338,7 @@ function postIdeaFromAI(){
 
 async function loadFromGAS(){ if(gasUrl.includes('AKfycby') && gasUrl.includes('...')){ renderEvents(); return; } try{ const res=await fetch(gasUrl+"?action=list"); const json=await res.json(); if(json.events && json.events.length>0){ EVENT_DATA = json.events.map(ev=>({ id: ev.id || "evt"+Date.now()+Math.random(), date: ev.date || "", time: ev.time || "", title: ev.title || "", place: ev.place || "", category: ev.category || "定例", status: ev.status || "参加者募集中", detail: ev.detail || "" })); renderEvents(); } if(json.data && json.data.length>0){ hirobaPosts = [...json.data.map(r=>({timestamp:r.timestamp, author:r.author, summary:r.summary||r.comment.slice(0,20), category:r.category||r.location||'その他', imageUrl:r.imageUrl, description:r.comment})), ...MOCK_HIROBA]; renderHiroba(); } if(json.board && json.board.length>0){ const boardFromSheet = json.board.map(b=>({big:BASE_CATEGORIES.find(c=>c.label===b.big)?.key||'BIG-3', mid:b.mid, title:b.title, summary:b.summary})); SEED_IDEAS = [...boardFromSheet, ...SEED_IDEAS]; renderBoard(); } }catch(e){ console.log(e); renderEvents(); } }
 document.addEventListener("DOMContentLoaded",()=>{ renderMapUpdate();renderEvents();renderEventIdeas();renderBoard();renderHiroba(); loadFromGAS(); const imgEl=document.getElementById('hirobaImage'); if(imgEl){imgEl.addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{hirobaImageBase64=ev.target.result.split(',')[1];document.getElementById('hirobaImagePreview').innerHTML='<img src="'+ev.target.result+'" style="width:100%;max-height:200px;object-fit:cover;border-radius:8px;">';};reader.readAsDataURL(file);});} const evDateEl=document.getElementById('evDate'); if(evDateEl) evDateEl.valueAsDate=new Date(); });
+
+</script>
+</body>
+</html>
