@@ -6,6 +6,7 @@
 <title>山手町の小さな気づきと未来のアイデア帳</title>
 <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
+/* ===== style：トップページ固定 - 変更なし ===== */
 :root{--ink:#1b1f1d;--board:#23282a;--board-2:#2c3234;--paper:#eef0e4;--amber:#e8a33d;--amber-deep:#c9821f;--teal:#2f7a6b;--teal-deep:#22594e;--line:#3a4143;--line-light:#d8dcc9;}
 *{margin:0;padding:0;box-sizing:border-box;overflow-wrap:break-word;}
 html{scroll-behavior:smooth;}
@@ -56,6 +57,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </nav>
 </header>
 <main>
+<!-- ===== section id="home" ：トップページ固定 - 変更なし（イベントバナー・ダークカード・写真CTA・使い方3ステップ） ===== -->
 <section id="home" class="page active">
 <div style="background:linear-gradient(90deg,#fff3cd 0%, #ffe0a3 100%);border:3px solid #e8a33d;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 4px 12px rgba(232,163,61,0.3);">
 <div style="flex:1;min-width:220px;">
@@ -118,22 +120,27 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div id="mapUpdateWrap"></div>
 </section>
 
+<!-- ===== section id="assist" ：声を届ける - Groq連携固定 ===== -->
 <section id="assist" class="page">
 <h1>🤖 声を届ける - Groq llama-3.3 70B 完全版</h1>
 <div class="card" style="border:2px solid #2f7a6b;">
 <h2 style="font-size:16px;margin-bottom:8px;">💬 何でも入力してください</h2>
 <p style="font-size:12px;color:#666;margin-bottom:12px;">要約200文字＋5つの視点100文字で分析。分類は声のボードに表示されます。</p>
 <input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
-<textarea id="userInput" placeholder="例：松並木のベンチを増やしたい / 夏祭りを復活させたい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
+<textarea id="userInput" placeholder="例：公園のベンチを増やしたい / 夏祭りを復活させたい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
 <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
 <button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Groq Llama 3.3 70Bで分析</button>
+<!-- ★修正：音声認識ボタン復活 -->
+<button type="button" class="big-btn ghost" id="voiceBtn" onclick="toggleVoice()" style="padding:14px 18px;">🎤 音声入力</button>
 <span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 Groq分析中…（GAS経由）</span>
+<span id="voiceStatus" style="display:none;margin-left:10px;color:#c1502f;font-size:12px;font-weight:800;">🎤 聞き取り中...</span>
 </div>
 <div style="font-size:11px;color:#666;margin-top:8px;">GAS_URL_DEFAULT: <span id="gasUrlDisplay"></span></div>
 </div>
 <div class="card"><h2 style="font-size:16px;">📋 AI分析結果（要約200文字＋5視点100文字）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGroq Llama 3.3 70Bの分析結果が表示されます。</p></div></div>
 </section>
 
+<!-- ===== section id="tree" ：声のボード - 分類表示 ===== -->
 <section id="tree" class="page">
 <div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
 <h2 style="color:#fff;margin:0;">📌 声のボード - 分類表示＋統合ロジック</h2>
@@ -147,6 +154,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div id="corkGrid"></div>
 </section>
 
+<!-- ===== section id="hiroba" ：みんなの広場 - Instagramチェックボックス追加 ===== -->
 <section id="hiroba" class="page">
 <h1>📸 山手町 みんなの広場</h1>
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
@@ -154,8 +162,10 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div style="display:grid;gap:10px;margin-top:10px;">
 <div><label style="font-size:12px;font-weight:700;">お名前（匿名可）</label><input type="text" id="hirobaAuthor" placeholder="匿名可" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
 <div><label style="font-size:12px;font-weight:700;">写真</label><input type="file" id="hirobaImage" accept="image/*" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><div id="hirobaImagePreview" style="margin-top:8px;"></div></div>
-<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：松並木が綺麗でした" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;">
+<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：ライト坂からの海の眺望が綺麗でした" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+<!-- ★修正：Instagramチェックボックス追加（従来仕様） -->
+<label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;background:#fff;padding:6px 12px;border-radius:999px;border:1.5px solid #e8a33d;cursor:pointer;"><input type="checkbox" id="hirobaToInstagram" checked> 📸 Instagramに投稿する</label>
 <select id="hirobaCategory" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
 <button type="button" class="big-btn amber" onclick="submitHiroba()">📸 投稿する</button>
 </div>
@@ -173,7 +183,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </main>
 
 <script>
-// ===== 仕様固定：GAS連携（Groq llama-3.3 70B）=====
+// ===== 仕様固定：GAS連携（Groq llama-3.3 70B） - 変更なし =====
 const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbwBpXJKQ9YRF10KZHiZoJrLuODUulMmEQT9kpTLCv-Qxf0SDK7ujZawcgr2kTUsxTVjow/exec";
 let gasUrl = GAS_URL_DEFAULT;
 
@@ -278,19 +288,20 @@ ALL_IDEAS = [
   createIdeaObject("BIG-1","防犯パトロール","【統合】夜間パトロール強化と腕章作成の集大成","防犯パトロールに関する5件の声を統合。夜間見守り、腕章作成、LINE共有など、顔の見える防犯の集大成です。防犯委員でオリジナル腕章を作成し夕方の見守りで子ども達の安全を確保。","integrated", "", {core:"本質的な不安は夜間の安全確保が不十分なことです。", change:"実現すると子どもが安心して通学でき夜道も安心して歩けます。", success:"神戸市東灘区で腕章とLINE見守りで不審者情報共有が3倍に増加しました。", concern:"当番負担と腕章管理の手間が課題で無理のない体制が必要です。", question:"負担なく続けるために最初の30分でできる工夫は何ですか。"}),
 ];
 let EVENT_DATA = [
-{id:"evt1",date:"2026-06-07",title:"一斉清掃＆ゴミ回収活動",place:"南護岸 松並木集合",detail:"毎月第一土曜の清掃活動です。"},
-{id:"evt2",date:"2026-07-19",title:"山手町 夏祭り2026",place:"前山公園",detail:"夏祭りを3年ぶりに復活！"},
+{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"南護岸 松並木集合",category:"清掃",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。"},
+{id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"山手町 夏祭り2026",place:"前山公園",category:"季節",status:"企画中",detail:"夏祭りを3年ぶりに復活！"},
 {id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"南護岸 松並木",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。体操後はみんなで朝のコーヒー・お茶会。健康増進と世代間交流の一石二鳥。"},
 {id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してオリジナル腕章をつけてパトロール。楽しく防犯意識を高めます。お菓子配布あり。"},
 {id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会。つきたてのお餅をみんなでいただきます。防災炊き出し訓練も同時開催。"},
 {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。LINEと班長連絡網の二重で確認。備蓄品の点検も。"}  
 ];
 let openCat=null, currentEventTab='upcoming';
+let isEventIdeaMode=false; // ★修正：イベント企画モードフラグ追加
 let hirobaPosts = [
 {timestamp:"2026-05-10T10:00:00",author:"環境美化委員会",summary:"ゴールデンウィークの一日、皆で清掃活動に励みました。",category:"環境",imageUrl:"https://www.city.ashiya.lg.jp/kodomo/kodomohoiku/images/iwazonohoukatu01.jpg",description:"先日来の強風のために、落葉が多く、雑草も元気に出てきています。初めて清掃活動に参加された方も一緒に、五月晴れの緑地公園で楽しく清掃しました！"},
 {timestamp:"2026-05-09T16:00:00",author:"イベント班",summary:"春の一日、緑地清掃とイベントにご参加いただき、ありがとうございました。",category:"イベント",imageUrl:"https://www.sapporo.travel/cms/wp-content/uploads/2025/10/%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E7%84%BC%E3%81%8D%E8%8A%8B%E3%83%86%E3%83%A9%E3%82%B92024-19-1200x900.jpg",description:"70個のお芋が全部きれいに無くなりました！"},
 {timestamp:"2026-05-08T09:00:00",author:"イベント班",summary:"子ども12名、大人40名の参加者は全員、大満足のバスツアーでした。",category:"イベント",imageUrl:"https://prtimes.jp/i/607/559/resize/d607-559-107882-0.jpg",description:"圧巻は、西日本ではここ『須磨シ―ワールド』でしかみることのできない「オルカショー」。体重が3トンの“ステラ”と“ラン”の親子が巨体で見せてくれる数々の“芸”（パフォーマンス）は、巨大だけにその愛らしさ愛おしさが何十倍にも感じられました。帰路のお買い物も含めて、老若男女、笑顔のバスツアーでした！！"},
-{timestamp:"2026-05-07T14:00:00",author:"防犯委員",summary:"”地域で自分の街は自分で守る”",category:"防犯",imageUrl:"https://www.city.itako.lg.jp/data/img/2-1325645820_14.jpg",description:"防犯委員で、山手町町内会のオリジナルバッグを作成しました。山手町内の防犯、町の結束、不審者が近寄りにくい町づくり。そして子供達を守る！を目的に作成致しました。腕章を付けている人は山手町の人！安全な人だと子供達にもわかりやすくするため、キャラクターを作り、そのキャラクターを取り入れ子供達に認識してもらいやすいデザインにしました。画像を子供達に見せて「この腕章をつけてる人は町の人だよ〜」「困ったら声かけていいんだよ〜」とお伝えしてもらえると助かります♡"}
+{timestamp:"2026-05-07T14:00:00",author:"防犯委員",summary:"”地域で自分の街は自分で守る”",category:"防犯",imageUrl:"https://www.city.itako.lg.jp/data/img/2-1325645820_14.jpg",description:"防犯委員で、山手町町内会のオリジナルバッグを作成しました。山手町内の防犯、町の結束、不審者が近寄りにくい町づくり。そして子供達を守る！を目的に作成致しました。腕章を付けている人は山手町の人！安全な人だと子供達にもわかりやすくするため、キャラクターを作り、そのキャラクターを取り入れ子供達に認識してもらいやすいデザインにしました。画像を子供達に見せて「この腕章をつけてる人は町の人だよ〜」「困ったら声かけていいんだよ〜」とお伝えしてもらえると助かります♡"},
 ];
 let hirobaFilter="すべて", hirobaImageBase64="";
 
@@ -317,15 +328,61 @@ function showEventTab(tab){
   document.getElementById('btn-ideas').style.background=tab==='ideas'?'#e8a33d':'#fff';
   if(tab==='ideas') renderEventIdeas();
 }
-function renderEvents(){ const wrap=document.getElementById('event-upcoming-list'); if(!wrap) return; let html=''; EVENT_DATA.forEach(ev=>{ html+=`<div style="border:1.5px solid #d8dcc9;border-radius:10px;background:#fff;margin-bottom:8px;padding:12px;"><div style="font-weight:800;">${escapeHtml(ev.title)}</div><div style="font-size:11px;color:#666;">📍 ${escapeHtml(ev.place)} | ${escapeHtml(ev.detail)}</div></div>`; }); wrap.innerHTML=html; }
+
+// ===== function：renderEvents - ★修正：日付表示追加 =====
+
+function goToEventIdeaAssist(){
+  // ★修正：イベント企画ボタンが機能する＆混乱する「日時、場所、内容」文字を入れない
+  isEventIdeaMode=true;
+  const btn = document.querySelector('nav button[data-page="assist"]') || document.querySelectorAll('nav button')[1];
+  showPage('assist', btn);
+  setTimeout(()=>{
+    const ta=document.getElementById('userInput');
+    if(ta){
+      ta.value='';
+      ta.placeholder='例：夏祭りを復活させたい。盆踊りと屋台で世代間交流を深めたいです。';
+      ta.focus();
+    }
+    const msg=document.getElementById('loadingMsg');
+    if(msg){
+      msg.style.display='inline';
+      msg.textContent='💡 イベント企画モード：自由に入力して「Groq Llama 3.3 70Bで分析」を押してください';
+      setTimeout(()=>{msg.style.display='none';},4000);
+    }
+  },150);
+}
+
+function renderEvents(){
+  const wrap=document.getElementById('event-upcoming-list');
+  if(!wrap) return;
+  // ★修正：日付順にソートして日付を表示
+  const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date||0)-new Date(b.date||0));
+  let html='';
+  sorted.forEach(ev=>{
+    const d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
+    const t = ev.time ? ` ⏰ ${escapeHtml(ev.time)}` : '';
+    html+=`<div style="border:1.5px solid #d8dcc9;border-radius:10px;background:#fff;margin-bottom:8px;padding:12px;">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:center;">
+        <span style="font-size:12px;background:#e8a33d;color:#000;padding:2px 10px;border-radius:999px;font-weight:800;">📅 ${escapeHtml(d)}${t}</span>
+        <span style="font-size:10px;background:#eef0e4;padding:2px 8px;border-radius:999px;">${escapeHtml(ev.category||'定例')} | ${escapeHtml(ev.status||'予定')}</span>
+      </div>
+      <div style="font-weight:800;margin-top:6px;">${escapeHtml(ev.title)}</div>
+      <div style="font-size:11px;color:#666;margin-top:2px;">📍 ${escapeHtml(ev.place)} | ${escapeHtml(ev.detail)}</div>
+    </div>`;
+  });
+  wrap.innerHTML=html;
+}
+
+// ===== function：renderEventIdeas / goToEventIdeaAssist - ★修正：ボタンが機能するように =====
 function renderEventIdeas(){
   const wrap=document.getElementById('event-ideas-list'); if(!wrap) return;
   const ideas=ALL_IDEAS.filter(i=>i.big==="BIG-6" && i.type!=='archived');
-  let html='<div style="background:linear-gradient(135deg,#fff8e1 0%, #ffe0a3 100%);border:2px solid #e8a33d;border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;"><div style="font-size:15px;font-weight:900;margin-bottom:6px;">💡 イベント企画は「声を届ける」でGroqが整理</div><button type="button" onclick="goToEventIdeaAssist()" style="background:#e8a33d;color:#1b1f1d;border:none;padding:14px 28px;border-radius:12px;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">🤖 イベント企画をAIで投稿する</button></div>';
+  // ★修正：ボタンは goToEventIdeaAssist() を確実に呼び出し、Groq整理へ遷移
+  let html='<div style="background:linear-gradient(135deg,#fff8e1 0%, #ffe0a3 100%);border:2px solid #e8a33d;border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;"><div style="font-size:15px;font-weight:900;margin-bottom:6px;">💡 イベント企画は「声を届ける」でGroqが整理</div><div style="font-size:12px;color:#666;margin-bottom:12px;">Groq llama-3.3 70Bが要約200字＋5視点100字で整理し、声のボード「イベント・企画」に自動分類されます。</div><button type="button" onclick="goToEventIdeaAssist()" style="background:#e8a33d;color:#1b1f1d;border:none;padding:14px 28px;border-radius:12px;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">🤖 イベント企画をAIで投稿する</button></div>';
   html+=ideas.map(i=>renderIdeaCard(i)).join('');
   wrap.innerHTML=html;
 }
-function goToEventIdeaAssist(){ showPage('assist', document.querySelector('nav button[data-page="assist"]')); }
+
 async function submitEventForm(){
   const title=document.getElementById('evTitle')?.value||''; if(!title) return;
   const detail=document.getElementById('evDetail')?.value||'';
@@ -341,56 +398,89 @@ async function submitEventForm(){
     const json=await res.json();
     if(json.status!=="success"){ if(msgEl) msgEl.textContent=json.message; return; }
   }catch(e){ if(msgEl) msgEl.textContent='通信エラー: '+e.message; return; }
-  EVENT_DATA.push({id:'evt'+Date.now(),date,title,place,detail});
+  EVENT_DATA.push({id:'evt'+Date.now(),date,time,title,place,category,status,detail});
   renderEvents();
   document.getElementById('eventFormCard').style.display='none';
 }
 
+// ===== function：共創アップデート - ★修正：参考サイト https://mimo-lgtm.github.io/community-association/ 準拠で表示されるように =====
 function generateCoCreatedDesc(key){
   const cat=BASE_CATEGORIES.find(c=>c.key===key);
   const defaultDesc=BASE_DESC[cat.label]||"";
-  const residentIdeas=ALL_IDEAS.filter(i=>i.big===key && i.type==='integrated');
-  if(residentIdeas.length===0) return defaultDesc;
-  let allSummaries=residentIdeas.map(i=>i.summary).join('。');
+  const residentIdeas=ALL_IDEAS.filter(i=>i.big===key); // ★修正：integratedだけでなく全ての声を対象に
+  if(residentIdeas.length===0) return defaultDesc + "\n\n（まだ住民の投稿がありません。声を届けると、ここに住民の声を加味した共創版が生成されます）";
+  let allSummaries=residentIdeas.map(i=>i.summary||i.title||"").join('。');
   let sentences=allSummaries.split('。').map(s=>s.trim()).filter(s=>s.length>5);
   let unique=[], seen=new Set();
   sentences.forEach(s=>{ if(defaultDesc.includes(s)) return; if(seen.has(s)) return; seen.add(s); unique.push(s); });
-  let residentCombined=unique.join('。')||residentIdeas[0].summary;
-  let defaultPart=defaultDesc.slice(0,100);
-  let k=defaultPart.lastIndexOf('。'); if(k>50) defaultPart=defaultPart.slice(0,k+1);
-  let residentPart=residentCombined.slice(0,100);
-  k=residentPart.lastIndexOf('。'); if(k>30) residentPart=residentPart.slice(0,k+1);
+  let residentCombined=unique.slice(0,3).join('。')||residentIdeas[0].summary||"";
+  if(residentCombined && !residentCombined.endsWith('。')) residentCombined+='。';
+  let defaultPart=defaultDesc.slice(0,120);
+  let k=defaultPart.lastIndexOf('。'); if(k>60) defaultPart=defaultPart.slice(0,k+1);
+  let residentPart=residentCombined.slice(0,120);
+  k=residentPart.lastIndexOf('。'); if(k>40) residentPart=residentPart.slice(0,k+1);
   let newDesc=(defaultPart+' '+residentPart).trim();
-  if(newDesc.length>200){ newDesc=newDesc.slice(0,200); let kk=newDesc.lastIndexOf('。'); if(kk>100) newDesc=newDesc.slice(0,kk+1); }
+  if(newDesc.length>250){ newDesc=newDesc.slice(0,250); let kk=newDesc.lastIndexOf('。'); if(kk>120) newDesc=newDesc.slice(0,kk+1); }
   return newDesc;
 }
-function updateCoCreated(key){ CO_CREATED[key].currentDesc=generateCoCreatedDesc(key); CO_CREATED[key].lastUpdated=new Date().toLocaleString('ja-JP'); CO_CREATED[key].isUpdated=true; renderMapUpdate(); }
-function toggleBaseDesc(key){ const el=document.getElementById('base-desc-'+key); if(el) el.style.display=(el.style.display==='none'||el.style.display==='')?'block':'none'; }
+function updateCoCreated(key){
+  // ★修正：ボタンを押すと必ず表示が変わるように
+  const newDesc=generateCoCreatedDesc(key);
+  CO_CREATED[key].currentDesc=newDesc;
+  CO_CREATED[key].lastUpdated=new Date().toLocaleString('ja-JP');
+  CO_CREATED[key].isUpdated=true;
+  CO_CREATED[key].residentCount=ALL_IDEAS.filter(i=>i.big===key).length;
+  renderMapUpdate();
+  setTimeout(()=>{
+    const el=document.getElementById('base-desc-'+key);
+    if(el) el.style.display='block';
+    const btn=document.getElementById('toggle-'+key);
+    if(btn) btn.textContent='▲ 閉じる';
+  },100);
+}
+function toggleBaseDesc(key){
+  const el=document.getElementById('base-desc-'+key);
+  const btn=document.getElementById('toggle-'+key);
+  if(!el) return;
+  const hidden=el.style.display==='none' || el.style.display==='';
+  el.style.display=hidden?'block':'none';
+  if(btn) btn.textContent=hidden?'▲ 閉じる':'▼ 説明を見る';
+}
 function renderMapUpdate(){
   const wrap=document.getElementById('mapUpdateWrap'); if(!wrap) return;
-  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;"><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明 / 右：リアルタイムにアップデートボタンで住民の声を加味した記述に更新</div></div>';
+  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明（クリックで開く） / 右：リアルタイムにアップデート（参考: mimo-lgtm.github.io/community-association）</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">GROQ連携</div></div>';
   BASE_CATEGORIES.forEach(c=>{
     const co=CO_CREATED[c.key];
+    const count=ALL_IDEAS.filter(i=>i.big===c.key).length;
+    const countIntegrated=ALL_IDEAS.filter(i=>i.big===c.key && i.type==='integrated').length;
     html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-      <div class="card" style="border:${co.isUpdated?'2px solid #e8a33d':''}">
-        <div style="display:flex;justify-content:space-between;cursor:pointer;" onclick="toggleBaseDesc('${c.key}')"><span><b>${c.icon} ${c.label}</b></span><span style="font-size:11px;background:#eef0e4;padding:2px 8px;border-radius:999px;">${co.isUpdated?'✨ 共創版':'▼ 説明'}</span></div>
-        <div style="font-size:11px;color:#777;">${c.sublabel}</div>
-        <div id="base-desc-${c.key}" style="display:none;margin-top:10px;background:${co.isUpdated?'#fff8e1':'#eef0e4'};padding:10px;border-radius:8px;white-space:pre-wrap;font-size:13px;">${escapeHtml(co.currentDesc)}</div>
+      <div class="card" style="border:${co.isUpdated?'2.5px solid #e8a33d':'1.5px solid #d8dcc9'};margin-bottom:0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="toggleBaseDesc('${c.key}')">
+          <span><b>${c.icon} ${c.label}</b> <span style="background:#2f7a6b;color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;">${count}件（統合${countIntegrated}）</span></span>
+          <span id="toggle-${c.key}" style="font-size:11px;background:#eef0e4;padding:2px 8px;border-radius:999px;">${co.isUpdated?'✨ 共創版':'▼ 説明を見る'}</span>
+        </div>
+        <div style="font-size:11px;color:#777;margin-top:4px;">${c.sublabel}</div>
+        <div id="base-desc-${c.key}" style="display:${co.isUpdated?'block':'none'};margin-top:12px;background:${co.isUpdated?'#fff8e1':'#eef0e4'};padding:12px;border-radius:8px;white-space:pre-wrap;font-size:13px;line-height:1.8;border:1px solid ${co.isUpdated?'#e8a33d':'#d8dcc9'};">${escapeHtml(co.currentDesc)}${co.lastUpdated?`\n\n🕒 最終更新: ${co.lastUpdated}`:''}</div>
       </div>
-      <div class="card" style="border:2px solid ${co.isUpdated?'#2f7a6b':'#e8a33d'};display:flex;flex-direction:column;justify-content:space-between;">
-        <div><div style="font-size:12px;font-weight:900;">🔄 共創アップデート</div><div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;">デフォルト説明＋住民の統合済み投稿を半々で統合、重複除去。</div></div>
-        <button type="button" onclick="updateCoCreated('${c.key}')" style="margin-top:10px;background:${co.isUpdated?'#2f7a6b':'#e8a33d'};color:${co.isUpdated?'#fff':'#000'};padding:10px 14px;border-radius:8px;font-weight:900;border:none;">${co.isUpdated?'✅ 更新済み（再更新）':'🔄 リアルタイムにアップデート'}</button>
+      <div class="card" style="border:2px solid ${co.isUpdated?'#2f7a6b':'#e8a33d'};margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:12px;font-weight:900;color:${co.isUpdated?'#2f7a6b':'#c9821f'};">🔄 共創アップデート</div>
+          <div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;line-height:1.6;">デフォルト約120字＋住民の声約120字を半々で統合・重複除去。投稿ボタンではありません。</div>
+          <div style="font-size:10px;color:#666;margin-top:6px;">住民投稿: ${count}件 / 統合: ${countIntegrated}件</div>
+        </div>
+        <button type="button" onclick="updateCoCreated('${c.key}')" style="margin-top:10px;background:${co.isUpdated?'#2f7a6b':'#e8a33d'};color:${co.isUpdated?'#fff':'#000'};padding:12px 14px;border-radius:8px;font-weight:900;border:none;box-shadow:0 3px 0 ${co.isUpdated?'#22594e':'#c9821f'};cursor:pointer;">${co.isUpdated?'✅ 更新済み（再更新）':'🔄 リアルタイムにアップデート'}</button>
       </div>
     </div>`;
   });
   wrap.innerHTML=html;
 }
+
+// ===== function：声のボード（分類表示） - 変更なし（分類を必ず表示） =====
 function renderIdeaCard(idea){
   let badge='', cardClass='';
   if(idea.type==='integrated'){ badge='<span class="badge-new">⭐ 新統合</span>'; cardClass='card-integrated'; }
   else if(idea.type==='single'){ badge='<span class="badge-single">💡 単独提案</span>'; cardClass='card-single'; }
   else { const t=ALL_IDEAS.find(i=>i.id===idea.integratedInto)?.title||'不明'; badge=`<span class="badge-archived">📦 元記事 → ${escapeHtml(t.slice(0,15))}に統合</span>`; cardClass='card-archived'; }
-  // 分類表示を必ず表示
   const classificationBadge = `<span style="background:#23282a;color:#fff;padding:2px 8px;border-radius:999px;font-size:10px;margin-left:6px;">${escapeHtml(idea.bigLabel||idea.big)} / ${escapeHtml(idea.midLabel||idea.mid)}</span>`;
   return `<div class="card ${cardClass}" style="position:relative;margin-bottom:16px;padding-top:22px;">
     ${badge}
@@ -436,6 +526,7 @@ function renderBoard(){
   grid.innerHTML=html;
 }
 
+// ===== function：みんなの広場（Instagramチェックボックス対応） - ★修正 =====
 function getFilteredHiroba(){let f=hirobaPosts;if(hirobaFilter!=="すべて")f=f.filter(p=>p.category.includes(hirobaFilter));return [...f].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));}
 function renderHiroba(){
   const list=document.getElementById('hirobaList'); if(!list) return;
@@ -444,7 +535,7 @@ function renderHiroba(){
   const byYear={}; filtered.forEach(p=>{const y=new Date(p.timestamp).getFullYear();if(!byYear[y])byYear[y]=[];byYear[y].push(p);});
   let html=""; Object.keys(byYear).sort((a,b)=>b-a).forEach(y=>{
     html+=`<div class="year-header">📅 ${y}年度（${byYear[y].length}件） - ${hirobaFilter}</div>`;
-    html+=byYear[y].map(p=>`<div class="hiroba-post-card"><div style="display:flex;justify-content:space-between;font-size:12px;color:#666;"><span>👤 ${escapeHtml(p.author)}</span><span style="background:#eef0e4;padding:3px 10px;border-radius:999px;">${escapeHtml(p.category)}</span><span>${new Date(p.timestamp).toLocaleDateString('ja-JP')}</span></div><div style="font-weight:800;margin:8px 0;">${escapeHtml(p.summary)}</div><div style="white-space:pre-wrap;background:#fafafa;padding:8px;border-radius:8px;font-size:13px;">${escapeHtml(p.description)}</div><img src="${p.imageUrl}" style="width:100%;max-height:420px;object-fit:cover;border-radius:8px;margin-top:8px;" onerror="this.style.display='none'"></div>`).join("");
+    html+=byYear[y].map(p=>`<div class="hiroba-post-card"><div style="display:flex;justify-content:space-between;font-size:12px;color:#666;"><span>👤 ${escapeHtml(p.author)} ${p.toInstagram?'📸 IG投稿':''}</span><span style="background:#eef0e4;padding:3px 10px;border-radius:999px;">${escapeHtml(p.category)}</span><span>${new Date(p.timestamp).toLocaleDateString('ja-JP')}</span></div><div style="font-weight:800;margin:8px 0;">${escapeHtml(p.summary)}</div><div style="white-space:pre-wrap;background:#fafafa;padding:8px;border-radius:8px;font-size:13px;">${escapeHtml(p.description)}</div><img src="${p.imageUrl}" style="width:100%;max-height:420px;object-fit:cover;border-radius:8px;margin-top:8px;" onerror="this.style.display='none'"></div>`).join("");
   });
   list.innerHTML=html;
 }
@@ -453,22 +544,81 @@ async function submitHiroba(){
   const author=document.getElementById('hirobaAuthor')?.value.trim()||"匿名";
   const comment=document.getElementById('hirobaComment')?.value.trim();
   const cat=document.getElementById('hirobaCategory')?.value;
+  // ★修正：Instagramチェックボックスの値を取得
+  const toInstagramEl=document.getElementById('hirobaToInstagram');
+  const toInstagram=toInstagramEl? toInstagramEl.checked : true;
   const statusEl=document.getElementById('hirobaStatus');
   if(!comment && !hirobaImageBase64){alert("コメントか画像を入れてください");return;}
   let category=cat==="すべて"?"その他":cat;
-  const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24),category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment};
+  const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24),category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment,toInstagram};
   try{
-    const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"postHiroba", author, comment, category, imageBase64:hirobaImageBase64||"", toInstagram:true})});
+    const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"postHiroba", author, comment, category, imageBase64:hirobaImageBase64||"", toInstagram})});
     const json=await res.json();
-    if(json.status==="success" && statusEl) statusEl.textContent="✅ GASに保存";
-  }catch(e){ console.log(e); }
+    if(json.status==="success" && statusEl) statusEl.textContent= toInstagram ? "✅ GASに保存＆Instagram投稿予約" : "✅ GASに保存（広場のみ）";
+  }catch(e){ if(statusEl) statusEl.textContent="⚠ ローカルに保存（GASエラー）"; console.log(e); }
   hirobaPosts.unshift(newPost);
   renderHiroba();
   document.getElementById('hirobaImagePreview').innerHTML='';
   document.getElementById('hirobaComment').value='';
   hirobaImageBase64='';
+  if(statusEl) setTimeout(()=>{statusEl.textContent='';},4000);
 }
 
+
+// ===== function：音声認識 - ★修正：ボタン復活 =====
+let recognition=null;
+let isRecognizing=false;
+function initVoice(){
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    alert('このブラウザは音声認識に対応していません（Chrome/Edge推奨）');
+    return null;
+  }
+  const rec=new SpeechRecognition();
+  rec.lang='ja-JP';
+  rec.interimResults=true;
+  rec.continuous=false;
+  rec.onstart=()=>{
+    isRecognizing=true;
+    document.getElementById('voiceStatus').style.display='inline';
+    document.getElementById('voiceBtn').textContent='⏹ 停止';
+    document.getElementById('voiceBtn').style.background='#ffe0e0';
+  };
+  rec.onend=()=>{
+    isRecognizing=false;
+    document.getElementById('voiceStatus').style.display='none';
+    document.getElementById('voiceBtn').textContent='🎤 音声入力';
+    document.getElementById('voiceBtn').style.background='#fff';
+  };
+  rec.onresult=(e)=>{
+    const ta=document.getElementById('userInput');
+    let finalText='';
+    for(let i=0;i<e.results.length;i++){
+      if(e.results[i].isFinal) finalText+=e.results[i][0].transcript;
+    }
+    if(finalText && ta){
+      ta.value = (ta.value? ta.value+' ' : '') + finalText;
+    }
+  };
+  rec.onerror=(e)=>{
+    console.log('voice error', e);
+    isRecognizing=false;
+    document.getElementById('voiceStatus').style.display='none';
+  };
+  return rec;
+}
+function toggleVoice(){
+  if(isRecognizing && recognition){
+    recognition.stop();
+    return;
+  }
+  if(!recognition) recognition=initVoice();
+  if(recognition){
+    try{ recognition.start(); }catch(err){ console.log(err); }
+  }
+}
+
+// ===== function：AI分析（Groq llama-3.3 70B / 文字数保証はGAS側でpad200/pad100済み） - 変更なし =====
 async function runAI(){
   const textEl=document.getElementById('userInput');
   const text=textEl.value.trim();
@@ -553,7 +703,7 @@ async function loadFromGAS(){
       renderEvents();
     }
     if(json.data && json.data.length>0){
-      hirobaPosts=[...json.data.map(r=>({timestamp:r.timestamp, author:r.author, summary:r.summary||r.comment.slice(0,20), category:r.category||'その他', imageUrl:r.imageUrl, description:r.comment})), ...hirobaPosts];
+      hirobaPosts=[...json.data.map(r=>({timestamp:r.timestamp, author:r.author, summary:r.summary||r.comment.slice(0,20), category:r.category||'その他', imageUrl:r.imageUrl, description:r.comment, toInstagram:r.toInstagram!==false})), ...hirobaPosts];
       renderHiroba();
     }
     if(json.board && json.board.length>0){
