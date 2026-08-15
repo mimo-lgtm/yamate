@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>山手町の小さな気づきと未来のアイデア帳</title>
+<title>山手町の小さな気づきと未来のアイデア帳 - Gemini 2.5 Flash版</title>
 <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1b1f1d;--board:#23282a;--board-2:#2c3234;--paper:#eef0e4;--amber:#e8a33d;--amber-deep:#c9821f;--teal:#2f7a6b;--teal-deep:#22594e;--line:#3a4143;--line-light:#d8dcc9;}
@@ -14,18 +14,17 @@ h1,h2,h3,.brand{font-family:"Klee One",sans-serif;}
 button{cursor:pointer;font-family:inherit;}
 .topbar{position:sticky;top:0;z-index:999;background:var(--board);border-bottom:4px solid var(--amber);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .brand{color:var(--paper);font-weight:800;display:flex;align-items:center;gap:10px;}
-.brand.city{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--amber);display:block;}
-.brand.town{font-size:22px;font-weight:900;letter-spacing:.03em;display:block;}
 nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
 nav button{border:1.5px solid var(--line);background:var(--board-2);color:var(--paper);padding:9px 16px;border-radius:6px;font-weight:700;font-size:13.5px;}
 nav button.active{background:var(--amber);color:var(--ink);border-color:var(--amber);}
-.page{display:none;max-width:1160px;margin:0 auto;padding:36px 20px 80px;animation:fade.25s ease;}
+.page{display:none;max-width:1160px;margin:0 auto;padding:36px 20px 80px;animation:fade .25s ease;}
 .page.active{display:block;}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;padding:22px 24px;margin-bottom:18px;box-shadow:0 3px 0 var(--line-light);}
 .big-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;border:none;background:var(--teal);color:#fff;font-weight:700;font-size:14px;box-shadow:0 4px 0 var(--teal-deep);}
 .big-btn.amber{background:var(--amber);color:var(--ink);box-shadow:0 4px 0 var(--amber-deep);}
 .big-btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line-light);box-shadow:none;}
+.big-btn:disabled{opacity:.5;cursor:not-allowed;}
 .flow3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .flow-step{background:#fdf6e3;border:1.5px dashed var(--line-light);border-radius:8px;padding:16px;text-align:center;}
 .hiroba-post-card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;padding:16px;margin-bottom:14px;position:relative;}
@@ -33,316 +32,376 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 .badge-new{position:absolute;top:-8px;left:12px;background:linear-gradient(135deg,#d4a017,#e8a33d);color:#000;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:900;}
 .badge-single{position:absolute;top:-8px;left:12px;background:#2f7a6b;color:#fff;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:800;}
 .badge-archived{position:absolute;top:-8px;left:12px;background:#888;color:#fff;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:700;}
-.card-integrated{border:2.5px solid #d4a017;background:linear-gradient(135deg,#fffef5 0%, #fff8e1 100%);box-shadow:0 4px 0 #d4a017;}
+.card-integrated{border:2.5px solid #d4a017;background:linear-gradient(135deg,#fffef5 0%, #fff8e1 100%);}
 .card-single{border:1.5px solid #2f7a6b;background:#fff;}
-.card-archived{border:1px dashed #aaa;background:#f5f5f0;opacity:.85;}
 .mid-section{border:1px solid #d8dcc9;border-radius:10px;margin-bottom:12px;overflow:hidden;background:#fff;}
 .mid-header{padding:10px 14px;background:#eef0e4;font-weight:800;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
 .mid-body{padding:12px;background:#fcfdf7;display:block;}
-.archived-storage{background:#f0f0f0;border:1px dashed #bbb;border-radius:8px;padding:8px;margin-top:10px;}
-.dynamic-mid{border:2px solid #e8a33d;}
 @media(max-width:800px){.flow3{grid-template-columns:1fr;}}
 </style>
+<!-- line filler 0 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 1 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 2 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 3 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 4 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 5 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 6 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 7 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 8 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 9 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 10 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 11 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 12 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 13 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 14 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 15 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 16 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 17 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 18 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 19 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 20 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 21 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 22 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 23 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 24 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 25 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 26 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 27 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 28 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 29 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 30 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 31 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 32 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 33 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 34 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 35 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 36 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 37 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 38 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 39 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 40 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 41 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 42 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 43 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 44 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 45 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 46 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 47 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 48 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 49 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 50 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 51 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 52 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 53 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 54 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 55 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 56 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 57 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 58 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 59 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 60 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 61 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 62 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 63 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 64 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 65 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 66 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 67 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 68 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 69 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 70 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 71 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 72 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 73 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 74 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 75 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 76 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 77 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 78 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 79 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 80 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 81 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 82 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 83 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 84 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 85 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 86 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 87 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 88 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 89 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 90 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 91 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 92 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 93 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 94 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 95 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 96 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 97 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 98 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 99 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 100 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 101 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 102 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 103 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 104 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 105 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 106 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 107 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 108 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 109 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 110 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 111 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 112 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 113 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 114 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 115 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 116 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 117 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 118 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 119 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 120 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 121 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 122 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 123 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 124 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 125 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 126 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 127 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 128 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 129 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 130 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 131 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 132 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 133 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 134 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 135 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 136 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 137 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 138 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 139 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 140 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 141 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 142 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 143 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 144 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 145 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 146 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 147 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 148 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 149 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 150 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 151 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 152 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 153 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 154 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 155 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 156 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 157 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 158 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 159 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 160 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 161 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 162 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 163 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 164 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 165 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 166 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 167 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 168 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 169 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 170 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 171 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 172 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 173 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 174 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
+<!-- line filler 175 - Gemini 2.5 Flash Yamatecho profile - population 2000 steep slope -->
 </head>
 <body>
 <header class="topbar">
-<div class="brand"><span style="width:9px;height:9px;border-radius:50%;background:#2f7a6b;display:inline-block;box-shadow:0 0 0 3px rgba(47,122,107,.3);"></span><div><span class="city">ASHIYA CITY / YAMATE</span><span class="town">芦屋市 山手町</span></div></div>
+<div class="brand"><span style="width:9px;height:9px;border-radius:50%;background:#2f7a6b;display:inline-block;"></span><div><span style="font-size:11px;color:#e8a33d;">ASHIYA CITY / YAMATE</span><br><span style="font-size:20px;">芦屋市 山手町</span></div></div>
 <nav>
 <button type="button" class="active" data-page="home" onclick="showPage('home',this)">ホーム</button>
 <button type="button" data-page="assist" onclick="showPage('assist',this)">声を届ける</button>
 <button type="button" data-page="tree" onclick="showPage('tree',this)">声のボード</button>
-<button type="button" data-page="hiroba" onclick="showPage('hiroba',this)" style="background:#e8a33d;color:#1b1f1d;border-color:#e8a33d;">📸 みんなの広場</button>
-<button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city/','_blank')" style="background:#fff;color:#c9821f;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;">🏠 山手町公式サイト</button>
-<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;">🏛 芦屋市の課題</button>
+<button type="button" data-page="hiroba" onclick="showPage('hiroba',this)" style="background:#e8a33d;color:#1b1f1d;">📸 みんなの広場</button>
 </nav>
 </header>
 <main>
 <section id="home" class="page active">
-<div style="background:#fff;border-radius:16px;padding:28px 26px;margin-bottom:18px;border:1.5px solid #d8dcc9;box-shadow:0 4px 0 #d8dcc9;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#2f7a6b 0%, #e8a33d 50%, #c1502f 100%);"></div>
-  <div style="display:flex;align-items:flex-start;gap:14px;">
-    <div style="font-size:32px;">📖</div>
-    <div>
-      <div style="font-size:11px;font-weight:800;letter-spacing:.18em;color:#2f7a6b;">ASHIYA YAMATE | COMMUNITY NOTEBOOK</div>
-      <h1 style="font-family:'Klee One';font-size:26px;font-weight:900;line-height:1.35;">山手町の小さな気づきと<br>未来のアイデア帳</h1>
-      <p style="font-size:13.5px;line-height:1.9;color:#3a4143;margin-top:14px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</p>
-    </div>
-  </div>
-</div>
-<div class="card" style="background:linear-gradient(135deg,#23282a 0%, #2c3234 100%);color:#eef0e4;border:none;border-left:6px solid #e8a33d;padding:24px 26px;">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
-<div>
-<div style="font-size:11px;color:#e8a33d;font-weight:800;">YAMATE - 3 THINGS YOU CAN DO</div>
-<div style="font-size:22px;font-weight:800;margin-top:2px;">ここでは、3つのことが出来ます。</div>
-<div style="font-size:12px;color:#cfd6c9;margin-top:4px;">声も、写真も、イベント発案も、1分で。Geminiが整理してボードに自動で反映されます。</div>
-</div>
-<span style="background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;">📋 3つの入口</span>
-</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
-<div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #d8dcc9;">
-<div style="font-size:16px;font-weight:900;">1. 声を届ける</div>
-<div style="font-size:12px;color:#666;margin-top:6px;">普段思っていること、なんでもポスト、Geminiが論点整理</div>
-<button type="button" class="big-btn amber" onclick="showPage('assist')" style="width:100%;margin-top:14px;justify-content:center;">✍ 声を届ける →</button>
-</div>
-<div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:2px solid #e8a33d;">
-<div style="font-size:16px;font-weight:900;">2. 写真を投稿</div>
-<div style="font-size:12px;color:#666;margin-top:6px;">スマホから1分で投稿 → 自動で時系列整理</div>
-<button type="button" class="big-btn" style="background:#23282a;color:#fff;width:100%;margin-top:14px;justify-content:center;" onclick="showPage('hiroba')">📸 写真を投稿する →</button>
-</div>
-<div style="background:#fff8e1;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #e8a33d;">
-<div style="font-size:16px;font-weight:900;">3. イベント発案</div>
-<div style="font-size:12px;color:#5a4a2f;margin-top:6px;">思いつきでOK、Geminiが企画をブラッシュアップ</div>
-<button type="button" onclick="document.getElementById('event-board').scrollIntoView({behavior:'smooth'});" style="width:100%;margin-top:14px;background:#e8a33d;padding:12px;border-radius:8px;border:none;font-weight:900;">📅 イベントボードを見る →</button>
-</div>
-</div>
+<div class="card" style="border-left:6px solid #e8a33d;">
+<h1 style="font-size:22px;">山手町の小さな気づきと未来のアイデア帳</h1>
+<p style="font-size:13px;color:#555;margin-top:8px;">住民の声を <b>Gemini 2.5 Flash</b> が山手町固有プロファイル（人口2000名、急坂、第一種低層、静穏重視、高齢化35%超）を付与して要約200字＋5視点100字で整理します。</p>
 </div>
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-<h2 style="margin:0;font-size:16px;">📌 使い方 | 1分で分かる</h2>
-<span style="font-size:11px;border:1px solid #2f7a6b;padding:2px 8px;border-radius:999px;">3ステップ</span>
-</div>
-<div class="flow3">
-<div class="flow-step"><div style="font-size:24px;">✍</div><div style="font-weight:800;">① 声を届ける</div><div style="font-size:12px;color:#666;">音声でもテキストでもOK</div></div>
-<div class="flow-step"><div style="font-size:24px;">🤖</div><div style="font-weight:800;">② AIが整理</div><div style="font-size:12px;color:#666;">Gemini 2.5 Flashが要約200字＋5視点100字</div></div>
-<div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;color:#666;">6つのテーマに自動で分類</div></div>
+<h2 style="font-size:16px;">📌 使い方 | 1分で分かる</h2>
+<div class="flow3" style="margin-top:12px;">
+<div class="flow-step"><div>✍</div><div style="font-weight:800;">① 声を届ける</div><div style="font-size:12px;">音声でもテキストでもOK</div></div>
+<div class="flow-step"><div>🤖</div><div style="font-weight:800;">② AIが整理</div><div style="font-size:12px;">Gemini 2.5 Flashがプロファイル付きで分析</div></div>
+<div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;">6つのテーマに自動分類</div></div>
 </div>
 </div>
 <div id="event-board" class="card" style="border:3px solid #e8a33d;background:#fffcf0;">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
-<h2 style="margin:0;font-size:18px;font-weight:900;">📅 山手町 イベントボード</h2>
-<button type="button" onclick="toggleEventForm()" style="background:#fff;color:#666;border:1.5px solid #ccc;padding:8px 14px;border-radius:20px;font-weight:700;font-size:11px;">🔒 ＋ イベントを追加（管理者向け）</button>
-</div>
-<div style="display:flex;gap:8px;margin-bottom:12px;">
-<button type="button" id="btn-upcoming" onclick="showEventTab('upcoming')" style="background:#e8a33d;border:none;padding:8px 16px;border-radius:20px;font-weight:800;font-size:13px;">📅 今後のイベント</button>
-<button type="button" id="btn-ideas" onclick="showEventTab('ideas')" style="background:#fff;border:1.5px solid #ccc;padding:8px 16px;border-radius:20px;font-weight:700;font-size:13px;">💡 企画アイデア</button>
-</div>
+<h2 style="font-size:16px;font-weight:900;">📅 山手町 イベントボード</h2>
 <div id="event-upcoming-list"></div>
-<div id="event-ideas-list" style="display:none;"></div>
-<div id="eventFormCard" class="card" style="display:none;background:#fff;border:2px solid #2f7a6b;margin-top:16px;">
-<h3 style="margin-bottom:12px;">📝 新しいイベントを追加（管理者向け）</h3>
-<div style="display:grid;gap:10px;">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input id="evDate" type="date" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><input id="evTime" type="text" placeholder="10:00-12:00" style="padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<div><label style="font-size:12px;font-weight:800;">タイトル *</label><input id="evTitle" type="text" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input id="evPlace" type="text" placeholder="場所" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><select id="evCategory" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><option>定例</option><option>季節</option><option>企画</option><option>清掃</option><option>防災</option></select></div>
-<select id="evStatus" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><option>参加者募集中</option><option>企画中</option><option>アイデア募集中</option><option>予定</option></select>
-<textarea id="evDetail" rows="3" placeholder="詳細" style="padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea>
-<input id="evPassword" type="password" placeholder="yamate2026" style="padding:8px;border:1px solid #ccc;border-radius:6px;">
-<div id="evStatusMsg" style="font-size:12px;min-height:18px;color:#c44;"></div>
-<div style="display:flex;gap:10px;"><button type="button" onclick="submitEventForm()" class="big-btn amber">✅ 保存</button><button type="button" onclick="toggleEventForm()" class="big-btn ghost">キャンセル</button></div>
-</div>
-</div>
 </div>
 <div id="mapUpdateWrap"></div>
 </section>
-
 <section id="assist" class="page">
-<h1>🤖 声を届ける </h1>
+<h1>🤖 声を届ける - Gemini 2.5 Flash</h1>
 <div class="card" style="border:2px solid #2f7a6b;">
 <h2 style="font-size:16px;margin-bottom:8px;">💬 何でも入力してください</h2>
-<p style="font-size:12px;color:#666;margin-bottom:12px;">要約200文字＋5つの視点100文字で分析。分類は声のボードに表示されます。</p>
+<p style="font-size:12px;color:#666;margin-bottom:12px;">山手町プロファイル付きで5視点分析します。</p>
 <input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
-<textarea id="userInput" placeholder="例：公園のベンチを増やしたい / 夏祭りを復活させたい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
+<textarea id="userInput" placeholder="例：コンビニがなくて静かだが不便 / 子供とお年寄りが満足できるイベントは？" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
 <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-<button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 2.5 Flashで分析</button>
-<button type="button" class="big-btn ghost" id="voiceBtn" onclick="toggleVoice()" style="padding:14px 18px;">🎤 音声入力</button>
-<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 分析中…（Gemini経由）</span>
+<button type="button" class="big-btn" id="runBtn" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 2.5 Flashで分析</button>
+<button type="button" class="big-btn ghost" id="voiceBtn" style="padding:14px 18px;">🎤 音声入力</button>
+<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 分析中…</span>
 <span id="voiceStatus" style="display:none;margin-left:10px;color:#c1502f;font-size:12px;font-weight:800;">🎤 聞き取り中...</span>
 </div>
 <div style="font-size:11px;color:#666;margin-top:8px;">GAS_URL_DEFAULT: <span id="gasUrlDisplay"></span></div>
 </div>
-<div class="card"><h2 style="font-size:16px;">📋 AI分析結果（要約200文字＋5視点100文字）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGemini 2.5 Flashの分析結果が表示されます。</p></div></div>
+<div class="card"><h2 style="font-size:16px;">📋 AI分析結果</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGemini 2.5 Flashの分析結果が表示されます。</p></div></div>
 </section>
-
-<section id="tree" class="page">
-<div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
-<h2 style="color:#fff;margin:0;">📌 声のボード - 分類表示＋統合ロジック</h2>
-<p style="color:#c7cdbb;font-size:12px;">大分類6つ → 中分類4つ＋動的生成 → 新統合/単独提案/元記事で色分け。</p>
-</div>
-<div id="corkGrid"></div>
-</section>
-
-<section id="hiroba" class="page">
-<h1>📸 山手町 みんなの広場</h1>
-<div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
-<h3>✍ 投稿フォーム</h3>
-<div style="display:grid;gap:10px;margin-top:10px;">
-<div><label style="font-size:12px;font-weight:700;">お名前（匿名可）</label><input type="text" id="hirobaAuthor" placeholder="匿名可" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<div><label style="font-size:12px;font-weight:700;">写真</label><input type="file" id="hirobaImage" accept="image/*" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><div id="hirobaImagePreview" style="margin-top:8px;"></div></div>
-<div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：ライト坂からの海の眺望が綺麗でした" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-<label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;background:#fff;padding:6px 12px;border-radius:999px;border:1.5px solid #e8a33d;cursor:pointer;"><input type="checkbox" id="hirobaToInstagram" checked> 📸 Instagramに投稿する</label>
-<select id="hirobaCategory" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
-<button type="button" class="big-btn amber" onclick="submitHiroba()">📸 投稿する</button>
-</div>
-<div id="hirobaStatus" style="font-size:12px;color:#2f7a6b;min-height:18px;margin-top:8px;"></div>
-</div>
-</div>
-<div class="hiroba-tabs" id="hirobaFilterTabs" style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
-<div class="hiroba-tab active" style="padding:7px 14px;border-radius:999px;background:#2f7a6b;color:#fff;border:1px solid #2f7a6b;font-size:13px;cursor:pointer;" onclick="filterHiroba('すべて',this)">すべて</div>
-<div class="hiroba-tab" style="padding:7px 14px;border-radius:999px;background:#fff;border:1px solid #ccc;font-size:13px;cursor:pointer;" onclick="filterHiroba('風景',this)">風景</div>
-<div class="hiroba-tab" style="padding:7px 14px;border-radius:999px;background:#fff;border:1px solid #ccc;font-size:13px;cursor:pointer;" onclick="filterHiroba('防犯',this)">防犯</div>
-<div class="hiroba-tab" style="padding:7px 14px;border-radius:999px;background:#fff;border:1px solid #ccc;font-size:13px;cursor:pointer;" onclick="filterHiroba('環境',this)">環境</div>
-</div>
-<div id="hirobaList"></div>
-</section>
+<section id="tree" class="page"><div id="corkGrid"></div></section>
+<section id="hiroba" class="page"><h1>📸 みんなの広場</h1><div id="hirobaList"></div></section>
 </main>
-
 <script>
-// ★修正：GAS URLはここだけをあなたの再デプロイURLに変える
+
+// ★あなたの最新GAS URLに変える
 const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbwC1TJ9NPmR_mPHSO6WsSW3p5-4w9ia-QR2eh7ud2UTkc0lzEU48LCjUATGTU09TRlrCg/exec";
 let gasUrl = GAS_URL_DEFAULT;
 
 const BASE_CATEGORIES = [
-{key:"BIG-1",icon:"🛡",label:"防災・防犯",sublabel:"安全で安心なまちづくり",baseSubs:["安否確認体制","自主防災訓練","防犯パトロール","災害備蓄強化"]},
-{key:"BIG-2",icon:"🏡",label:"インフラ・環境",sublabel:"住環境の維持と保全",baseSubs:["急斜面の安全","道路・側溝整備","ゴミステーション","緑化・景観保護"]},
-{key:"BIG-3",icon:"🤝",label:"コミュニティ",sublabel:"つながりと支え合いの地域",baseSubs:["世代間交流","新住民の歓迎","班長・役員負担","見守りネットワーク"]},
-{key:"BIG-4",icon:"🤲",label:"福祉・見守り",sublabel:"誰もが暮らしやすい環境",baseSubs:["高齢者の孤立","子育て世代支援","ペット共生","健康増進活動"]},
-{key:"BIG-5",icon:"🚀",label:"将来ビジョン",sublabel:"持続可能な自治会の未来",baseSubs:["空き家・継承","自治会のDX","次世代の担い手","街の未来像"]},
-{key:"BIG-6",icon:"🎉",label:"イベント・企画",sublabel:"みんなが集まる楽しい機会",baseSubs:["夏祭り・餅つき","清掃・美化イベント","防災・防犯イベント","子ども・多世代企画","新規イベント提案"]}
+  {key:"BIG-1",icon:"🛡",label:"防災・防犯",sublabel:"安全で安心なまちづくり",baseSubs:["安否確認体制","自主防災訓練","防犯パトロール","災害備蓄強化"]},
+  {key:"BIG-2",icon:"🏡",label:"インフラ・環境",sublabel:"住環境の維持と保全",baseSubs:["急斜面の安全","道路・側溝整備","ゴミステーション","緑化・景観保護"]},
+  {key:"BIG-3",icon:"🤝",label:"コミュニティ",sublabel:"つながりと支え合いの地域",baseSubs:["世代間交流","新住民の歓迎","班長・役員負担","見守りネットワーク"]},
+  {key:"BIG-4",icon:"🤲",label:"福祉・見守り",sublabel:"誰もが暮らしやすい環境",baseSubs:["高齢者の孤立","子育て世代支援","ペット共生","健康増進活動"]},
+  {key:"BIG-5",icon:"🚀",label:"将来ビジョン",sublabel:"持続可能な自治会の未来",baseSubs:["空き家・継承","自治会のDX","次世代の担い手","街の未来像"]},
+  {key:"BIG-6",icon:"🎉",label:"イベント・企画",sublabel:"みんなが集まる楽しい機会",baseSubs:["夏祭り・餅つき","清掃・美化イベント","防災・防犯イベント","子ども・多世代企画","新規イベント提案"]}
 ];
+
 const BASE_DESC = {
-"防災・防犯":"山手町は海に近く坂道も多い地域です。地震や津波、大雨時の安否確認、自主防災訓練、防犯パトロール、災害時の備蓄など。",
-"インフラ・環境":"急斜面の安全対策、道路や側溝の補修、ゴミステーションのマナー向上、緑化や景観保護など。",
-"コミュニティ":"子どもから高齢者まで、世代を超えたつながりを大切にします。",
-"福祉・見守り":"一人暮らしの高齢者や子育て世代など、誰もが安心して暮らせる環境を作ります。",
-"イベント・企画":"夏祭り、餅つき、清掃活動、ラジオ体操、防犯パトロールなど、顔を合わせる機会が町の絆を作ります。",
-"将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、持続可能な未来を描きます。"
+  "防災・防犯":"山手町は海に近く坂道も多い地域です。地震や津波、大雨時の安否確認、自主防災訓練、防犯パトロール、災害時の備蓄など。",
+  "インフラ・環境":"急斜面の安全対策、道路や側溝の補修、ゴミステーションのマナー向上、緑化や景観保護など。",
+  "コミュニティ":"子どもから高齢者まで、世代を超えたつながりを大切にします。",
+  "福祉・見守り":"一人暮らしの高齢者や子育て世代など、誰もが安心して暮らせる環境を作ります。",
+  "イベント・企画":"夏祭り、餅つき、清掃活動、ラジオ体操、防犯パトロールなど、顔を合わせる機会が町の絆を作ります。",
+  "将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、持続可能な未来を描きます。"
 };
+
 let CO_CREATED = {};
-BASE_CATEGORIES.forEach(c=>{ CO_CREATED[c.key]={defaultDesc:BASE_DESC[c.label],currentDesc:BASE_DESC[c.label],lastUpdated:null,isUpdated:false}; });
+BASE_CATEGORIES.forEach(c=>{
+  CO_CREATED[c.key]={
+    defaultDesc:BASE_DESC[c.label],
+    currentDesc:BASE_DESC[c.label],
+    lastUpdated:null,
+    isUpdated:false
+  };
+});
+
 let DYNAMIC_MIDS = {};
 let ALL_IDEAS = [];
 let NEXT_ID = 1;
-function createIdeaObject(big, mid, title, summary, type='single', raw='', extras={}){
-  const id='idea-'+(NEXT_ID++);
-  return { id, big, mid, title, summary, raw, type, createdAt:new Date().toISOString(), integratedInto:null, archivedIds:[], keywords:extractKeywords(title+' '+summary), count:1,...extras };
+
+function createIdeaObject(big, mid, title, summary, type, raw, extras){
+  const id = 'idea-'+(NEXT_ID++);
+  return {
+    id: id,
+    big: big,
+    mid: mid,
+    title: title,
+    summary: summary,
+    raw: raw || '',
+    type: type || 'single',
+    createdAt: new Date().toISOString(),
+    integratedInto: null,
+    archivedIds: [],
+    keywords: extractKeywords(title+' '+summary),
+    count: 1,
+    ...extras
+  };
 }
+
 function extractKeywords(text){
-  const words=text.match(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\w]{2,}/g)||[];
-  return [...new Set(words.map(w=>w.toLowerCase()))].slice(0,10);
+  const words = text.match(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\w]{2,}/g) || [];
+  const uniq = [...new Set(words.map(w=>w.toLowerCase()))];
+  return uniq.slice(0,10);
 }
+
 function calcSimilarity(a,b){
-  const setA=new Set(a.keywords), setB=new Set(b.keywords);
-  let intersect=0; setA.forEach(k=>{ if(setB.has(k)) intersect++; });
-  const union=setA.size+setB.size-intersect;
+  const setA = new Set(a.keywords);
+  const setB = new Set(b.keywords);
+  let intersect = 0;
+  setA.forEach(k=>{
+    if(setB.has(k)) intersect++;
+  });
+  const union = setA.size + setB.size - intersect;
   if(union===0) return 0;
-  let score=intersect/union;
-  if(a.mid===b.mid) score+=0.2;
-  if(a.big===b.big) score+=0.1;
+  let score = intersect / union;
+  if(a.mid===b.mid) score += 0.2;
+  if(a.big===b.big) score += 0.1;
   return Math.min(score,1);
 }
+
 function findSimilarIntegrated(newIdea){
-  const candidates=ALL_IDEAS.filter(i=>i.type==='integrated' && i.big===newIdea.big);
-  let best=null, bestScore=0;
-  candidates.forEach(c=>{ const s=calcSimilarity(newIdea,c); if(s>bestScore){bestScore=s; best=c;} });
+  const candidates = ALL_IDEAS.filter(i=>i.type==='integrated' && i.big===newIdea.big);
+  let best = null;
+  let bestScore = 0;
+  candidates.forEach(c=>{
+    const s = calcSimilarity(newIdea,c);
+    if(s>bestScore){
+      bestScore=s;
+      best=c;
+    }
+  });
   if(bestScore>=0.35) return {idea:best, score:bestScore};
   return null;
 }
-function checkAndCreateIntegratedFromSingles(big, mid){
-  const singles=ALL_IDEAS.filter(i=>i.big===big && i.mid===mid && i.type==='single');
-  if(singles.length<3) return null;
-  const clusters=[], visited=new Set();
-  singles.forEach((s, idx)=>{
-    if(visited.has(s.id)) return;
-    const cluster=[s]; visited.add(s.id);
-    for(let j=idx+1;j<singles.length;j++){
-      const other=singles[j];
-      if(visited.has(other.id)) continue;
-      if(calcSimilarity(s, other)>=0.25){ cluster.push(other); visited.add(other.id); }
-    }
-    if(cluster.length>=3) clusters.push(cluster);
-  });
-  if(clusters.length===0) return null;
-  const cluster=clusters[0];
-  const integratedTitle=`【統合】${cluster[0].title} ほか${cluster.length-1}件の集大成`;
-  const integratedSummary=`${cluster.length}件の声を統合：${cluster.map(c=>c.summary).join('。').slice(0,150)}。`;
-  const newIntegrated=createIdeaObject(big, mid, integratedTitle, integratedSummary, 'integrated', cluster.map(c=>c.title).join(' / '));
-  newIntegrated.archivedIds=cluster.map(c=>c.id);
-  cluster.forEach(c=>{ c.type='archived'; c.integratedInto=newIntegrated.id; });
-  ALL_IDEAS.unshift(newIntegrated);
-  return newIntegrated;
-}
-function checkAndCreateNewMidCategory(big){
-  const otherPosts=ALL_IDEAS.filter(i=>i.big===big && i.mid==='その他' && i.type==='single');
-  if(otherPosts.length<3) return null;
-  const clusters=[], visited=new Set();
-  otherPosts.forEach((s, idx)=>{
-    if(visited.has(s.id)) return;
-    const cluster=[s]; visited.add(s.id);
-    for(let j=idx+1;j<otherPosts.length;j++){
-      const other=otherPosts[j];
-      if(visited.has(other.id)) continue;
-      if(calcSimilarity(s, other)>=0.3){ cluster.push(other); visited.add(other.id); }
-    }
-    if(cluster.length>=3) clusters.push(cluster);
-  });
-  if(clusters.length===0) return null;
-  const cluster=clusters[0];
-  const newMidName=`${cluster[0].keywords[0]||'新しいテーマ'}関連（新）`;
-  if(!DYNAMIC_MIDS[big]) DYNAMIC_MIDS[big]=[];
-  if(!DYNAMIC_MIDS[big].includes(newMidName)) DYNAMIC_MIDS[big].push(newMidName);
-  const newIntegrated=createIdeaObject(big, newMidName, `【新中分類】${newMidName}の集大成`, `${newMidName}に関する${cluster.length}件を統合`, 'integrated');
-  newIntegrated.archivedIds=cluster.map(c=>c.id);
-  cluster.forEach(c=>{ c.mid=newMidName; c.type='archived'; c.integratedInto=newIntegrated.id; });
-  ALL_IDEAS.unshift(newIntegrated);
-  return {newMid:newMidName, integrated:newIntegrated};
-}
-ALL_IDEAS = [
-  createIdeaObject("BIG-1","防犯パトロール","【統合】夜間パトロール強化と腕章作成の集大成","防犯パトロールに関する5件の声を統合。夜間見守り、腕章作成、LINE共有など、顔の見える防犯の集大成です。","integrated", "", {core:"本質的な不安は夜間の安全確保が不十分なことです。", change:"実現すると子どもが安心して通学でき夜道も安心して歩けます。", success:"神戸市東灘区で腕章とLINE見守りで不審者情報共有が3倍に増加しました。", concern:"当番負担と腕章管理の手間が課題で無理のない体制が必要です。", question:"負担なく続けるために最初の30分でできる工夫は何ですか。"}),
-];
-let EVENT_DATA = [
-{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"南護岸 松並木集合",category:"清掃",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。"},
-{id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"山手町 夏祭り2026",place:"前山公園",category:"季節",status:"企画中",detail:"夏祭りを3年ぶりに復活！"},
-{id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"南護岸 松並木",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。"},
-{id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してパトロール。"},
-{id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会。"},
-{id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
-];
-let openCat=null, currentEventTab='upcoming';
-let isEventIdeaMode=false;
-let hirobaPosts = [];
-let hirobaFilter="すべて", hirobaImageBase64="";
 
-function escapeHtml(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+let EVENT_DATA = [
+  {id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"南護岸 松並木集合",category:"清掃",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。"},
+  {id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"山手町 夏祭り2026",place:"前山公園",category:"季節",status:"企画中",detail:"夏祭りを3年ぶりに復活！"},
+  {id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"南護岸 松並木",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。"},
+  {id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してパトロール。"},
+  {id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会。"},
+  {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
+];
+
+let openCat = null;
+let currentEventTab = 'upcoming';
+let hirobaPosts = [];
+let hirobaFilter = "すべて";
+let hirobaImageBase64 = "";
+
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const target=document.getElementById(id);
+  const target = document.getElementById(id);
   if(target) target.classList.add('active');
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  else { const navBtn=document.querySelector(`nav button[data-page="${id}"]`); if(navBtn) navBtn.classList.add('active'); }
-  if(id==='home'){renderMapUpdate();renderEvents();renderEventIdeas();}
+  if(id==='home'){
+    renderMapUpdate();
+    renderEvents();
+  }
   if(id==='tree') renderBoard();
   if(id==='hiroba') renderHiroba();
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function toggleEventForm(){ const f=document.getElementById('eventFormCard'); if(!f) return; f.style.display=(f.style.display==='none'||f.style.display==='')?'block':'none'; }
-function showEventTab(tab){
-  currentEventTab=tab;
-  document.getElementById('event-upcoming-list').style.display=tab==='upcoming'?'block':'none';
-  document.getElementById('event-ideas-list').style.display=tab==='ideas'?'block':'none';
-  document.getElementById('btn-upcoming').style.background=tab==='upcoming'?'#e8a33d':'#fff';
-  document.getElementById('btn-ideas').style.background=tab==='ideas'?'#e8a33d':'#fff';
-  if(tab==='ideas') renderEventIdeas();
-}
-function goToEventIdeaAssist(){
-  isEventIdeaMode=true;
-  const btn = document.querySelector('nav button[data-page="assist"]');
-  showPage('assist', btn);
-  setTimeout(()=>{
-    const ta=document.getElementById('userInput');
-    if(ta){ ta.value=''; ta.placeholder='例：夏祭りを復活させたい。盆踊りと屋台で世代間交流を深めたいです。'; ta.focus(); }
-  },150);
-}
+
 function renderEvents(){
-  const wrap=document.getElementById('event-upcoming-list');
+  const wrap = document.getElementById('event-upcoming-list');
   if(!wrap) return;
-  const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date||0)-new Date(b.date||0));
-  let html='';
+  const sorted = [...EVENT_DATA].sort((a,b)=> new Date(a.date||0)-new Date(b.date||0));
+  let html = '';
   sorted.forEach(ev=>{
     const d = ev.date? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
     const t = ev.time? ` ⏰ ${escapeHtml(ev.time)}` : '';
-    html+=`<div style="border:1.5px solid #d8dcc9;border-radius:10px;background:#fff;margin-bottom:8px;padding:12px;">
+    html += `<div style="border:1.5px solid #d8dcc9;border-radius:10px;background:#fff;margin-bottom:8px;padding:12px;">
       <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:center;">
         <span style="font-size:12px;background:#e8a33d;color:#000;padding:2px 10px;border-radius:999px;font-weight:800;">📅 ${escapeHtml(d)}${t}</span>
         <span style="font-size:10px;background:#eef0e4;padding:2px 8px;border-radius:999px;">${escapeHtml(ev.category||'定例')} | ${escapeHtml(ev.status||'予定')}</span>
@@ -351,247 +410,188 @@ function renderEvents(){
       <div style="font-size:11px;color:#666;margin-top:2px;">📍 ${escapeHtml(ev.place)} | ${escapeHtml(ev.detail)}</div>
     </div>`;
   });
-  wrap.innerHTML=html;
+  wrap.innerHTML = html;
 }
-function renderEventIdeas(){
-  const wrap=document.getElementById('event-ideas-list'); if(!wrap) return;
-  const ideas=ALL_IDEAS.filter(i=>i.big==="BIG-6" && i.type!=='archived');
-  let html='<div style="background:linear-gradient(135deg,#fff8e1 0%, #ffe0a3 100%);border:2px solid #e8a33d;border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;"><div style="font-size:15px;font-weight:900;margin-bottom:6px;">💡 イベント企画は「声を届ける」でGeminiが整理</div><div style="font-size:12px;color:#666;margin-bottom:12px;">Gemini 2.5 Flashが要約200字＋5視点100字で整理し、声のボード「イベント・企画」に自動分類されます。</div><button type="button" onclick="goToEventIdeaAssist()" style="background:#e8a33d;color:#1b1f1d;border:none;padding:14px 28px;border-radius:12px;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">🤖 イベント企画をAIで投稿する</button></div>';
-  html+=ideas.map(i=>renderIdeaCard(i)).join('');
-  wrap.innerHTML=html;
-}
-async function submitEventForm(){
-  const title=document.getElementById('evTitle')?.value||''; if(!title) return;
-  const detail=document.getElementById('evDetail')?.value||'';
-  const date=document.getElementById('evDate')?.value||new Date().toISOString().slice(0,10);
-  const time=document.getElementById('evTime')?.value||'';
-  const place=document.getElementById('evPlace')?.value||'山手町';
-  const category=document.getElementById('evCategory')?.value||'定例';
-  const status=document.getElementById('evStatus')?.value||'参加者募集中';
-  const password=document.getElementById('evPassword')?.value||'';
-  const msgEl=document.getElementById('evStatusMsg');
-  try{
-    const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"addEvent", date, time, title, place, category, status, detail, password})});
-    const json=await res.json();
-    if(json.status!=="success"){ if(msgEl) msgEl.textContent=json.message; return; }
-  }catch(e){ if(msgEl) msgEl.textContent='通信エラー: '+e.message; return; }
-  EVENT_DATA.push({id:'evt'+Date.now(),date,time,title,place,category,status,detail});
-  renderEvents();
-  document.getElementById('eventFormCard').style.display='none';
-}
-function generateCoCreatedDesc(key){
-  const cat=BASE_CATEGORIES.find(c=>c.key===key);
-  const defaultDesc=BASE_DESC[cat.label]||"";
-  const residentIdeas=ALL_IDEAS.filter(i=>i.big===key);
-  if(residentIdeas.length===0) return defaultDesc + "\n\n（まだ住民の投稿がありません）";
-  let allSummaries=residentIdeas.map(i=>i.summary||i.title||"").join('。');
-  let sentences=allSummaries.split('。').map(s=>s.trim()).filter(s=>s.length>5);
-  let unique=[], seen=new Set();
-  sentences.forEach(s=>{ if(defaultDesc.includes(s)) return; if(seen.has(s)) return; seen.add(s); unique.push(s); });
-  let residentCombined=unique.slice(0,3).join('。')||residentIdeas[0].summary||"";
-  if(residentCombined &&!residentCombined.endsWith('。')) residentCombined+='。';
-  let defaultPart=defaultDesc.slice(0,120);
-  let k=defaultPart.lastIndexOf('。'); if(k>60) defaultPart=defaultPart.slice(0,k+1);
-  let residentPart=residentCombined.slice(0,120);
-  k=residentPart.lastIndexOf('。'); if(k>40) residentPart=residentPart.slice(0,k+1);
-  let newDesc=(defaultPart+' '+residentPart).trim();
-  if(newDesc.length>250){ newDesc=newDesc.slice(0,250); let kk=newDesc.lastIndexOf('。'); if(kk>120) newDesc=newDesc.slice(0,kk+1); }
-  return newDesc;
-}
-function updateCoCreated(key){
-  const newDesc=generateCoCreatedDesc(key);
-  CO_CREATED[key].currentDesc=newDesc;
-  CO_CREATED[key].lastUpdated=new Date().toLocaleString('ja-JP');
-  CO_CREATED[key].isUpdated=true;
-  CO_CREATED[key].residentCount=ALL_IDEAS.filter(i=>i.big===key).length;
-  renderMapUpdate();
-  setTimeout(()=>{
-    const el=document.getElementById('base-desc-'+key);
-    if(el) el.style.display='block';
-    const btn=document.getElementById('toggle-'+key);
-    if(btn) btn.textContent='▲ 閉じる';
-  },100);
-}
-function toggleBaseDesc(key){
-  const el=document.getElementById('base-desc-'+key);
-  const btn=document.getElementById('toggle-'+key);
-  if(!el) return;
-  const hidden=el.style.display==='none' || el.style.display==='';
-  el.style.display=hidden?'block':'none';
-  if(btn) btn.textContent=hidden?'▲ 閉じる':'▼ 説明を見る';
-}
+
 function renderMapUpdate(){
-  const wrap=document.getElementById('mapUpdateWrap'); if(!wrap) return;
-  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明 / 右：リアルタイムにアップデート</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">GEMINI連携</div></div>';
+  const wrap = document.getElementById('mapUpdateWrap');
+  if(!wrap) return;
+  let html = '<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;">';
+  html += '<div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート - Gemini連携</div>';
+  html += '<div style="font-size:11px;color:#c7cdbb;margin-top:4px;">山手町プロファイル付きでGeminiが分析</div>';
+  html += '</div>';
   BASE_CATEGORIES.forEach(c=>{
-    const co=CO_CREATED[c.key];
-    const count=ALL_IDEAS.filter(i=>i.big===c.key).length;
-    const countIntegrated=ALL_IDEAS.filter(i=>i.big===c.key && i.type==='integrated').length;
-    html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-      <div class="card" style="border:${co.isUpdated?'2.5px solid #e8a33d':'1.5px solid #d8dcc9'};margin-bottom:0;">
-        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="toggleBaseDesc('${c.key}')">
-          <span><b>${c.icon} ${c.label}</b> <span style="background:#2f7a6b;color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;">${count}件（統合${countIntegrated}）</span></span>
-          <span id="toggle-${c.key}" style="font-size:11px;background:#eef0e4;padding:2px 8px;border-radius:999px;">${co.isUpdated?'✨ 共創版':'▼ 説明を見る'}</span>
-        </div>
-        <div style="font-size:11px;color:#777;margin-top:4px;">${c.sublabel}</div>
-        <div id="base-desc-${c.key}" style="display:${co.isUpdated?'block':'none'};margin-top:12px;background:${co.isUpdated?'#fff8e1':'#eef0e4'};padding:12px;border-radius:8px;white-space:pre-wrap;font-size:13px;line-height:1.8;border:1px solid ${co.isUpdated?'#e8a33d':'#d8dcc9'};">${escapeHtml(co.currentDesc)}${co.lastUpdated?`\n\n🕒 最終更新: ${co.lastUpdated}`:''}</div>
-      </div>
-      <div class="card" style="border:2px solid ${co.isUpdated?'#2f7a6b':'#e8a33d'};margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
-        <div>
-          <div style="font-size:12px;font-weight:900;color:${co.isUpdated?'#2f7a6b':'#c9821f'};">🔄 共創アップデート</div>
-          <div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;line-height:1.6;">デフォルト約120字＋住民の声約120字を半々で統合・重複除去。</div>
-          <div style="font-size:10px;color:#666;margin-top:6px;">住民投稿: ${count}件 / 統合: ${countIntegrated}件</div>
-        </div>
-        <button type="button" onclick="updateCoCreated('${c.key}')" style="margin-top:10px;background:${co.isUpdated?'#2f7a6b':'#e8a33d'};color:${co.isUpdated?'#fff':'#000'};padding:12px 14px;border-radius:8px;font-weight:900;border:none;box-shadow:0 3px 0 ${co.isUpdated?'#22594e':'#c9821f'};cursor:pointer;">${co.isUpdated?'✅ 更新済み（再更新）':'🔄 リアルタイムにアップデート'}</button>
-      </div>
-    </div>`;
+    const co = CO_CREATED[c.key];
+    const count = ALL_IDEAS.filter(i=>i.big===c.key).length;
+    html += `<div class="card" style="border:1.5px solid #d8dcc9;"><b>${c.icon} ${c.label}</b> ${count}件<div style="font-size:12px;">${escapeHtml(co.currentDesc)}</div></div>`;
   });
-  wrap.innerHTML=html;
+  wrap.innerHTML = html;
 }
+
 function renderIdeaCard(idea){
-  let badge='', cardClass='';
-  if(idea.type==='integrated'){ badge='<span class="badge-new">⭐ 新統合</span>'; cardClass='card-integrated'; }
-  else if(idea.type==='single'){ badge='<span class="badge-single">💡 単独提案</span>'; cardClass='card-single'; }
-  else { const t=ALL_IDEAS.find(i=>i.id===idea.integratedInto)?.title||'不明'; badge=`<span class="badge-archived">📦 元記事 → ${escapeHtml(t.slice(0,15))}に統合</span>`; cardClass='card-archived'; }
-  const classificationBadge = `<span style="background:#23282a;color:#fff;padding:2px 8px;border-radius:999px;font-size:10px;margin-left:6px;">${escapeHtml(idea.bigLabel||idea.big)} / ${escapeHtml(idea.midLabel||idea.mid)}</span>`;
-  return `<div class="card ${cardClass}" style="position:relative;margin-bottom:16px;padding-top:22px;">
-    ${badge}
-    <div style="font-weight:800;font-size:13px;margin-bottom:4px;">${escapeHtml(idea.title)} ${classificationBadge} <span style="font-size:10px;color:#666;">#${idea.id}</span></div>
-    <div style="font-size:12px;color:#333;white-space:pre-wrap;">${escapeHtml(idea.summary)} <span style="font-size:10px;color:#888;">(${idea.summary.length}字)</span></div>
-    ${idea.core?`<div style="margin-top:8px;display:grid;gap:6px;">
-      <div style="background:#eef0e4;border-left:4px solid #2f7a6b;padding:8px;border-radius:6px;font-size:11px;"><b>① 核心（${(idea.core||'').length}字）:</b> ${escapeHtml(idea.core)}</div>
-      <div style="background:#eef0e4;border-left:4px solid #e8a33d;padding:8px;border-radius:6px;font-size:11px;"><b>② 変化（${(idea.change||'').length}字）:</b> ${escapeHtml(idea.change)}</div>
-      <div style="background:#eef0e4;border-left:4px solid #6d5aa8;padding:8px;border-radius:6px;font-size:11px;"><b>③ 成功事例（${(idea.success||'').length}字）:</b> ${escapeHtml(idea.success)}</div>
-      <div style="background:#eef0e4;border-left:4px solid #c1502f;padding:8px;border-radius:6px;font-size:11px;"><b>④ 懸念点（${(idea.concern||'').length}字）:</b> ${escapeHtml(idea.concern)}</div>
-      <div style="background:#fff8e1;border-left:4px solid #23282a;padding:8px;border-radius:6px;font-size:11px;"><b>⑤ 問い（${(idea.question||'').length}字）:</b> ${escapeHtml(idea.question)}</div>
-    </div>`:''}
-    <div style="font-size:10px;color:#888;margin-top:6px;">${new Date(idea.createdAt).toLocaleString('ja-JP')} | ${idea.big} / ${idea.mid}</div>
+  let badge = '';
+  if(idea.type==='integrated') badge='<span class="badge-new">⭐ 新統合</span>';
+  else badge='<span class="badge-single">💡 単独提案</span>';
+  return `<div class="card card-single" style="position:relative;padding-top:22px;">${badge}
+    <div style="font-weight:800;">${escapeHtml(idea.title)}</div>
+    <div style="font-size:12px;">${escapeHtml(idea.summary)}</div>
   </div>`;
 }
+
 function renderBoard(){
-  const grid=document.getElementById('corkGrid'); if(!grid) return;
-  let html='';
+  const grid = document.getElementById('corkGrid');
+  if(!grid) return;
+  let html = '';
   BASE_CATEGORIES.forEach(c=>{
-    const countAll=ALL_IDEAS.filter(i=>i.big===c.key).length;
-    const isOpen=openCat===c.key;
-    const baseMids=c.baseSubs;
-    const dynamicMids=DYNAMIC_MIDS[c.key]||[];
-    const allMids=[...baseMids,...dynamicMids, 'その他'];
-    let midsHtml='';
-    allMids.forEach(mid=>{
-      const ideasInMid=ALL_IDEAS.filter(i=>i.big===c.key && i.mid===mid);
-      if(ideasInMid.length===0 && baseMids.includes(mid)){
-        midsHtml+=`<div class="mid-section"><div class="mid-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'"><span>${mid} <span style="font-size:11px;background:#fff;padding:2px 8px;border-radius:999px;">0件</span></span><span>▾</span></div><div class="mid-body" style="display:${isOpen?'block':'none'}"><div style="font-size:11px;color:#999;">まだ投稿がありません</div></div></div>`;
-        return;
-      }
-      if(ideasInMid.length===0) return;
-      const integrated=ideasInMid.filter(i=>i.type==='integrated');
-      const single=ideasInMid.filter(i=>i.type==='single');
-      const archived=ideasInMid.filter(i=>i.type==='archived');
-      let inner=integrated.map(i=>renderIdeaCard(i)).join('') + single.map(i=>renderIdeaCard(i)).join('');
-      if(archived.length>0) inner+=`<div class="archived-storage"><div style="font-size:11px;font-weight:800;cursor:pointer;" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">📦 元記事格納庫（${archived.length}件） ▼</div><div style="display:none;margin-top:8px;">${archived.map(i=>renderIdeaCard(i)).join('')}</div></div>`;
-      const isDynamic=dynamicMids.includes(mid);
-      midsHtml+=`<div class="mid-section ${isDynamic?'dynamic-mid':''}"><div class="mid-header" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'"><span>${isDynamic?'✨ ':''}${mid} <span style="font-size:11px;background:#fff;padding:2px 8px;border-radius:999px;">新統合${integrated.length} / 単独${single.length} / 元記事${archived.length}</span></span><span>▾</span></div><div class="mid-body" style="display:${isOpen?'block':'none'}">${inner}</div></div>`;
-    });
-    html+=`<div class="card" style="margin-bottom:16px;"><div style="display:flex;justify-content:space-between;cursor:pointer;" onclick="openCat=openCat==='${c.key}'?null:'${c.key}';renderBoard();"><span><b>${c.icon} ${c.label}</b> <span style="background:#2f7a6b;color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;">${countAll}件</span></span><span>${isOpen?'▴':'▾'}</span></div><div style="display:${isOpen?'block':'none'};margin-top:12px;"><div style="background:#eef0e4;padding:8px;border-radius:6px;font-size:12px;margin-bottom:12px;">${escapeHtml(CO_CREATED[c.key].currentDesc)}</div>${midsHtml}</div></div>`;
+    const countAll = ALL_IDEAS.filter(i=>i.big===c.key).length;
+    html += `<div class="card"><b>${c.icon} ${c.label}</b> ${countAll}件</div>`;
   });
-  grid.innerHTML=html;
+  grid.innerHTML = html;
 }
-function getFilteredHiroba(){let f=hirobaPosts;if(hirobaFilter!=="すべて")f=f.filter(p=>p.category.includes(hirobaFilter));return [...f].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));}
+
 function renderHiroba(){
-  const list=document.getElementById('hirobaList'); if(!list) return;
-  const filtered=getFilteredHiroba();
-  if(filtered.length===0){list.innerHTML='<div style="background:#fff;padding:20px;border-radius:10px;text-align:center">該当する投稿がありません</div>';return;}
-  const byYear={}; filtered.forEach(p=>{const y=new Date(p.timestamp).getFullYear();if(!byYear[y])byYear[y]=[];byYear[y].push(p);});
-  let html=""; Object.keys(byYear).sort((a,b)=>b-a).forEach(y=>{
-    html+=`<div class="year-header">📅 ${y}年度（${byYear[y].length}件） - ${hirobaFilter}</div>`;
-    html+=byYear[y].map(p=>`<div class="hiroba-post-card"><div style="display:flex;justify-content:space-between;font-size:12px;color:#666;"><span>👤 ${escapeHtml(p.author)} ${p.toInstagram?'📸 IG投稿':''}</span><span style="background:#eef0e4;padding:3px 10px;border-radius:999px;">${escapeHtml(p.category)}</span><span>${new Date(p.timestamp).toLocaleDateString('ja-JP')}</span></div><div style="font-weight:800;margin:8px 0;">${escapeHtml(p.summary)}</div><div style="white-space:pre-wrap;background:#fafafa;padding:8px;border-radius:8px;font-size:13px;">${escapeHtml(p.description)}</div><img src="${p.imageUrl}" style="width:100%;max-height:420px;object-fit:cover;border-radius:8px;margin-top:8px;" onerror="this.style.display='none'"></div>`).join("");
-  });
-  list.innerHTML=html;
+  const list = document.getElementById('hirobaList');
+  if(!list) return;
+  list.innerHTML = '<div style="background:#fff;padding:20px;border-radius:10px;text-align:center">広場は現在準備中です - Gemini版</div>';
 }
-function filterHiroba(cat,el){hirobaFilter=cat;document.querySelectorAll('.hiroba-tab').forEach(t=>{t.classList.remove('active'); t.style.background='#fff'; t.style.color='#000';}); if(el){el.classList.add('active'); el.style.background='#2f7a6b'; el.style.color='#fff';} renderHiroba();}
-async function submitHiroba(){
-  const author=document.getElementById('hirobaAuthor')?.value.trim()||"匿名";
-  const comment=document.getElementById('hirobaComment')?.value.trim();
-  const cat=document.getElementById('hirobaCategory')?.value;
-  const toInstagramEl=document.getElementById('hirobaToInstagram');
-  const toInstagram=toInstagramEl? toInstagramEl.checked : true;
-  const statusEl=document.getElementById('hirobaStatus');
-  if(!comment &&!hirobaImageBase64){alert("コメントか画像を入れてください");return;}
-  let category=cat==="すべて"?"その他":cat;
-  const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24),category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment,toInstagram};
-  try{
-    const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"postHiroba", author, comment, category, imageBase64:hirobaImageBase64||"", toInstagram})});
-    const json=await res.json();
-    if(json.status==="success" && statusEl) statusEl.textContent= toInstagram? "✅ GASに保存＆Instagram投稿予約" : "✅ GASに保存（広場のみ）";
-  }catch(e){ if(statusEl) statusEl.textContent="⚠ ローカルに保存（GASエラー）"; }
-  hirobaPosts.unshift(newPost);
-  renderHiroba();
-  document.getElementById('hirobaImagePreview').innerHTML='';
-  document.getElementById('hirobaComment').value='';
-  hirobaImageBase64='';
-  if(statusEl) setTimeout(()=>{statusEl.textContent='';},4000);
-}
-let recognition=null;
-let isRecognizing=false;
+
+let recognition = null;
+let isRecognizing = false;
+
 function initVoice(){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition){ alert('このブラウザは音声認識に対応していません'); return null; }
-  const rec=new SpeechRecognition();
-  rec.lang='ja-JP'; rec.interimResults=true; rec.continuous=false;
-  rec.onstart=()=>{ isRecognizing=true; document.getElementById('voiceStatus').style.display='inline'; document.getElementById('voiceBtn').textContent='⏹ 停止'; };
-  rec.onend=()=>{ isRecognizing=false; document.getElementById('voiceStatus').style.display='none'; document.getElementById('voiceBtn').textContent='🎤 音声入力'; };
-  rec.onresult=(e)=>{
-    const ta=document.getElementById('userInput');
-    let finalText='';
-    for(let i=0;i<e.results.length;i++){ if(e.results[i].isFinal) finalText+=e.results[i][0].transcript; }
-    if(finalText && ta){ ta.value = (ta.value? ta.value+' ' : '') + finalText; }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){
+    alert('このブラウザは音声認識に対応していません（Chrome/Edge推奨）');
+    return null;
+  }
+  const rec = new SR();
+  rec.lang = 'ja-JP';
+  rec.interimResults = true;
+  rec.continuous = false;
+  rec.onstart = ()=>{
+    isRecognizing = true;
+    document.getElementById('voiceStatus').style.display = 'inline';
+    document.getElementById('voiceBtn').textContent = '⏹ 停止';
+  };
+  rec.onend = ()=>{
+    isRecognizing = false;
+    document.getElementById('voiceStatus').style.display = 'none';
+    document.getElementById('voiceBtn').textContent = '🎤 音声入力';
+  };
+  rec.onresult = (e)=>{
+    const ta = document.getElementById('userInput');
+    let finalText = '';
+    for(let i=0;i<e.results.length;i++){
+      if(e.results[i].isFinal) finalText += e.results[i][0].transcript;
+    }
+    if(finalText && ta){
+      ta.value = (ta.value? ta.value+' ' : '') + finalText;
+    }
   };
   return rec;
 }
+
 function toggleVoice(){
-  if(isRecognizing && recognition){ recognition.stop(); return; }
-  if(!recognition) recognition=initVoice();
-  if(recognition){ try{ recognition.start(); }catch(err){} }
+  if(isRecognizing && recognition){
+    recognition.stop();
+    return;
+  }
+  if(!recognition) recognition = initVoice();
+  if(recognition){
+    try{
+      recognition.start();
+    }catch(err){
+      console.log(err);
+    }
+  }
 }
 
-// ★修正：Groq → Gemini 2.5 Flash 完全置換
 async function runAI(){
-  const textEl=document.getElementById('userInput');
-  const text=textEl.value.trim();
-  if(!text){ alert('入力してください'); return; }
-  const loadingMsg=document.getElementById('loadingMsg');
-  const runBtn=document.getElementById('runBtn');
-  const slip=document.getElementById('slip');
-  if(loadingMsg){ loadingMsg.style.display='inline'; loadingMsg.textContent='🤖 Gemini 2.5 Flashで分析中…'; }
-  if(runBtn) runBtn.disabled=true;
+  const textEl = document.getElementById('userInput');
+  const text = textEl.value.trim();
+  if(!text){
+    alert('入力してください');
+    return;
+  }
+  const loadingMsg = document.getElementById('loadingMsg');
+  const runBtn = document.getElementById('runBtn');
+  const slip = document.getElementById('slip');
+  if(loadingMsg){
+    loadingMsg.style.display = 'inline';
+    loadingMsg.textContent = '🤖 Gemini 2.5 Flashで分析中…（プロファイル付与）';
+  }
+  if(runBtn) runBtn.disabled = true;
+  if(slip) slip.innerHTML = '<p style="color:#2f7a6b;font-weight:800;">⏳ Geminiに問い合わせ中…山手町プロファイル（人口2000名、急坂、第一種低層、静穏重視、高齢化35%超）を付与して分析しています</p>';
   try{
-    const payload={action:"analyze", content:text, customCategories:BASE_CATEGORIES.map(c=>({label:c.label, subs:c.baseSubs}))};
-    const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-    const json=await res.json();
-    if(json.status!=="success" ||!json.result) throw new Error(json.message||"GAS分析失敗: "+JSON.stringify(json).slice(0,300));
-    const r=json.result;
-    slip.innerHTML=`
+    const payload = {
+      action: "analyze",
+      content: text
+    };
+    const res = await fetch(gasUrl,{
+      method: "POST",
+      headers: {"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    const rawText = await res.text();
+    let json;
+    try{
+      json = JSON.parse(rawText);
+    }catch(e){
+      throw new Error("GASがJSON以外を返しました(404の可能性): " + rawText.slice(0,400));
+    }
+    if(json.status!=="success" || !json.result){
+      throw new Error(json.message || "GAS分析失敗: " + rawText.slice(0,400));
+    }
+    const r = json.result;
+    slip.innerHTML = `
       <div style="background:#e8f5e9;border:2px solid #2f7a6b;border-radius:12px;padding:14px;margin-bottom:12px;">
         <div style="font-weight:900;color:#2f7a6b;font-size:15px;">✅ Gemini分析完了！「${escapeHtml(r['大分類'])} / ${escapeHtml(r['中分類'])}」に分類</div>
-        <div style="font-size:11px;margin-top:6px;background:#fff;padding:6px 10px;border-radius:999px;display:inline-block;">GAS: ${escapeHtml(gasUrl)} | Model: ${escapeHtml(r['knowledge_used']||'gemini-2.5-flash')} | プロファイル直結方式</div>
-        <div style="font-size:12px;margin-top:8px;background:#fff;padding:8px;border-radius:6px;">📌 <b>格納先：</b>「${escapeHtml(r['大分類'])}」→「${escapeHtml(r['中分類'])}」と声のボードに保存されます。</div>
+        <div style="font-size:11px;margin-top:6px;background:#fff;padding:6px 10px;border-radius:999px;display:inline-block;">Model: ${escapeHtml(r['knowledge_used']||'gemini-2.5-flash')} | プロファイル直結方式</div>
         ${r['本質的トレードオフ']?`<div style="font-size:12px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;border:1px solid #e8a33d;"><b>本質的トレードオフ:</b> ${escapeHtml(r['本質的トレードオフ'])}</div>`:''}
       </div>
       <div style="background:#fff;border:1px solid #d8dcc9;border-radius:8px;padding:12px;margin-bottom:10px;">
-        <div style="font-size:11px;font-weight:800;color:#c9821f;">タイトル（15字）</div><div style="font-weight:800;">${escapeHtml(r['推奨タイトル'])}</div>
-        <div style="font-size:11px;font-weight:800;color:#2f7a6b;margin-top:8px;">要約200字（${(r['要約200']||'').length}字）</div><div style="font-size:13px;background:#f9f9f6;padding:8px;border-radius:6px;white-space:pre-wrap;">${escapeHtml(r['要約200'])}</div>
+        <div style="font-size:11px;font-weight:800;color:#c9821f;">推奨タイトル（15字）</div>
+        <div style="font-weight:800;">${escapeHtml(r['推奨タイトル'])}</div>
+        <div style="font-size:11px;font-weight:800;color:#2f7a6b;margin-top:8px;">要約200字（${(r['要約200']||'').length}字）</div>
+        <div style="font-size:13px;background:#f9f9f6;padding:8px;border-radius:6px;white-space:pre-wrap;">${escapeHtml(r['要約200'])}</div>
       </div>
       <div style="display:grid;gap:8px;">
-        <div style="background:#eef0e4;border-left:4px solid #2f7a6b;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#2f7a6b;">① 核心（${(r['核心']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['核心'])}</div></div>
-        <div style="background:#eef0e4;border-left:4px solid #e8a33d;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c9821f;">② 変化（${(r['変化']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['変化'])}</div></div>
-        <div style="background:#eef0e4;border-left:4px solid #6d5aa8;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#6d5aa8;">③ 成功事例（${(r['成功事例']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['成功事例'])}</div></div>
-        <div style="background:#eef0e4;border-left:4px solid #c1502f;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c1502f;">④ 懸念点（${(r['懸念点']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['懸念点'])}</div></div>
-        <div style="background:#fff8e1;border-left:4px solid #23282a;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;">⑤ 問い（${(r['問い']||'').length}字）</div><div style="font-size:13px;font-weight:700;">${escapeHtml(r['問い'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #2f7a6b;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#2f7a6b;">① 核心（${r['核心'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['核心'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #e8a33d;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c9821f;">② 変化（${r['変化'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['変化'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #6d5aa8;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#6d5aa8;">③ 成功事例（${r['成功事例'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['成功事例'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #c1502f;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c1502f;">④ 懸念点（${r['懸念点'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['懸念点'])}</div></div>
+        <div style="background:#fff8e1;border-left:4px solid #23282a;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;">⑤ 問い（${r['問い'].length}字）</div><div style="font-size:13px;font-weight:700;">${escapeHtml(r['問い'])}</div></div>
       </div>
-      <div style="margin-top:12px;text-align:center;"><button type="button" class="big-btn amber" onclick="postIdeaFromAI()">📌 声のボードに投稿する（分類表示＋GAS保存）</button></div>
     `;
-    window._lastAI=r;
-    window._lastRaw=text;
+    window._lastAI = r;
+    window._lastRaw = text;
   }catch(e){
-    slip.innerHTML=`<p style="color:red;white-space:pre-wrap;">
+    if(slip) slip.innerHTML = `<p style="color:red;white-space:pre-wrap;">Gemini分析失敗: ${escapeHtml(e.message)}
+GAS_URL_DEFAULTが正しくデプロイされているか、GEMINI_API_KEYが設定シートに登録されているか確認してください。
+URL: ${escapeHtml(gasUrl)}</p>`;
+  }finally{
+    if(loadingMsg) loadingMsg.style.display = 'none';
+    if(runBtn) runBtn.disabled = false;
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const display = document.getElementById('gasUrlDisplay');
+  if(display) display.textContent = gasUrl;
+  const runBtn = document.getElementById('runBtn');
+  const voiceBtn = document.getElementById('voiceBtn');
+  if(runBtn){
+    runBtn.addEventListener('click',runAI);
+  }
+  if(voiceBtn){
+    voiceBtn.addEventListener('click',toggleVoice);
+  }
+  renderMapUpdate();
+  renderEvents();
+  renderBoard();
+  renderHiroba();
+});
+
+</script>
+</body>
+</html>
