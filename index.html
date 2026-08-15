@@ -54,33 +54,55 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <button type="button" data-page="assist" onclick="showPage('assist',this)">声を届ける</button>
 <button type="button" data-page="tree" onclick="showPage('tree',this)">声のボード</button>
 <button type="button" data-page="hiroba" onclick="showPage('hiroba',this)" style="background:#e8a33d;color:#1b1f1d;border-color:#e8a33d;">📸 みんなの広場</button>
+<button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city/','_blank')" style="background:#fff;color:#c9821f;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">
+      🏠 山手町公式サイト
+    </button>
+    <button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">
+      🏛 芦屋市の課題
+    </button>
 </nav>
 </header>
 <main>
 <!-- ===== section id="home" ：トップページ固定 - 変更なし（イベントバナー・ダークカード・写真CTA・使い方3ステップ） ===== -->
 <section id="home" class="page active">
-<div style="background:linear-gradient(90deg,#fff3cd 0%, #ffe0a3 100%);border:3px solid #e8a33d;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 4px 12px rgba(232,163,61,0.3);">
-<div style="flex:1;min-width:220px;">
-<div style="font-size:14px;font-weight:900;color:#c1502f;">🎉 山手町のイベントはこちら！</div>
-<div style="font-size:13px;color:#5a4a2f;margin-top:2px;">イベント情報はこのサイトで完結 - 下のイベントボードをチェック</div>
-</div>
-<button type="button" onclick="scrollToEventBoard()" style="display:inline-flex;align-items:center;gap:8px;background:#e8a33d;color:#1b1f1d;padding:14px 22px;border-radius:10px;border:none;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">📅 イベントを見る ↓</button>
-</div>
-<div class="card" style="background:#23282a;color:#eef0e4;border:none;">
-<div style="font-size:22px;font-weight:800;margin-bottom:8px;">山手町の小さな気づきと未来のアイデア帳</div>
-<p style="color:#cfd6c9;font-size:13px;">癒しも、提案も、気軽にポスト。AIが要約200字＋5つの視点100字で整理します。</p>
-<div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
-<button type="button" class="big-btn amber" onclick="showPage('assist', document.querySelector('nav button[data-page=assist]'))">✍ 声を届けてみる</button>
-<button type="button" class="big-btn" style="background:#eef0e4;color:#1b1f1d;" onclick="showPage('hiroba', document.querySelector('nav button[data-page=hiroba]'))">📸 写真を投稿する</button>
-</div>
-</div>
-<div class="photo-cta">
+<!-- ★修正：3つのボードを一つに統合 - 見やすく -->
+<div class="card" style="background:linear-gradient(135deg,#23282a 0%, #2c3234 100%);color:#eef0e4;border:none;border-left:6px solid #e8a33d;padding:24px 26px;">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
 <div>
-<h2 style="margin:0 0 4px 0;font-size:18px;">📸 写真を投稿してみよう</h2>
-<p style="margin:0;font-size:13px;color:#eef0e4;">スマホから1分で投稿 → 自動で時系列・テーマ別に整理 → Instagramにも自動投稿 ✨</p>
+<div style="font-size:11px;color:#e8a33d;font-weight:800;">YAMATE - 3 THINGS YOU CAN DO</div>
+<div style="font-size:22px;font-weight:800;margin-top:2px;">ここでは、3つのことが出来ます。</div>
+<div style="font-size:12px;color:#cfd6c9;margin-top:4px;">声も、写真も、イベント発案も、1分で。AIが整理してボードに自動で反映されます。</div>
 </div>
-<button type="button" class="big-btn" style="background:#fff;color:#1b1f1d;" onclick="showPage('hiroba', document.querySelector('nav button[data-page=hiroba]'))">投稿する ➔</button>
+<span style="background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;">📋 3つの入口</span>
 </div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
+
+<!-- 1. 声を届ける -->
+<div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #d8dcc9;">
+<div style="font-size:16px;font-weight:900;">1. 声を届ける</div>
+<div style="font-size:12px;color:#666;margin-top:6px;">普段から思っていること、などなんでもポスト、AIが論点整理してくれる</div>
+<button type="button" class="big-btn amber" onclick="showPage('assist')" style="width:100%;margin-top:14px;justify-content:center;">✍ 声を届ける →</button>
+</div>
+
+<!-- 2. 写真を投稿 -->
+<div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:2px solid #e8a33d;">
+<div style="font-size:16px;font-weight:900;">2. 写真を投稿</div>
+<div style="font-size:12px;color:#666;margin-top:6px;">スマホから1分で投稿 → 自動で時系列・テーマ別に整理 → Instagramにも自動投稿 ✨</div>
+<button type="button" class="big-btn" style="background:#23282a;color:#fff;width:100%;margin-top:14px;justify-content:center;" onclick="showPage('hiroba')">📸 写真を投稿する →</button>
+</div>
+
+<!-- 3. イベント発案 -->
+<div style="background:#fff8e1;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #e8a33d;">
+<div style="font-size:16px;font-weight:900;">3. イベント発案</div>
+<div style="font-size:12px;color:#5a4a2f;margin-top:6px;">思いつきで結構、AIが企画をブラッシュアップ</div>
+<button type="button" onclick="document.getElementById('event-board').scrollIntoView({behavior:'smooth'});" style="width:100%;margin-top:14px;background:#e8a33d;padding:12px;border-radius:8px;border:none;font-weight:900;">📅 イベントボードを見る →</button>
+</div>
+
+</div>
+</div>
+
+
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
 <h2 style="margin:0;font-size:16px;">📌 使い方 | 1分で分かる</h2>
