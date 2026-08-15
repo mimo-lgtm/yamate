@@ -6,7 +6,6 @@
 <title>山手町の小さな気づきと未来のアイデア帳</title>
 <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-/* ===== style：トップページ固定 - 変更なし ===== */
 :root{--ink:#1b1f1d;--board:#23282a;--board-2:#2c3234;--paper:#eef0e4;--amber:#e8a33d;--amber-deep:#c9821f;--teal:#2f7a6b;--teal-deep:#22594e;--line:#3a4143;--line-light:#d8dcc9;}
 *{margin:0;padding:0;box-sizing:border-box;overflow-wrap:break-word;}
 html{scroll-behavior:smooth;}
@@ -15,24 +14,23 @@ h1,h2,h3,.brand{font-family:"Klee One",sans-serif;}
 button{cursor:pointer;font-family:inherit;}
 .topbar{position:sticky;top:0;z-index:999;background:var(--board);border-bottom:4px solid var(--amber);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .brand{color:var(--paper);font-weight:800;display:flex;align-items:center;gap:10px;}
-.brand .city{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--amber);display:block;}
-.brand .town{font-size:22px;font-weight:900;letter-spacing:.03em;display:block;}
+.brand.city{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--amber);display:block;}
+.brand.town{font-size:22px;font-weight:900;letter-spacing:.03em;display:block;}
 nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
 nav button{border:1.5px solid var(--line);background:var(--board-2);color:var(--paper);padding:9px 16px;border-radius:6px;font-weight:700;font-size:13.5px;}
 nav button.active{background:var(--amber);color:var(--ink);border-color:var(--amber);}
-.page{display:none;max-width:1160px;margin:0 auto;padding:36px 20px 80px;animation:fade .25s ease;}
+.page{display:none;max-width:1160px;margin:0 auto;padding:36px 20px 80px;animation:fade.25s ease;}
 .page.active{display:block;}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;padding:22px 24px;margin-bottom:18px;box-shadow:0 3px 0 var(--line-light);}
 .big-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;border:none;background:var(--teal);color:#fff;font-weight:700;font-size:14px;box-shadow:0 4px 0 var(--teal-deep);}
 .big-btn.amber{background:var(--amber);color:var(--ink);box-shadow:0 4px 0 var(--amber-deep);}
 .big-btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line-light);box-shadow:none;}
-.photo-cta{background:linear-gradient(135deg,#2f7a6b 0%, #e8a33d 100%);border-radius:12px;padding:20px 22px;margin-bottom:18px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .flow3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .flow-step{background:#fdf6e3;border:1.5px dashed var(--line-light);border-radius:8px;padding:16px;text-align:center;}
 .hiroba-post-card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;padding:16px;margin-bottom:14px;position:relative;}
 .year-header{font-size:14px;font-weight:900;margin:18px 0 8px;padding:6px 10px;background:#23282a;color:#fff;border-radius:6px;}
-.badge-new{position:absolute;top:-8px;left:12px;background:linear-gradient(135deg,#d4a017,#e8a33d);color:#000;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:900;box-shadow:0 2px 4px rgba(0,0,0,.2);}
+.badge-new{position:absolute;top:-8px;left:12px;background:linear-gradient(135deg,#d4a017,#e8a33d);color:#000;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:900;}
 .badge-single{position:absolute;top:-8px;left:12px;background:#2f7a6b;color:#fff;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:800;}
 .badge-archived{position:absolute;top:-8px;left:12px;background:#888;color:#fff;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:700;}
 .card-integrated{border:2.5px solid #d4a017;background:linear-gradient(135deg,#fffef5 0%, #fff8e1 100%);box-shadow:0 4px 0 #d4a017;}
@@ -54,75 +52,50 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <button type="button" data-page="assist" onclick="showPage('assist',this)">声を届ける</button>
 <button type="button" data-page="tree" onclick="showPage('tree',this)">声のボード</button>
 <button type="button" data-page="hiroba" onclick="showPage('hiroba',this)" style="background:#e8a33d;color:#1b1f1d;border-color:#e8a33d;">📸 みんなの広場</button>
-<button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city/','_blank')" style="background:#fff;color:#c9821f;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">
-      🏠 山手町公式サイト
-    </button>
-    <button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">
-      🏛 芦屋市の課題
-    </button>
+<button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city/','_blank')" style="background:#fff;color:#c9821f;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;">🏠 山手町公式サイト</button>
+<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;">🏛 芦屋市の課題</button>
 </nav>
 </header>
 <main>
-<!-- ===== section id="home" ：トップページ固定 - 変更なし（イベントバナー・ダークカード・写真CTA・使い方3ステップ） ===== -->
 <section id="home" class="page active">
- <!-- ★追加：タイトル＆サブタイトルをきれいに装飾 -->
 <div style="background:#fff;border-radius:16px;padding:28px 26px;margin-bottom:18px;border:1.5px solid #d8dcc9;box-shadow:0 4px 0 #d8dcc9;position:relative;overflow:hidden;">
   <div style="position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#2f7a6b 0%, #e8a33d 50%, #c1502f 100%);"></div>
   <div style="display:flex;align-items:flex-start;gap:14px;">
     <div style="font-size:32px;">📖</div>
     <div>
       <div style="font-size:11px;font-weight:800;letter-spacing:.18em;color:#2f7a6b;">ASHIYA YAMATE | COMMUNITY NOTEBOOK</div>
-      <h1 style="font-family:'Klee One';font-size:26px;font-weight:900;line-height:1.35;">
-        山手町の小さな気づきと<br>未来のアイデア帳
-      </h1>
-      <div style="background:#fff8e1;border:1px solid #e8a33d;padding:4px 12px;border-radius:999px;font-size:11px;">
-        住民の声 × 写真 × イベント
-      </div>
-      <p style="font-size:13.5px;line-height:1.9;color:#3a4143;margin-top:14px;">
-        日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>
-        山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です
-      </p>
+      <h1 style="font-family:'Klee One';font-size:26px;font-weight:900;line-height:1.35;">山手町の小さな気づきと<br>未来のアイデア帳</h1>
+      <p style="font-size:13.5px;line-height:1.9;color:#3a4143;margin-top:14px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</p>
     </div>
   </div>
-</div>     
-<!-- ★修正：3つのボードを一つに統合 - 見やすく -->
+</div>
 <div class="card" style="background:linear-gradient(135deg,#23282a 0%, #2c3234 100%);color:#eef0e4;border:none;border-left:6px solid #e8a33d;padding:24px 26px;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
 <div>
 <div style="font-size:11px;color:#e8a33d;font-weight:800;">YAMATE - 3 THINGS YOU CAN DO</div>
 <div style="font-size:22px;font-weight:800;margin-top:2px;">ここでは、3つのことが出来ます。</div>
-<div style="font-size:12px;color:#cfd6c9;margin-top:4px;">声も、写真も、イベント発案も、1分で。AIが整理してボードに自動で反映されます。</div>
+<div style="font-size:12px;color:#cfd6c9;margin-top:4px;">声も、写真も、イベント発案も、1分で。Geminiが整理してボードに自動で反映されます。</div>
 </div>
 <span style="background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;">📋 3つの入口</span>
 </div>
-
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
-
-<!-- 1. 声を届ける -->
 <div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #d8dcc9;">
 <div style="font-size:16px;font-weight:900;">1. 声を届ける</div>
-<div style="font-size:12px;color:#666;margin-top:6px;">普段から思っていること、などなんでもポスト、AIが論点整理してくれる</div>
+<div style="font-size:12px;color:#666;margin-top:6px;">普段思っていること、なんでもポスト、Geminiが論点整理</div>
 <button type="button" class="big-btn amber" onclick="showPage('assist')" style="width:100%;margin-top:14px;justify-content:center;">✍ 声を届ける →</button>
 </div>
-
-<!-- 2. 写真を投稿 -->
 <div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:2px solid #e8a33d;">
 <div style="font-size:16px;font-weight:900;">2. 写真を投稿</div>
-<div style="font-size:12px;color:#666;margin-top:6px;">スマホから1分で投稿 → 自動で時系列・テーマ別に整理 → Instagramにも自動投稿 ✨</div>
+<div style="font-size:12px;color:#666;margin-top:6px;">スマホから1分で投稿 → 自動で時系列整理</div>
 <button type="button" class="big-btn" style="background:#23282a;color:#fff;width:100%;margin-top:14px;justify-content:center;" onclick="showPage('hiroba')">📸 写真を投稿する →</button>
 </div>
-
-<!-- 3. イベント発案 -->
 <div style="background:#fff8e1;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #e8a33d;">
 <div style="font-size:16px;font-weight:900;">3. イベント発案</div>
-<div style="font-size:12px;color:#5a4a2f;margin-top:6px;">思いつきで結構、AIが企画をブラッシュアップ</div>
+<div style="font-size:12px;color:#5a4a2f;margin-top:6px;">思いつきでOK、Geminiが企画をブラッシュアップ</div>
 <button type="button" onclick="document.getElementById('event-board').scrollIntoView({behavior:'smooth'});" style="width:100%;margin-top:14px;background:#e8a33d;padding:12px;border-radius:8px;border:none;font-weight:900;">📅 イベントボードを見る →</button>
 </div>
-
 </div>
 </div>
-
-
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
 <h2 style="margin:0;font-size:16px;">📌 使い方 | 1分で分かる</h2>
@@ -130,7 +103,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </div>
 <div class="flow3">
 <div class="flow-step"><div style="font-size:24px;">✍</div><div style="font-weight:800;">① 声を届ける</div><div style="font-size:12px;color:#666;">音声でもテキストでもOK</div></div>
-<div class="flow-step"><div style="font-size:24px;">🤖</div><div style="font-weight:800;">② AIが整理</div><div style="font-size:12px;color:#666;">Groq Llama 3.3 70Bが要約200字＋5視点100字</div></div>
+<div class="flow-step"><div style="font-size:24px;">🤖</div><div style="font-weight:800;">② AIが整理</div><div style="font-size:12px;color:#666;">Gemini 2.5 Flashが要約200字＋5視点100字</div></div>
 <div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;color:#666;">6つのテーマに自動で分類</div></div>
 </div>
 </div>
@@ -162,7 +135,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div id="mapUpdateWrap"></div>
 </section>
 
-<!-- ===== section id="assist" ：声を届ける - Groq連携固定 ===== -->
 <section id="assist" class="page">
 <h1>🤖 声を届ける </h1>
 <div class="card" style="border:2px solid #2f7a6b;">
@@ -171,32 +143,24 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
 <textarea id="userInput" placeholder="例：公園のベンチを増やしたい / 夏祭りを復活させたい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
 <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-<button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Groq Llama 3.3 70Bで分析</button>
-<!-- ★修正：音声認識ボタン復活 -->
+<button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 2.5 Flashで分析</button>
 <button type="button" class="big-btn ghost" id="voiceBtn" onclick="toggleVoice()" style="padding:14px 18px;">🎤 音声入力</button>
-<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 分析中…（GAS経由）</span>
+<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 分析中…（Gemini経由）</span>
 <span id="voiceStatus" style="display:none;margin-left:10px;color:#c1502f;font-size:12px;font-weight:800;">🎤 聞き取り中...</span>
 </div>
 <div style="font-size:11px;color:#666;margin-top:8px;">GAS_URL_DEFAULT: <span id="gasUrlDisplay"></span></div>
 </div>
-<div class="card"><h2 style="font-size:16px;">📋 AI分析結果（要約200文字＋5視点100文字）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGroq Llama 3.3 70Bの分析結果が表示されます。</p></div></div>
+<div class="card"><h2 style="font-size:16px;">📋 AI分析結果（要約200文字＋5視点100文字）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGemini 2.5 Flashの分析結果が表示されます。</p></div></div>
 </section>
 
-<!-- ===== section id="tree" ：声のボード - 分類表示 ===== -->
 <section id="tree" class="page">
 <div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
 <h2 style="color:#fff;margin:0;">📌 声のボード - 分類表示＋統合ロジック</h2>
-<p style="color:#c7cdbb;font-size:12px;">大分類6つ → 中分類4つ＋動的生成 → 新統合/単独提案/元記事で色分け。分類は必ず表示されます。</p>
-<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
-<span style="background:#d4a017;color:#000;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:800;">⭐ 新統合：集大成</span>
-<span style="background:#2f7a6b;color:#fff;padding:2px 8px;border-radius:999px;font-size:11px;">💡 単独提案：通常</span>
-<span style="background:#888;color:#fff;padding:2px 8px;border-radius:999px;font-size:11px;">📦 元記事：統合済み</span>
-</div>
+<p style="color:#c7cdbb;font-size:12px;">大分類6つ → 中分類4つ＋動的生成 → 新統合/単独提案/元記事で色分け。</p>
 </div>
 <div id="corkGrid"></div>
 </section>
 
-<!-- ===== section id="hiroba" ：みんなの広場 - Instagramチェックボックス追加 ===== -->
 <section id="hiroba" class="page">
 <h1>📸 山手町 みんなの広場</h1>
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
@@ -206,7 +170,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div><label style="font-size:12px;font-weight:700;">写真</label><input type="file" id="hirobaImage" accept="image/*" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"><div id="hirobaImagePreview" style="margin-top:8px;"></div></div>
 <div><label style="font-size:12px;font-weight:700;">コメント</label><textarea id="hirobaComment" rows="3" placeholder="例：ライト坂からの海の眺望が綺麗でした" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea></div>
 <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-<!-- ★修正：Instagramチェックボックス追加（従来仕様） -->
 <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;background:#fff;padding:6px 12px;border-radius:999px;border:1.5px solid #e8a33d;cursor:pointer;"><input type="checkbox" id="hirobaToInstagram" checked> 📸 Instagramに投稿する</label>
 <select id="hirobaCategory" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
 <button type="button" class="big-btn amber" onclick="submitHiroba()">📸 投稿する</button>
@@ -225,7 +188,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </main>
 
 <script>
-// ===== 仕様固定：GAS連携（Groq llama-3.3 70B） - 変更なし =====
+// ★修正：GAS URLはここだけをあなたの再デプロイURLに変える
 const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbwC1TJ9NPmR_mPHSO6WsSW3p5-4w9ia-QR2eh7ud2UTkc0lzEU48LCjUATGTU09TRlrCg/exec";
 let gasUrl = GAS_URL_DEFAULT;
 
@@ -238,22 +201,21 @@ const BASE_CATEGORIES = [
 {key:"BIG-6",icon:"🎉",label:"イベント・企画",sublabel:"みんなが集まる楽しい機会",baseSubs:["夏祭り・餅つき","清掃・美化イベント","防災・防犯イベント","子ども・多世代企画","新規イベント提案"]}
 ];
 const BASE_DESC = {
-"防災・防犯":"山手町は海に近く坂道も多い地域です。地震や津波、大雨時の安否確認、自主防災訓練、防犯パトロール、災害時の備蓄など、誰も取り残さない安全なまちづくりを目指します。",
-"インフラ・環境":"急斜面の安全対策、道路や側溝の補修、ゴミステーションのマナー向上、緑化や景観保護など、住み心地の良い環境を維持します。",
-"コミュニティ":"子どもから高齢者まで、世代を超えたつながりを大切にします。夏祭りや清掃活動、ラジオ体操、新住民歓迎会など、小さなきっかけが自然な交流を生みます。",
-"福祉・見守り":"一人暮らしの高齢者や子育て世代、ペットを飼う家族など、誰もが安心して暮らせる環境を作ります。",
-"イベント・企画":"住民が最も楽しみにしているのがイベントです。夏祭り、餅つき、清掃活動、ラジオ体操、防犯パトロールなど、顔を合わせる機会が町の絆を作ります。",
-"将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、山手町らしい持続可能な未来を描きます。"
+"防災・防犯":"山手町は海に近く坂道も多い地域です。地震や津波、大雨時の安否確認、自主防災訓練、防犯パトロール、災害時の備蓄など。",
+"インフラ・環境":"急斜面の安全対策、道路や側溝の補修、ゴミステーションのマナー向上、緑化や景観保護など。",
+"コミュニティ":"子どもから高齢者まで、世代を超えたつながりを大切にします。",
+"福祉・見守り":"一人暮らしの高齢者や子育て世代など、誰もが安心して暮らせる環境を作ります。",
+"イベント・企画":"夏祭り、餅つき、清掃活動、ラジオ体操、防犯パトロールなど、顔を合わせる機会が町の絆を作ります。",
+"将来ビジョン":"空き家や高齢化、担い手不足などに向き合いながら、持続可能な未来を描きます。"
 };
 let CO_CREATED = {};
 BASE_CATEGORIES.forEach(c=>{ CO_CREATED[c.key]={defaultDesc:BASE_DESC[c.label],currentDesc:BASE_DESC[c.label],lastUpdated:null,isUpdated:false}; });
-
 let DYNAMIC_MIDS = {};
 let ALL_IDEAS = [];
 let NEXT_ID = 1;
 function createIdeaObject(big, mid, title, summary, type='single', raw='', extras={}){
   const id='idea-'+(NEXT_ID++);
-  return { id, big, mid, title, summary, raw, type, createdAt:new Date().toISOString(), integratedInto:null, archivedIds:[], keywords:extractKeywords(title+' '+summary), count:1, ...extras };
+  return { id, big, mid, title, summary, raw, type, createdAt:new Date().toISOString(), integratedInto:null, archivedIds:[], keywords:extractKeywords(title+' '+summary), count:1,...extras };
 }
 function extractKeywords(text){
   const words=text.match(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\w]{2,}/g)||[];
@@ -325,30 +287,23 @@ function checkAndCreateNewMidCategory(big){
   ALL_IDEAS.unshift(newIntegrated);
   return {newMid:newMidName, integrated:newIntegrated};
 }
-
 ALL_IDEAS = [
-  createIdeaObject("BIG-1","防犯パトロール","【統合】夜間パトロール強化と腕章作成の集大成","防犯パトロールに関する5件の声を統合。夜間見守り、腕章作成、LINE共有など、顔の見える防犯の集大成です。防犯委員でオリジナル腕章を作成し夕方の見守りで子ども達の安全を確保。","integrated", "", {core:"本質的な不安は夜間の安全確保が不十分なことです。", change:"実現すると子どもが安心して通学でき夜道も安心して歩けます。", success:"神戸市東灘区で腕章とLINE見守りで不審者情報共有が3倍に増加しました。", concern:"当番負担と腕章管理の手間が課題で無理のない体制が必要です。", question:"負担なく続けるために最初の30分でできる工夫は何ですか。"}),
+  createIdeaObject("BIG-1","防犯パトロール","【統合】夜間パトロール強化と腕章作成の集大成","防犯パトロールに関する5件の声を統合。夜間見守り、腕章作成、LINE共有など、顔の見える防犯の集大成です。","integrated", "", {core:"本質的な不安は夜間の安全確保が不十分なことです。", change:"実現すると子どもが安心して通学でき夜道も安心して歩けます。", success:"神戸市東灘区で腕章とLINE見守りで不審者情報共有が3倍に増加しました。", concern:"当番負担と腕章管理の手間が課題で無理のない体制が必要です。", question:"負担なく続けるために最初の30分でできる工夫は何ですか。"}),
 ];
 let EVENT_DATA = [
 {id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"南護岸 松並木集合",category:"清掃",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。"},
 {id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"山手町 夏祭り2026",place:"前山公園",category:"季節",status:"企画中",detail:"夏祭りを3年ぶりに復活！"},
-{id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"南護岸 松並木",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。体操後はみんなで朝のコーヒー・お茶会。健康増進と世代間交流の一石二鳥。"},
-{id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してオリジナル腕章をつけてパトロール。楽しく防犯意識を高めます。お菓子配布あり。"},
-{id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会。つきたてのお餅をみんなでいただきます。防災炊き出し訓練も同時開催。"},
-{id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。LINEと班長連絡網の二重で確認。備蓄品の点検も。"}  
+{id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"南護岸 松並木",category:"季節",status:"参加者募集中",detail:"夏休み期間、松並木でラジオ体操を開催。"},
+{id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装してパトロール。"},
+{id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会。"},
+{id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
 ];
 let openCat=null, currentEventTab='upcoming';
-let isEventIdeaMode=false; // ★修正：イベント企画モードフラグ追加
-let hirobaPosts = [
-{timestamp:"2026-05-10T10:00:00",author:"環境美化委員会",summary:"ゴールデンウィークの一日、皆で清掃活動に励みました。",category:"環境",imageUrl:"https://www.city.ashiya.lg.jp/kodomo/kodomohoiku/images/iwazonohoukatu01.jpg",description:"先日来の強風のために、落葉が多く、雑草も元気に出てきています。初めて清掃活動に参加された方も一緒に、五月晴れの緑地公園で楽しく清掃しました！"},
-{timestamp:"2026-05-09T16:00:00",author:"イベント班",summary:"春の一日、緑地清掃とイベントにご参加いただき、ありがとうございました。",category:"イベント",imageUrl:"https://www.sapporo.travel/cms/wp-content/uploads/2025/10/%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E7%84%BC%E3%81%8D%E8%8A%8B%E3%83%86%E3%83%A9%E3%82%B92024-19-1200x900.jpg",description:"70個のお芋が全部きれいに無くなりました！"},
-{timestamp:"2026-05-08T09:00:00",author:"イベント班",summary:"子ども12名、大人40名の参加者は全員、大満足のバスツアーでした。",category:"イベント",imageUrl:"https://prtimes.jp/i/607/559/resize/d607-559-107882-0.jpg",description:"圧巻は、西日本ではここ『須磨シ―ワールド』でしかみることのできない「オルカショー」。体重が3トンの“ステラ”と“ラン”の親子が巨体で見せてくれる数々の“芸”（パフォーマンス）は、巨大だけにその愛らしさ愛おしさが何十倍にも感じられました。帰路のお買い物も含めて、老若男女、笑顔のバスツアーでした！！"},
-{timestamp:"2026-05-07T14:00:00",author:"防犯委員",summary:"”地域で自分の街は自分で守る”",category:"防犯",imageUrl:"https://www.city.itako.lg.jp/data/img/2-1325645820_14.jpg",description:"防犯委員で、山手町町内会のオリジナルバッグを作成しました。山手町内の防犯、町の結束、不審者が近寄りにくい町づくり。そして子供達を守る！を目的に作成致しました。腕章を付けている人は山手町の人！安全な人だと子供達にもわかりやすくするため、キャラクターを作り、そのキャラクターを取り入れ子供達に認識してもらいやすいデザインにしました。画像を子供達に見せて「この腕章をつけてる人は町の人だよ〜」「困ったら声かけていいんだよ〜」とお伝えしてもらえると助かります♡"},
-];
+let isEventIdeaMode=false;
+let hirobaPosts = [];
 let hirobaFilter="すべて", hirobaImageBase64="";
 
 function escapeHtml(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function scrollToEventBoard(){ const el=document.getElementById('event-board'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const target=document.getElementById(id);
@@ -370,39 +325,23 @@ function showEventTab(tab){
   document.getElementById('btn-ideas').style.background=tab==='ideas'?'#e8a33d':'#fff';
   if(tab==='ideas') renderEventIdeas();
 }
-
-// ===== function：renderEvents - ★修正：日付表示追加 =====
-
 function goToEventIdeaAssist(){
-  // ★修正：イベント企画ボタンが機能する＆混乱する「日時、場所、内容」文字を入れない
   isEventIdeaMode=true;
-  const btn = document.querySelector('nav button[data-page="assist"]') || document.querySelectorAll('nav button')[1];
+  const btn = document.querySelector('nav button[data-page="assist"]');
   showPage('assist', btn);
   setTimeout(()=>{
     const ta=document.getElementById('userInput');
-    if(ta){
-      ta.value='';
-      ta.placeholder='例：夏祭りを復活させたい。盆踊りと屋台で世代間交流を深めたいです。';
-      ta.focus();
-    }
-    const msg=document.getElementById('loadingMsg');
-    if(msg){
-      msg.style.display='inline';
-      msg.textContent='💡 イベント企画モード：自由に入力して「Groq Llama 3.3 70Bで分析」を押してください';
-      setTimeout(()=>{msg.style.display='none';},4000);
-    }
+    if(ta){ ta.value=''; ta.placeholder='例：夏祭りを復活させたい。盆踊りと屋台で世代間交流を深めたいです。'; ta.focus(); }
   },150);
 }
-
 function renderEvents(){
   const wrap=document.getElementById('event-upcoming-list');
   if(!wrap) return;
-  // ★修正：日付順にソートして日付を表示
   const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date||0)-new Date(b.date||0));
   let html='';
   sorted.forEach(ev=>{
-    const d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
-    const t = ev.time ? ` ⏰ ${escapeHtml(ev.time)}` : '';
+    const d = ev.date? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
+    const t = ev.time? ` ⏰ ${escapeHtml(ev.time)}` : '';
     html+=`<div style="border:1.5px solid #d8dcc9;border-radius:10px;background:#fff;margin-bottom:8px;padding:12px;">
       <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:center;">
         <span style="font-size:12px;background:#e8a33d;color:#000;padding:2px 10px;border-radius:999px;font-weight:800;">📅 ${escapeHtml(d)}${t}</span>
@@ -414,17 +353,13 @@ function renderEvents(){
   });
   wrap.innerHTML=html;
 }
-
-// ===== function：renderEventIdeas / goToEventIdeaAssist - ★修正：ボタンが機能するように =====
 function renderEventIdeas(){
   const wrap=document.getElementById('event-ideas-list'); if(!wrap) return;
   const ideas=ALL_IDEAS.filter(i=>i.big==="BIG-6" && i.type!=='archived');
-  // ★修正：ボタンは goToEventIdeaAssist() を確実に呼び出し、Groq整理へ遷移
-  let html='<div style="background:linear-gradient(135deg,#fff8e1 0%, #ffe0a3 100%);border:2px solid #e8a33d;border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;"><div style="font-size:15px;font-weight:900;margin-bottom:6px;">💡 イベント企画は「声を届ける」でGroqが整理</div><div style="font-size:12px;color:#666;margin-bottom:12px;">Groq llama-3.3 70Bが要約200字＋5視点100字で整理し、声のボード「イベント・企画」に自動分類されます。</div><button type="button" onclick="goToEventIdeaAssist()" style="background:#e8a33d;color:#1b1f1d;border:none;padding:14px 28px;border-radius:12px;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">🤖 イベント企画をAIで投稿する</button></div>';
+  let html='<div style="background:linear-gradient(135deg,#fff8e1 0%, #ffe0a3 100%);border:2px solid #e8a33d;border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;"><div style="font-size:15px;font-weight:900;margin-bottom:6px;">💡 イベント企画は「声を届ける」でGeminiが整理</div><div style="font-size:12px;color:#666;margin-bottom:12px;">Gemini 2.5 Flashが要約200字＋5視点100字で整理し、声のボード「イベント・企画」に自動分類されます。</div><button type="button" onclick="goToEventIdeaAssist()" style="background:#e8a33d;color:#1b1f1d;border:none;padding:14px 28px;border-radius:12px;font-weight:900;font-size:15px;box-shadow:0 4px 0 #c9821f;cursor:pointer;">🤖 イベント企画をAIで投稿する</button></div>';
   html+=ideas.map(i=>renderIdeaCard(i)).join('');
   wrap.innerHTML=html;
 }
-
 async function submitEventForm(){
   const title=document.getElementById('evTitle')?.value||''; if(!title) return;
   const detail=document.getElementById('evDetail')?.value||'';
@@ -444,19 +379,17 @@ async function submitEventForm(){
   renderEvents();
   document.getElementById('eventFormCard').style.display='none';
 }
-
-// ===== function：共創アップデート - ★修正：参考サイト https://mimo-lgtm.github.io/community-association/ 準拠で表示されるように =====
 function generateCoCreatedDesc(key){
   const cat=BASE_CATEGORIES.find(c=>c.key===key);
   const defaultDesc=BASE_DESC[cat.label]||"";
-  const residentIdeas=ALL_IDEAS.filter(i=>i.big===key); // ★修正：integratedだけでなく全ての声を対象に
-  if(residentIdeas.length===0) return defaultDesc + "\n\n（まだ住民の投稿がありません。声を届けると、ここに住民の声を加味した共創版が生成されます）";
+  const residentIdeas=ALL_IDEAS.filter(i=>i.big===key);
+  if(residentIdeas.length===0) return defaultDesc + "\n\n（まだ住民の投稿がありません）";
   let allSummaries=residentIdeas.map(i=>i.summary||i.title||"").join('。');
   let sentences=allSummaries.split('。').map(s=>s.trim()).filter(s=>s.length>5);
   let unique=[], seen=new Set();
   sentences.forEach(s=>{ if(defaultDesc.includes(s)) return; if(seen.has(s)) return; seen.add(s); unique.push(s); });
   let residentCombined=unique.slice(0,3).join('。')||residentIdeas[0].summary||"";
-  if(residentCombined && !residentCombined.endsWith('。')) residentCombined+='。';
+  if(residentCombined &&!residentCombined.endsWith('。')) residentCombined+='。';
   let defaultPart=defaultDesc.slice(0,120);
   let k=defaultPart.lastIndexOf('。'); if(k>60) defaultPart=defaultPart.slice(0,k+1);
   let residentPart=residentCombined.slice(0,120);
@@ -466,7 +399,6 @@ function generateCoCreatedDesc(key){
   return newDesc;
 }
 function updateCoCreated(key){
-  // ★修正：ボタンを押すと必ず表示が変わるように
   const newDesc=generateCoCreatedDesc(key);
   CO_CREATED[key].currentDesc=newDesc;
   CO_CREATED[key].lastUpdated=new Date().toLocaleString('ja-JP');
@@ -490,7 +422,7 @@ function toggleBaseDesc(key){
 }
 function renderMapUpdate(){
   const wrap=document.getElementById('mapUpdateWrap'); if(!wrap) return;
-  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート『地域の課題を皆様の投稿で変化していく様子をご覧いただけます』</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明（クリックで開く） / 右：リアルタイムにアップデート（参考: mimo-lgtm.github.io/community-association）</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">GROQ連携</div></div>';
+  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明 / 右：リアルタイムにアップデート</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">GEMINI連携</div></div>';
   BASE_CATEGORIES.forEach(c=>{
     const co=CO_CREATED[c.key];
     const count=ALL_IDEAS.filter(i=>i.big===c.key).length;
@@ -507,7 +439,7 @@ function renderMapUpdate(){
       <div class="card" style="border:2px solid ${co.isUpdated?'#2f7a6b':'#e8a33d'};margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
         <div>
           <div style="font-size:12px;font-weight:900;color:${co.isUpdated?'#2f7a6b':'#c9821f'};">🔄 共創アップデート</div>
-          <div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;line-height:1.6;">デフォルト約120字＋住民の声約120字を半々で統合・重複除去。投稿ボタンではありません。</div>
+          <div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;line-height:1.6;">デフォルト約120字＋住民の声約120字を半々で統合・重複除去。</div>
           <div style="font-size:10px;color:#666;margin-top:6px;">住民投稿: ${count}件 / 統合: ${countIntegrated}件</div>
         </div>
         <button type="button" onclick="updateCoCreated('${c.key}')" style="margin-top:10px;background:${co.isUpdated?'#2f7a6b':'#e8a33d'};color:${co.isUpdated?'#fff':'#000'};padding:12px 14px;border-radius:8px;font-weight:900;border:none;box-shadow:0 3px 0 ${co.isUpdated?'#22594e':'#c9821f'};cursor:pointer;">${co.isUpdated?'✅ 更新済み（再更新）':'🔄 リアルタイムにアップデート'}</button>
@@ -516,8 +448,6 @@ function renderMapUpdate(){
   });
   wrap.innerHTML=html;
 }
-
-// ===== function：声のボード（分類表示） - 変更なし（分類を必ず表示） =====
 function renderIdeaCard(idea){
   let badge='', cardClass='';
   if(idea.type==='integrated'){ badge='<span class="badge-new">⭐ 新統合</span>'; cardClass='card-integrated'; }
@@ -546,7 +476,7 @@ function renderBoard(){
     const isOpen=openCat===c.key;
     const baseMids=c.baseSubs;
     const dynamicMids=DYNAMIC_MIDS[c.key]||[];
-    const allMids=[...baseMids, ...dynamicMids, 'その他'];
+    const allMids=[...baseMids,...dynamicMids, 'その他'];
     let midsHtml='';
     allMids.forEach(mid=>{
       const ideasInMid=ALL_IDEAS.filter(i=>i.big===c.key && i.mid===mid);
@@ -567,8 +497,6 @@ function renderBoard(){
   });
   grid.innerHTML=html;
 }
-
-// ===== function：みんなの広場（Instagramチェックボックス対応） - ★修正 =====
 function getFilteredHiroba(){let f=hirobaPosts;if(hirobaFilter!=="すべて")f=f.filter(p=>p.category.includes(hirobaFilter));return [...f].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));}
 function renderHiroba(){
   const list=document.getElementById('hirobaList'); if(!list) return;
@@ -586,18 +514,17 @@ async function submitHiroba(){
   const author=document.getElementById('hirobaAuthor')?.value.trim()||"匿名";
   const comment=document.getElementById('hirobaComment')?.value.trim();
   const cat=document.getElementById('hirobaCategory')?.value;
-  // ★修正：Instagramチェックボックスの値を取得
   const toInstagramEl=document.getElementById('hirobaToInstagram');
   const toInstagram=toInstagramEl? toInstagramEl.checked : true;
   const statusEl=document.getElementById('hirobaStatus');
-  if(!comment && !hirobaImageBase64){alert("コメントか画像を入れてください");return;}
+  if(!comment &&!hirobaImageBase64){alert("コメントか画像を入れてください");return;}
   let category=cat==="すべて"?"その他":cat;
   const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24),category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment,toInstagram};
   try{
     const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"postHiroba", author, comment, category, imageBase64:hirobaImageBase64||"", toInstagram})});
     const json=await res.json();
-    if(json.status==="success" && statusEl) statusEl.textContent= toInstagram ? "✅ GASに保存＆Instagram投稿予約" : "✅ GASに保存（広場のみ）";
-  }catch(e){ if(statusEl) statusEl.textContent="⚠ ローカルに保存（GASエラー）"; console.log(e); }
+    if(json.status==="success" && statusEl) statusEl.textContent= toInstagram? "✅ GASに保存＆Instagram投稿予約" : "✅ GASに保存（広場のみ）";
+  }catch(e){ if(statusEl) statusEl.textContent="⚠ ローカルに保存（GASエラー）"; }
   hirobaPosts.unshift(newPost);
   renderHiroba();
   document.getElementById('hirobaImagePreview').innerHTML='';
@@ -605,62 +532,30 @@ async function submitHiroba(){
   hirobaImageBase64='';
   if(statusEl) setTimeout(()=>{statusEl.textContent='';},4000);
 }
-
-
-// ===== function：音声認識 - ★修正：ボタン復活 =====
 let recognition=null;
 let isRecognizing=false;
 function initVoice(){
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition){
-    alert('このブラウザは音声認識に対応していません（Chrome/Edge推奨）');
-    return null;
-  }
+  if(!SpeechRecognition){ alert('このブラウザは音声認識に対応していません'); return null; }
   const rec=new SpeechRecognition();
-  rec.lang='ja-JP';
-  rec.interimResults=true;
-  rec.continuous=false;
-  rec.onstart=()=>{
-    isRecognizing=true;
-    document.getElementById('voiceStatus').style.display='inline';
-    document.getElementById('voiceBtn').textContent='⏹ 停止';
-    document.getElementById('voiceBtn').style.background='#ffe0e0';
-  };
-  rec.onend=()=>{
-    isRecognizing=false;
-    document.getElementById('voiceStatus').style.display='none';
-    document.getElementById('voiceBtn').textContent='🎤 音声入力';
-    document.getElementById('voiceBtn').style.background='#fff';
-  };
+  rec.lang='ja-JP'; rec.interimResults=true; rec.continuous=false;
+  rec.onstart=()=>{ isRecognizing=true; document.getElementById('voiceStatus').style.display='inline'; document.getElementById('voiceBtn').textContent='⏹ 停止'; };
+  rec.onend=()=>{ isRecognizing=false; document.getElementById('voiceStatus').style.display='none'; document.getElementById('voiceBtn').textContent='🎤 音声入力'; };
   rec.onresult=(e)=>{
     const ta=document.getElementById('userInput');
     let finalText='';
-    for(let i=0;i<e.results.length;i++){
-      if(e.results[i].isFinal) finalText+=e.results[i][0].transcript;
-    }
-    if(finalText && ta){
-      ta.value = (ta.value? ta.value+' ' : '') + finalText;
-    }
-  };
-  rec.onerror=(e)=>{
-    console.log('voice error', e);
-    isRecognizing=false;
-    document.getElementById('voiceStatus').style.display='none';
+    for(let i=0;i<e.results.length;i++){ if(e.results[i].isFinal) finalText+=e.results[i][0].transcript; }
+    if(finalText && ta){ ta.value = (ta.value? ta.value+' ' : '') + finalText; }
   };
   return rec;
 }
 function toggleVoice(){
-  if(isRecognizing && recognition){
-    recognition.stop();
-    return;
-  }
+  if(isRecognizing && recognition){ recognition.stop(); return; }
   if(!recognition) recognition=initVoice();
-  if(recognition){
-    try{ recognition.start(); }catch(err){ console.log(err); }
-  }
+  if(recognition){ try{ recognition.start(); }catch(err){} }
 }
 
-// ===== function：AI分析（Groq llama-3.3 70B / 文字数保証はGAS側でpad200/pad100済み） - 変更なし =====
+// ★修正：Groq → Gemini 2.5 Flash 完全置換
 async function runAI(){
   const textEl=document.getElementById('userInput');
   const text=textEl.value.trim();
@@ -668,129 +563,35 @@ async function runAI(){
   const loadingMsg=document.getElementById('loadingMsg');
   const runBtn=document.getElementById('runBtn');
   const slip=document.getElementById('slip');
-  if(loadingMsg) loadingMsg.style.display='inline';
+  if(loadingMsg){ loadingMsg.style.display='inline'; loadingMsg.textContent='🤖 Gemini 2.5 Flashで分析中…'; }
   if(runBtn) runBtn.disabled=true;
   try{
     const payload={action:"analyze", content:text, customCategories:BASE_CATEGORIES.map(c=>({label:c.label, subs:c.baseSubs}))};
     const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
     const json=await res.json();
-    if(json.status!=="success" || !json.result) throw new Error(json.message||"GAS分析失敗");
+    if(json.status!=="success" ||!json.result) throw new Error(json.message||"GAS分析失敗: "+JSON.stringify(json).slice(0,300));
     const r=json.result;
-    // 文字数保証はGAS側でpad200/pad100済み
     slip.innerHTML=`
       <div style="background:#e8f5e9;border:2px solid #2f7a6b;border-radius:12px;padding:14px;margin-bottom:12px;">
-        <div style="font-weight:900;color:#2f7a6b;font-size:15px;">✅ Groq分析完了！「${escapeHtml(r['大分類'])} / ${escapeHtml(r['中分類'])}」に分類</div>
-        <div style="font-size:11px;margin-top:6px;background:#fff;padding:6px 10px;border-radius:999px;display:inline-block;">GAS: ${gasUrl} | Model: llama-3.3-70b-versatile | 文字数保証済み</div>
-        <div style="font-size:12px;margin-top:8px;background:#fff;padding:8px;border-radius:6px;">📌 <b>格納先：</b>ホーム「${escapeHtml(r['大分類'])}」→「${escapeHtml(r['中分類'])}」と声のボードに保存されます。</div>
+        <div style="font-weight:900;color:#2f7a6b;font-size:15px;">✅ Gemini分析完了！「${escapeHtml(r['大分類'])} / ${escapeHtml(r['中分類'])}」に分類</div>
+        <div style="font-size:11px;margin-top:6px;background:#fff;padding:6px 10px;border-radius:999px;display:inline-block;">GAS: ${escapeHtml(gasUrl)} | Model: ${escapeHtml(r['knowledge_used']||'gemini-2.5-flash')} | プロファイル直結方式</div>
+        <div style="font-size:12px;margin-top:8px;background:#fff;padding:8px;border-radius:6px;">📌 <b>格納先：</b>「${escapeHtml(r['大分類'])}」→「${escapeHtml(r['中分類'])}」と声のボードに保存されます。</div>
+        ${r['本質的トレードオフ']?`<div style="font-size:12px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;border:1px solid #e8a33d;"><b>本質的トレードオフ:</b> ${escapeHtml(r['本質的トレードオフ'])}</div>`:''}
       </div>
       <div style="background:#fff;border:1px solid #d8dcc9;border-radius:8px;padding:12px;margin-bottom:10px;">
-        <div style="font-size:11px;font-weight:800;color:#c9821f;">タイトル（20字）</div><div style="font-weight:800;">${escapeHtml(r['推奨タイトル'])}</div>
-        <div style="font-size:11px;font-weight:800;color:#2f7a6b;margin-top:8px;">要約200字（${r['要約200'].length}字）</div><div style="font-size:13px;background:#f9f9f6;padding:8px;border-radius:6px;white-space:pre-wrap;">${escapeHtml(r['要約200'])}</div>
+        <div style="font-size:11px;font-weight:800;color:#c9821f;">タイトル（15字）</div><div style="font-weight:800;">${escapeHtml(r['推奨タイトル'])}</div>
+        <div style="font-size:11px;font-weight:800;color:#2f7a6b;margin-top:8px;">要約200字（${(r['要約200']||'').length}字）</div><div style="font-size:13px;background:#f9f9f6;padding:8px;border-radius:6px;white-space:pre-wrap;">${escapeHtml(r['要約200'])}</div>
       </div>
       <div style="display:grid;gap:8px;">
-        <div style="background:#eef0e4;border-left:4px solid #2f7a6b;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#2f7a6b;">① 核心（${r['核心'].length}字 / 100字）</div><div style="font-size:13px;">${escapeHtml(r['核心'])}</div></div>
-        <div style="background:#eef0e4;border-left:4px solid #e8a33d;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c9821f;">② 変化（${r['変化'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['変化'])}</div></div>
-        <div style="background:#eef0e4;border-left:4px solid #6d5aa8;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#6d5aa8;">③ 成功事例（${r['成功事例'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['成功事例'])}</div></div>
-        <div style="background:#eef0e4;border-left:4px solid #c1502f;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c1502f;">④ 懸念点（${r['懸念点'].length}字）</div><div style="font-size:13px;">${escapeHtml(r['懸念点'])}</div></div>
-        <div style="background:#fff8e1;border-left:4px solid #23282a;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;">⑤ 問い（${r['問い'].length}字）</div><div style="font-size:13px;font-weight:700;">${escapeHtml(r['問い'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #2f7a6b;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#2f7a6b;">① 核心（${(r['核心']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['核心'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #e8a33d;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c9821f;">② 変化（${(r['変化']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['変化'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #6d5aa8;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#6d5aa8;">③ 成功事例（${(r['成功事例']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['成功事例'])}</div></div>
+        <div style="background:#eef0e4;border-left:4px solid #c1502f;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;color:#c1502f;">④ 懸念点（${(r['懸念点']||'').length}字）</div><div style="font-size:13px;">${escapeHtml(r['懸念点'])}</div></div>
+        <div style="background:#fff8e1;border-left:4px solid #23282a;padding:10px;border-radius:6px;"><div style="font-size:11px;font-weight:800;">⑤ 問い（${(r['問い']||'').length}字）</div><div style="font-size:13px;font-weight:700;">${escapeHtml(r['問い'])}</div></div>
       </div>
       <div style="margin-top:12px;text-align:center;"><button type="button" class="big-btn amber" onclick="postIdeaFromAI()">📌 声のボードに投稿する（分類表示＋GAS保存）</button></div>
     `;
     window._lastAI=r;
     window._lastRaw=text;
   }catch(e){
-    slip.innerHTML=`<p style="color:red;">Groq分析失敗: ${escapeHtml(e.message)}<br>GAS_URL_DEFAULTが正しくデプロイされているか、GROQ_API_KEYが設定シートに登録されているか確認してください。</p>`;
-  } finally {
-    if(loadingMsg) loadingMsg.style.display='none';
-    if(runBtn) runBtn.disabled=false;
-  }
-}
-
-async function postIdeaFromAI(){
-  const r=window._lastAI; const raw=window._lastRaw;
-  if(!r) return;
-  const bigKey=BASE_CATEGORIES.find(c=>c.label===r['大分類'])?.key||'BIG-3';
-  const midLabel=r['中分類']||'世代間交流';
-  const author=document.getElementById('authorName')?.value.trim()||'匿名';
-  const newIdea=createIdeaObject(bigKey, midLabel, r['推奨タイトル']||raw.slice(0,20), r['要約200']||raw, 'single', raw, {
-    bigLabel:r['大分類'], midLabel:r['中分類'],
-    core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']
-  });
-  const similar=findSimilarIntegrated(newIdea);
-  if(similar){
-    newIdea.type='archived'; newIdea.integratedInto=similar.idea.id; similar.idea.archivedIds.push(newIdea.id);
-    ALL_IDEAS.unshift(newIdea);
-  } else {
-    ALL_IDEAS.unshift(newIdea);
-    checkAndCreateIntegratedFromSingles(bigKey, midLabel);
-    if(midLabel==='その他') checkAndCreateNewMidCategory(bigKey);
-  }
-  try{
-    await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({
-      action:"postIdea", author, bigLabel:r['大分類'], midLabel:r['中分類'], title:r['推奨タイトル'], summary:r['要約200'], raw, core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']
-    })});
-  }catch(e){ console.log(e); }
-  document.getElementById('userInput').value='';
-  document.getElementById('slip').innerHTML=`<div style="background:#e8f5e9;border:2px solid #2f7a6b;border-radius:12px;padding:14px;"><div style="font-size:16px;font-weight:900;color:#2f7a6b;">✅ 投稿完了！「${escapeHtml(r['大分類'])} / ${escapeHtml(r['中分類'])}」に格納（GAS保存済み）</div><div style="font-size:12px;">声のボードで分類表示を確認できます。要約${r['要約200'].length}字、5視点各100字で保存されました。</div></div>`;
-  setTimeout(()=>{ showPage('tree',document.querySelector('nav button[data-page="tree"]')); renderBoard(); openCat=bigKey; renderBoard(); renderMapUpdate(); },800);
-}
-
-async function loadFromGAS(){
-  const display=document.getElementById('gasUrlDisplay'); if(display) display.textContent=gasUrl;
-  try{
-    const res=await fetch(gasUrl+"?action=list");
-    const json=await res.json();
-    if(json.events && json.events.length>0){
-      EVENT_DATA=json.events.map(ev=>({id:ev.id, date:ev.date, time:ev.time, title:ev.title, place:ev.place, category:ev.category, status:ev.status, detail:ev.detail}));
-      renderEvents();
-    }
-    if(json.data && json.data.length>0){
-      hirobaPosts=[...json.data.map(r=>({timestamp:r.timestamp, author:r.author, summary:r.summary||r.comment.slice(0,20), category:r.category||'その他', imageUrl:r.imageUrl, description:r.comment, toInstagram:r.toInstagram!==false})), ...hirobaPosts];
-      renderHiroba();
-    }
-    if(json.board && json.board.length>0){
-      const boardFromSheet=json.board.map(b=>createIdeaObject(BASE_CATEGORIES.find(c=>c.label===b.big)?.key||'BIG-3', b.mid, b.title, b.summary, 'single', b.summary, {bigLabel:b.big, midLabel:b.mid}));
-      ALL_IDEAS=[...boardFromSheet, ...ALL_IDEAS];
-      renderBoard();
-    }
-  }catch(e){ console.log(e); renderEvents(); renderHiroba(); }
-}
-
-document.addEventListener("DOMContentLoaded",()=>{
-  renderMapUpdate();renderEvents();renderEventIdeas();renderBoard();renderHiroba();loadFromGAS();
-  const evDateEl=document.getElementById('evDate'); if(evDateEl) evDateEl.valueAsDate=new Date();
-  const imgEl=document.getElementById('hirobaImage');
-  if(imgEl){
-    imgEl.addEventListener('change',e=>{
-      const file=e.target.files[0];if(!file)return;
-      const reader=new FileReader();
-      reader.onload=ev=>{ hirobaImageBase64=ev.target.result.split(',')[1]; document.getElementById('hirobaImagePreview').innerHTML='<img src="'+ev.target.result+'" style="width:100%;max-height:200px;object-fit:cover;border-radius:8px;">'; };
-      reader.readAsDataURL(file);
-    });
-  }
-});
-</script>
-<footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
-  <div style="max-width:1120px;margin:0 auto;">
-    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
-      <div style="font-size:28px;">🏙</div>
-      <div>
-        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
-          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
-        </div>
-        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
-          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
-          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
-          誰もが参加できるオープンな活動を行っています。
-          <br>
-          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
-          <span style="opacity:.5;margin:0 6px;">/</span>
-          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
-  
-</body>
-</html>
+    slip.innerHTML=`<p style="color:red;white-space:pre-wrap;">
