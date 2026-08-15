@@ -490,7 +490,7 @@ function toggleBaseDesc(key){
 }
 function renderMapUpdate(){
   const wrap=document.getElementById('mapUpdateWrap'); if(!wrap) return;
-  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明（クリックで開く） / 右：リアルタイムにアップデート（参考: mimo-lgtm.github.io/community-association）</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">GROQ連携</div></div>';
+  let html='<div style="margin:16px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:17px;font-weight:900;">🗺 6つのテーマ｜共創アップデート『地域の課題を皆様の投稿で変化していく様子をご覧いただけます』</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">左：テーマ説明（クリックで開く） / 右：リアルタイムにアップデート（参考: mimo-lgtm.github.io/community-association）</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">GROQ連携</div></div>';
   BASE_CATEGORIES.forEach(c=>{
     const co=CO_CREATED[c.key];
     const count=ALL_IDEAS.filter(i=>i.big===c.key).length;
