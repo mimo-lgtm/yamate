@@ -47,6 +47,11 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 .view5-item.concern{border-left-color:#c1502f;}
 .view5-item.question{border-left-color:#23282a;background:#fff8e1;font-weight:700;}
 @media(max-width:800px){.flow3{grid-template-columns:1fr;}}
+#btnVoice.listening{background:#ff3b3b!important;color:#fff!important;animation:pulse 1.2s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
+.d-none{display:none!important}
+#voiceStatus{background:#e8f5e9;border:1px solid #2f7a6b;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
+  
 </style>
 </head>
 <body>
@@ -158,6 +163,11 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div class="card" style="border:2px solid #2f7a6b;">
 <p style="font-size:12px;color:#666;margin-bottom:10px;">要約200字＋5視点各100字で分析。5視点はここ「声を届ける」でのみ詳しく表示されます。声のボードでは要約200字のみで省スペース化。</p>
 <input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+  <button type="button" id="btnVoice" class="big-btn ghost" style="padding:8px 14px;font-size:13px;">🎙 音声入力</button>
+  <span id="voiceStatus" class="d-none"><span id="voiceStatusText">聞き取り中…</span></span>
+  <span style="font-size:11px;color:#666;">Chromeでマイクが使えます。話す→自動で文字化</span>
+</div>
 <textarea id="userInput" placeholder="例：山手町の坂道が急で高齢者の歩行が大変。ベンチや休憩スペースが欲しい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
 <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
 <button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 5視点で分析（必須）</button>
@@ -482,6 +492,63 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
   console.log("✅ v10.7 レイアウト復元版: 24新統合", ALL_IDEAS.length, "イベント", EVENT_DATA.length, "広場", hirobaPosts.length, "トップレイアウト完全復元");
 });
+// === Safari対応 音声入力（Chrome: WebSpeech / Safari: 録音→Gemini文字起こし）===
+let recognition=null, isListening=false, mediaRecorder=null, audioChunks=[];
+function initVoice(){
+  const btn=document.getElementById("btnVoice");
+  const status=document.getElementById("voiceStatus");
+  const statusText=document.getElementById("voiceStatusText");
+  const textarea=document.getElementById("userInput") || document.getElementById("content");
+  if(!btn||!textarea) return;
+
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const hasNative =!!SR;
+
+  // Chrome用
+  if(hasNative){
+    recognition=new SR(); recognition.lang="ja-JP"; recognition.interimResults=true; recognition.continuous=true;
+    let finalTranscript="";
+    recognition.onstart=()=>{ isListening=true; btn.classList.add("listening"); btn.textContent="⏹ 停止"; status.classList.remove("d-none"); statusText.textContent="聞き取り中…"; finalTranscript=textarea.value; };
+    recognition.onend=()=>{ isListening=false; btn.classList.remove("listening"); btn.textContent="🎙 音声入力"; status.classList.add("d-none"); };
+    recognition.onresult=(e)=>{ let interim=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) finalTranscript+=t+" "; else interim+=t; } textarea.value=finalTranscript+interim; statusText.textContent=interim?`"${interim}"`:"聞き取り中…"; textarea.dispatchEvent(new Event('input')); };
+  }
+
+  // Safari用：録音→Gemini文字起こし
+  async function startSafariRecord(){
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRecorder=new MediaRecorder(stream, {mimeType: MediaRecorder.isTypeSupported('audio/webm')?'audio/webm':'audio/mp4'});
+      audioChunks=[]; mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); };
+      mediaRecorder.onstop=async()=>{
+        statusText.textContent="Geminiで文字起こし中…";
+        const blob=new Blob(audioChunks, {type: mediaRecorder.mimeType});
+        const base64=await blobToBase64(blob);
+        try{
+          const res=await fetch(gasUrl, {method:"POST", headers:{"Content-Type":"text/plain"}, body: JSON.stringify({mode:"transcribe", audioBase64: base64, mimeType: blob.type})});
+          const data=await res.json();
+          const text = data.text || data.content || "";
+          if(text){ textarea.value = (textarea.value? textarea.value+" " : "") + text; textarea.dispatchEvent(new Event('input')); statusText.textContent="完了"; }
+          else { statusText.textContent="聞き取れませんでした"; }
+        }catch(e){ statusText.textContent="文字起こし失敗: "+e; }
+        setTimeout(()=>{ status.classList.add("d-none"); isListening=false; btn.classList.remove("listening"); btn.textContent="🎙 音声入力"; },1500);
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      mediaRecorder.start(); isListening=true; btn.classList.add("listening"); btn.textContent="⏹ 停止"; status.classList.remove("d-none"); statusText.textContent="録音中…話してください（停止で文字起こし）";
+    }catch(e){ alert("マイク許可が必要です: "+e); }
+  }
+  function blobToBase64(blob){ return new Promise(r=>{ const fr=new FileReader(); fr.onload=()=>r(fr.result.split(',')[1]); fr.readAsDataURL(blob); }); }
+
+  btn.addEventListener("click", ()=>{
+    if(isListening){
+      if(hasNative && recognition){ recognition.stop(); }
+      else if(mediaRecorder && mediaRecorder.state==="recording"){ mediaRecorder.stop(); }
+      return;
+    }
+    if(hasNative){ try{ recognition.start(); }catch(e){ startSafariRecord(); } }
+    else { startSafariRecord(); }
+  });
+}
+setTimeout(initVoice, 700);  
 </script>
 <footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
   <div style="max-width:1120px;margin:0 auto;">
