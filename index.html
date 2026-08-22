@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -51,7 +52,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 @keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
 .d-none{display:none!important}
 #voiceStatus{background:#e8f5e9;border:1px solid #2f7a6b;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
-  
 </style>
 </head>
 <body>
@@ -68,7 +68,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </header>
 <main>
 <section id="home" class="page active">
-<!-- 復元: オリジナルと同じトップの白いタイトルカード -->
 <div style="background:#fff;border-radius:16px;padding:28px 26px;margin-bottom:18px;border:1.5px solid #d8dcc9;box-shadow:0 4px 0 #d8dcc9;position:relative;overflow:hidden;">
   <div style="position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#2f7a6b 0%, #e8a33d 50%, #c1502f 100%);"></div>
   <div style="display:flex;align-items:flex-start;gap:14px;">
@@ -81,8 +80,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
     </div>
   </div>
 </div>
-
-<!-- 復元: ここでは3つのことが出来ます。黒いカード -->
 <div class="card" style="background:linear-gradient(135deg,#23282a 0%, #2c3234 100%);color:#eef0e4;border:none;border-left:6px solid #e8a33d;padding:24px 26px;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
 <div>
@@ -110,8 +107,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </div>
 </div>
 </div>
-
-<!-- 復元: 使い方 | 1分で分かる -->
 <div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
 <h2 style="margin:0;font-size:16px;">📌 使い方 | 1分で分かる</h2>
@@ -123,7 +118,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;color:#666;">6つのテーマに自動で分類<br>24新統合が初期搭載</div></div>
 </div>
 </div>
-
 <div id="event-board" class="card" style="border:3px solid #e8a33d;background:#fffcf0;">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
 <h2 style="margin:0;font-size:18px;font-weight:900;">📅 山手町 イベントボード</h2>
@@ -153,11 +147,8 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </div>
 </div>
 </div>
-
-<!-- 復活: 6つの共創アップデート -->
 <div id="mapUpdateWrap" style="min-height:300px;"></div>
 </section>
-
 <section id="assist" class="page">
 <h1>🤖 声を届ける - 5視点分析はここで必須</h1>
 <div class="card" style="border:2px solid #2f7a6b;">
@@ -178,7 +169,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </div>
 <div class="card"><h2 style="font-size:16px;">📋 AI分析結果 - 要約200字＋5視点100字×5（ここでのみ詳細表示）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGeminiの5視点分析が表示されます。声のボードでは要約200字のみで省スペース化されます。</p></div></div>
 </section>
-
 <section id="tree" class="page">
 <div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
 <h2 style="color:#fff;margin:0;">📌 声のボード - 要約200字のみ（省スペース）</h2>
@@ -187,7 +177,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div style="display:flex;gap:8px;margin-bottom:12px;"><button type="button" onclick="showPage('home', document.getElementById('nav-home'))" class="big-btn ghost">🏠 トップに戻る</button></div>
 <div id="corkGrid" style="min-height:400px;background:#fff;border-radius:12px;padding:12px;"></div>
 </section>
-
 <section id="hiroba" class="page">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
 <h1>📸 山手町 みんなの広場 - 過去投稿5件必ず表示</h1>
@@ -211,11 +200,9 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div id="hirobaList" style="min-height:400px;background:#fff;border-radius:12px;padding:12px;"></div>
 </section>
 </main>
-
 <script>
 const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbxk5uFEP5Y4iQyvaP3JVqg9dT4eAS8CQCUayAWBR7pGqLDJAyg8Uyr6jhWRQGAYJ4IISA/exec";
 let gasUrl = GAS_URL_DEFAULT;
-
 const BASE_CATEGORIES = [
 {key:"BIG-1",icon:"🛡",label:"防災・防犯",sublabel:"安全で安心なまちづくり",baseSubs:["安否確認体制","自主防災訓練","防犯パトロール","災害備蓄強化"]},
 {key:"BIG-2",icon:"🏡",label:"インフラ・環境",sublabel:"住環境の維持と保全",baseSubs:["急斜面の安全","道路・側溝整備","ゴミステーション","緑化・景観保護"]},
@@ -235,10 +222,10 @@ const BASE_DESC = {
 let CO_CREATED={}; BASE_CATEGORIES.forEach(c=>{ CO_CREATED[c.key]={defaultDesc:BASE_DESC[c.label],currentDesc:BASE_DESC[c.label]}; });
 let ALL_IDEAS=[]; let NEXT_ID=1; let EVENT_DATA=[]; let openBig="BIG-1"; let openMidMap={"BIG-1__安否確認体制":true};
 let hirobaPosts=[]; let hirobaImageBase64="";
-var isEventMode = false; // ★ここに1つだけ。varにするのが重要（letだと再宣言で死ぬ）
+var isEventMode = false;
 function createIdeaObject(bigKey, midName, title, summary, type, raw, extras){
   const id='idea-'+(NEXT_ID++); const bigLabel = BASE_CATEGORIES.find(b=>b.key===bigKey)?.label||bigKey;
-  return { id, big:bigKey, mid:midName, title, summary, raw, type, bigLabel, midLabel:midName, createdAt:new Date().toISOString(), core:extras?.core||"", change:extras?.change||"", success:extras?.success||"", concern:extras?.concern||"", question:extras?.question||"", ...extras, bigLabel, midLabel:midName };
+  return { id, big:bigKey, mid:midName, title, summary, raw, type, bigLabel, midLabel:midName, createdAt:new Date().toISOString(), core:extras?.core||"", change:extras?.change||"", success:extras?.success||"", concern:extras?.concern||"", question:extras?.question||"", bigLabel, midLabel:midName };
 }
 const INITIAL_24 = [
  {big:"BIG-1", mid:"安否確認体制", title:"急坂地域の安否確認体制強化", summary:"山手町は六甲山麓の急斜面に位置し、地震時の石垣崩落や坂道での避難困難が想定されます。人口2000名、高齢化35％超の小規模町会の強みを活かし、班長・民生委員・LINEグループの三重連絡網と、坂道を考慮したブロック別安否確認マップを作成。一人暮らし高齢者の見守りと連動させ、発災後30分以内の全戸確認を目指す体制が集大成としてまとまりました。"},
@@ -280,19 +267,14 @@ const INITIAL_EVENTS = [
 {id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会と防災炊き出し訓練。"},
 {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
 ];
-
-
-
 function initData(){
   ALL_IDEAS = INITIAL_24.map(o=>{ const label=BASE_CATEGORIES.find(b=>b.key===o.big)?.label||o.big; return createIdeaObject(o.big,o.mid,o.title,o.summary,o.big.startsWith("BIG-6")?"single":"integrated",o.summary,{bigLabel:label,midLabel:o.mid}); });
   EVENT_DATA = [...INITIAL_EVENTS];
   hirobaPosts = [...INITIAL_HIROBA];
 }
-
 function escapeHtml(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-
 function showPage(id,btn){
-  if(id!=='assist') isEventMode = false; // ★声を届ける以外に行ったらイベントモード解除
+  if(id!=='assist') isEventMode = false;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const target=document.getElementById(id); if(!target) return;
   target.classList.add('active');
@@ -303,36 +285,34 @@ function showPage(id,btn){
   if(id==='hiroba') renderHiroba();
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function toggleEventForm(){
   const f=document.getElementById('eventFormCard');
   const isHidden=f.style.display==='none'||f.style.display==='';
   f.style.display=isHidden?'block':'none';
-  if(isHidden){ const d=document.getElementById('evDate'); if(d &&!d.value) d.valueAsDate=new Date(); }
+  if(isHidden){ const d=document.getElementById('evDate'); if(d && !d.value) d.valueAsDate=new Date(); }
 }
-
 function showEventTab(tab){
   const up=document.getElementById('event-upcoming-list');
   const ideas=document.getElementById('event-ideas-list');
+  if(!up||!ideas) return;
   if(tab==='upcoming'){ up.style.display='block'; ideas.style.display='none'; document.getElementById('btn-upcoming').style.background='#e8a33d'; document.getElementById('btn-ideas').style.background='#fff'; }
   else { up.style.display='none'; ideas.style.display='block'; document.getElementById('btn-upcoming').style.background='#fff'; document.getElementById('btn-ideas').style.background='#e8a33d'; renderEventIdeas(); }
 }
-
 function goToEventIdeaAssist(){
-  isEventMode = true; // ★イベント企画モードON
+  isEventMode = true;
   const btn=document.querySelector('nav button[data-page="assist"]');
   showPage('assist',btn);
   const input = document.getElementById('userInput');
-  if(input) input.placeholder = "例：ハロウィンで仮装しながら防犯パトロール。子どもも参加できる楽しい企画に";
-  document.getElementById('slip').innerHTML = `<div style="background:#fff8e1;border:2px solid #e8a33d;padding:12px;border-radius:8px;"><b>🎉 イベント企画モード</b><br>この内容は「声のボード」には入らず、「イベントボード」に単独で格納されます。要約のみ表示でリアルタイム統合はされません。</div>`;
+  if(input) input.placeholder = "例：ハロウィンで仮装しながら防犯パトロール";
+  const slip = document.getElementById('slip');
+  if(slip) slip.innerHTML = `<div style="background:#fff8e1;border:2px solid #e8a33d;padding:12px;border-radius:8px;"><b>🎉 イベント企画モード</b><br>この内容は「声のボード」には入らず、「イベントボード」に単独で格納されます。要約のみ表示。</div>`;
 }
-
 function renderEvents(){
   const wrap=document.getElementById('event-upcoming-list');
   if(!wrap) return;
   const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
   wrap.innerHTML=sorted.map(ev=>{
-    const d = ev.date? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
+    const d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
     return `<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:12px;padding:16px;">
       <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 ${escapeHtml(d)} ⏰ ${escapeHtml(ev.time||'')}</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">${escapeHtml(ev.category)} | ${escapeHtml(ev.status)}</span></div>
       <div style="font-weight:900;font-size:16px;margin-top:8px;">${escapeHtml(ev.title)}</div>
@@ -340,34 +320,28 @@ function renderEvents(){
     </div>`;
   }).join('');
 }
-
 function renderEventIdeas(){
   const wrap=document.getElementById('event-ideas-list');
   if(!wrap) return;
-  // ★声のボードではなくEVENT_DATAから企画アイデアを表示
   const ideas = EVENT_DATA.filter(e=> e.category==="企画" || e.status==="アイデア募集中");
-  const integratedIdeas = ALL_IDEAS.filter(i=>i.big==="BIG-6");
-  const allEventIdeas = [...ideas,...integratedIdeas.map(i=>({title:i.title, detail:i.summary}))];
-
-  wrap.innerHTML = ideas.map(ev=>`<div class="card card-single" style="position:relative;padding-top:22px;margin-bottom:10px;"><span class="badge-single">💡 イベント企画（要約のみ・単独）</span><div style="font-weight:800;margin-top:6px;">${escapeHtml(ev.title)}</div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;white-space:pre-wrap;">${escapeHtml(ev.detail||'')}</div><div style="font-size:10px;color:#888;margin-top:4px;">イベントボードに単独格納（声のボードには統合されない）</div></div>`).join('') +
-  integratedIdeas.map(i=>`<div class="card card-single" style="position:relative;padding-top:22px;"><span class="badge-single">💡 イベント企画（要約のみ）</span><div style="font-weight:800;">${escapeHtml(i.title)}</div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;">${escapeHtml(i.summary)}</div></div>`).join('') || '<div style="color:#888;">まだ企画がありません</div>';
+  const baseIdeas = ALL_IDEAS.filter(i=>i.big==="BIG-6");
+  let html = ideas.map(ev=>`<div class="card card-single" style="position:relative;padding-top:22px;margin-bottom:10px;"><span class="badge-single">💡 イベント企画（単独）</span><div style="font-weight:800;margin-top:6px;">${escapeHtml(ev.title)}</div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;white-space:pre-wrap;">${escapeHtml(ev.detail||'')}</div><div style="font-size:10px;color:#888;margin-top:4px;">イベントボードに単独格納（声のボードには統合されない）</div></div>`).join('');
+  html += baseIdeas.map(i=>`<div class="card card-single" style="position:relative;padding-top:22px;"><span class="badge-single">💡 イベント企画（要約のみ）</span><div style="font-weight:800;">${escapeHtml(i.title)}</div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;">${escapeHtml(i.summary)}</div></div>`).join('');
+  wrap.innerHTML = html || '<div style="color:#888;">まだ企画がありません</div>';
 }
-
 function submitEventForm(){
   const titleEl=document.getElementById('evTitle');
   const title=titleEl?.value.trim()||'';
   if(!title){ alert('タイトルを入力してください'); return; }
   const date=document.getElementById('evDate')?.value||new Date().toISOString().slice(0,10);
-  const newEv = {id:'evt'+Date.now(),date,time:document.getElementById('evTime')?.value||'',title,place:document.getElementById('evPlace')?.value||'山手町',category:document.getElementById('evCategory')?.value||'定例',status:document.getElementById('evStatus')?.value||'予定',detail:document.getElementById('evDetail')?.value||''};
+  const newEv={id:'evt'+Date.now(),date,time:document.getElementById('evTime')?.value||'',title,place:document.getElementById('evPlace')?.value||'山手町',category:document.getElementById('evCategory')?.value||'定例',status:document.getElementById('evStatus')?.value||'予定',detail:document.getElementById('evDetail')?.value||''};
   EVENT_DATA.push(newEv);
-  // GASにも送信
   fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:newEv.detail, title:newEv.title, summary:newEv.detail})}).catch(()=>{});
   renderEvents();
   document.getElementById('eventFormCard').style.display='none';
   titleEl.value=''; document.getElementById('evDetail').value='';
   showEventTab('upcoming');
 }
-
 function renderMapUpdate(){
   const wrap=document.getElementById('mapUpdateWrap');
   if(!wrap) return;
@@ -391,7 +365,6 @@ function renderMapUpdate(){
   });
   wrap.innerHTML=html;
 }
-
 function generateCoCreatedDesc(key){
   const cat=BASE_CATEGORIES.find(c=>c.key===key);
   const defaultDesc=BASE_DESC[cat.label]||"";
@@ -402,10 +375,8 @@ function generateCoCreatedDesc(key){
   if(newDesc.length>200){ newDesc=newDesc.slice(0,200); }
   return newDesc;
 }
-
 function updateCoCreated(key){ CO_CREATED[key].currentDesc=generateCoCreatedDesc(key); renderMapUpdate(); }
 function toggleBaseDesc(key){ const el=document.getElementById('base-desc-'+key); const btn=document.getElementById('toggle-'+key); if(!el) return; const hidden=el.style.display==='none' || el.style.display===''; el.style.display=hidden?'block':'none'; if(btn) btn.textContent=hidden?'▲ 閉じる':'▼ 詳細を見る（200字のみ）'; }
-
 function renderBoard(){
   const grid=document.getElementById('corkGrid');
   if(!grid) return;
@@ -435,64 +406,32 @@ function renderBoard(){
   });
   grid.innerHTML=html;
 }
-
 function toggleBig(k){ openBig=openBig===k?null:k; renderBoard(); }
 function toggleMid(b,m){ const k=`${b}__${m}`; openMidMap[k]=!openMidMap[k]; renderBoard(); }
-
 function renderHiroba(){
   const list=document.getElementById('hirobaList');
   if(!list) return;
   list.innerHTML=hirobaPosts.map(p=>`<div class="hiroba-post-card"><div style="display:flex;justify-content:space-between;font-size:12px;color:#666;flex-wrap:wrap;gap:6px;"><span>👤 ${escapeHtml(p.author)}</span><span style="background:#eef0e4;padding:3px 10px;border-radius:999px;">${escapeHtml(p.category)}</span><span>${new Date(p.timestamp).toLocaleDateString('ja-JP')}</span></div><div style="font-weight:800;margin:8px 0;">${escapeHtml(p.summary)}</div><div style="white-space:pre-wrap;background:#fafafa;padding:8px;border-radius:8px;font-size:13px;">${escapeHtml(p.description)}</div>${p.imageUrl?`<img src="${p.imageUrl}" style="width:100%;max-height:420px;object-fit:cover;border-radius:8px;margin-top:8px;" onerror="this.style.display='none'">`:''}</div>`).join('');
 }
-
 async function submitHiroba(){
   const author=document.getElementById('hirobaAuthor')?.value.trim()||"匿名";
   const comment=document.getElementById('hirobaComment')?.value.trim();
   const category=document.getElementById('hirobaCategory')?.value||'その他';
   const toInstagram = document.getElementById('hirobaToInstagram')?.checked || false;
-  if(!comment &&!hirobaImageBase64){ alert("コメントか画像を入れてください"); return; }
-  const newPost={
-    timestamp:new Date().toISOString(),
-    author,
-    summary:comment.slice(0,24)||'写真投稿',
-    category,
-    imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",
-    description:comment||'写真を投稿しました'
-  };
+  if(!comment && !hirobaImageBase64){ alert("コメントか画像を入れてください"); return; }
+  const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24)||'写真投稿',category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment||'写真を投稿しました'};
   hirobaPosts.unshift(newPost);
   renderHiroba();
   document.getElementById('hirobaImagePreview').innerHTML='';
   document.getElementById('hirobaComment').value='';
   const statusEl = document.getElementById('hirobaStatus');
-  statusEl.textContent='投稿中… GASとInstagramに送信しています…';
+  statusEl.textContent='投稿中…';
   try{
-    const res = await fetch(gasUrl, {
-      method:"POST",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body: JSON.stringify({
-        action:"postHiroba",
-        author: author,
-        comment: comment,
-        category: category,
-        imageBase64: hirobaImageBase64,
-        toInstagram: toInstagram
-      })
-    });
+    const res = await fetch(gasUrl, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postHiroba", author, comment, category, imageBase64:hirobaImageBase64, toInstagram})});
     const data = await res.json();
-    if(data.status==="success"){
-      statusEl.textContent = toInstagram? '✅ 投稿しました！Instagramにも送信しました' : '✅ 投稿しました！広場5件＋新規1件が表示されています';
-    }else{
-      statusEl.textContent = '✅ 広場には表示しましたが、GAS保存でエラー: '+(data.message||'');
-    }
-  }catch(e){
-    statusEl.textContent='✅ 広場には表示しましたが、GAS通信エラー: '+e;
-  }finally{
-    hirobaImageBase64='';
-    const cb = document.getElementById('hirobaToInstagram');
-    if(cb) cb.checked=false;
-  }
+    statusEl.textContent = data.status==="success"? (toInstagram?'✅ Instagramにも送信しました':'✅ 投稿しました') : 'GASエラー';
+  }catch(e){ statusEl.textContent='GAS通信エラー'; }finally{ hirobaImageBase64=''; const cb=document.getElementById('hirobaToInstagram'); if(cb) cb.checked=false; }
 }
-
 async function runAI(){
   const text=document.getElementById('userInput').value.trim(); if(!text){alert('入力してください');return;}
   document.getElementById('loadingMsg').style.display='inline'; document.getElementById('runBtn').disabled=true;
@@ -500,18 +439,16 @@ async function runAI(){
     const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"analyze", content:text})});
     const json=await res.json(); if(json.status!=="success"||!json.result) throw new Error(json.message||"GAS分析失敗");
     const r=json.result;
-    // イベントモード時はボタンの文言を変える
     const postBtnLabel = isEventMode? "🎉 イベントボードに投稿する（要約のみ・単独）" : "📌 声のボードに投稿する（リアルタイム統合）";
     document.getElementById('slip').innerHTML=`
       <div style="background:#e8f5e9;border:2px solid #2f7a6b;border-radius:12px;padding:14px;margin-bottom:12px;">
         <div style="font-weight:900;color:#2f7a6b;font-size:15px;">✅ 分析完了！「${escapeHtml(r['大分類'])} / ${escapeHtml(r['中分類'])}」 ${isEventMode? "→ イベントボードへ" : "→ 声のボードへ統合"}</div>
-        <div style="font-size:11px;margin-top:6px;background:#fff;padding:6px 10px;border-radius:999px;display:inline-block;">${isEventMode? "イベントは単独格納" : "分類不能はその他→3件で新中分類自動生成"}</div>
       </div>
       <div style="background:#fff;border:1px solid #d8dcc9;border-radius:8px;padding:12px;margin-bottom:10px;">
         <div style="font-weight:800;font-size:15px;">${escapeHtml(r['推奨タイトル'])}</div>
         <div style="font-size:13px;background:#fff8e1;padding:10px;border-radius:6px;white-space:pre-wrap;border:1.5px solid #e8a33d;margin-top:6px;">${escapeHtml(r['要約200'])} (${r['要約200'].length}字)</div>
       </div>
-      <div style="font-size:14px;font-weight:900;margin-bottom:8px;color:#2f7a6b;">▼ 5視点分析（各100字）</div>
+      <div style="font-size:14px;font-weight:900;margin-bottom:8px;color:#2f7a6b;">▼ 5視点分析</div>
       <div class="view5">
         <div class="view5-item core"><b>① 核心:</b> ${escapeHtml(r['核心'])}</div>
         <div class="view5-item change"><b>② 変化:</b> ${escapeHtml(r['変化'])}</div>
@@ -524,7 +461,6 @@ async function runAI(){
     window._lastAI=r; window._lastRaw=text;
   }catch(e){ document.getElementById('slip').innerHTML=`<p style="color:red;">失敗: ${escapeHtml(e.message)}</p>`; } finally { document.getElementById('loadingMsg').style.display='none'; document.getElementById('runBtn').disabled=false; }
 }
-
 async function postIdeaFromAI(){
   const r=window._lastAI; if(!r) return;
   const raw = window._lastRaw || "";
@@ -532,8 +468,6 @@ async function postIdeaFromAI(){
   const base=BASE_CATEGORIES.find(c=>c.label===bigLabel); let bigKey=base?.key||'BIG-3';
   const newTitle=r['推奨タイトル']||raw.slice(0,20);
   const actionType = isEventMode? "postEventIdea" : "postIdea";
-
-  // 画面即時表示
   if(!isEventMode){
     const newIdea=createIdeaObject(bigKey,midLabel,newTitle,r['要約200'], 'single', raw, {bigLabel,midLabel, core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']});
     ALL_IDEAS.unshift(newIdea);
@@ -541,48 +475,26 @@ async function postIdeaFromAI(){
     openBig=bigKey;
     openMidMap[`${bigKey}__${midLabel}`]=true;
   }
-
   try{
     document.getElementById('slip').innerHTML += `<p style="color:#2f7a6b;font-weight:800;margin-top:10px;">📡 ${isEventMode? "イベントボード" : "声のボード"}に送信中…</p>`;
     const res = await fetch(gasUrl, {
       method:"POST",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body: JSON.stringify({
-        action: actionType,
-        author: document.getElementById('authorName')?.value || "匿名",
-        content: raw,
-        title: newTitle,
-        summary: r['要約200'],
-        analysis: r
-      })
+      body: JSON.stringify({action: actionType, author: document.getElementById('authorName')?.value || "匿名", content: raw, title: newTitle, summary: r['要約200'], analysis: r})
     });
     const json = await res.json();
     if(json.status==="success"){
       if(isEventMode){
-        // イベントは単独でEVENT_DATAに追加
         EVENT_DATA.push({id:'evt'+Date.now(), date:new Date().toISOString().slice(0,10), time:"", title:newTitle, place:"山手町", category:"企画", status:"アイデア募集中", detail:raw});
-        document.getElementById('slip').innerHTML = `<div style="background:#fff8e1;padding:14px;border-radius:12px;border:2px solid #e8a33d;">
-          <b>✅ イベント企画をイベントボードに単独格納しました</b><br>
-          声のボードには統合されていません。イベントボードの「企画アイデア」を確認してください。<br>
-          <small>${escapeHtml(json.reason)}</small><br>
-          <small>targetRow: ${json.targetRow}</small>
-        </div>`;
+        document.getElementById('slip').innerHTML = `<div style="background:#fff8e1;padding:14px;border-radius:12px;border:2px solid #e8a33d;"><b>✅ イベント企画をイベントボードに単独格納しました</b><br>声のボードには統合されていません。<br><small>${escapeHtml(json.reason)}</small></div>`;
         setTimeout(()=>{ showPage('home',document.getElementById('nav-home')); renderEvents(); showEventTab('ideas'); },1200);
       }else{
-        const promotedMsg = json.promoted? `<br><br>🎉 <b>新中分類が自動生成されました！</b><br>その他が3件貯まったため「${escapeHtml(json.promoted.newMid)}」が新しい新統合記事になりました。` : "";
-        const reason = `「${escapeHtml(raw.slice(0,30))}…」はAIが「${escapeHtml(midLabel)}」に該当と判定。大分類6つは固定で、最も近い中分類が「${escapeHtml(midLabel)}」だったため、既存の新統合記事に即時統合され、この単独提案が新しい元記事になりました。` + promotedMsg;
+        const promotedMsg = json.promoted? `<br><br>🎉 <b>新中分類が自動生成されました！</b>「${escapeHtml(json.promoted.newMid)}」` : "";
+        const reason = `「${escapeHtml(raw.slice(0,30))}…」は「${escapeHtml(midLabel)}」に該当と判定。既存の新統合記事に即時統合され、この単独提案が新しい元記事になりました。` + promotedMsg;
         document.getElementById('slip').innerHTML = `<div style="background:#e8f5e9;padding:16px;border-radius:12px;border:2.5px solid #2f7a6b;">
-          <div style="font-size:14px;font-weight:900;color:#2f7a6b;">✅ リアルタイム統合完了！単独提案は新統合の元記事になりました</div>
-          <div style="margin-top:10px;background:#fff;border-left:5px solid #e8a33d;padding:10px 12px;border-radius:6px;">
-            <div style="font-size:12px;font-weight:800;color:#c9821f;">📍 統合先（元記事更新）</div>
-            <div style="font-weight:900;">${escapeHtml(json.category)} / ${escapeHtml(newTitle)}</div>
-            <div style="font-size:11px;color:#666;">targetRow: ${json.targetRow} が更新 / ${escapeHtml(json.reason)}</div>
-          </div>
-          <div style="margin-top:10px;background:#23282a;color:#eef0e4;padding:10px 12px;border-radius:8px;">
-            <div style="font-size:12px;font-weight:800;color:#e8a33d;">💡 統合理由</div>
-            <div style="font-size:13px;line-height:1.8;margin-top:4px;white-space:pre-wrap;">${reason}</div>
-          </div>
-          <div style="margin-top:10px;font-size:11px;background:#fff8e1;padding:8px;border-radius:6px;">その他ルール：分類不能→その他に格納。同種テーマが3件で新中分類に自動昇格して新しい新統合になります。</div>
+          <div style="font-weight:900;color:#2f7a6b;">✅ リアルタイム統合完了！元記事になりました</div>
+          <div style="margin-top:10px;background:#fff;border-left:5px solid #e8a33d;padding:10px;border-radius:6px;"><b>統合先:</b> ${escapeHtml(json.category)} / Row ${json.targetRow}<br><small>${escapeHtml(json.reason)}</small></div>
+          <div style="margin-top:10px;background:#23282a;color:#eef0e4;padding:10px;border-radius:8px;"><div style="color:#e8a33d;font-weight:800;">💡 統合理由</div><div style="margin-top:4px;line-height:1.8;">${reason}</div></div>
         </div>`;
         setTimeout(()=>{ showPage('tree',document.querySelector('nav button[data-page="tree"]')); renderBoard(); },1200);
       }
@@ -590,6 +502,83 @@ async function postIdeaFromAI(){
       document.getElementById('slip').innerHTML += `<p style="color:red;">GASエラー: ${escapeHtml(json.message||'')}</p>`;
     }
   }catch(e){
-    document.getElementById('slip').innerHTML += `<p style="color:red;">通信エラー: ${escapeHtml(e.message)}<br>GAS_URL: ${escapeHtml(gasUrl)}</p>`;
+    document.getElementById('slip').innerHTML += `<p style="color:red;">通信エラー: ${escapeHtml(e.message)}</p>`;
   }
 }
+document.addEventListener("DOMContentLoaded",()=>{
+  initData();
+  document.getElementById('gasUrlDisplay').textContent=gasUrl;
+  renderMapUpdate();
+  renderEvents();
+  renderEventIdeas();
+  renderBoard();
+  renderHiroba();
+  const evDateEl=document.getElementById('evDate'); if(evDateEl) evDateEl.valueAsDate=new Date();
+  const imgEl=document.getElementById('hirobaImage');
+  if(imgEl){
+    imgEl.addEventListener('change',e=>{
+      const file=e.target.files[0]; if(!file)return;
+      const reader=new FileReader();
+      reader.onload=ev=>{
+        hirobaImageBase64=ev.target.result.split(',')[1];
+        document.getElementById('hirobaImagePreview').innerHTML='<img src="'+ev.target.result+'" style="width:100%;max-height:240px;object-fit:cover;border-radius:8px;">';
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+});
+let recognition=null, isListening=false, mediaRecorder=null, audioChunks=[];
+function initVoice(){
+  const btn=document.getElementById("btnVoice");
+  const status=document.getElementById("voiceStatus");
+  const statusText=document.getElementById("voiceStatusText");
+  const textarea=document.getElementById("userInput");
+  if(!btn||!textarea) return;
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const hasNative =!!SR;
+  if(hasNative){
+    recognition=new SR(); recognition.lang="ja-JP"; recognition.interimResults=true; recognition.continuous=true;
+    let finalTranscript="";
+    recognition.onstart=()=>{ isListening=true; btn.classList.add("listening"); btn.textContent="⏹ 停止"; status.classList.remove("d-none"); statusText.textContent="聞き取り中…"; finalTranscript=textarea.value; };
+    recognition.onend=()=>{ isListening=false; btn.classList.remove("listening"); btn.textContent="🎙 音声入力"; status.classList.add("d-none"); };
+    recognition.onresult=(e)=>{ let interim=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) finalTranscript+=t+" "; else interim+=t; } textarea.value=finalTranscript+interim; statusText.textContent=interim?`"${interim}"`:"聞き取り中…"; textarea.dispatchEvent(new Event('input')); };
+  }
+  async function startSafariRecord(){
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRecorder=new MediaRecorder(stream, {mimeType: MediaRecorder.isTypeSupported('audio/webm')?'audio/webm':'audio/mp4'});
+      audioChunks=[]; mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); };
+      mediaRecorder.onstop=async()=>{
+        statusText.textContent="Geminiで文字起こし中…";
+        const blob=new Blob(audioChunks, {type: mediaRecorder.mimeType});
+        const base64=await new Promise(r=>{ const fr=new FileReader(); fr.onload=()=>r(fr.result.split(',')[1]); fr.readAsDataURL(blob); });
+        try{
+          const res=await fetch(gasUrl, {method:"POST", headers:{"Content-Type":"text/plain"}, body: JSON.stringify({mode:"transcribe", audioBase64: base64, mimeType: blob.type})});
+          const data=await res.json();
+          const text = data.text || data.content || "";
+          if(text){ textarea.value = (textarea.value? textarea.value+" " : "") + text; textarea.dispatchEvent(new Event('input')); statusText.textContent="完了"; }
+          else { statusText.textContent="聞き取れませんでした"; }
+        }catch(e){ statusText.textContent="文字起こし失敗: "+e; }
+        setTimeout(()=>{ status.classList.add("d-none"); isListening=false; btn.classList.remove("listening"); btn.textContent="🎙 音声入力"; },1500);
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      mediaRecorder.start(); isListening=true; btn.classList.add("listening"); btn.textContent="⏹ 停止"; status.classList.remove("d-none"); statusText.textContent="録音中…";
+    }catch(e){ alert("マイク許可が必要です: "+e); }
+  }
+  btn.addEventListener("click", ()=>{
+    if(isListening){
+      if(hasNative && recognition){ recognition.stop(); }
+      else if(mediaRecorder && mediaRecorder.state==="recording"){ mediaRecorder.stop(); }
+      return;
+    }
+    if(hasNative){ try{ recognition.start(); }catch(e){ startSafariRecord(); } }
+    else { startSafariRecord(); }
+  });
+}
+setTimeout(initVoice, 700);
+</script>
+<footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
+  <div style="max-width:1120px;margin:0 auto;">運営：Code for Ashiya | Civic Tech</div>
+</footer>
+</body>
+</html>
