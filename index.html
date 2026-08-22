@@ -235,7 +235,7 @@ const BASE_DESC = {
 let CO_CREATED={}; BASE_CATEGORIES.forEach(c=>{ CO_CREATED[c.key]={defaultDesc:BASE_DESC[c.label],currentDesc:BASE_DESC[c.label]}; });
 let ALL_IDEAS=[]; let NEXT_ID=1; let EVENT_DATA=[]; let openBig="BIG-1"; let openMidMap={"BIG-1__安否確認体制":true};
 let hirobaPosts=[]; let hirobaImageBase64="";
-
+var isEventMode = false; // ★ここに1つだけ。varにするのが重要（letだと再宣言で死ぬ）
 function createIdeaObject(bigKey, midName, title, summary, type, raw, extras){
   const id='idea-'+(NEXT_ID++); const bigLabel = BASE_CATEGORIES.find(b=>b.key===bigKey)?.label||bigKey;
   return { id, big:bigKey, mid:midName, title, summary, raw, type, bigLabel, midLabel:midName, createdAt:new Date().toISOString(), core:extras?.core||"", change:extras?.change||"", success:extras?.success||"", concern:extras?.concern||"", question:extras?.question||"", ...extras, bigLabel, midLabel:midName };
@@ -281,7 +281,7 @@ const INITIAL_EVENTS = [
 {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
 ];
 
-let isEventMode = false; // ★追加：イベント企画モード判定
+
 
 function initData(){
   ALL_IDEAS = INITIAL_24.map(o=>{ const label=BASE_CATEGORIES.find(b=>b.key===o.big)?.label||o.big; return createIdeaObject(o.big,o.mid,o.title,o.summary,o.big.startsWith("BIG-6")?"single":"integrated",o.summary,{bigLabel:label,midLabel:o.mid}); });
