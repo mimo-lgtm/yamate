@@ -150,24 +150,32 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div id="mapUpdateWrap" style="min-height:300px;"></div>
 </section>
 <section id="assist" class="page">
-<h1>🤖 声を届ける - 5視点分析はここで必須</h1>
+<h1>🤖 声を届ける / イベント企画を投稿</h1>
 <div class="card" style="border:2px solid #2f7a6b;">
-<p style="font-size:12px;color:#666;margin-bottom:10px;">要約200字＋5視点各100字で分析。5視点はここ「声を届ける」でのみ詳しく表示されます。声のボードでは要約200字のみで省スペース化。</p>
-<input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-  <button type="button" id="btnVoice" class="big-btn ghost" style="padding:8px 14px;font-size:13px;">🎙 音声入力</button>
-  <span id="voiceStatus" class="d-none"><span id="voiceStatusText">聞き取り中…</span></span>
-  <span style="font-size:11px;color:#666;">話す→自動で文字化</span>
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
+<label style="display:flex;align-items:center;gap:8px;background:#fff8e1;border:2px solid #e8a33d;padding:8px 12px;border-radius:8px;font-weight:800;cursor:pointer;">
+<input type="checkbox" id="isEventCheck" onchange="toggleEventMode()" style="width:18px;height:18px;">
+🎉 イベント企画として投稿する
+</label>
+<span id="modeLabel" style="font-size:12px;background:#eef0e4;padding:4px 10px;border-radius:999px;">📌 声のボードに統合されます</span>
 </div>
-<textarea id="userInput" placeholder="例：山手町の坂道が急で高齢者の歩行が大変。ベンチや休憩スペースが欲しい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
+<div id="modeDesc" style="font-size:12px;background:#e8f5e9;border:1px solid #2f7a6b;padding:10px;border-radius:8px;margin-bottom:10px;">
+📌 <b>声を届けるモード</b>：投稿は「声のボード」の該当中分類の元記事に即時統合され、元記事が更新されます。その他3件で新中分類自動生成。
+</div>
+<input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+<button type="button" id="btnVoice" class="big-btn ghost" style="padding:8px 14px;font-size:13px;">🎙 音声入力</button>
+<span id="voiceStatus" class="d-none"><span id="voiceStatusText">聞き取り中…</span></span>
+</div>
+<textarea id="userInput" placeholder="例：山手町の坂道が急でベンチが欲しい / ハロウィンで仮装パトロールをしたい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
 <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-<button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 5視点で分析（必須）</button>
+<button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 5視点で分析</button>
 <button type="button" class="big-btn ghost" onclick="showPage('home', document.getElementById('nav-home'))">🏠 トップに戻る</button>
-<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 5視点分析中…</span>
+<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 分析中…</span>
 </div>
 <div style="font-size:11px;color:#666;margin-top:8px;">GAS: <span id="gasUrlDisplay"></span></div>
 </div>
-<div class="card"><h2 style="font-size:16px;">📋 AI分析結果 - 要約200字＋5視点100字×5（ここでのみ詳細表示）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGeminiの5視点分析が表示されます。声のボードでは要約200字のみで省スペース化されます。</p></div></div>
+<div class="card"><h2 style="font-size:16px;">📋 AI分析結果</h2><div id="slip"><p style="color:#888;font-size:13px;">ここに分析結果が表示されます。</p></div></div>
 </section>
 <section id="tree" class="page">
 <div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
@@ -291,6 +299,7 @@ function toggleEventForm(){
   f.style.display=isHidden?'block':'none';
   if(isHidden){ const d=document.getElementById('evDate'); if(d && !d.value) d.valueAsDate=new Date(); }
 }
+
 function showEventTab(tab){
   const up=document.getElementById('event-upcoming-list');
   const ideas=document.getElementById('event-ideas-list');
@@ -298,14 +307,33 @@ function showEventTab(tab){
   if(tab==='upcoming'){ up.style.display='block'; ideas.style.display='none'; document.getElementById('btn-upcoming').style.background='#e8a33d'; document.getElementById('btn-ideas').style.background='#fff'; }
   else { up.style.display='none'; ideas.style.display='block'; document.getElementById('btn-upcoming').style.background='#fff'; document.getElementById('btn-ideas').style.background='#e8a33d'; renderEventIdeas(); }
 }
+
+function toggleEventMode(){
+  const chk = document.getElementById('isEventCheck');
+  if(!chk) return;
+  isEventMode = chk.checked;
+  const label = document.getElementById('modeLabel');
+  const desc = document.getElementById('modeDesc');
+  const input = document.getElementById('userInput');
+  if(isEventMode){
+    if(label){ label.textContent = "🎉 イベントボードに単独格納されます"; label.style.background = "#fff8e1"; }
+    if(desc){ desc.innerHTML = "🎉 <b>イベント企画モード</b>：この内容は「声のボード」には入らず、「イベントボード」に単独で格納されます。要約のみ表示でリアルタイム統合はされません。"; desc.style.background = "#fff8e1"; desc.style.borderColor = "#e8a33d"; }
+    if(input) input.placeholder = "例：ハロウィンで仮装しながら防犯パトロール";
+  }else{
+    if(label){ label.textContent = "📌 声のボードに統合されます"; label.style.background = "#eef0e4"; }
+    if(desc){ desc.innerHTML = "📌 <b>声を届けるモード</b>：投稿は「声のボード」の該当中分類の元記事に即時統合され、元記事が更新されます。その他3件で新中分類自動生成。"; desc.style.background = "#e8f5e9"; desc.style.borderColor = "#2f7a6b"; }
+    if(input) input.placeholder = "例：山手町の坂道が急で高齢者の歩行が大変。ベンチが欲しい";
+  }
+}
+
 function goToEventIdeaAssist(){
-  isEventMode = true;
   const btn=document.querySelector('nav button[data-page="assist"]');
   showPage('assist',btn);
-  const input = document.getElementById('userInput');
-  if(input) input.placeholder = "例：ハロウィンで仮装しながら防犯パトロール";
-  const slip = document.getElementById('slip');
-  if(slip) slip.innerHTML = `<div style="background:#fff8e1;border:2px solid #e8a33d;padding:12px;border-radius:8px;"><b>🎉 イベント企画モード</b><br>この内容は「声のボード」には入らず、「イベントボード」に単独で格納されます。要約のみ表示。</div>`;
+  // 少し待ってからチェックON（DOMが表示されてから）
+  setTimeout(()=>{
+    const chk = document.getElementById('isEventCheck');
+    if(chk){ chk.checked = true; toggleEventMode(); }
+  },50);
 }
 function renderEvents(){
   const wrap=document.getElementById('event-upcoming-list');
