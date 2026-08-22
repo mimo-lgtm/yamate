@@ -201,8 +201,10 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <textarea id="hirobaComment" rows="3" placeholder="コメント" style="width:100%;padding:10px;border:1.5px solid #ccc;border-radius:8px;"></textarea>
 <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
 <select id="hirobaCategory" style="flex:1;padding:10px;border:1.5px solid #ccc;border-radius:8px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
+<label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:800;background:#fff;padding:8px 12px;border:1.5px solid #e8a33d;border-radius:8px;cursor:pointer;white-space:nowrap;">
+  <input type="checkbox" id="hirobaToInstagram" style="width:18px;height:18px;"> 📸 Instagramにも投稿
+</label>
 <button type="button" class="big-btn amber" onclick="submitHiroba()" style="flex:1;justify-content:center;">📸 投稿する</button>
-</div>
 <div id="hirobaStatus" style="font-size:13px;color:#2f7a6b;min-height:20px;font-weight:700;"></div>
 </div>
 </div>
@@ -418,14 +420,53 @@ async function submitHiroba(){
   const author=document.getElementById('hirobaAuthor')?.value.trim()||"匿名";
   const comment=document.getElementById('hirobaComment')?.value.trim();
   const category=document.getElementById('hirobaCategory')?.value||'その他';
+  const toInstagram = document.getElementById('hirobaToInstagram')?.checked || false; // ★追加
   if(!comment && !hirobaImageBase64){ alert("コメントか画像を入れてください"); return; }
-  const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24)||'写真投稿',category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment||'写真を投稿しました'};
+
+  const newPost={
+    timestamp:new Date().toISOString(),
+    author,
+    summary:comment.slice(0,24)||'写真投稿',
+    category,
+    imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",
+    description:comment||'写真を投稿しました'
+  };
+  
+  // 画面に即表示
   hirobaPosts.unshift(newPost);
   renderHiroba();
   document.getElementById('hirobaImagePreview').innerHTML='';
   document.getElementById('hirobaComment').value='';
-  hirobaImageBase64='';
-  document.getElementById('hirobaStatus').textContent='✅ 投稿しました！広場5件＋新規1件が表示されています';
+  const statusEl = document.getElementById('hirobaStatus');
+  statusEl.textContent='投稿中… GASとInstagramに送信しています…';
+
+  // GASに送信（Instagram自動投稿はGAS側で toInstagram を見る）
+  try{
+    const res = await fetch(gasUrl, {
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify({
+        action:"postHiroba",
+        author: author,
+        comment: comment,
+        category: category,
+        imageBase64: hirobaImageBase64,
+        toInstagram: toInstagram
+      })
+    });
+    const data = await res.json();
+    if(data.status==="success"){
+      statusEl.textContent = toInstagram ? '✅ 投稿しました！Instagramにも送信しました' : '✅ 投稿しました！広場5件＋新規1件が表示されています';
+    }else{
+      statusEl.textContent = '✅ 広場には表示しましたが、GAS保存でエラー: '+(data.message||'');
+    }
+  }catch(e){
+    statusEl.textContent='✅ 広場には表示しましたが、GAS通信エラー: '+e;
+  }finally{
+    hirobaImageBase64='';
+    const cb = document.getElementById('hirobaToInstagram');
+    if(cb) cb.checked=false;
+  }
 }
 
 async function runAI(){
