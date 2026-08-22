@@ -500,14 +500,54 @@ async function runAI(){
 }
 async function postIdeaFromAI(){
   const r=window._lastAI; if(!r) return;
+  const raw = window._lastRaw || "";
   let bigLabel=r['大分類']; let midLabel=r['中分類'];
   const base=BASE_CATEGORIES.find(c=>c.label===bigLabel); let bigKey=base?.key||'BIG-3';
-  if(base && !base.baseSubs.includes(midLabel)) midLabel="その他";
-  const title=r['推奨タイトル']||window._lastRaw.slice(0,20);
-  const newIdea=createIdeaObject(bigKey,midLabel,title,r['要約200'], 'single', window._lastRaw, {bigLabel,midLabel, core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']});
+  if(base && !base.baseSubs.includes(midLabel) && midLabel!=="世代間交流") midLabel="その他";
+
+  // 画面に即時表示
+  const title=r['推奨タイトル']||raw.slice(0,20);
+  const newIdea=createIdeaObject(bigKey,midLabel,title,r['要約200'], 'single', raw, {bigLabel,midLabel, core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']});
   ALL_IDEAS.unshift(newIdea);
-  document.getElementById('userInput').value=''; document.getElementById('slip').innerHTML=`<div style="background:#e8f5e9;padding:14px;border-radius:12px;"><b>✅ 投稿完了！「${escapeHtml(bigLabel)} / ${escapeHtml(midLabel)}」に格納（要約200字のみ表示）</b></div>`;
-  setTimeout(()=>{ showPage('tree',document.querySelector('nav button[data-page=tree]')); renderBoard(); openBig=bigKey; openMidMap[`${bigKey}__${midLabel}`]=true; renderBoard(); },800);
+  renderBoard();
+  openBig=bigKey; 
+  openMidMap[`${bigKey}__${midLabel}`]=true; 
+
+  // ★根本修正：GASの声のボードに送信して即時統合させる
+  try{
+    document.getElementById('slip').innerHTML += `<p style="color:#2f7a6b;font-weight:800;margin-top:10px;">📡 スプレッドシートに統合中…</p>`;
+    
+    const res = await fetch(gasUrl, {
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"}, // ★ application/jsonはNG。text/plain必須
+      body: JSON.stringify({
+        action:"postIdea",
+        author: document.getElementById('authorName')?.value || "匿名",
+        content: raw,
+        title: title,
+        summary: r['要約200'],
+        analysis: r // 大分類/中分類を含む
+      })
+    });
+    const json = await res.json();
+    if(json.status==="success"){
+      document.getElementById('slip').innerHTML = `<div style="background:#e8f5e9;padding:14px;border-radius:12px;border:2px solid #2f7a6b;">
+        <b>✅ スプレッドシート統合完了！</b><br>
+        「${escapeHtml(bigLabel)} / ${escapeHtml(midLabel)}」の元記事に統合されました。<br>
+        声のボードの行が更新されています。<br>
+        <small>targetRow: ${json.targetRow} / category: ${escapeHtml(json.category)}</small>
+      </div>`;
+    }else{
+      document.getElementById('slip').innerHTML += `<p style="color:red;">GASエラー: ${escapeHtml(json.message)}</p>`;
+    }
+  }catch(e){
+    document.getElementById('slip').innerHTML += `<p style="color:red;">通信エラー: ${escapeHtml(e.message)}<br>GAS_URL: ${escapeHtml(gasUrl)}</p>`;
+  }
+
+  setTimeout(()=>{ 
+    showPage('tree',document.querySelector('nav button[data-page="tree]')); 
+    renderBoard(); 
+  },1200);
 }
 
 document.addEventListener("DOMContentLoaded",()=>{
