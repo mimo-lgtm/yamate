@@ -237,10 +237,43 @@ const INITIAL_EVENTS = [
 {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ想定の安否確認訓練。"}
 ];
 
-function initData(){
+async function initData(){
   ALL_IDEAS = INITIAL_24.map(o=>{ const label=BASE_CATEGORIES.find(b=>b.key===o.big)?.label||o.big; return createIdeaObject(o.big,o.mid,o.title,o.summary,o.big.startsWith("BIG-6")?"single":"integrated",o.summary,{bigLabel:label,midLabel:o.mid}); });
   EVENT_DATA = [...INITIAL_EVENTS];
   hirobaPosts = [...INITIAL_HIROBA];
+  // ★GASから最新の声のボードを読んで上書き（保存されるように見せる核心）
+  try{
+    const res = await fetch(gasUrl+"?action=list", {method:"GET"});
+    const json = await res.json();
+    if(json.status==="success"){
+      if(json.ideas && json.ideas.length>0){
+        json.ideas.forEach(item=>{
+          const base = BASE_CATEGORIES.find(c=>c.label===item.bigLabel);
+          const bigKey = base? base.key : "BIG-3";
+          const mid = item.midLabel || "その他";
+          const existing = ALL_IDEAS.find(a=>a.mid===mid && a.big===bigKey);
+          if(existing){
+            existing.summary = item.summary;
+            existing.title = item.title;
+            existing.raw = item.raw;
+            existing.type = "integrated";
+          }else{
+            const obj = createIdeaObject(bigKey, mid, item.title, item.summary, "integrated", item.raw, {bigLabel:item.bigLabel,midLabel:mid});
+            ALL_IDEAS.push(obj);
+          }
+        });
+      }
+      if(json.events && json.events.length>0) EVENT_DATA = json.events;
+      if(json.data && json.data.length>0) hirobaPosts = json.data;
+      console.log("✅ GASから読み込み", json.ideas ? json.ideas.length : 0, "件");
+      renderBoard();
+      renderEvents();
+      renderHiroba();
+      renderEventIdeas();
+    }
+  }catch(e){
+    console.log("GAS読み込み失敗", e);
+  }
 }
 function escapeHtml(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function showPage(id,btn){
