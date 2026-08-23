@@ -61,6 +61,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <button type="button" data-page="tree" onclick="showPage('tree',this)">声のボード</button>
 <button type="button" data-page="hiroba" onclick="showPage('hiroba',this)" style="background:#e8a33d;color:#1b1f1d;border-color:#e8a33d;">📸 みんなの広場</button>
 <button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city','_blank')" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏠 町内会サイト</button>
+<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏛 芦屋市の課題</button>
 </nav>
 </header>
 <main>
@@ -594,7 +595,28 @@ function initVoice(){
   });
 }
 setTimeout(initVoice, 700);
+
 </script>
-<footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;"><div style="max-width:1120px;margin:0 auto;">運営：Code for Ashiya | Civic Tech</div></footer>
+<footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
+  <div style="max-width:1120px;margin:0 auto;">
+    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="font-size:28px;">🏙</div>
+      <div>
+        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
+          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
+        </div>
+        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
+          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
+          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
+          誰もが参加できるオープンな活動を行っています。
+          <br>
+          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
+          <span style="opacity:.5;margin:0 6px;">/</span>
+          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>  
 </body>
 </html>
