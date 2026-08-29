@@ -2,8 +2,6 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>芦屋市山手町の小さな気づきと未来のアイデア帳 </title>
 <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
@@ -53,9 +51,6 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 @keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
 .d-none{display:none!important}
 #voiceStatus{background:#e8f5e9;border:1px solid #2f7a6b;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
-.join-grid button{padding:7px 12px;border-radius:20px;border:1.5px solid #ccc;background:#fff;font-weight:700;font-size:12px}
-.join-grid button.joined{background:#2f7a6b;color:#fff;border-color:#2f7a6b}
-.ai-plan-box{background:#f0f7f0;border:1.5px dashed #2f7a6b;padding:10px 12px;border-radius:8px;margin-top:8px;font-size:12.5px}
 </style>
 </head>
 <body>
@@ -135,111 +130,7 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div style="font-size:14px;font-weight:800;">💡 イベント企画は統合せず単独でブラッシュアップ</div>
 <button type="button" onclick="goToEventIdeaAssist()" style="margin-top:10px;background:#e8a33d;color:#1b1f1d;border:none;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;">🤖 イベント企画をAIで投稿する →</button>
 </div>
-
-<div id="event-upcoming-list" style="display:block;min-height:100px;background:#fff;border-radius:8px;padding:8px;">
-<div style="background:#fff8e1;border:2px solid #e8a33d;border-radius:12px;padding:14px 16px;margin-bottom:14px;">
-  <div style="font-weight:900;font-size:14px;">👇 ボタンを押すとカウントされます — 匿名・気軽に</div>
-  <div style="font-size:12.5px;line-height:1.8;">達成されればイベント実施を検討します：<br>✅ やりたい10人以上 / ✅ やりたい5人＋手伝える2人＋場所1件 / ✅ やりたい7人＋仕切り1人<br>集まると自動で 🔥 自治会検討中 に変わります。</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt1">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-06-07 ⏰ 09:00-11:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">清掃 | 参加者募集中</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">一斉清掃＆ゴミ回収活動</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 山手町集会所集合 | 毎月第一土曜の清掃活動。</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt1" onclick="joinEvent('evt1','want')">🙋 やりたい <b id="want-evt1">0</b></button>
-    <button id="btn-help-evt1" onclick="joinEvent('evt1','help')">🤝 手伝える <b id="help-evt1">0</b></button>
-    <button id="btn-lead-evt1" onclick="joinEvent('evt1','lead')">🎤 仕切り <b id="lead-evt1">0</b></button>
-    <button id="btn-place-evt1" onclick="joinEvent('evt1','place')">📍 場所 <b id="place-evt1">0</b></button>
-    <button id="btn-interest-evt1" onclick="joinEvent('evt1','interest')">👀 興味あり <b id="interest-evt1">0</b></button>
-  </div>
-  <div id="ai-plan-evt1" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt2">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-07-19 ⏰ 17:00-20:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">季節 | 企画中</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">夏祭り2026</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 山手公園 | 夏祭りを3年ぶりに復活！</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt2" onclick="joinEvent('evt2','want')">🙋 やりたい <b id="want-evt2">0</b></button>
-    <button id="btn-help-evt2" onclick="joinEvent('evt2','help')">🤝 手伝える <b id="help-evt2">0</b></button>
-    <button id="btn-lead-evt2" onclick="joinEvent('evt2','lead')">🎤 仕切り <b id="lead-evt2">0</b></button>
-    <button id="btn-place-evt2" onclick="joinEvent('evt2','place')">📍 場所 <b id="place-evt2">0</b></button>
-    <button id="btn-interest-evt2" onclick="joinEvent('evt2','interest')">👀 興味あり <b id="interest-evt2">0</b></button>
-  </div>
-  <div id="ai-plan-evt2" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt3">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-08-02 ⏰ 06:30-07:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">季節 | 参加者募集中</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">ラジオ体操＆朝活コーヒー</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 山手公園 | 夏休み期間ラジオ体操。</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt3" onclick="joinEvent('evt3','want')">🙋 やりたい <b id="want-evt3">0</b></button>
-    <button id="btn-help-evt3" onclick="joinEvent('evt3','help')">🤝 手伝える <b id="help-evt3">0</b></button>
-    <button id="btn-lead-evt3" onclick="joinEvent('evt3','lead')">🎤 仕切り <b id="lead-evt3">0</b></button>
-    <button id="btn-place-evt3" onclick="joinEvent('evt3','place')">📍 場所 <b id="place-evt3">0</b></button>
-    <button id="btn-interest-evt3" onclick="joinEvent('evt3','interest')">👀 興味あり <b id="interest-evt3">0</b></button>
-  </div>
-  <div id="ai-plan-evt3" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt4">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-10-25 ⏰ 14:00-16:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">企画 | アイデア募集中</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">ハロウィン仮装防犯パトロール</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 町内全域 | 子ども達が仮装してパトロール。</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt4" onclick="joinEvent('evt4','want')">🙋 やりたい <b id="want-evt4">0</b></button>
-    <button id="btn-help-evt4" onclick="joinEvent('evt4','help')">🤝 手伝える <b id="help-evt4">0</b></button>
-    <button id="btn-lead-evt4" onclick="joinEvent('evt4','lead')">🎤 仕切り <b id="lead-evt4">0</b></button>
-    <button id="btn-place-evt4" onclick="joinEvent('evt4','place')">📍 場所 <b id="place-evt4">0</b></button>
-    <button id="btn-interest-evt4" onclick="joinEvent('evt4','interest')">👀 興味あり <b id="interest-evt4">0</b></button>
-  </div>
-  <div id="ai-plan-evt4" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt5">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-12-14 ⏰ 10:00-13:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">季節 | 予定</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">餅つき大会＆防災炊き出し訓練</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 集会所前広場 | 年末恒例の餅つき大会。</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt5" onclick="joinEvent('evt5','want')">🙋 やりたい <b id="want-evt5">0</b></button>
-    <button id="btn-help-evt5" onclick="joinEvent('evt5','help')">🤝 手伝える <b id="help-evt5">0</b></button>
-    <button id="btn-lead-evt5" onclick="joinEvent('evt5','lead')">🎤 仕切り <b id="lead-evt5">0</b></button>
-    <button id="btn-place-evt5" onclick="joinEvent('evt5','place')">📍 場所 <b id="place-evt5">0</b></button>
-    <button id="btn-interest-evt5" onclick="joinEvent('evt5','interest')">👀 興味あり <b id="interest-evt5">0</b></button>
-  </div>
-  <div id="ai-plan-evt5" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt6">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-09-20 ⏰ 10:00-12:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">防災 | 参加者募集中</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">防災訓練・安否確認訓練</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 集会所 | 南海トラフ想定の安否確認訓練。</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt6" onclick="joinEvent('evt6','want')">🙋 やりたい <b id="want-evt6">0</b></button>
-    <button id="btn-help-evt6" onclick="joinEvent('evt6','help')">🤝 手伝える <b id="help-evt6">0</b></button>
-    <button id="btn-lead-evt6" onclick="joinEvent('evt6','lead')">🎤 仕切り <b id="lead-evt6">0</b></button>
-    <button id="btn-place-evt6" onclick="joinEvent('evt6','place')">📍 場所 <b id="place-evt6">0</b></button>
-    <button id="btn-interest-evt6" onclick="joinEvent('evt6','interest')">👀 興味あり <b id="interest-evt6">0</b></button>
-  </div>
-  <div id="ai-plan-evt6" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-
-<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:14px;padding:16px;" id="card-evt-illumi">
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 2026-12-01 ⏰ 18:00-20:00</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">企画 | アイデア募集中</span></div>
-  <div style="font-weight:900;font-size:16px;margin-top:8px;">山手町の静穏イルミ</div>
-  <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 山手町 | 静穏を守る低照度イルミネーション</div>
-  <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-    <button id="btn-want-evt-illumi" onclick="joinEvent('evt-illumi','want')">🙋 やりたい <b id="want-evt-illumi">0</b></button>
-    <button id="btn-help-evt-illumi" onclick="joinEvent('evt-illumi','help')">🤝 手伝える <b id="help-evt-illumi">0</b></button>
-    <button id="btn-lead-evt-illumi" onclick="joinEvent('evt-illumi','lead')">🎤 仕切り <b id="lead-evt-illumi">0</b></button>
-    <button id="btn-place-evt-illumi" onclick="joinEvent('evt-illumi','place')">📍 場所 <b id="place-evt-illumi">0</b></button>
-    <button id="btn-interest-evt-illumi" onclick="joinEvent('evt-illumi','interest')">👀 興味あり <b id="interest-evt-illumi">0</b></button>
-  </div>
-  <div id="ai-plan-evt-illumi" class="ai-plan-box">ボタンを押して意思表示しよう — 10人集まれば 🔥 自治会検討中 に自動昇格します</div>
-</div>
-</div>
+<div id="event-upcoming-list" style="display:block;min-height:100px;background:#fff;border-radius:8px;padding:8px;"></div>
 <div id="event-ideas-list" style="display:none;min-height:100px;background:#fff;border-radius:8px;padding:8px;"></div>
 <div id="eventFormCard" class="card" style="display:none;background:#fff;border:2px solid #2f7a6b;margin-top:16px;">
 <h3 style="margin-bottom:12px;">📝 新しいイベントを追加（管理者向け）</h3>
@@ -375,10 +266,69 @@ const INITIAL_EVENTS = [
 {id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会と防災炊き出し訓練。"},
 {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
 ];
+
+async function loadIdeasFromGAS(){
+  try{
+    const url = gasUrl + '?action=getIdeas&t=' + Date.now();
+    const res = await fetch(url, {method:'GET'});
+    const data = await res.json();
+    console.log('GAS ideas', data);
+    let ideas = [];
+    if(Array.isArray(data)) ideas = data;
+    else if(data.ideas && Array.isArray(data.ideas)) ideas = data.ideas;
+    else if(data.data && Array.isArray(data.data)) ideas = data.data;
+    if(ideas.length > 0){
+      // Filter only those not in INITIAL_24
+      const existingTitles = new Set(INITIAL_24.map(i=>i.title));
+      const newFromGAS = ideas.filter(i=> !existingTitles.has(i.title||i.Title));
+      console.log('新規GAS', newFromGAS.length, newFromGAS);
+      newFromGAS.forEach(item=>{
+        const title = item.title || item.Title || item['推奨タイトル'] || (item.content||'').slice(0,20);
+        const summary = item.summary || item.Summary || item['要約200'] || item.content || item.Content || '';
+        const raw = item.content || item.Content || item.raw || summary;
+        const bigLabel = item.bigLabel || item['大分類'] || 'コミュニティ';
+        const midLabel = item.midLabel || item['中分類'] || item.mid || '新住民の歓迎';
+        const bigKey = (BASE_CATEGORIES.find(c=>c.label===bigLabel)?.key) || item.big || 'BIG-3';
+        const mid = item.mid || midLabel;
+        // 重複チェック
+        if(ALL_IDEAS.some(a=>a.title===title && a.summary===summary)) return;
+        const obj=createIdeaObject(bigKey, mid, title, summary, 'single', raw, {bigLabel:bigLabel, midLabel:midLabel});
+        obj.isNew=true;
+        obj.fromGAS=true;
+        ALL_IDEAS.push(obj);
+      });
+      // 新規を先頭にソート
+      ALL_IDEAS.sort((a,b)=> (b.isNew?1:0) - (a.isNew?1:0));
+      renderBoard();
+      console.log('✅ GASから'+newFromGAS.length+'件を声のボードに反映');
+      const board=document.getElementById('board');
+      if(board && newFromGAS.length>0){
+        // 新規件数を表示
+        const info=document.createElement('div');
+        info.style.cssText='background:#fff8e1;border:2px solid #e8a33d;padding:8px;border-radius:8px;margin-bottom:8px;font-weight:900;';
+        info.textContent='✅ スプレッドシートから'+newFromGAS.length+'件の新規投稿を反映しました（全'+ALL_IDEAS.length+'件）';
+        board.prepend(info);
+      }
+    }
+  }catch(e){
+    console.log('GAS取得失敗', e);
+  }
+}
+
 function initData(){
   ALL_IDEAS = INITIAL_24.map(o=>{ const label=BASE_CATEGORIES.find(b=>b.key===o.big)?.label||o.big; return createIdeaObject(o.big,o.mid,o.title,o.summary,o.big.startsWith("BIG-6")?"single":"integrated",o.summary,{bigLabel:label,midLabel:o.mid}); });
   EVENT_DATA = [...INITIAL_EVENTS];
   hirobaPosts = [...INITIAL_HIROBA];
+  try{
+    const saved = JSON.parse(localStorage.getItem('yamate_ideas_new')||'[]');
+    saved.forEach(item=>{
+      const obj=createIdeaObject(item.big||'BIG-3', item.mid||'新住民の歓迎', item.title, item.summary, 'single', item.raw, {bigLabel:item.bigLabel||'コミュニティ', midLabel:item.mid||item.midLabel||'新住民の歓迎'});
+      obj.isNew=true;
+      ALL_IDEAS.unshift(obj);
+    });
+    const joins=JSON.parse(localStorage.getItem('yamate_joins')||'{}');
+    Object.keys(joins).forEach(id=>{ const ev=EVENT_DATA.find(e=>e.id===id); if(ev) ev.counts=joins[id]; });
+  }catch(e){ console.log(e); }
 }
 function escapeHtml(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function showPage(id,btn){
@@ -421,13 +371,34 @@ function renderEvents(){
   const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
   wrap.innerHTML=sorted.map(ev=>{
     const d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
+    const c = ev.counts || {want:0, help:0, lead:0, place:0, interest:0};
+    const total = c.want + c.help + c.lead + c.place + c.interest;
     return `<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:12px;padding:16px;">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 ${escapeHtml(d)} ⏰ ${escapeHtml(ev.time||'')}</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">${escapeHtml(ev.category)} | ${escapeHtml(ev.status)}</span></div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 ${escapeHtml(d)} ⏰ ${escapeHtml(ev.time||'')}</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">${escapeHtml(ev.category)} | ${escapeHtml(ev.status)} ${total>0?'・'+total+'人':''}</span></div>
       <div style="font-weight:900;font-size:16px;margin-top:8px;">${escapeHtml(ev.title)}</div>
       <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 ${escapeHtml(ev.place)} | ${escapeHtml(ev.detail)}</div>
+      <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;">
+        <button onclick="joinEvent('${ev.id}','want')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-weight:700;font-size:12px;cursor:pointer;">🙋 やりたい → 自分も参加したい <b id="want-${ev.id}">${c.want}</b></button>
+        <button onclick="joinEvent('${ev.id}','help')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-weight:700;font-size:12px;cursor:pointer;">🤝 手伝える → 準備や当日のお手伝いできる <b id="help-${ev.id}">${c.help}</b></button>
+        <button onclick="joinEvent('${ev.id}','lead')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-weight:700;font-size:12px;cursor:pointer;">🎤 仕切り → 進行や取りまとめができる <b id="lead-${ev.id}">${c.lead}</b></button>
+        <button onclick="joinEvent('${ev.id}','place')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-weight:700;font-size:12px;cursor:pointer;">📍 場所 → 庭や駐車場など場所を提供できる <b id="place-${ev.id}">${c.place}</b></button>
+        <button onclick="joinEvent('${ev.id}','interest')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-weight:700;font-size:12px;cursor:pointer;">👀 興味あり → まずは見てみたい <b id="interest-${ev.id}">${c.interest}</b></button>
+      </div>
+      <div id="ai-plan-${ev.id}" style="display:${total>0?'block':'none'};background:#f0f7f0;border:1.5px dashed #2f7a6b;padding:8px;border-radius:8px;margin-top:8px;font-size:12px;">現在 やりたい${c.want}人 / 手伝える${c.help}人 / 仕切り${c.lead}人 / 場所${c.place}人 / 興味${c.interest}人</div>
     </div>`;
   }).join('');
 }
+function joinEvent(eventId, type){
+  const c = {want:0,help:0,lead:0,place:0,interest:0};
+  try{ const s=JSON.parse(localStorage.getItem('yamate_joins')||'{}'); if(s[eventId]) Object.assign(c,s[eventId]); }catch(e){}
+  c[type]=(c[type]||0)+1;
+  try{ const a=JSON.parse(localStorage.getItem('yamate_joins')||'{}'); a[eventId]=c; localStorage.setItem('yamate_joins', JSON.stringify(a)); }catch(e){}
+  ['want','help','lead','place','interest'].forEach(k=>{ const el=document.getElementById(k+'-'+eventId); if(el) el.textContent=c[k]||0; });
+  const ev=EVENT_DATA.find(e=>e.id===eventId); if(ev) ev.counts=c;
+  const planEl=document.getElementById('ai-plan-'+eventId); if(planEl){ planEl.style.display='block'; planEl.innerHTML='✅ 反映しました！ やりたい'+c.want+'人 / 手伝える'+c.help+'人 / 仕切り'+c.lead+'人 / 場所'+c.place+'人 / 興味'+c.interest+'人'; }
+  try{ fetch(gasUrl, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({action:'joinEvent', eventId, type})}); }catch(e){}
+}
+
 function renderEventIdeas(){
   const wrap=document.getElementById('event-ideas-list');
   if(!wrap) return;
@@ -579,6 +550,11 @@ async function postIdeaFromAI(){
   if(!isEventMode){
     const newIdea=createIdeaObject(bigKey,midLabel,newTitle,r['要約200'], 'single', raw, {bigLabel,midLabel, core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']});
     ALL_IDEAS.unshift(newIdea);
+    try{
+      const arr=JSON.parse(localStorage.getItem('yamate_ideas_new')||'[]');
+      arr.unshift({big:bigKey, mid:midLabel, title:newTitle, summary:r['要約200'], raw:raw, bigLabel:bigLabel, midLabel:midLabel, timestamp:new Date().toISOString()});
+      localStorage.setItem('yamate_ideas_new', JSON.stringify(arr));
+    }catch(e){}
     renderBoard();
     openBig=bigKey;
     openMidMap[`${bigKey}__${midLabel}`]=true;
@@ -615,6 +591,8 @@ async function postIdeaFromAI(){
 }
 document.addEventListener("DOMContentLoaded",()=>{
   initData();
+  loadIdeasFromGAS();
+
   document.getElementById('gasUrlDisplay').textContent=gasUrl;
   renderMapUpdate();
   renderEvents();
@@ -686,151 +664,7 @@ function initVoice(){
 setTimeout(initVoice, 700);
 </script>
 <footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
-  <div style="max-width:1120px;margin:0 auto;">
-    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
-      <div style="font-size:28px;">🏙</div>
-      <div>
-        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
-          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
-        </div>
-        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
-          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
-          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
-          誰もが参加できるオープンな活動を行っています。
-          <br>
-          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
-          <span style="opacity:.5;margin:0 6px;">/</span>
-          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
-        </p>
-      </div>
-    </div>
-  </div>
-</footer> 
-
-<script>
-// ★オフライン対応パッチ：GASが404でも動く
-(function(){
-  const LS_KEY_IDEAS = 'yamate_ideas_offline';
-  const LS_KEY_JOINS = 'yamate_joins_offline';
-  
-  window.getOfflineJoins = function(){
-    try{ return JSON.parse(localStorage.getItem(LS_KEY_JOINS)||'{}'); }catch{ return {}; }
-  }
-  window.saveOfflineJoin = function(eventId, type){
-    const map = window.getOfflineJoins();
-    if(!map[eventId]) map[eventId]={want:0,help:0,lead:0,place:0,interest:0};
-    map[eventId][type]=(map[eventId][type]||0)+1;
-    localStorage.setItem(LS_KEY_JOINS, JSON.stringify(map));
-    return map[eventId];
-  }
-  window.getOfflineIdeas = function(){
-    try{ return JSON.parse(localStorage.getItem(LS_KEY_IDEAS)||'[]'); }catch{ return []; }
-  }
-  window.saveOfflineIdea = function(idea){
-    const arr = window.getOfflineIdeas();
-    arr.push(idea);
-    localStorage.setItem(LS_KEY_IDEAS, JSON.stringify(arr));
-  }
-
-  const originalFetch = window.fetch;
-  window.fetch = async function(url, opts){
-    try{
-      const res = await originalFetch(url, opts);
-      if(!res.ok && url.toString().includes('script.google.com')){
-        console.log('⚠️ GAS 404/失敗 - オフライン動作に切替', res.status);
-        // 404ならダミー成功レスポンスを返す
-        return {
-          ok: true,
-          status: 200,
-          json: async()=>({status:'success', ideas:[], events:[], data:[], counts:{want:1,help:0,lead:0,place:0,interest:0}, isReady:false}),
-          text: async()=>('{}')
-        };
-      }
-      return res;
-    }catch(e){
-      console.log('⚠️ fetch失敗 - オフライン動作', e);
-      return {
-        ok: true,
-        status: 200,
-        json: async()=>({status:'success', ideas:[], events:[], data:[], counts:{want:1,help:0,lead:0,place:0,interest:0}, isReady:false}),
-        text: async()=>('{}')
-      };
-    }
-  };
-
-  // 声のボード投稿を上書き：GAS失敗でも即時反映
-  const originalPostIdea = window.postIdea || null;
-  window.postIdeaOffline = function(){
-    // 既存のpostIdeaがあればそれを呼ぶが、失敗してもlocalStorageに保存
-    const titleEl = document.getElementById('idea-title');
-    const contentEl = document.getElementById('idea-content');
-    const title = titleEl? titleEl.value : '';
-    const content = contentEl? contentEl.value : '';
-    if(!content) { alert('内容を入力してください'); return; }
-    const idea = {
-      timestamp: new Date().toISOString(),
-      author: 'あなた',
-      bigLabel: 'コミュニティ',
-      midLabel: '新住民の歓迎',
-      title: title || content.slice(0,15),
-      summary: content.slice(0,200),
-      raw: content
-    };
-    window.saveOfflineIdea(idea);
-    // ALL_IDEASに追加して即時描画
-    if(window.ALL_IDEAS){
-      const base = {big:'BIG-3', mid:idea.midLabel, title:idea.title, summary:idea.summary};
-      if(window.createIdeaObject){
-        const obj = window.createIdeaObject(base.big, base.mid, base.title, base.summary, 'single', base.summary, {bigLabel:idea.bigLabel, midLabel:base.mid});
-        window.ALL_IDEAS.unshift(obj);
-      }
-    }
-    if(window.renderBoard) window.renderBoard();
-    if(titleEl) titleEl.value='';
-    if(contentEl) contentEl.value='';
-    alert('✅ 声のボードに反映しました（オフライン保存）\nGASが復活したら自動同期されます');
-  };
-
-  // ボタンを上書き
-  window.joinEvent = async function(eventId, type){
-    const btn = document.getElementById(`btn-${type}-${eventId}`);
-    if(btn){btn.disabled=true; btn.style.opacity="0.6";}
-    try{
-      const res = await fetch(gasUrl, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"joinEvent", eventId, type})});
-      const data = await res.json();
-      if(data.status==="success" && data.counts){
-        const c = data.counts;
-        ['want','help','lead','place','interest'].forEach(k=>{
-          const el = document.getElementById(`${k}-${eventId}`);
-          if(el) el.textContent = c[k]||0;
-        });
-      }else{
-        throw new Error('GAS 404 fallback');
-      }
-    }catch(e){
-      // オフライン：localStorageでカウント
-      const c = window.saveOfflineJoin(eventId, type);
-      ['want','help','lead','place','interest'].forEach(k=>{
-        const el = document.getElementById(`${k}-${eventId}`);
-        if(el) el.textContent = c[k]||0;
-      });
-      const planEl = document.getElementById(`ai-plan-${eventId}`);
-      if(planEl){
-        planEl.style.display='block';
-        const isReady = (c.want>=10) || (c.want>=5 && c.help>=2 && c.place>=1) || (c.want>=7 && c.lead>=1);
-        if(isReady){
-          planEl.innerHTML='🔥 <b>閾値達成！自治会検討中（オフライン）</b>';
-        }else{
-          planEl.innerHTML=`🤖 現在 やりたい${c.want} / 手伝える${c.help} / 仕切り${c.lead} / 場所${c.place} / 興味${c.interest} — GAS復活で正式カウントへ`;
-        }
-      }
-      console.log('オフラインカウント保存', eventId, type, c);
-    }finally{
-      if(btn){btn.disabled=false; btn.style.opacity="1"; btn.classList.add('joined');}
-    }
-  };
-})();
-</script>
-
+  <div style="max-width:1120px;margin:0 auto;">運営：Code for Ashiya | Civic Tech</div>
+</footer>
 </body>
 </html>
