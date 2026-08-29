@@ -146,7 +146,10 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
     集まると自動で <span style="background:#23282a;color:#e8a33d;padding:2px 8px;border-radius:999px;font-weight:900;">🔥 自治会検討中</span> に変わります。
   </div>
 </div>
-
+<div style="background:#fff8e1;border:2px solid #e8a33d;border-radius:12px;padding:14px 16px;margin-bottom:14px;">
+  <div style="font-weight:900;font-size:14px;">👇 ボタンを押すとカウントされます — 達成されればイベント実施を検討します</div>
+  <div style="font-size:12.5px;line-height:1.8;">✅ やりたい10人以上 / ✅ やりたい5人＋手伝える2人＋場所1件 / ✅ やりたい7人＋仕切り1人 → 🔥 自治会検討中に自動昇格</div>
+</div>
 <div id="event-upcoming-list" style="display:block;min-height:100px;background:#fff;border-radius:8px;padding:8px;"></div>
 <div id="event-ideas-list" style="display:none;min-height:100px;background:#fff;border-radius:8px;padding:8px;"></div>
 <div id="eventFormCard" class="card" style="display:none;background:#fff;border:2px solid #2f7a6b;margin-top:16px;">
@@ -323,16 +326,30 @@ function goToEventIdeaAssist(){
   const slip = document.getElementById('slip');
   if(slip) slip.innerHTML = `<div style="background:#fff8e1;border:2px solid #e8a33d;padding:12px;border-radius:8px;"><b>🎉 イベント企画モード</b><br>この内容は「声のボード」には入らず、「イベントボード」に単独で格納されます。要約のみ表示。</div>`;
 }
+// 309行目の function renderEvents(){ から joinEvent の終わりまでをこれに置換
 function renderEvents(){
   const wrap=document.getElementById('event-upcoming-list');
   if(!wrap) return;
   const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
+  if(sorted.length===0){ wrap.innerHTML='<div style="padding:20px;text-align:center;color:#888;">読み込み中...</div>'; return; }
   wrap.innerHTML=sorted.map(ev=>{
     const d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
-    return `<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:12px;padding:16px;">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 ${escapeHtml(d)} ⏰ ${escapeHtml(ev.time||'')}</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">${escapeHtml(ev.category)} | ${escapeHtml(ev.status)}</span></div>
+    const c = ev.counts || {want:0, help:0, lead:0, place:0, interest:0};
+    const total = c.want + c.help + c.lead + c.place + c.interest;
+    const isHot = (c.want>=10) || (c.want>=5 && c.help>=2 && c.place>=1) || (c.want>=7 && c.lead>=1);
+    const statusBadge = isHot? '🔥 自治会検討中' : escapeHtml(ev.status);
+    return `<div style="border:${isHot?'3px solid #e8a33d':'2px solid #e8a33d'};border-radius:12px;background:${isHot?'#fff8e1':'#fff'};margin-bottom:14px;padding:16px;">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:${isHot?'#23282a':'#e8a33d'};color:${isHot?'#e8a33d':'#000'};padding:4px 12px;border-radius:999px;font-weight:900;">📅 ${escapeHtml(d)}</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">${escapeHtml(ev.category)} | ${statusBadge} ${total>0?`・${total}人関心`:''}</span></div>
       <div style="font-weight:900;font-size:16px;margin-top:8px;">${escapeHtml(ev.title)}</div>
       <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 ${escapeHtml(ev.place)} | ${escapeHtml(ev.detail)}</div>
+      <div class="join-grid" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
+        <button id="btn-want-${ev.id}" onclick="joinEvent('${ev.id}','want')">🙋 やりたい <b id="want-${ev.id}">${c.want}</b></button>
+        <button id="btn-help-${ev.id}" onclick="joinEvent('${ev.id}','help')">🤝 手伝える <b id="help-${ev.id}">${c.help}</b></button>
+        <button id="btn-lead-${ev.id}" onclick="joinEvent('${ev.id}','lead')">🎤 仕切り <b id="lead-${ev.id}">${c.lead}</b></button>
+        <button id="btn-place-${ev.id}" onclick="joinEvent('${ev.id}','place')">📍 場所 <b id="place-${ev.id}">${c.place}</b></button>
+        <button id="btn-interest-${ev.id}" onclick="joinEvent('${ev.id}','interest')">👀 興味あり <b id="interest-${ev.id}">${c.interest}</b></button>
+      </div>
+      <div id="ai-plan-${ev.id}" class="ai-plan-box" style="display:${total>0?'block':'none'}">${isHot?`🔥 閾値達成！` : `現在 やりたい${c.want} / 手伝える${c.help} / 仕切り${c.lead}`}</div>
     </div>`;
   }).join('');
 }
