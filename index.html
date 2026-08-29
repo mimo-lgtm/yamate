@@ -267,53 +267,88 @@ const INITIAL_EVENTS = [
 {id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練。"}
 ];
 
+
 async function loadIdeasFromGAS(){
   try{
-    const url = gasUrl + '?action=getIdeas&t=' + Date.now();
+    const url = gasUrl + '?action=list&t=' + Date.now();
+    console.log('GAS fetch', url);
     const res = await fetch(url, {method:'GET'});
     const data = await res.json();
-    console.log('GAS ideas', data);
-    let ideas = [];
-    if(Array.isArray(data)) ideas = data;
-    else if(data.ideas && Array.isArray(data.ideas)) ideas = data.ideas;
-    else if(data.data && Array.isArray(data.data)) ideas = data.data;
-    if(ideas.length > 0){
-      // Filter only those not in INITIAL_24
-      const existingTitles = new Set(INITIAL_24.map(i=>i.title));
-      const newFromGAS = ideas.filter(i=> !existingTitles.has(i.title||i.Title));
-      console.log('新規GAS', newFromGAS.length, newFromGAS);
-      newFromGAS.forEach(item=>{
-        const title = item.title || item.Title || item['推奨タイトル'] || (item.content||'').slice(0,20);
-        const summary = item.summary || item.Summary || item['要約200'] || item.content || item.Content || '';
-        const raw = item.content || item.Content || item.raw || summary;
-        const bigLabel = item.bigLabel || item['大分類'] || 'コミュニティ';
-        const midLabel = item.midLabel || item['中分類'] || item.mid || '新住民の歓迎';
-        const bigKey = (BASE_CATEGORIES.find(c=>c.label===bigLabel)?.key) || item.big || 'BIG-3';
-        const mid = item.mid || midLabel;
-        // 重複チェック
-        if(ALL_IDEAS.some(a=>a.title===title && a.summary===summary)) return;
-        const obj=createIdeaObject(bigKey, mid, title, summary, 'single', raw, {bigLabel:bigLabel, midLabel:midLabel});
-        obj.isNew=true;
-        obj.fromGAS=true;
-        ALL_IDEAS.push(obj);
-      });
-      // 新規を先頭にソート
-      ALL_IDEAS.sort((a,b)=> (b.isNew?1:0) - (a.isNew?1:0));
-      renderBoard();
-      console.log('✅ GASから'+newFromGAS.length+'件を声のボードに反映');
-      const board=document.getElementById('board');
-      if(board && newFromGAS.length>0){
-        // 新規件数を表示
-        const info=document.createElement('div');
-        info.style.cssText='background:#fff8e1;border:2px solid #e8a33d;padding:8px;border-radius:8px;margin-bottom:8px;font-weight:900;';
-        info.textContent='✅ スプレッドシートから'+newFromGAS.length+'件の新規投稿を反映しました（全'+ALL_IDEAS.length+'件）';
-        board.prepend(info);
-      }
+    console.log('GAS list response', data);
+    let ideas = data.ideas || [];
+    if(!Array.isArray(ideas) || ideas.length===0){
+      console.log('GAS ideas 0件');
+      return;
+    }
+    // デフォルト24件のタイトルセット
+    const defaultTitles = new Set(INITIAL_24.map(i=>i.title));
+    // GASの7件は新規として追加
+    let added = 0;
+    ideas.forEach(item=>{
+      if(!item.title && !item.summary) return;
+      // 既にINITIAL_24にあるかチェック
+      if(defaultTitles.has(item.title)) return;
+      // 既にALL_IDEASにあるか重複チェック
+      if(ALL_IDEAS.some(a=>a.title===item.title && a.summary===item.summary)) return;
+      const bigLabel = item.bigLabel || 'コミュニティ';
+      const midLabel = item.midLabel || item.mid || '新住民の歓迎';
+      const base = BASE_CATEGORIES.find(c=>c.label===bigLabel);
+      const bigKey = base?.key || 'BIG-3';
+      const obj=createIdeaObject(bigKey, item.midLabel||midLabel, item.title, item.summary, 'single', item.raw||item.summary, {bigLabel:bigLabel, midLabel:midLabel, core:item.core, change:item.change, success:item.success, concern:item.concern, question:item.question});
+      obj.isNew=true;
+      obj.fromGAS=true;
+      obj.timestamp=item.timestamp;
+      obj.author=item.author;
+      ALL_IDEAS.push(obj);
+      added++;
+    });
+    // 新規を先頭に
+    ALL_IDEAS.sort((a,b)=> (b.isNew?1:0) - (a.isNew?1:0));
+    renderBoard();
+    console.log('✅ GASから'+added+'件を反映 全'+ALL_IDEAS.length+'件');
+    const board=document.getElementById('board');
+    if(board && added>0){
+      const existing = document.getElementById('gas-info');
+      if(existing) existing.remove();
+      const info=document.createElement('div');
+      info.id='gas-info';
+      info.style.cssText='background:#fff8e1;border:2px solid #e8a33d;padding:10px;border-radius:8px;margin-bottom:12px;font-weight:900;text-align:center;';
+      info.innerHTML='✅ スプレッドシートから'+added+'件の新規投稿を反映（デフォルト24件 + 新規'+added+'件 = 全'+ALL_IDEAS.length+'件）';
+      board.prepend(info);
+    }
+    // イベントと広場もGASから更新
+    if(data.events && Array.isArray(data.events) && data.events.length>0){
+      // GASのcountsは既に入っている
+      const gasEvents = data.events;
+      // ローカルのjoinとマージ
+      try{
+        const joins=JSON.parse(localStorage.getItem('yamate_joins')||'{}');
+        gasEvents.forEach(ev=>{
+          if(joins[ev.id]){
+            // ローカルを優先
+            const local=joins[ev.id];
+            ev.counts = {
+              want: Math.max(ev.counts?.want||0, local.want||0),
+              help: Math.max(ev.counts?.help||0, local.help||0),
+              lead: Math.max(ev.counts?.lead||0, local.lead||0),
+              place: Math.max(ev.counts?.place||0, local.place||0),
+              interest: Math.max(ev.counts?.interest||0, local.interest||0)
+            };
+          }
+        });
+      }catch(e){}
+      EVENT_DATA = gasEvents;
+      renderEvents();
+    }
+    if(data.data && Array.isArray(data.data)){
+      hirobaPosts = data.data;
+      if(typeof renderHiroba==='function') renderHiroba();
     }
   }catch(e){
-    console.log('GAS取得失敗', e);
+    console.log('GAS list取得失敗', e);
   }
 }
+
 
 function initData(){
   ALL_IDEAS = INITIAL_24.map(o=>{ const label=BASE_CATEGORIES.find(b=>b.key===o.big)?.label||o.big; return createIdeaObject(o.big,o.mid,o.title,o.summary,o.big.startsWith("BIG-6")?"single":"integrated",o.summary,{bigLabel:label,midLabel:o.mid}); });
