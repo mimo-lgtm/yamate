@@ -272,7 +272,24 @@ async function initData(){
           }
         });
       }
-      if(json.events && json.events.length>0) EVENT_DATA = json.events;
+      if(json.events && json.events.length>0){
+  // GASのイベント + 初期6件をマージ（重複はidで除外）
+  var gasEvents = json.events.map(ev=>{
+    if(!ev.counts) ev.counts = {want:0, help:0, lead:0, place:0, interest:0};
+    return ev;
+  });
+  var merged = [...INITIAL_EVENTS];
+  gasEvents.forEach(ge=>{
+    if(!merged.find(me=>me.id===ge.id)){
+      merged.push(ge);
+    }else{
+      // 既存ならGASの最新（counts付き）で上書き
+      var idx = merged.findIndex(me=>me.id===ge.id);
+      merged[idx] = ge;
+    }
+  });
+  EVENT_DATA = merged;
+}
       if(json.data && json.data.length>0) hirobaPosts = json.data;
       console.log("✅ GASから読み込み", json.ideas ? json.ideas.length : 0, "件");
       renderBoard();
