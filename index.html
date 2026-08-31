@@ -58,6 +58,21 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 </style>
 </head>
 <body>
+<script>
+// 再読み込みで元に戻るのを自動で回避 - 古いバージョンを検出したら最新を取得
+(function(){
+  var isOldVersion = !document.getElementById('event-ideas-list') || document.getElementById('event-ideas-list').innerHTML.indexOf('やりたい') === -1;
+  // 初回ロード後0.8秒で5つのボタンがあるかチェック - なければキャッシュバスト
+  setTimeout(function(){
+    var wrap = document.getElementById('event-ideas-list');
+    if(!wrap || wrap.innerHTML.indexOf('やりたい') === -1 || wrap.innerHTML.indexOf('興味あり') === -1){
+      var url = new URL(location.href);
+      url.searchParams.set('v', Date.now());
+      location.replace(url.toString());
+    }
+  }, 800);
+})();
+</script>
 <header class="topbar">
 <div class="brand" onclick="showPage('home', document.getElementById('nav-home'))"><span style="width:9px;height:9px;border-radius:50%;background:#2f7a6b;display:inline-block;box-shadow:0 0 0 3px rgba(47,122,107,.3);"></span><div><span class="city">ASHIYA CITY / YAMATECHO</span><span class="town">芦屋市 山手町</span></div></div>
 <nav>
