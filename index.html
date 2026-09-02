@@ -85,7 +85,8 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
     <div>
       <div style="font-size:11px;font-weight:800;letter-spacing:.18em;color:#2f7a6b;">ASHIYA YAMATE | COMMUNITY NOTEBOOK</div>
       <h1 style="font-family:'Klee One';font-size:26px;font-weight:900;line-height:1.35;">山手町の小さな気づきと<br>未来のアイデア帳</h1>
-      <div style="background:#fff8e1;border:1px solid #e8a33d;padding:4px 12px;border-radius:999px;font-size:11px;display:inline-block;margin-top:6px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</div>
+      <div style="background:#fff8e1;border:1px solid #e8a33d;padding:4px 12px;border-radius:999px;font-size:15px;display:inline-block;margin-top:6px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</div>
+      
     </div>
   </div>
 </div>
@@ -127,7 +128,11 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
 <div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;color:#666;">6つのテーマに自動で分類<br>24新統合が初期搭載</div></div>
 </div>
 </div>
-
+<div style="background:#fff;border:2px solid #2f7a6b;border-radius:12px;padding:16px;text-align:center;">
+<div style="font-size:16px;font-weight:900;">🎉 イベントは新しいイベントページに移設されました</div>
+<div style="font-size:12px;margin-top:8px;color:#666;">山手町イベントボード、町内会で検討のボードは「🎉 イベント」ページへ移動しました。</div>
+<button type="button" onclick="showPage('event', document.querySelector('nav button[data-page=event]'))" style="margin-top:12px;background:#2f7a6b;color:#fff;border:none;padding:12px 24px;border-radius:999px;font-weight:900;cursor:pointer;">🎉 イベントページへ →</button>
+</div>
 </section>
 <section id="event" class="page">
 <h1>🎉 イベント</h1>
@@ -304,7 +309,11 @@ function toggleEventForm(){
   const f=document.getElementById('eventFormCard');
   const isHidden=f.style.display==='none'||f.style.display==='';
   f.style.display=isHidden?'block':'none';
-  if(isHidden){ const d=document.getElementById('evDate'); if(d && !d.value) d.valueAsDate=new Date(); }
+  if(isHidden){
+    const d=document.getElementById('evDate'); if(d && !d.value) d.valueAsDate=new Date();
+    // 管理者が書き込む箇所までクリックで移動
+    setTimeout(function(){ f.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+  }
 }
 function showEventTab(tab){
   const up=document.getElementById('event-upcoming-list');
@@ -736,6 +745,101 @@ function generateFlyer(){
 }
 
 // 町内会で検討のボード - 応援10件以上が入っている、ダミー削除、チラシ作成フォーマットはデフォルト閉じ、実行プログラムは削除、プロレベルチラシ
+
+var openEventCat = null;
+var openEventTitleMap = {};
+
+function renderEventsClean(){
+  var up=document.getElementById('event-upcoming-list');
+  if(!up) return;
+  var sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
+  // カテゴリ別にグループ化
+  var cats={};
+  sorted.forEach(function(ev){ var c=ev.category||'その他'; if(!cats[c]) cats[c]=[]; cats[c].push(ev); });
+  var html='<div style="background:#23282a;color:#fff;padding:10px;border-radius:8px;margin-bottom:12px;font-weight:900;">📅 今後のイベント（'+sorted.length+'件・分類→タイトル→内容の順にクリックして開く）</div>';
+  html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px;">';
+  Object.keys(cats).forEach(function(cat){
+    var count=cats[cat].length;
+    var isOpen=openEventCat===cat;
+    html+='<div onclick="openEventCat=\''+cat.replace(/'/g,"\\'")+'\'; renderEventsClean();" style="border:'+(isOpen?'2px solid #e8a33d':'1.5px solid #d8dcc9')+';border-radius:12px;background:#fff;padding:14px 10px;text-align:center;cursor:pointer;">'+
+      '<div style="font-size:11px;background:#2f7a6b;color:#fff;display:inline-block;padding:2px 8px;border-radius:999px;">'+count+'件</div>'+
+      '<div style="font-weight:900;margin-top:6px;">'+escapeHtml(cat)+'</div><div style="font-size:11px;color:#666;margin-top:4px;">'+(isOpen?'▲ 閉じる':'▼ タイトルを見る')+'</div></div>';
+  });
+  html+='</div>';
+  if(openEventCat && cats[openEventCat]){
+    html+='<div style="background:#fff;border-radius:12px;padding:12px;border:1.5px solid #d8dcc9;"><div style="font-weight:900;margin-bottom:10px;">📎 '+escapeHtml(openEventCat)+'（'+cats[openEventCat].length+'件）</div>';
+    cats[openEventCat].forEach(function(ev){
+      var isTitleOpen=!!openEventTitleMap[ev.id];
+      html+='<div onclick="openEventTitleMap[\''+ev.id+'\']=!openEventTitleMap[\''+ev.id+'\']; renderEventsClean();" style="background:#fff8e1;border-left:4px solid #e8a33d;border-radius:6px;padding:10px 12px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;">'+
+        '<span style="font-weight:700;font-size:13px;">'+escapeHtml(ev.title)+' <span style="font-size:11px;color:#666;">'+escapeHtml(ev.date||'')+' '+escapeHtml(ev.time||'')+'</span></span><span style="font-size:11px;">'+(isTitleOpen?'▲':'▼')+'</span></div>';
+      if(isTitleOpen){
+        html+='<div style="margin-left:16px;margin-bottom:12px;background:#fff;border:1.5px solid #e8a33d;border-radius:8px;padding:12px;">'+
+          '<div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;">📍 '+escapeHtml(ev.place||'')+' | '+escapeHtml(ev.detail||'')+'<br><span style="font-size:11px;color:#666;">'+escapeHtml(ev.status||'')+'</span></div>'+
+          '</div>';
+      }
+    });
+    html+='</div>';
+  }
+  up.innerHTML=html;
+}
+
+function renderEventIdeasClean(){
+  var wrap=document.getElementById('event-ideas-list');
+  if(!wrap) return;
+  var items=[
+    {id:'idea1', title:'夏祭り復活', cat:'祭り', summary:'夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流し、第一種低層の静穏な住宅地に配慮して音量を抑えた品格ある祭りとして実施。子どもから高齢者まで楽しめる屋台と防災意識を高める展示も併設します。'},
+    {id:'idea2', title:'石垣と邸宅街を守る美化活動', cat:'清掃', summary:'石垣や門構えが特徴の山手町では、美化活動は景観保全そのものです。急斜面の側溝清掃、石垣周辺の除草、生垣手入れ講習を継続し、邸宅街の品格を守ります。住民参加型で年4回実施し、景観保全の意識を高めます。'},
+    {id:'idea3', title:'急坂地域の防災・防犯を楽しく学ぶ', cat:'防災', summary:'急坂が多い山手町の防災・防犯を楽しく学ぶイベントを開催します。ハロウィン仮装防犯パトロールや炊き出し訓練、防災ラジオ配布を通じて、高齢者も子どもも参加できる防災意識向上の機会を作ります。'},
+    {id:'idea4', title:'邸宅の庭を活かした多世代交流', cat:'子ども', summary:'邸宅の庭を活かした多世代交流を推進します。広い庭を持つ邸宅が多い特性を活かし、庭での絵本読み聞かせや自然観察、ラジオ体操と朝活コーヒーで子どもから高齢者までが顔の見える関係を築きます。'},
+    {id:'idea5', title:'防犯パトロール', cat:'防犯', summary:'夜間の防犯パトロールを強化します。急坂が多く街灯が少ない山手町では、懐中電灯を持った見回りが重要です。子ども見守り隊と連携し、ハロウィン仮装パトロールなど楽しく参加できる防犯活動を実施します。'},
+    {id:'idea6', title:'空き家見学会', cat:'空き家', summary:'空き家バンクの空き家を見学するイベントを開催します。大邸宅が多い地域特性を活かし、空き家を地域資源として活用する方法を学びます。移住希望者向けに邸宅の歴史や景観保全の取り組みも紹介します。'},
+    {id:'idea7', title:'両町合同イベントの模索', cat:'合同', summary:'山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。'}
+  ];
+  // GASから追加されたイベントも企画アイデアとして含める
+  EVENT_DATA.filter(function(e){ return e.category==='企画' || e.status==='アイデア募集中' || e.category==='合同'; }).forEach(function(ev){
+    if(!items.some(function(it){ return it.title===ev.title; })){
+      items.push({id:ev.id, title:ev.title, cat:ev.category||'企画', summary:ev.detail||''});
+    }
+  });
+  // 分類別にグループ化
+  var cats={};
+  items.forEach(function(it){ var c=it.cat||'その他'; if(!cats[c]) cats[c]=[]; cats[c].push(it); });
+  var html='<div style="background:#e8a33d;color:#000;padding:10px;border-radius:8px;margin-bottom:12px;font-weight:900;">💡 企画アイデア（分類→タイトル→内容（5つの応援ボタン）の順にクリック）</div>';
+  html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:16px;">';
+  Object.keys(cats).forEach(function(cat){
+    var count=cats[cat].length;
+    var isOpen=openEventCat===cat;
+    html+='<div onclick="openEventCat=\''+cat.replace(/'/g,"\\'")+'\'; renderEventIdeasClean(); renderEventsClean();" style="border:'+(isOpen?'2px solid #e8a33d':'1.5px solid #d8dcc9')+';border-radius:12px;background:#fff;padding:14px 10px;text-align:center;cursor:pointer;">'+
+      '<div style="font-size:11px;background:#e8a33d;color:#000;display:inline-block;padding:2px 8px;border-radius:999px;">'+count+'件</div>'+
+      '<div style="font-weight:900;margin-top:6px;">'+escapeHtml(cat)+'</div><div style="font-size:11px;color:#666;margin-top:4px;">'+(isOpen?'▲ 閉じる':'▼ タイトルを見る')+'</div></div>';
+  });
+  html+='</div>';
+  if(openEventCat && cats[openEventCat]){
+    html+='<div style="background:#fff;border-radius:12px;padding:12px;border:1.5px solid #d8dcc9;"><div style="font-weight:900;margin-bottom:10px;">📎 '+escapeHtml(openEventCat)+'（'+cats[openEventCat].length+'件）</div>';
+    cats[openEventCat].forEach(function(it){
+      var c=eventIdeaCounts[it.id]||{want:0,help:0,lead:0,place:0,interest:0};
+      var total=(c.want||0)+(c.help||0)+(c.lead||0)+(c.place||0)+(c.interest||0);
+      var isTitleOpen=!!openEventTitleMap[it.id];
+      html+='<div onclick="openEventTitleMap[\''+it.id+'\']=!openEventTitleMap[\''+it.id+'\']; renderEventIdeasClean();" style="background:#fff8e1;border-left:4px solid #e8a33d;border-radius:6px;padding:10px 12px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;">'+
+        '<span style="font-weight:700;font-size:13px;">'+escapeHtml(it.title)+' <span style="font-size:11px;background:#e8a33d;color:#000;padding:1px 6px;border-radius:999px;">合計'+total+'/10</span></span><span style="font-size:11px;">'+(isTitleOpen?'▲':'▼')+'</span></div>';
+      if(isTitleOpen){
+        html+='<div style="margin-left:16px;margin-bottom:12px;background:#fff;border:1.5px solid #e8a33d;border-radius:8px;padding:12px;">'+
+          '<div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;">'+escapeHtml(it.summary)+'</div>'+
+          '<div class="event-btn-group" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">'+
+          '<button type="button" onclick="event.stopPropagation(); incrementIdea(\''+it.id+'\',\'want\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🙋 やりたい '+c.want+'</button>'+
+          '<button type="button" onclick="event.stopPropagation(); incrementIdea(\''+it.id+'\',\'help\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🤝 手伝える '+c.help+'</button>'+
+          '<button type="button" onclick="event.stopPropagation(); incrementIdea(\''+it.id+'\',\'lead\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🎤 仕切り '+c.lead+'</button>'+
+          '<button type="button" onclick="event.stopPropagation(); incrementIdea(\''+it.id+'\',\'place\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">📍 場所 '+c.place+'</button>'+
+          '<button type="button" onclick="event.stopPropagation(); incrementIdea(\''+it.id+'\',\'interest\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">👀 興味あり '+c.interest+'</button>'+
+          '</div></div>';
+      }
+    });
+    html+='</div>';
+  }
+  wrap.innerHTML=html;
+}
+
+
 function renderKentouBoardClean(){
   var wrap=document.getElementById('kentouWrap');
   if(!wrap) return;
@@ -779,54 +883,53 @@ function renderKentouBoardClean(){
     '<div><label style="font-weight:800;font-size:12px;">■内容：</label><textarea id="flyContent" rows="3" placeholder="100-150文字で内容を入力" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>'+
     '<div><label style="font-weight:800;font-size:12px;">■思い入れ：</label><textarea id="flyOmoi" rows="2" placeholder="なぜやるのか、どんな未来を作りたいか" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>'+
     '<div><label style="font-weight:800;font-size:12px;">■雨天時の扱い：</label><input id="flyRain" type="text" placeholder="小雨決行・荒天中止、中止判断は当日8時までにLINEで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
-    '<div><label style="font-weight:800;font-size:12px;">■申込方法と締切：</label><input id="flyApply" type="text" placeholder="町内会LINE、掲示板、メール 締切：X月XX日まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
+    '<div><label style="font-weight:800;font-size:12px;">■申込方法と締切：</label><input id="flyApply" type="text" placeholder="町内会LINE、掲示板、メール 締切：Ｘ月ＸＸ日まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■緊急連絡先：</label><input id="flyEmergency" type="text" placeholder="町内会長 090-XXXX-XXXX" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■問合せ：</label><input id="flyContact" type="text" placeholder="山手町町内会 〇〇まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
     '<button type="button" onclick="generateFlyer()" style="background:linear-gradient(135deg,#2f7a6b 0%, #e8a33d 100%);color:#fff;border:none;padding:16px 24px;border-radius:999px;font-weight:900;font-size:16px;cursor:pointer;width:100%;margin-top:8px;">✨ プロレベルのA4チラシを別画面に出力する（背景画像・icon-512.png・色・フォント・ボックス）</button>'+
     '</div></div></div></div>';
   // ダミーの防災訓練の強化・ごみステーション美化は削除済み
   wrap.innerHTML=html;
 }
+
+var openEventCat = null;
+var openEventTitleMap = {};
+
 function renderEventsClean(){
   var up=document.getElementById('event-upcoming-list');
   if(!up) return;
   var sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
-  var html='<div style="background:#23282a;color:#fff;padding:10px;border-radius:8px;margin-bottom:12px;font-weight:900;">📅 今後のイベント（'+sorted.length+'件・企画アイデアとは別内容・100-150字）</div>';
-  sorted.forEach(function(ev){
-    var d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
-    html+='<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:12px;padding:16px;">'+
-      '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 '+escapeHtml(d)+' ⏰ '+escapeHtml(ev.time||'')+'</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">'+escapeHtml(ev.category)+' | '+escapeHtml(ev.status)+'</span></div>'+
-      '<div style="font-weight:900;font-size:16px;margin-top:8px;">'+escapeHtml(ev.title)+'</div>'+
-      '<div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 '+escapeHtml(ev.place)+' | '+escapeHtml(ev.detail)+'</div>'+
-      '</div>';
+  // カテゴリ別にグループ化
+  var cats={};
+  sorted.forEach(function(ev){ var c=ev.category||'その他'; if(!cats[c]) cats[c]=[]; cats[c].push(ev); });
+  var html='<div style="background:#23282a;color:#fff;padding:10px;border-radius:8px;margin-bottom:12px;font-weight:900;">📅 今後のイベント（'+sorted.length+'件・分類→タイトル→内容の順にクリックして開く）</div>';
+  html+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px;">';
+  Object.keys(cats).forEach(function(cat){
+    var count=cats[cat].length;
+    var isOpen=openEventCat===cat;
+    html+='<div onclick="openEventCat=\''+cat.replace(/'/g,"\'")+'\'; renderEventsClean();" style="border:'+(isOpen?'2px solid #e8a33d':'1.5px solid #d8dcc9')+';border-radius:12px;background:#fff;padding:14px 10px;text-align:center;cursor:pointer;">'+
+      '<div style="font-size:11px;background:#2f7a6b;color:#fff;display:inline-block;padding:2px 8px;border-radius:999px;">'+count+'件</div>'+
+      '<div style="font-weight:900;margin-top:6px;">'+escapeHtml(cat)+'</div><div style="font-size:11px;color:#666;margin-top:4px;">'+(isOpen?'▲ 閉じる':'▼ タイトルを見る')+'</div></div>';
   });
+  html+='</div>';
+  if(openEventCat && cats[openEventCat]){
+    html+='<div style="background:#fff;border-radius:12px;padding:12px;border:1.5px solid #d8dcc9;"><div style="font-weight:900;margin-bottom:10px;">📎 '+escapeHtml(openEventCat)+'（'+cats[openEventCat].length+'件）</div>';
+    cats[openEventCat].forEach(function(ev){
+      var isTitleOpen=!!openEventTitleMap[ev.id];
+      html+='<div onclick="openEventTitleMap[\''+ev.id+'\']=!openEventTitleMap[\''+ev.id+'\']; renderEventsClean();" style="background:#fff8e1;border-left:4px solid #e8a33d;border-radius:6px;padding:10px 12px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;">'+
+        '<span style="font-weight:700;font-size:13px;">'+escapeHtml(ev.title)+' <span style="font-size:11px;color:#666;">'+escapeHtml(ev.date||'')+' '+escapeHtml(ev.time||'')+'</span></span><span style="font-size:11px;">'+(isTitleOpen?'▲':'▼')+'</span></div>';
+      if(isTitleOpen){
+        html+='<div style="margin-left:16px;margin-bottom:12px;background:#fff;border:1.5px solid #e8a33d;border-radius:8px;padding:12px;">'+
+          '<div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;">📍 '+escapeHtml(ev.place||'')+' | '+escapeHtml(ev.detail||'')+'<br><span style="font-size:11px;color:#666;">'+escapeHtml(ev.status||'')+'</span></div>'+
+          '</div>';
+      }
+    });
+    html+='</div>';
+  }
   up.innerHTML=html;
 }
-function renderEventIdeasClean(){
-  var wrap=document.getElementById('event-ideas-list');
-  if(!wrap) return;
-  var items=[
-    {id:'idea1', title:'夏祭り復活', cat:'祭り', summary:'夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流し、第一種低層の静穏な住宅地に配慮して音量を抑えた品格ある祭りとして実施。子どもから高齢者まで楽しめる屋台と防災意識を高める展示も併設します。'},
-    {id:'idea2', title:'石垣と邸宅街を守る美化活動', cat:'清掃', summary:'石垣や門構えが特徴の山手町では、美化活動は景観保全そのものです。急斜面の側溝清掃、石垣周辺の除草、生垣手入れ講習を継続し、邸宅街の品格を守ります。住民参加型で年4回実施し、景観保全の意識を高めます。'},
-    {id:'idea3', title:'急坂地域の防災・防犯を楽しく学ぶ', cat:'防災', summary:'急坂が多い山手町の防災・防犯を楽しく学ぶイベントを開催します。ハロウィン仮装防犯パトロールや炊き出し訓練、防災ラジオ配布を通じて、高齢者も子どもも参加できる防災意識向上の機会を作ります。'},
-    {id:'idea4', title:'邸宅の庭を活かした多世代交流', cat:'子ども', summary:'邸宅の庭を活かした多世代交流を推進します。広い庭を持つ邸宅が多い特性を活かし、庭での絵本読み聞かせや自然観察、ラジオ体操と朝活コーヒーで子どもから高齢者までが顔の見える関係を築きます。'},
-    {id:'idea5', title:'防犯パトロール', cat:'防犯', summary:'夜間の防犯パトロールを強化します。急坂が多く街灯が少ない山手町では、懐中電灯を持った見回りが重要です。子ども見守り隊と連携し、ハロウィン仮装パトロールなど楽しく参加できる防犯活動を実施します。'},
-    {id:'idea6', title:'空き家見学会', cat:'空き家', summary:'空き家バンクの空き家を見学するイベントを開催します。大邸宅が多い地域特性を活かし、空き家を地域資源として活用する方法を学びます。移住希望者向けに邸宅の歴史や景観保全の取り組みも紹介します。'},
-    {id:'idea7', title:'両町合同イベントの模索', cat:'合同', summary:'山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。'}
-  ];
-  var html='<div style="background:#e8a33d;color:#000;padding:14px 18px;border-radius:8px;margin-bottom:12px;font-weight:900;font-size:14px;">💡 企画アイデア（タイトルと100-150字・今後のイベントとは別内容・ボタンあり・クリックで数字が増えます）</div>';
-  items.forEach(function(it){
-    var c=eventIdeaCounts[it.id]||{want:0,help:0,lead:0,place:0,interest:0};
-    var total=(c.want||0)+(c.help||0)+(c.lead||0)+(c.place||0)+(c.interest||0);
-    html+='<div style="border:1.5px solid #e8a33d;border-radius:10px;background:#fffcf0;padding:12px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;"><span style="font-weight:900;">'+escapeHtml(it.title)+'</span><span style="font-size:11px;background:#e8a33d;color:#000;padding:2px 8px;border-radius:999px;">'+escapeHtml(it.cat)+' 合計'+total+'/10</span></div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;">'+escapeHtml(it.summary)+'</div><div class="event-btn-group" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;overflow:visible;">'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'want\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🙋 やりたい '+c.want+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'help\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🤝 手伝える '+c.help+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'lead\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🎤 仕切り '+c.lead+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'place\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">📍 場所 '+c.place+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'interest\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">👀 興味あり '+c.interest+'</button>'+
-      '</div></div>';
-  });
-  wrap.innerHTML=html;
-}
+
+
+
 var __origToggle = toggleBaseDesc;
 toggleBaseDesc = function(k){
   var el=document.getElementById('base-desc-'+k+'-tree')||document.getElementById('base-desc-'+k);
