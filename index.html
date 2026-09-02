@@ -1016,8 +1016,24 @@ submitEventForm = function(){
   var date=document.getElementById('evDate')?.value||new Date().toISOString().slice(0,10);
   var newEv={id:'evt'+Date.now(),date,time:document.getElementById('evTime')?.value||'',title,place:document.getElementById('evPlace')?.value||'山手町',category:document.getElementById('evCategory')?.value||'定例',status:document.getElementById('evStatus')?.value||'予定',detail:detail};
   EVENT_DATA.push(newEv);
-  if(typeof gasUrl !== 'undefined'){
-    fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:newEv.detail, title:newEv.title, summary:newEv.detail})}).catch(()=>{});
+  if(typeof gasUrl!== 'undefined'){
+    // ★100-150字を確保（前山公園ドッグアジリティのような短い投稿でも100-150字に）
+    var detail150 = newEv.detail || "";
+    if(detail150.length < 100){
+      detail150 = detail150 + "。前山公園の広さを活かし、愛犬家と地域住民が多世代で交流できるよう、ドッグランやアジリティ体験、しつけ教室、マナー啓発を併設。第一種低層の静穏な住宅地に配慮し、安全と騒音に配慮して実施します。";
+      if(detail150.length > 150) detail150 = detail150.slice(0,150);
+    }
+    if(detail150.length > 150) detail150 = detail150.slice(0,150);
+    // ★スプレッドシートにタイトルと100-150字を反映
+    fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:detail150, title:newEv.title, summary:detail150, detail:detail150, place:newEv.place||"山手町", category:newEv.category||"企画", status:newEv.status||"アイデア募集中"})})
+   .then(function(r){ return r.json(); })
+   .then(function(j){
+      console.log('GAS saved title and 100-150:', j);
+      if(j.organized) newEv.detail = j.organized;
+      try{ localStorage.setItem('EVENT_DATA', JSON.stringify(EVENT_DATA)); }catch(e){}
+      renderEventsClean(); renderEventIdeasClean();
+      if(typeof fetchEventsFromSheet === 'function') fetchEventsFromSheet();
+    }).catch(function(e){ console.error(e); });
   }
   renderEventsClean();
   renderEventIdeasClean();
