@@ -85,8 +85,8 @@ nav button.active{background:var(--amber);color:var(--ink);border-color:var(--am
     <div>
       <div style="font-size:11px;font-weight:800;letter-spacing:.18em;color:#2f7a6b;">ASHIYA YAMATE | COMMUNITY NOTEBOOK</div>
       <h1 style="font-family:'Klee One';font-size:26px;font-weight:900;line-height:1.35;">山手町の小さな気づきと<br>未来のアイデア帳</h1>
-      <div style="background:#fff8e1;border:1px solid #e8a33d;padding:4px 12px;border-radius:999px;font-size:15px;display:inline-block;margin-top:6px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</div>
-      
+      <div style="background:#fff8e1;border:1px solid #e8a33d;padding:4px 12px;border-radius:999px;font-size:14px;display:inline-block;margin-top:6px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</div>
+
     </div>
   </div>
 </div>
@@ -683,11 +683,11 @@ function fillFlyerFromIdea(id){
   set('flyTitle', it.title);
   set('flyContent', it.summary);
   set('flyOmoi','第一種低層の静穏な住宅地としての品格を守りながら、子どもから高齢者までが顔の見える関係を築き、山手町の誇りである石垣と邸宅街の景観を次世代に繋ぐ思いを込めて実施します。');
-  set('flyDate','2025年7月20日(日) 18:00-20:30');
-  set('flyPlace','中央公園（地図付き）');
+  set('flyDate','20XX年X月XX日(日) 18:00-20:30');
+  set('flyPlace','前山公園（地図付き）');
   set('flyTarget','子ども～高齢者まで 50名程度');
-  set('flyRain','小雨決行・荒天中止。中止判断は当日8時までに町内会LINEと掲示板でお知らせ。予備日7月27日(日)');
-  set('flyApply','①町内会LINE ②掲示板申込用紙 ③yamate@example.com 締切：7月10日まで 参加費無料 定員100名（先着順）');
+  set('flyRain','小雨決行・荒天中止。中止判断は当日8時までに町内会LINEと掲示板でお知らせ。予備日X月XX日(日)');
+  set('flyApply','①町内会LINE ②掲示板申込用紙 ③yamate@example.com 締切：X月XX日まで 参加費無料 定員100名（先着順）');
   set('flyBelong','動きやすい服装、飲み物、帽子、タオル');
   set('flyEmergency','町内会長 090-XXXX-XXXX 集会所 078-XXXX-XXXX 緊急時 110番・119番');
   set('flyContact','山手町町内会 〇〇まで');
@@ -874,12 +874,12 @@ function renderKentouBoardClean(){
     '<div id="flyer-form-wrap" style="display:none;margin-top:12px;">'+
     '<div id="flyer-form" style="display:grid;gap:10px;background:#f5f5f0;padding:16px;border-radius:10px;">'+
     '<div><label style="font-weight:800;font-size:12px;">■タイトル：</label><input id="flyTitle" type="text" placeholder="例：夏祭り復活～3年ぶりに邸宅街に笑顔を～" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■日時：</label><input id="flyDate" type="text" placeholder="202X年X月XX日(日) 18:00-20:00" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■場所：</label><input id="flyPlace" type="text" placeholder="前山公園" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■日時：</label><input id="flyDate" type="text" placeholder="2025年7月20日(日) 18:00-20:00" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■場所：</label><input id="flyPlace" type="text" placeholder="中央公園" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■対象：</label><input id="flyTarget" type="text" placeholder="子ども～高齢者まで 50名程度" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■持ち物：</label><input id="flyBelongings" type="text" placeholder="動きやすい服装、飲み物" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
     '<div><label style="font-weight:800;font-size:12px;">■内容：</label><textarea id="flyContent" rows="3" placeholder="100-150文字で内容を入力" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>'+
     '<div><label style="font-weight:800;font-size:12px;">■思い入れ：</label><textarea id="flyOmoi" rows="2" placeholder="なぜやるのか、どんな未来を作りたいか" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>'+
     '<div><label style="font-weight:800;font-size:12px;">■雨天時の扱い：</label><input id="flyRain" type="text" placeholder="小雨決行・荒天中止、中止判断は当日8時までにLINEで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
-    '<div><label style="font-weight:800;font-size:12px;">■申込方法と締切：</label><input id="flyApply" type="text" placeholder="町内会LINE、掲示板、メール 締切：Ｘ月ＸＸ日まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
+    '<div><label style="font-weight:800;font-size:12px;">■申込方法と締切：</label><input id="flyApply" type="text" placeholder="町内会LINE、掲示板、メール 締切：7月10日まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■緊急連絡先：</label><input id="flyEmergency" type="text" placeholder="町内会長 090-XXXX-XXXX" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■問合せ：</label><input id="flyContact" type="text" placeholder="山手町町内会 〇〇まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
     '<button type="button" onclick="generateFlyer()" style="background:linear-gradient(135deg,#2f7a6b 0%, #e8a33d 100%);color:#fff;border:none;padding:16px 24px;border-radius:999px;font-weight:900;font-size:16px;cursor:pointer;width:100%;margin-top:8px;">✨ プロレベルのA4チラシを別画面に出力する（背景画像・icon-512.png・色・フォント・ボックス）</button>'+
     '</div></div></div></div>';
@@ -1016,24 +1016,8 @@ submitEventForm = function(){
   var date=document.getElementById('evDate')?.value||new Date().toISOString().slice(0,10);
   var newEv={id:'evt'+Date.now(),date,time:document.getElementById('evTime')?.value||'',title,place:document.getElementById('evPlace')?.value||'山手町',category:document.getElementById('evCategory')?.value||'定例',status:document.getElementById('evStatus')?.value||'予定',detail:detail};
   EVENT_DATA.push(newEv);
-  if(typeof gasUrl!== 'undefined'){
-    // ★100-150字を確保（前山公園ドッグアジリティのような短い投稿でも100-150字に）
-    var detail150 = newEv.detail || "";
-    if(detail150.length < 100){
-      detail150 = detail150 + "。前山公園の広さを活かし、愛犬家と地域住民が多世代で交流できるよう、ドッグランやアジリティ体験、しつけ教室、マナー啓発を併設。第一種低層の静穏な住宅地に配慮し、安全と騒音に配慮して実施します。";
-      if(detail150.length > 150) detail150 = detail150.slice(0,150);
-    }
-    if(detail150.length > 150) detail150 = detail150.slice(0,150);
-    // ★スプレッドシートにタイトルと100-150字を反映
-    fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:detail150, title:newEv.title, summary:detail150, detail:detail150, place:newEv.place||"山手町", category:newEv.category||"企画", status:newEv.status||"アイデア募集中"})})
-   .then(function(r){ return r.json(); })
-   .then(function(j){
-      console.log('GAS saved title and 100-150:', j);
-      if(j.organized) newEv.detail = j.organized;
-      try{ localStorage.setItem('EVENT_DATA', JSON.stringify(EVENT_DATA)); }catch(e){}
-      renderEventsClean(); renderEventIdeasClean();
-      if(typeof fetchEventsFromSheet === 'function') fetchEventsFromSheet();
-    }).catch(function(e){ console.error(e); });
+  if(typeof gasUrl !== 'undefined'){
+    fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:newEv.detail, title:newEv.title, summary:newEv.detail})}).catch(()=>{});
   }
   renderEventsClean();
   renderEventIdeasClean();
