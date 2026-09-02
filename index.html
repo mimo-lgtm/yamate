@@ -1,993 +1,1009 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>芦屋市山手町の小さな気づきと未来のアイデア帳 </title>
-<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#1b1f1d;--board:#23282a;--board-2:#2c3234;--paper:#eef0e4;--amber:#e8a33d;--amber-deep:#c9821f;--teal:#2f7a6b;--teal-deep:#22594e;--line:#3a4143;--line-light:#d8dcc9;}
-*{margin:0;padding:0;box-sizing:border-box;overflow-wrap:break-word;}
-html{scroll-behavior:smooth;}
-body{font-family:"Zen Kaku Gothic New",sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;font-size:16px;}
-h1,h2,h3,.brand{font-family:"Klee One",sans-serif;}
-button{cursor:pointer;font-family:inherit;}
-.topbar{position:sticky;top:0;z-index:999;background:var(--board);border-bottom:4px solid var(--amber);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-.brand{color:var(--paper);font-weight:800;display:flex;align-items:center;gap:10px;cursor:pointer;}
-.brand .city{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--amber);display:block;}
-.brand .town{font-size:22px;font-weight:900;letter-spacing:.03em;display:block;}
-nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-nav button{border:1.5px solid var(--line);background:var(--board-2);color:var(--paper);padding:9px 16px;border-radius:6px;font-weight:700;font-size:13.5px;}
-nav button.active{background:var(--amber);color:var(--ink);border-color:var(--amber);}
-.page{display:none;max-width:1160px;margin:0 auto;padding:36px 20px 80px;animation:fade .25s ease;}
-.page.active{display:block;}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;padding:22px 24px;margin-bottom:18px;box-shadow:0 3px 0 var(--line-light);}
-.big-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;border:none;background:var(--teal);color:#fff;font-weight:700;font-size:14px;box-shadow:0 4px 0 var(--teal-deep);}
-.big-btn.amber{background:var(--amber);color:var(--ink);box-shadow:0 4px 0 var(--amber-deep);}
-.big-btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line-light);box-shadow:none;}
-.flow3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.flow-step{background:#fdf6e3;border:1.5px dashed var(--line-light);border-radius:8px;padding:16px;text-align:center;}
-.hiroba-post-card{background:#fff;border:1.5px solid var(--line-light);border-radius:12px;padding:16px;margin-bottom:14px;}
-.big-category{font-size:20px;font-weight:900;border-left:6px solid var(--teal);padding:14px 16px;border-radius:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;background:#fff;}
-.mid-category{font-size:15px;font-weight:800;background:#fff8e1;border-left:4px solid var(--amber);padding:10px 14px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin:8px 0 8px 16px;}
-.article-list{margin-left:32px;display:none;}
-.article-list.open{display:block;}
-.mid-wrapper{display:none;margin-left:16px;}
-.mid-wrapper.open{display:block;}
-.badge-new{position:absolute;top:-8px;left:12px;background:linear-gradient(135deg,#d4a017,#e8a33d);color:#000;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:900;}
-.badge-single{position:absolute;top:-8px;left:12px;background:#2f7a6b;color:#fff;padding:3px 10px;border-radius:999px;font-size:10px;font-weight:800;}
-.card-integrated{border:2.5px solid #d4a017;background:#fffef5;}
-.card-single{border:1.5px solid #2f7a6b;background:#fff;}
-.view5{display:grid;gap:8px;margin-top:10px;}
-.view5-item{padding:10px 12px;border-radius:8px;font-size:13px;border-left:4px solid #ccc;background:#eef0e4;}
-.view5-item.core{border-left-color:#2f7a6b;}
-.view5-item.change{border-left-color:#e8a33d;}
-.view5-item.success{border-left-color:#6d5aa8;}
-.view5-item.concern{border-left-color:#c1502f;}
-.view5-item.question{border-left-color:#23282a;background:#fff8e1;font-weight:700;}
-@media(max-width:800px){.flow3{grid-template-columns:1fr;}}
-#btnVoice.listening{background:#ff3b3b!important;color:#fff!important;animation:pulse 1.2s infinite}
-@keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
-.d-none{display:none!important}
-#voiceStatus{background:#e8f5e9;border:1px solid #2f7a6b;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}
-</style>
+/**
+ * ============================================================================
+ * 山手町アイデア帳 - GAS v11.4 完全版 完成版
+ * 作成日: 2026-08-31
+ * 変更点 v11.3 → v11.4:
+ * - Groq 20b (openai/gpt-oss-20b) → Groq 120b → Gemini 2.5-flash-lite フォールバック
+ * - postEventIdea で賢いLLMが100-150字に整理してspreadsheetに格納（場当たり的なifは使わない）
+ * - 高齢化率35％ / 35％ は出てこないように全て削除（多世代に置換）
+ * - どのような質問にも対応できる賢いLLM方式
+ * ============================================================================
+ */
 
-<style>
-.nav-unified.active, nav button.active { background:#2f7a6b !important; color:#fff !important; border-color:#2f7a6b !important; }
-.nav-unified:hover { transform:translateY(-1px); box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-#event-board h2{font-size:26px !important; font-weight:900 !important;}
-@media (max-width: 768px){
-  .event-btn-group{display:flex !important; flex-wrap:wrap !important; gap:8px !important; overflow:visible !important;}
-  .event-btn-group button{display:inline-block !important; font-size:11px !important; padding:6px 10px !important;}
+const SHEET_ID = '1DWKJE3UV98chVIpgva1gsi7GJP72BTwNK96Dk9kTDAM';
+
+// ---------------------------------------------------------------------------
+// CORS / OPTIONS 対応
+// ---------------------------------------------------------------------------
+function doOptions(e){
+  return ContentService.createTextOutput("").setMimeType(ContentService.MimeType.JSON);
 }
-</style>
-</head>
-<body>
-<header class="topbar">
-<div class="brand" onclick="showPage('home', document.getElementById('nav-home'))"><span style="width:9px;height:9px;border-radius:50%;background:#2f7a6b;display:inline-block;box-shadow:0 0 0 3px rgba(47,122,107,.3);"></span><div><span class="city">ASHIYA CITY / YAMATECHO</span><span class="town">芦屋市 山手町</span></div></div>
-<nav style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
-<button type="button" id="nav-home" class="active nav-unified" data-page="home" onclick="showPage('home',this)" style="background:#2f7a6b;color:#fff;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">🏡 ホーム</button>
-<button type="button" data-page="assist" onclick="isEventMode=false; showPage('assist',this); document.getElementById('slip').innerHTML='<p style=color:#888;font-size:13px;>ここにGeminiの5視点分析が表示されます。声のボードでは要約200字のみで省スペース化されます。</p>'; document.getElementById('userInput').placeholder='例：山手町の坂道が急で高齢者の歩行が大変。ベンチや休憩スペースが欲しい';" class="nav-unified" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">✍️ 意見投稿</button>
-<button type="button" data-page="tree" onclick="showPage('tree',this)" class="nav-unified" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">📦 意見集約箱</button>
-<button type="button" data-page="hiroba" onclick="showPage('hiroba',this)" class="nav-unified" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">📸 写真投稿</button>
-<button type="button" data-page="event" onclick="showPage('event',this)" class="nav-unified" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">🎉 イベント</button>
-<button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city','_blank')" class="nav-unified" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">🏘️ 町内会サイト</button>
-<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" class="nav-unified" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:10px 18px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;min-width:120px;">🏛️ 芦屋市の課題</button>
-</nav>
-</header>
-<main>
-<section id="home" class="page active">
-<div style="background:#fff;border-radius:16px;padding:28px 26px;margin-bottom:18px;border:1.5px solid #d8dcc9;box-shadow:0 4px 0 #d8dcc9;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#2f7a6b 0%, #e8a33d 50%, #c1502f 100%);"></div>
-  <div style="display:flex;align-items:flex-start;gap:14px;">
-    <div style="font-size:32px;">📖</div>
-    <div>
-      <div style="font-size:11px;font-weight:800;letter-spacing:.18em;color:#2f7a6b;">ASHIYA YAMATE | COMMUNITY NOTEBOOK</div>
-      <h1 style="font-family:'Klee One';font-size:26px;font-weight:900;line-height:1.35;">山手町の小さな気づきと<br>未来のアイデア帳</h1>
-      <div style="background:#fff8e1;border:1px solid #e8a33d;padding:4px 12px;border-radius:999px;font-size:11px;display:inline-block;margin-top:6px;">住民の声 × 写真 × イベント | 人口2000名 / 高齢化35%超 / 第一種低層 / 急坂</div>
-      <p style="font-size:13.5px;line-height:1.9;color:#3a4143;margin-top:14px;">日常の写真やちょっとした意見、イベントのアイデアをスマホから気軽にポスト。<br>山手町のみんなの<span style="background:linear-gradient(transparent 60%, #ffe0a3 60%);font-weight:800;">「声」と「笑顔」</span>が集まる場所です</p>
-    </div>
-  </div>
-</div>
-<div class="card" style="background:linear-gradient(135deg,#23282a 0%, #2c3234 100%);color:#eef0e4;border:none;border-left:6px solid #e8a33d;padding:24px 26px;">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
-<div>
-<div style="font-size:11px;color:#e8a33d;font-weight:800;">YAMATE - 3 THINGS YOU CAN DO</div>
-<div style="font-size:22px;font-weight:800;margin-top:2px;">ここでは、3つのことが出来ます。</div>
-<div style="font-size:12px;color:#cfd6c9;margin-top:4px;">声も、写真も、イベント発案も、1分で。AIが整理してボードに自動で反映されます。</div>
-</div>
-<span style="background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;">📋 3つの入口</span>
-</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
-<div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #d8dcc9;">
-<div style="font-size:16px;font-weight:900;">1. 声を届ける</div>
-<div style="font-size:12px;color:#666;margin-top:6px;">普段から思っていること、などなんでもポスト、AIが論点整理してくれる<br><span style="font-size:11px;color:#2f7a6b;font-weight:700;">→ 5視点分析はここでのみ詳細表示（必須）</span></div>
-<button type="button" class="big-btn amber" onclick="showPage('assist', document.querySelector('nav button[data-page=assist]'))" style="width:100%;margin-top:14px;justify-content:center;">✍ 声を届ける →</button>
-</div>
-<div style="background:#fff;color:#1b1f1d;border-radius:12px;padding:18px;border:2px solid #e8a33d;">
-<div style="font-size:16px;font-weight:900;">2. 写真を投稿</div>
-<div style="font-size:12px;color:#666;margin-top:6px;">スマホから1分で投稿 → 自動で時系列・テーマ別に整理</div>
-<button type="button" class="big-btn" style="background:#23282a;color:#fff;width:100%;margin-top:14px;justify-content:center;" onclick="showPage('hiroba', document.querySelector('nav button[data-page=hiroba]'))">📸 写真を投稿する →</button>
-</div>
-<div style="background:#fff8e1;color:#1b1f1d;border-radius:12px;padding:18px;border:1.5px solid #e8a33d;">
-<div style="font-size:16px;font-weight:900;">3. イベント発案</div>
-<div style="font-size:12px;color:#5a4a2f;margin-top:6px;">思いつきで結構、AIが企画をブラッシュアップ<br><span style="font-size:11px;color:#c9821f;">→ 要約のみ表示（5視点なし）</span></div>
-<button type="button" onclick="document.getElementById('event-board').scrollIntoView({behavior:'smooth'});" style="width:100%;margin-top:14px;background:#e8a33d;padding:12px;border-radius:8px;border:none;font-weight:900;">📅 イベントボードを見る →</button>
-</div>
-</div>
-</div>
-<div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-<h2 style="margin:0;font-size:16px;">📌 使い方 | 1分で分かる</h2>
-<span style="font-size:11px;border:1px solid #2f7a6b;padding:2px 8px;border-radius:999px;">3ステップ</span>
-</div>
-<div class="flow3">
-<div class="flow-step"><div style="font-size:24px;">✍</div><div style="font-weight:800;">① 声を届ける</div><div style="font-size:12px;color:#666;">音声でもテキストでもOK<br><b style="color:#2f7a6b;">5視点分析はここで必須</b></div></div>
-<div class="flow-step"><div style="font-size:24px;">🤖</div><div style="font-weight:800;">② AIが整理</div><div style="font-size:12px;color:#666;">Gemini 2.5 Flashが要約200字＋5視点<br>ボードでは要約のみ省スペース表示</div></div>
-<div class="flow-step"><div style="font-size:24px;">📌</div><div style="font-weight:800;">③ ボードに表示</div><div style="font-size:12px;color:#666;">6つのテーマに自動で分類<br>24新統合が初期搭載</div></div>
-</div>
-</div>
-<div style="background:#fff;border:2px solid #2f7a6b;border-radius:12px;padding:16px;text-align:center;">
-<div style="font-size:16px;font-weight:900;">🎉 イベントは新しいイベントページに移設されました</div>
-<div style="font-size:12px;margin-top:8px;color:#666;">山手町イベントボード、町内会で検討のボードは「🎉 イベント」ページへ移動しました。</div>
-<button type="button" onclick="showPage('event', document.querySelector('nav button[data-page=event]'))" style="margin-top:12px;background:#2f7a6b;color:#fff;border:none;padding:12px 24px;border-radius:999px;font-weight:900;cursor:pointer;">🎉 イベントページへ →</button>
-</div>
-</section>
-<section id="event" class="page">
-<h1>🎉 イベント</h1>
-<div id="event-board" class="card" style="border:3px solid #e8a33d;background:#fffcf0;">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
-<h2 style="margin:0;font-size:26px;font-weight:900;letter-spacing:1px;">📅 山手町 イベントボード</h2>
-<button type="button" onclick="toggleEventForm()" style="background:#fff;color:#666;border:1.5px solid #ccc;padding:8px 14px;border-radius:20px;font-weight:700;font-size:11px;">🔒 ＋ イベントを追加（管理者向け）</button>
-</div>
-<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
-<button type="button" id="btn-upcoming" onclick="showEventTab('upcoming')" style="background:#e8a33d;border:none;padding:8px 16px;border-radius:20px;font-weight:800;font-size:13px;">📅 今後のイベント（6件・企画とは別内容）</button>
-<button type="button" id="btn-ideas" onclick="showEventTab('ideas')" style="background:#fff;border:1.5px solid #ccc;padding:8px 16px;border-radius:20px;font-weight:700;font-size:13px;">💡 企画アイデア（タイトルと100-150字・ボタンあり）</button>
-</div>
-<div style="background:linear-gradient(135deg,#23282a 0%, #2f7a6b 100%);border-radius:14px;padding:16px;margin-bottom:14px;text-align:center;color:#fff;">
-<div style="font-size:14px;font-weight:800;">💡 イベント企画は統合せず単独でブラッシュアップ</div>
-<button type="button" onclick="goToEventIdeaAssist()" style="margin-top:10px;background:#e8a33d;color:#1b1f1d;border:none;padding:12px 24px;border-radius:12px;font-weight:900;font-size:14px;cursor:pointer;">🤖 イベント企画をAIで投稿する →</button>
-</div>
-<div id="event-upcoming-list" style="display:block;min-height:100px;background:#fff;border-radius:8px;padding:8px;"></div>
-<div id="event-ideas-list" style="display:none;min-height:100px;background:#fff;border-radius:8px;padding:8px;"></div>
-<div id="eventFormCard" class="card" style="display:none;background:#fff;border:2px solid #2f7a6b;margin-top:16px;">
-<h3 style="margin-bottom:12px;">📝 新しいイベントを追加（管理者向け）</h3>
-<div style="display:grid;gap:10px;">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input id="evDate" type="date" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><input id="evTime" type="text" placeholder="10:00-12:00" style="padding:8px;border:1px solid #ccc;border-radius:6px;"></div>
-<div><label style="font-size:12px;font-weight:800;">タイトル *</label><input id="evTitle" type="text" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input id="evPlace" type="text" placeholder="場所" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><select id="evCategory" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><option>定例</option><option>季節</option><option>企画</option><option>清掃</option><option>防災</option></select></div>
-<select id="evStatus" style="padding:8px;border:1px solid #ccc;border-radius:6px;"><option>参加者募集中</option><option>企画中</option><option>アイデア募集中</option><option>予定</option></select>
-<textarea id="evDetail" rows="3" placeholder="詳細 100-150文字" style="padding:8px;border:1px solid #ccc;border-radius:6px;"></textarea>
-<input id="evPassword" type="password" placeholder="yamate2026" style="padding:8px;border:1px solid #ccc;border-radius:6px;">
-<div id="evStatusMsg" style="font-size:12px;min-height:18px;color:#c44;"></div>
-<div style="display:flex;gap:10px;"><button type="button" onclick="submitEventForm()" class="big-btn amber">✅ 保存</button><button type="button" onclick="toggleEventForm()" class="big-btn ghost">キャンセル</button></div>
-</div>
-</div>
-</div>
-<div id="kentou-board-home" style="margin-top:24px;background:#fff;border-radius:12px;padding:16px;border:3px solid #2f7a6b;"><div id="kentouWrap"></div></div>
-</section>
-<section id="assist" class="page">
-<h1>🤖 声を届ける - 5視点分析はここで必須</h1>
-<div class="card" style="border:2px solid #2f7a6b;">
-<p style="font-size:12px;color:#666;margin-bottom:10px;">要約200字＋5視点各100字で分析。5視点はここ「声を届ける」でのみ詳しく表示されます。声のボードでは要約200字のみで省スペース化。</p>
-<input id="authorName" placeholder="お名前（任意）" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px;">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
-  <button type="button" id="btnVoice" class="big-btn ghost" style="padding:8px 14px;font-size:13px;">🎙 音声入力</button>
-  <span id="voiceStatus" class="d-none"><span id="voiceStatusText">聞き取り中…</span></span>
-  <span style="font-size:11px;color:#666;">話す→自動で文字化</span>
-</div>
-<textarea id="userInput" placeholder="例：山手町の坂道が急で高齢者の歩行が大変。ベンチや休憩スペースが欲しい" style="width:100%;min-height:180px;padding:12px;border:1.5px solid #ccc;border-radius:8px;font-size:14px;"></textarea>
-<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-<button type="button" class="big-btn" id="runBtn" onclick="runAI()" style="background:#23282a;padding:14px 24px;font-size:15px;">🤖 Gemini 5視点で分析（必須）</button>
-<button type="button" class="big-btn ghost" onclick="showPage('home', document.getElementById('nav-home'))">🏠 トップに戻る</button>
-<span id="loadingMsg" style="display:none;margin-left:10px;color:#2f7a6b;font-weight:800;">🤖 5視点分析中…</span>
-</div>
-<div style="font-size:11px;color:#666;margin-top:8px;">GAS: <span id="gasUrlDisplay"></span></div>
-</div>
-<div class="card"><h2 style="font-size:16px;">📋 AI分析結果 - 要約200字＋5視点100字×5（ここでのみ詳細表示）</h2><div id="slip"><p style="color:#888;font-size:13px;">ここにGeminiの5視点分析が表示されます。声のボードでは要約200字のみで省スペース化されます。</p></div></div>
-</section>
-<section id="tree" class="page">
-<div style="background:#23282a;color:#eef0e4;border-radius:10px;padding:16px 18px;margin-bottom:16px;">
-<h2 style="color:#fff;margin:0;">📌 声のボード - 要約200字のみ（省スペース）</h2>
-<p style="color:#c7cdbb;font-size:12px;">大分類→中分類→記事の3階層。各記事は要約200字のみ表示で省スペース。5視点の詳細は「声を届ける」でのみ確認できます。24新統合が必ず表示されます。</p>
-</div>
-<div style="display:flex;gap:8px;margin-bottom:12px;"><button type="button" onclick="showPage('home', document.getElementById('nav-home'))" class="big-btn ghost">🏠 トップに戻る</button></div>
-<div id="corkGrid" style="min-height:400px;background:#fff;border-radius:12px;padding:12px;"></div>
-<div id="kyoso-update" style="margin-top:24px;background:#fff;border-radius:12px;padding:16px;border:3px dashed #e8a33d;"><div id="mapUpdateWrapTree"></div></div>
-</section>
-<section id="hiroba" class="page">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px;">
-<h1>📸 山手町 みんなの広場 - 過去投稿5件必ず表示</h1>
-<button type="button" onclick="showPage('home', document.getElementById('nav-home'))" class="big-btn ghost">🏠 トップに戻る</button>
-</div>
-<div class="card" style="border:2px solid #e8a33d;background:#fffcf0;">
-<h3>✍ 投稿フォーム</h3>
-<div style="display:grid;gap:10px;margin-top:10px;">
-<input type="text" id="hirobaAuthor" placeholder="お名前（匿名可）" style="width:100%;padding:10px;border:1.5px solid #ccc;border-radius:8px;">
-<input type="file" id="hirobaImage" accept="image/*" style="width:100%;padding:10px;border:1.5px solid #ccc;border-radius:8px;background:#fff;"><div id="hirobaImagePreview" style="margin-top:8px;"></div>
-<textarea id="hirobaComment" rows="3" placeholder="コメント" style="width:100%;padding:10px;border:1.5px solid #ccc;border-radius:8px;"></textarea>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-<select id="hirobaCategory" style="flex:1;padding:10px;border:1.5px solid #ccc;border-radius:8px;"><option value="すべて">自動判定</option><option value="風景">🌿 風景</option><option value="防犯">🛡 防犯</option><option value="環境">🏡 環境</option><option value="イベント">🎉 イベント</option></select>
-<label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:800;background:#fff;padding:8px 12px;border:1.5px solid #e8a33d;border-radius:8px;cursor:pointer;white-space:nowrap;">
-  <input type="checkbox" id="hirobaToInstagram" style="width:18px;height:18px;"> 📸 Instagramにも投稿
-</label>
-<button type="button" class="big-btn amber" onclick="submitHiroba()" style="flex:1;justify-content:center;">📸 投稿する</button>
-<div id="hirobaStatus" style="font-size:13px;color:#2f7a6b;min-height:20px;font-weight:700;"></div>
-</div>
-</div>
-<div id="hirobaList" style="min-height:400px;background:#fff;border-radius:12px;padding:12px;"></div>
-</section>
-</main>
-<script>
-const GAS_URL_DEFAULT = "https://script.google.com/macros/s/AKfycbxk5uFEP5Y4iQyvaP3JVqg9dT4eAS8CQCUayAWBR7pGqLDJAyg8Uyr6jhWRQGAYJ4IISA/exec";
-let gasUrl = GAS_URL_DEFAULT;
-const BASE_CATEGORIES = [
-{key:"BIG-1",icon:"🛡",label:"防災・防犯",sublabel:"安全で安心なまちづくり",baseSubs:["安否確認体制","自主防災訓練","防犯パトロール","災害備蓄強化"]},
-{key:"BIG-2",icon:"🏡",label:"インフラ・環境",sublabel:"住環境の維持と保全",baseSubs:["急斜面の安全","道路・側溝整備","ゴミステーション","緑化・景観保護"]},
-{key:"BIG-3",icon:"🤝",label:"コミュニティ",sublabel:"つながりと支え合いの地域",baseSubs:["世代間交流","新住民の歓迎","班長・役員負担","見守りネットワーク"]},
-{key:"BIG-4",icon:"🤲",label:"福祉・見守り",sublabel:"誰もが暮らしやすい環境",baseSubs:["高齢者の孤立","子育て世代支援","ペット共生","健康増進活動"]},
-{key:"BIG-5",icon:"🚀",label:"将来ビジョン",sublabel:"持続可能な自治会の未来",baseSubs:["空き家・継承","自治会のDX","次世代の担い手","街の未来像"]},
-{key:"BIG-6",icon:"🎉",label:"イベント・企画",sublabel:"みんなが集まる楽しい機会",baseSubs:["夏祭り・餅つき","清掃・美化イベント","防災・防犯イベント","子ども・多世代企画"]}
-];
-const BASE_DESC = {
-"防災・防犯":"六甲山麓の急斜面地で地震時の石垣崩落や坂道避難が課題。",
-"インフラ・環境":"第一種低層住居専用地域として静穏と景観を守りつつ急斜面安全や道路補修が必要。",
-"コミュニティ":"人口2000名高齢化35%超。世代間交流と役員負担軽減で持続可能なコミュニティを。",
-"福祉・見守り":"坂道多く買い物難。高齢者孤立防止や子育て支援が必要。",
-"将来ビジョン":"瀟洒な邸宅街の品格を次世代へ。空き家継承やDX推進で未来を。",
-"イベント・企画":"静穏重視でも夏祭りや清掃など顔合わせが絆を作ります。"
-};
-let CO_CREATED={}; BASE_CATEGORIES.forEach(c=>{ CO_CREATED[c.key]={defaultDesc:BASE_DESC[c.label],currentDesc:BASE_DESC[c.label]}; });
-let ALL_IDEAS=[]; let NEXT_ID=1; let EVENT_DATA=[]; let openBig="BIG-1"; let openMidMap={"BIG-1__安否確認体制":true};
-try{
-  var savedEvents = localStorage.getItem('EVENT_DATA');
-  if(savedEvents){ EVENT_DATA = JSON.parse(savedEvents); }
-}catch(e){}
-let hirobaPosts=[]; let hirobaImageBase64="";
-var isEventMode = false;
-function createIdeaObject(bigKey, midName, title, summary, type, raw, extras){
-  const id='idea-'+(NEXT_ID++); const bigLabel = BASE_CATEGORIES.find(b=>b.key===bigKey)?.label||bigKey;
-  return { id, big:bigKey, mid:midName, title, summary, raw, type, bigLabel, midLabel:midName, createdAt:new Date().toISOString(), core:extras?.core||"", change:extras?.change||"", success:extras?.success||"", concern:extras?.concern||"", question:extras?.question||"", bigLabel, midLabel:midName };
-}
-const INITIAL_24 = [
- {big:"BIG-1", mid:"安否確認体制", title:"急坂地域の安否確認体制強化", summary:"山手町は六甲山麓の急斜面に位置し、地震時の石垣崩落や坂道での避難困難が想定されます。人口2000名、高齢化35％超の小規模町会の強みを活かし、班長・民生委員・LINEグループの三重連絡網と、坂道を考慮したブロック別安否確認マップを作成。一人暮らし高齢者の見守りと連動させ、発災後30分以内の全戸確認を目指す体制が集大成としてまとまりました。"},
- {big:"BIG-1", mid:"自主防災訓練", title:"坂道を考慮した防災訓練", summary:"急坂と石垣が多い山手町では、平坦地と同じ防災訓練は機能しません。高齢者が無理なく参加できるよう、坂道の上り下りを避けた避難経路の確認、集会所での初期消火・救護訓練、第一種低層地域の特性を活かした井戸水や庭の活用など、景観を損なわない資機材置き場の整備を含めた実践的な訓練メニューが求められています。"},
- {big:"BIG-1", mid:"防犯パトロール", title:"邸宅街の景観を守る防犯パトロール", summary:"戦前からの大邸宅が並ぶ山手町の防犯は、不審者が近寄りにくい雰囲気作りが重要です。オリジナル腕章を付けた住民による夕方の見守り、石垣や生垣の死角になりやすい場所の重点巡回、防犯カメラの景観配慮型設置、子ども達が腕章を認識して助けを求めやすい教育を組み合わせ、格式ある街並みを保ちつつ安全を確保するパトロール体制が集大成としてまとまりました。"},
- {big:"BIG-1", mid:"災害備蓄強化", title:"第一種低層地域の備蓄分散化", summary:"山手町全域が第一種低層住居専用地域のため、大規模備蓄倉庫の建設は困難です。各邸宅の庭や車庫を活用した分散備蓄、班ごとの小型備蓄ボックス設置、井戸や雨水タンクの共有、高齢者宅への個別配布体制を整備。坂道で運搬が困難な状況を想定し、電動アシスト台車の導入と、避難時に持ち出しやすいコンパクト備蓄セットの普及が集大成として提案されています。"},
- {big:"BIG-2", mid:"急斜面の安全", title:"急坂の歩行支援とベンチ回遊路", summary:"北部は戦前からの大邸宅が多い急斜面地で、坂道が日常生活の大きな負担となっています。高齢化率35％超を踏まえ、景観に調和した天然木ベンチの設置、手すりの連続設置、滑り止め舗装、休憩ポイントのマップ化を組み合わせた回遊路設計が求められています。石垣や門構えの美観を損なわないデザインで、安心して散策できる環境整備が集大成です。"},
- {big:"BIG-2", mid:"道路・側溝整備", title:"邸宅街の道路・側溝の景観配慮整備", summary:"山手町の道路は幅員が狭く、石垣や生垣が迫る箇所が多くあります。落葉や土砂で側溝が詰まりやすく、大雨時の排水不良が課題です。景観を保ちつつ、蓋付き側溝への更新、定期的な清掃体制、住民による落葉回収ボランティア、電柱地中化の検討など、瀟洒な住宅地の品格を維持しながら安全と機能性を両立させる整備計画が集大成としてまとまりました。"},
- {big:"BIG-2", mid:"ゴミステーション", title:"景観を守るゴミステーション美化", summary:"第一種低層の静穏な住宅地では、ゴミステーションの景観配慮が不可欠です。石垣や植栽で目隠しした美観重視型ステーションの設置、カラス対策ネットの統一、高齢者向けの戸別収集補助、分別マナー向上の啓発を組み合わせます。人口2000名の顔の見える関係を活かし、班長による声かけと子ども達の環境教育で、清潔で品格あるゴミ出し文化を継承する仕組みが集大成です。"},
- {big:"BIG-2", mid:"緑化・景観保護", title:"静穏な邸宅街の買物支援と景観保全", summary:"山手町のコンビニ不在は、第一種低層住居専用地域としての卓越した静穏性と格式高い景観を維持する基盤である一方、高齢化率35％超と急坂が重なり日常の購買難を顕在化させています。固定店舗誘致ではなく、移動販売の拡充や配送最適化、景観を害さないスマート受取拠点の検討など、住環境の品格保持と高齢者の生活支援を両立させる柔軟なインフラ整備が集大成として求められています。"},
- {big:"BIG-3", mid:"世代間交流", title:"坂道を超える世代間交流", summary:"人口2000名の小さな町では、子どもから高齢者まで顔の見える関係が貴重です。急坂で移動が困難な高齢者宅へ子ども達が訪問する見守り活動、集会所での昔話と宿題サポート、庭や畑を活用した園芸交流、坂道の少ない南部での多世代サロン開催など、地理的制約を工夫で乗り越え、邸宅の庭を共有資源として活用する世代間交流プログラムが集大成として提案されています。"},
- {big:"BIG-3", mid:"新住民の歓迎", title:"格式ある邸宅街への新住民溶け込み支援", summary:"山手町は戦前からの旧家と戦後の瀟洒な住宅が混在し、格式とプライバシーを重んじる文化があります。新住民が溶け込みやすいよう、町会の歴史や第一種低層のルールを丁寧に説明する歓迎ガイド、石垣や門構えの手入れを学ぶ景観講座、班活動への緩やかな参加促進、庭の手入れを通じた隣人交流など、品格を保ちつつ閉鎖的にならない歓迎体制が集大成としてまとまりました。"},
- {big:"BIG-3", mid:"班長・役員負担", title:"高齢化35％超の役員負担軽減とDX", summary:"人口2000名で高齢化率35％超の山手町では、班長や役員の担い手不足と負担集中が深刻です。回覧板のデジタル化、LINEによる連絡網一元化、書類のクラウド共有、行事の簡素化と外部委託、任期の短縮と複数人制導入など、第一種低層の静穏な暮らしを守りつつ、持続可能な運営を実現するDXと仕組み改革が集大成として求められています。"},
- {big:"BIG-3", mid:"見守りネットワーク", title:"急坂地域の見守りネットワーク構築", summary:"急坂が多く一人暮らし高齢者が点在する山手町では、日常的な見守りが命綱です。朝のカーテン開閉や夜の灯りによる安否確認、買い物代行と安否確認を組み合わせた共助モデル、散歩や犬の散歩を通じた自然な見守り、集会所での定期的な健康チェックとお茶会を組み合わせ、プライバシーを尊重しつつも孤立を防ぐ、顔の見える見守りネットワークの構築が集大成です。"},
- {big:"BIG-4", mid:"高齢者の孤立", title:"坂道と孤立を防ぐ居場所づくり", summary:"高齢化率35％超の山手町では、急坂が外出を妨げ孤立を招くリスクがあります。坂道の少ない南部に常設サロン、北部では各邸宅の庭を巡回する移動サロン、送迎付きの健康麻雀や体操教室、電話やLINEでの定期的な声かけを組み合わせます。第一種低層の静穏な環境を活かし、騒がしくない小規模な集まりを多数開催することで、高齢者が無理なく参加できる居場所づくりが集大成として提案されています。"},
- {big:"BIG-4", mid:"子育て世代支援", title:"邸宅街の子育て世代と高齢者の共生支援", summary:"山手町は第一種低層で子どもの遊び場が限られますが、広い庭や緑豊かな環境は子育ての貴重な資源です。高齢者宅の庭を子ども達に開放する庭遊びプロジェクト、坂道ベビーカーの押手伝いボランティア、集会所での一時預かりと高齢者による見守り、通学路の防犯パトロールと見守りを組み合わせ、人口2000名の顔の見える関係を活かした共生型子育て支援体制が集大成としてまとまりました。"},
- {big:"BIG-4", mid:"ペット共生", title:"静穏な住宅地のペット共生マナー", summary:"第一種低層の静穏な邸宅街では、ペットの鳴き声や散歩マナーが生活環境に直結します。早朝・夜間の吠え声配慮、石垣や植栽への排泄マナー向上、ドッグランのような共用スペース確保、ペットを通じた飼い主同士の交流と見守りネットワーク化を推進。瀟洒な住宅地の品格を保ちつつ、ペットと人が共生できるルールと交流の場づくりが集大成として求められています。"},
- {big:"BIG-4", mid:"健康増進活動", title:"急坂を活かした健康増進プログラム", summary:"山手町の急坂は負担であると同時に、健康増進の資源でもあります。坂道の負荷を考慮したウォーキングマップ作成、休憩ベンチを活用したインターバル速歩、集会所での転倒予防体操、邸宅の庭を活用した園芸療法を組み合わせます。高齢化35％超を踏まえ、無理なく続けられる小規模プログラムを多数用意し、六甲山麓の緑豊かな環境を活かした健康づくりが集大成として提案されています。"},
- {big:"BIG-5", mid:"空き家・継承", title:"大邸宅の空き家継承と利活用", summary:"戦前からの大邸宅が多い山手町では、相続による空き家化が将来の大きな課題です。第一種低層の規制を守りつつ、空き家を多世代シェアハウスや地域サロンとして活用、庭や門構えを保全する条件付きでの利活用、若い世代への継承支援、空き家バンクと景観保全を組み合わせた制度設計が求められています。格式ある邸宅街の品格を次世代へ継承する仕組みが集大成としてまとまりました。"},
- {big:"BIG-5", mid:"自治会のDX", title:"静穏な邸宅街の自治会DX推進", summary:"人口2000名、高齢化35％超の山手町では、紙ベースの運営は限界です。回覧板のデジタル化、LINEとメール併用の連絡網、クラウドでの書類共有、オンライン総会の導入、見守りと買い物支援を連携させるアプリ活用など、静穏な暮らしを妨げない範囲でDXを推進。対面の良さを残しつつ役員負担を半減させ、持続可能な自治会運営を実現するDX計画が集大成です。"},
- {big:"BIG-5", mid:"次世代の担い手", title:"邸宅街の次世代担い手育成", summary:"高齢化35％超の山手町では、自治会や見守り活動の担い手不足が深刻です。子育て世代や新住民が参加しやすい短時間ボランティア制度、庭の手入れや清掃など得意分野での貢献、学生や若手社会人のインターン受け入れ、邸宅の歴史や石垣の価値を学ぶ景観教育を通じた愛着醸成など、格式ある街への誇りを次世代へつなぐ担い手育成プログラムが集大成として提案されています。"},
- {big:"BIG-5", mid:"街の未来像", title:"第一種低層の品格を守る未来像", summary:"山手町は第一種低層住居専用地域として、日本有数の瀟洒な邸宅街の品格を守ってきました。人口2000名の小さな町だからこそ、静穏と緑と眺望を次世代へ継承しつつ、高齢化と空き家、買い物難などの課題に柔軟に対応する未来像が求められています。景観規制を守りつつも、共助とテクノロジーで暮らしやすさを高める、持続可能な邸宅街モデルが集大成として描かれました。"},
- {big:"BIG-6", mid:"夏祭り・餅つき", title:"夏祭り復活", summary:"夏祭りを3年ぶりに復活。盆踊りと屋台で多世代交流。音量を抑えた品格ある祭りとして実施。"},
- {big:"BIG-6", mid:"清掃・美化イベント", title:"石垣と邸宅街を守る美化活動", summary:"石垣や門構えが特徴の山手町では、美化活動は景観保全そのもの。急斜面の側溝清掃、石垣周辺の除草、生垣手入れ講習を継続。"},
- {big:"BIG-6", mid:"防災・防犯イベント", title:"急坂地域の防災・防犯を楽しく学ぶ", summary:"ハロウィン仮装防犯パトロールや餅つきと同時開催の防災炊き出し訓練など、家族で参加できる体験型イベントで意識向上。"},
- {big:"BIG-6", mid:"子ども・多世代企画", title:"邸宅の庭を活かした多世代交流", summary:"広い庭を持つ邸宅が多い特性を活かし、庭での絵本読み聞かせや自然観察、ラジオ体操と朝活コーヒーなど多世代交流を推進。"},
-];
-const INITIAL_HIROBA = [
-{timestamp:"2026-05-10T10:00:00",author:"環境美化委員会",summary:"ゴールデンウィークの一日、皆で清掃活動に励みました。",category:"環境",imageUrl:"https://www.city.ashiya.lg.jp/kodomo/kodomohoiku/images/iwazonohoukatu01.jpg",description:"先日来の強風のために、落葉が多く、雑草も元気に出てきています。初めて清掃活動に参加された方も一緒に、五月晴れの緑地公園で楽しく清掃しました！"},
-{timestamp:"2026-05-09T16:00:00",author:"イベント班",summary:"春の一日、緑地清掃とイベントにご参加いただき、ありがとうございました。",category:"イベント",imageUrl:"https://www.sapporo.travel/cms/wp-content/uploads/2025/10/%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E7%84%BC%E3%81%8D%E8%8A%8B%E3%83%86%E3%83%A9%E3%82%B92024-19-1200x900.jpg",description:"70個のお芋が全部きれいに無くなりました！"},
-{timestamp:"2026-05-08T09:00:00",author:"イベント班",summary:"子ども12名、大人40名の参加者は全員、大満足のバスツアーでした。",category:"イベント",imageUrl:"https://prtimes.jp/i/607/559/resize/d607-559-107882-0.jpg",description:"圧巻は、西日本ではここ『須磨シ―ワールド』でしかみることのできない「オルカショー」。体重が3トンの“ステラ”と“ラン”の親子が巨体で見せてくれる数々の“芸”（パフォーマンス）は、巨大だけにその愛らしさ愛おしさが何十倍にも感じられました。帰路のお買い物も含めて、老若男女、笑顔のバスツアーでした！！"},
-{timestamp:"2026-05-07T14:00:00",author:"防犯委員",summary:"”地域で自分の街は自分で守る”",category:"防犯",imageUrl:"https://www.city.itako.lg.jp/data/img/2-1325645820_14.jpg",description:"防犯委員で、山手町町内会のオリジナルバッグを作成しました。山手町内の防犯、町の結束、不審者が近寄りにくい町づくり。そして子供達を守る！を目的に作成致しました。腕章を付けている人は山手町の人！安全な人だと子供達にもわかりやすくするため、キャラクターを作り、そのキャラクターを取り入れ子供達に認識してもらいやすいデザインにしました。画像を子供達に見せて「この腕章をつけてる人は町の人だよ〜」「困ったら声かけていいんだよ〜」とお伝えしてもらえると助かります♡"}
-];
-const INITIAL_EVENTS = [
-{id:"evt1",date:"2026-06-07",time:"09:00-11:00",title:"一斉清掃＆ゴミ回収活動",place:"山手町集会所集合",category:"清掃",status:"参加者募集中",detail:"毎月第一土曜の清掃活動です。急斜面の側溝も重点的に清掃し、石垣や生垣が特徴の山手町の景観を守ります。住民参加型で邸宅街の品格を維持しながら、排水機能を確保する大切な活動です。"},
-{id:"evt2",date:"2026-07-19",time:"17:00-20:00",title:"夏祭り2026",place:"山手公園",category:"季節",status:"企画中",detail:"夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流し、第一種低層の静穏な住宅地に配慮して音量を抑えた品格ある祭りとして実施。子どもから高齢者まで楽しめる屋台と防災意識を高める展示も併設します。"},
-{id:"evt3",date:"2026-08-02",time:"06:30-07:00",title:"ラジオ体操＆朝活コーヒー",place:"山手公園",category:"季節",status:"参加者募集中",detail:"夏休み期間、ラジオ体操を開催します。邸宅の庭が多い山手町の特性を活かし、広い庭での自然観察や朝活コーヒーで多世代が顔の見える関係を築きます。健康づくりと交流を兼ねた朝のひとときです。"},
-{id:"evt4",date:"2026-10-25",time:"14:00-16:00",title:"ハロウィン仮装防犯パトロール",place:"町内全域",category:"企画",status:"アイデア募集中",detail:"子ども達が仮装して防犯パトロールを行います。急坂が多く街灯が少ない山手町では、楽しく参加できる防犯活動が重要です。子ども見守り隊と連携し、地域の安全意識を高めながら多世代交流を促進します。"},
-{id:"evt5",date:"2026-12-14",time:"10:00-13:00",title:"餅つき大会＆防災炊き出し訓練",place:"集会所前広場",category:"季節",status:"予定",detail:"年末恒例の餅つき大会と防災炊き出し訓練を同時開催します。つきたての餅を多世代で味わいながら、南海トラフ地震を想定した炊き出し訓練で防災意識を高めます。高齢者から子どもまで参加できる温かいイベントです。"},
-{id:"evt6",date:"2026-09-20",time:"10:00-12:00",title:"防災訓練・安否確認訓練",place:"集会所",category:"防災",status:"参加者募集中",detail:"南海トラフ地震を想定した安否確認訓練を実施します。急坂が多い山手町では、高齢者世帯の安否確認が重要です。防災ラジオ配布や防災グッズ展示も併せて行い、災害時の情報伝達体制を強化します。"},
-{id:"evt7",date:"2026-11-15",time:"10:00-15:00",title:"両町合同イベントの模索",place:"山手公園・東芦屋町",category:"合同",status:"アイデア募集中",detail:"山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。"}
-];
-function initData(){
-  ALL_IDEAS = INITIAL_24.map(o=>{ const label=BASE_CATEGORIES.find(b=>b.key===o.big)?.label||o.big; return createIdeaObject(o.big,o.mid,o.title,o.summary,o.big.startsWith("BIG-6")?"single":"integrated",o.summary,{bigLabel:label,midLabel:o.mid}); });
-  EVENT_DATA = [...INITIAL_EVENTS];
-  hirobaPosts = [...INITIAL_HIROBA];
-}
-function escapeHtml(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function showPage(id,btn){
-  if(id!=='assist') isEventMode = false;
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const target=document.getElementById(id); if(!target) return;
-  target.classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active'); else { const n=document.querySelector(`nav button[data-page="${id}"]`); if(n) n.classList.add('active'); }
-  if(id==='home'){renderMapUpdate();renderEvents();renderEventIdeas();}
-  if(id==='tree') renderBoard();
-  if(id==='hiroba') renderHiroba();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function toggleEventForm(){
-  const f=document.getElementById('eventFormCard');
-  const isHidden=f.style.display==='none'||f.style.display==='';
-  f.style.display=isHidden?'block':'none';
-  if(isHidden){ const d=document.getElementById('evDate'); if(d && !d.value) d.valueAsDate=new Date(); }
-}
-function showEventTab(tab){
-  const up=document.getElementById('event-upcoming-list');
-  const ideas=document.getElementById('event-ideas-list');
-  if(!up||!ideas) return;
-  if(tab==='upcoming'){ up.style.display='block'; ideas.style.display='none'; document.getElementById('btn-upcoming').style.background='#e8a33d'; document.getElementById('btn-ideas').style.background='#fff'; }
-  else { up.style.display='none'; ideas.style.display='block'; document.getElementById('btn-upcoming').style.background='#fff'; document.getElementById('btn-ideas').style.background='#e8a33d'; renderEventIdeas(); }
-}
-function goToEventIdeaAssist(){
-  isEventMode = true;
-  const btn=document.querySelector('nav button[data-page="assist"]');
-  showPage('assist',btn);
-  const input = document.getElementById('userInput');
-  if(input) input.placeholder = "例：ハロウィンで仮装しながら防犯パトロール";
-  const slip = document.getElementById('slip');
-  if(slip) slip.innerHTML = `<div style="background:#fff8e1;border:2px solid #e8a33d;padding:12px;border-radius:8px;"><b>🎉 イベント企画モード</b><br>この内容は「声のボード」には入らず、「イベントボード」に単独で格納されます。要約のみ表示。</div>`;
-}
-function renderEvents(){
-  const wrap=document.getElementById('event-upcoming-list');
-  if(!wrap) return;
-  const sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
-  wrap.innerHTML=sorted.map(ev=>{
-    const d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
-    return `<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:12px;padding:16px;">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 ${escapeHtml(d)} ⏰ ${escapeHtml(ev.time||'')}</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">${escapeHtml(ev.category)} | ${escapeHtml(ev.status)}</span></div>
-      <div style="font-weight:900;font-size:16px;margin-top:8px;">${escapeHtml(ev.title)}</div>
-      <div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 ${escapeHtml(ev.place)} | ${escapeHtml(ev.detail)}</div>
-    </div>`;
-  }).join('');
-}
-function renderEventIdeas(){
-  const wrap=document.getElementById('event-ideas-list');
-  if(!wrap) return;
-  const ideas = EVENT_DATA.filter(e=> e.category==="企画" || e.status==="アイデア募集中");
-  const baseIdeas = ALL_IDEAS.filter(i=>i.big==="BIG-6");
-  let html = ideas.map(ev=>`<div class="card card-single" style="position:relative;padding-top:22px;margin-bottom:10px;"><span class="badge-single">💡 イベント企画（単独）</span><div style="font-weight:800;margin-top:6px;">${escapeHtml(ev.title)}</div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;white-space:pre-wrap;">${escapeHtml(ev.detail||'')}</div><div style="font-size:10px;color:#888;margin-top:4px;">イベントボードに単独格納（声のボードには統合されない）</div></div>`).join('');
-  html += baseIdeas.map(i=>`<div class="card card-single" style="position:relative;padding-top:22px;"><span class="badge-single">💡 イベント企画（要約のみ）</span><div style="font-weight:800;">${escapeHtml(i.title)}</div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;">${escapeHtml(i.summary)}</div></div>`).join('');
-  wrap.innerHTML = html || '<div style="color:#888;">まだ企画がありません</div>';
-}
-function submitEventForm(){
-  const titleEl=document.getElementById('evTitle');
-  const title=titleEl?.value.trim()||'';
-  if(!title){ alert('タイトルを入力してください'); return; }
-  const date=document.getElementById('evDate')?.value||new Date().toISOString().slice(0,10);
-  const newEv={id:'evt'+Date.now(),date,time:document.getElementById('evTime')?.value||'',title,place:document.getElementById('evPlace')?.value||'山手町',category:document.getElementById('evCategory')?.value||'定例',status:document.getElementById('evStatus')?.value||'予定',detail:document.getElementById('evDetail')?.value||''};
-  EVENT_DATA.push(newEv);
-  fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:newEv.detail, title:newEv.title, summary:newEv.detail})}).catch(()=>{});
-  renderEvents();
-  document.getElementById('eventFormCard').style.display='none';
-  titleEl.value=''; document.getElementById('evDetail').value='';
-  showEventTab('upcoming');
-}
-function renderMapUpdate(){
-  const wrap=document.getElementById('mapUpdateWrap');
-  if(!wrap) return;
-  let html='<div style="margin:20px 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;"><div><div style="font-size:18px;font-weight:900;">🗺 6つのテーマ｜共創アップデート（要約200字のみ・5視点なし）- 24新統合から</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">各テーマ4中分類＝24新統合が初期搭載 | クリックで200字詳細を表示（5視点なし）</div></div><div style="font-size:10px;background:#e8a33d;color:#000;padding:4px 10px;border-radius:999px;font-weight:800;">24 INITIAL + 6 CO-CREATION</div></div>';
-  BASE_CATEGORIES.forEach(c=>{
-    const count=ALL_IDEAS.filter(i=>i.big===c.key).length;
-    html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-      <div class="card" style="border:1.5px solid #d8dcc9;margin-bottom:0;">
-        <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="toggleBaseDesc('${c.key}')">
-          <span><b>${c.icon} ${c.label}</b> <span style="background:#2f7a6b;color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;">${count}件</span></span>
-          <span id="toggle-${c.key}" style="font-size:11px;background:#eef0e4;padding:2px 8px;border-radius:999px;">▼ 詳細を見る（200字のみ）</span>
-        </div>
-        <div style="font-size:11px;color:#777;margin-top:4px;">要約200字のみ表示</div>
-        <div id="base-desc-${c.key}" style="display:none;margin-top:12px;background:#eef0e4;padding:12px;border-radius:8px;white-space:pre-wrap;font-size:13px;line-height:1.8;border:1px solid #d8dcc9;">${escapeHtml(CO_CREATED[c.key].currentDesc)}</div>
-      </div>
-      <div class="card" style="border:2px solid #e8a33d;margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between;">
-        <div><div style="font-size:12px;font-weight:900;color:#c9821f;">🔄 共創アップデート（200字のみ）</div><div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;">デフォルト100字＋住民の声100字＝200字で統合。5視点は表示しません。</div></div>
-        <button type="button" onclick="updateCoCreated('${c.key}')" style="margin-top:10px;background:#e8a33d;color:#000;padding:12px 14px;border-radius:8px;font-weight:900;border:none;cursor:pointer;">🔄 リアルタイムにアップデート（200字のみ）</button>
-      </div>
-    </div>`;
-  });
-  wrap.innerHTML=html;
-}
-function generateCoCreatedDesc(key){
-  const cat=BASE_CATEGORIES.find(c=>c.key===key);
-  const defaultDesc=BASE_DESC[cat.label]||"";
-  const ideas=ALL_IDEAS.filter(i=>i.big===key);
-  if(ideas.length===0) return defaultDesc;
-  let combined=ideas.map(i=>i.summary).join('。').slice(0,100);
-  let newDesc=(defaultDesc+' '+combined).trim();
-  if(newDesc.length>200){ newDesc=newDesc.slice(0,200); }
-  return newDesc;
-}
-function updateCoCreated(key){ CO_CREATED[key].currentDesc=generateCoCreatedDesc(key); renderMapUpdate(); }
-function toggleBaseDesc(key){ const el=document.getElementById('base-desc-'+key); const btn=document.getElementById('toggle-'+key); if(!el) return; const hidden=el.style.display==='none' || el.style.display===''; el.style.display=hidden?'block':'none'; if(btn) btn.textContent=hidden?'▲ 閉じる':'▼ 詳細を見る（200字のみ）'; }
-function renderBoard(){
-  const grid=document.getElementById('corkGrid');
-  if(!grid) return;
-  let html='';
-  BASE_CATEGORIES.forEach(c=>{
-    const countAll=ALL_IDEAS.filter(i=>i.big===c.key).length;
-    const isBigOpen=openBig===c.key;
-    html+=`<div style="margin-bottom:18px;"><div class="big-category" onclick="toggleBig('${c.key}')"><span style="font-size:20px;font-weight:900;">${c.icon} ${c.label}</span><span style="background:#2f7a6b;color:#fff;border-radius:999px;padding:2px 8px;font-size:11px;">${countAll}件 ${isBigOpen?'▴':'▾'}</span></div><div class="mid-wrapper ${isBigOpen?'open':''}">`;
-    const mids=[...c.baseSubs,"その他"];
-    mids.forEach(mid=>{
-      const ideas=ALL_IDEAS.filter(i=>i.big===c.key && i.mid===mid);
-      if(ideas.length===0) return;
-      const key=`${c.key}__${mid}`;
-      const isMidOpen=!!openMidMap[key];
-      html+=`<div class="mid-category" onclick="toggleMid('${c.key}','${mid.replace(/'/g,"\\'")}')"><span>${mid} <span style="font-size:11px;background:#fff;padding:2px 8px;border-radius:999px;">${ideas.length}件</span></span><span>${isMidOpen?'▴':'▾'}</span></div><div class="article-list ${isMidOpen?'open':''}">`;
-      ideas.forEach(idea=>{
-        const badge=idea.type==='integrated'?'<span class="badge-new">⭐ 新統合</span>': '<span class="badge-single">💡 単独</span>';
-        const cls=idea.type==='integrated'?'card-integrated':'card-single';
-        html+=`<div class="card ${cls}" style="position:relative;padding-top:22px;margin-bottom:10px;"><div style="position:absolute;top:-8px;left:12px;">${badge}</div>
-          <div style="font-weight:800;margin-top:4px;">${escapeHtml(idea.title)}</div>
-          <div style="font-size:11px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;white-space:pre-wrap;">${escapeHtml(idea.summary)} <span style="font-size:10px;color:#888;">(${idea.summary.length}字)</span></div>
-        </div>`;
-      });
-      html+=`</div>`;
-    });
-    html+=`</div></div>`;
-  });
-  grid.innerHTML=html;
-}
-function toggleBig(k){ openBig=openBig===k?null:k; renderBoard(); }
-function toggleMid(b,m){ const k=`${b}__${m}`; openMidMap[k]=!openMidMap[k]; renderBoard(); }
-function renderHiroba(){
-  const list=document.getElementById('hirobaList');
-  if(!list) return;
-  list.innerHTML=hirobaPosts.map(p=>`<div class="hiroba-post-card"><div style="display:flex;justify-content:space-between;font-size:12px;color:#666;flex-wrap:wrap;gap:6px;"><span>👤 ${escapeHtml(p.author)}</span><span style="background:#eef0e4;padding:3px 10px;border-radius:999px;">${escapeHtml(p.category)}</span><span>${new Date(p.timestamp).toLocaleDateString('ja-JP')}</span></div><div style="font-weight:800;margin:8px 0;">${escapeHtml(p.summary)}</div><div style="white-space:pre-wrap;background:#fafafa;padding:8px;border-radius:8px;font-size:13px;">${escapeHtml(p.description)}</div>${p.imageUrl?`<img src="${p.imageUrl}" style="width:100%;max-height:420px;object-fit:cover;border-radius:8px;margin-top:8px;" onerror="this.style.display='none'">`:''}</div>`).join('');
-}
-async function submitHiroba(){
-  const author=document.getElementById('hirobaAuthor')?.value.trim()||"匿名";
-  const comment=document.getElementById('hirobaComment')?.value.trim();
-  const category=document.getElementById('hirobaCategory')?.value||'その他';
-  const toInstagram = document.getElementById('hirobaToInstagram')?.checked || false;
-  if(!comment && !hirobaImageBase64){ alert("コメントか画像を入れてください"); return; }
-  const newPost={timestamp:new Date().toISOString(),author,summary:comment.slice(0,24)||'写真投稿',category,imageUrl:hirobaImageBase64?"data:image/jpeg;base64,"+hirobaImageBase64:"https://picsum.photos/seed/"+Date.now()+"/600/400",description:comment||'写真を投稿しました'};
-  hirobaPosts.unshift(newPost);
-  renderHiroba();
-  document.getElementById('hirobaImagePreview').innerHTML='';
-  document.getElementById('hirobaComment').value='';
-  const statusEl = document.getElementById('hirobaStatus');
-  statusEl.textContent='投稿中…';
-  try{
-    const res = await fetch(gasUrl, {method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postHiroba", author, comment, category, imageBase64:hirobaImageBase64, toInstagram})});
-    const data = await res.json();
-    statusEl.textContent = data.status==="success"? (toInstagram?'✅ Instagramにも送信しました':'✅ 投稿しました') : 'GASエラー';
-  }catch(e){ statusEl.textContent='GAS通信エラー'; }finally{ hirobaImageBase64=''; const cb=document.getElementById('hirobaToInstagram'); if(cb) cb.checked=false; }
-}
-async function runAI(){
-  const text=document.getElementById('userInput').value.trim(); if(!text){alert('入力してください');return;}
-  document.getElementById('loadingMsg').style.display='inline'; document.getElementById('runBtn').disabled=true;
-  try{
-    const res=await fetch(gasUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"analyze", content:text})});
-    const json=await res.json(); if(json.status!=="success"||!json.result) throw new Error(json.message||"GAS分析失敗");
-    const r=json.result;
-    const postBtnLabel = isEventMode? "🎉 イベントボードに投稿する（要約のみ・単独）" : "📌 声のボードに投稿する（リアルタイム統合）";
-    document.getElementById('slip').innerHTML=`
-      <div style="background:#e8f5e9;border:2px solid #2f7a6b;border-radius:12px;padding:14px;margin-bottom:12px;">
-        <div style="font-weight:900;color:#2f7a6b;font-size:15px;">✅ 分析完了！「${escapeHtml(r['大分類'])} / ${escapeHtml(r['中分類'])}」 ${isEventMode? "→ イベントボードへ" : "→ 声のボードへ統合"}</div>
-      </div>
-      <div style="background:#fff;border:1px solid #d8dcc9;border-radius:8px;padding:12px;margin-bottom:10px;">
-        <div style="font-weight:800;font-size:15px;">${escapeHtml(r['推奨タイトル'])}</div>
-        <div style="font-size:13px;background:#fff8e1;padding:10px;border-radius:6px;white-space:pre-wrap;border:1.5px solid #e8a33d;margin-top:6px;">${escapeHtml(r['要約200'])} (${r['要約200'].length}字)</div>
-      </div>
-      <div style="font-size:14px;font-weight:900;margin-bottom:8px;color:#2f7a6b;">▼ 5視点分析</div>
-      <div class="view5">
-        <div class="view5-item core"><b>① 核心:</b> ${escapeHtml(r['核心'])}</div>
-        <div class="view5-item change"><b>② 変化:</b> ${escapeHtml(r['変化'])}</div>
-        <div class="view5-item success"><b>③ 成功事例:</b> ${escapeHtml(r['成功事例'])}</div>
-        <div class="view5-item concern"><b>④ 懸念点:</b> ${escapeHtml(r['懸念点'])}</div>
-        <div class="view5-item question"><b>⑤ 問い:</b> ${escapeHtml(r['問い'])}</div>
-      </div>
-      <div style="margin-top:14px;text-align:center;"><button type="button" class="big-btn amber" onclick="postIdeaFromAI()" style="padding:14px 28px;font-size:15px;">${postBtnLabel}</button></div>
-    `;
-    window._lastAI=r; window._lastRaw=text;
-  }catch(e){ document.getElementById('slip').innerHTML=`<p style="color:red;">失敗: ${escapeHtml(e.message)}</p>`; } finally { document.getElementById('loadingMsg').style.display='none'; document.getElementById('runBtn').disabled=false; }
-}
-async function postIdeaFromAI(){
-  const r=window._lastAI; if(!r) return;
-  const raw = window._lastRaw || "";
-  let bigLabel=r['大分類']; let midLabel=r['中分類'];
-  const base=BASE_CATEGORIES.find(c=>c.label===bigLabel); let bigKey=base?.key||'BIG-3';
-  const newTitle=r['推奨タイトル']||raw.slice(0,20);
-  const actionType = isEventMode? "postEventIdea" : "postIdea";
-  if(!isEventMode){
-    const newIdea=createIdeaObject(bigKey,midLabel,newTitle,r['要約200'], 'single', raw, {bigLabel,midLabel, core:r['核心'], change:r['変化'], success:r['成功事例'], concern:r['懸念点'], question:r['問い']});
-    ALL_IDEAS.unshift(newIdea);
-    renderBoard();
-    openBig=bigKey;
-    openMidMap[`${bigKey}__${midLabel}`]=true;
+
+// ---------------------------------------------------------------------------
+// シート取得ヘルパー
+// ---------------------------------------------------------------------------
+function getSheet(name) {
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(name);
+  if (!sh) {
+    sh = ss.insertSheet(name);
   }
-  try{
-    // イベント用に100-150字に整理（5視点の要約200字を100-150字に）
-    var eventSummary150 = r['要約200'] || raw;
-    if(eventSummary150.length > 150) eventSummary150 = eventSummary150.slice(0,150);
-    // スプレッドシートにdetailが空にならないように、必ず100-150字を確保
-    if(eventSummary150.length < 100){
-      eventSummary150 = eventSummary150 + '。山手町の石垣と邸宅街の景観を活かし、第一種低層の静穏な住宅地の品格を保ちつつ、多世代が交流できるイベントとして具体化します。';
-      if(eventSummary150.length > 150) eventSummary150 = eventSummary150.slice(0,150);
-    }
-    // 賢いLLMが書き出した100-150字をdetailとして使う
-    var detailForSheet = isEventMode ? eventSummary150 : raw;
-    
-    document.getElementById('slip').innerHTML += `<p style="color:#2f7a6b;font-weight:800;margin-top:10px;">📡 ${isEventMode? "イベントボード" : "声のボード"}に送信中…（detail: ${detailForSheet.length}字）</p>`;
-    const res = await fetch(gasUrl, {
-      method:"POST",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body: JSON.stringify({action: actionType, author: document.getElementById('authorName')?.value || "匿名", content: detailForSheet, title: newTitle, summary: eventSummary150, detail: detailForSheet, analysis: r})
-    });
-    const json = await res.json();
-    if(json.status==="success"){
-      if(isEventMode){
-        // detailが空にならないように、必ず100-150字のeventSummary150をdetailに入れる
-        var newEvent = {id:'evt'+Date.now(), date:new Date().toISOString().slice(0,10), time:"", title:newTitle, place:"山手町", category:"企画", status:"アイデア募集中", detail:eventSummary150};
-        EVENT_DATA.push(newEvent);
-        // ローカルストレージにも保存して再読み込みでも消えないように
-        try{ localStorage.setItem('EVENT_DATA', JSON.stringify(EVENT_DATA)); }catch(e){}
-        document.getElementById('slip').innerHTML = `<div style="background:#fff8e1;padding:14px;border-radius:12px;border:2px solid #e8a33d;"><b>✅ イベント企画をイベントボードに単独格納しました（detail ${eventSummary150.length}字）</b><br>イベントボードに反映されました。スプレッドシートのdetail欄にも${eventSummary150.length}字で保存されます。<br>タイトル: ${escapeHtml(newTitle)}<br>detail: ${escapeHtml(eventSummary150)}<br><small>${escapeHtml(json.reason||'GAS保存成功')}</small></div>`;
-        // イベントページのイベントボードに確実に反映
-        setTimeout(()=>{
-          showPage('event', document.querySelector('nav button[data-page=event]'));
-          renderEventsClean();
-          renderEventIdeasClean();
-          showEventTab('ideas');
-        }, 800);
-      }else{
-        const promotedMsg = json.promoted? `<br><br>🎉 <b>新中分類が自動生成されました！</b>「${escapeHtml(json.promoted.newMid)}」` : "";
-        const reason = `「${escapeHtml(raw.slice(0,30))}…」は「${escapeHtml(midLabel)}」に該当と判定。既存の新統合記事に即時統合され、この単独提案が新しい元記事になりました。` + promotedMsg;
-        document.getElementById('slip').innerHTML = `<div style="background:#e8f5e9;padding:16px;border-radius:12px;border:2.5px solid #2f7a6b;">
-          <div style="font-weight:900;color:#2f7a6b;">✅ リアルタイム統合完了！元記事になりました</div>
-          <div style="margin-top:10px;background:#fff;border-left:5px solid #e8a33d;padding:10px;border-radius:6px;"><b>統合先:</b> ${escapeHtml(json.category)} / Row ${json.targetRow}<br><small>${escapeHtml(json.reason)}</small></div>
-          <div style="margin-top:10px;background:#23282a;color:#eef0e4;padding:10px;border-radius:8px;"><div style="color:#e8a33d;font-weight:800;">💡 統合理由</div><div style="margin-top:4px;line-height:1.8;">${reason}</div></div>
-        </div>`;
-        setTimeout(()=>{ showPage('tree',document.querySelector('nav button[data-page="tree"]')); renderBoard(); },1200);
+  return sh;
+}
+
+function getSheetSafe_(name, headers){
+  var sh = getSheet(name);
+  if(sh.getLastRow()===0 && headers){
+    sh.appendRow(headers);
+  }
+  return sh;
+}
+
+// ---------------------------------------------------------------------------
+// 設定取得（高齢化率35％は削除）
+// ---------------------------------------------------------------------------
+function getApiKey() {
+  var key = PropertiesService.getScriptProperties().getProperty('GEMINI_API_KEY');
+  if (!key) {
+    try {
+      var cfg = getSheet('設定');
+      var vals = cfg.getRange('A1:B100').getValues();
+      for (var i = 0; i < vals.length; i++){
+        if (vals[i][0] === 'GEMINI_API_KEY'){
+          return vals[i][1];
+        }
       }
-    }else{
-      document.getElementById('slip').innerHTML += `<p style="color:red;">GASエラー: ${escapeHtml(json.message||'')}</p>`;
-    }
-  }catch(e){
-    document.getElementById('slip').innerHTML += `<p style="color:red;">通信エラー: ${escapeHtml(e.message)}</p>`;
+    } catch (e) {}
   }
+  return (key || '').trim();
 }
-document.addEventListener("DOMContentLoaded",()=>{
-  initData();
-  document.getElementById('gasUrlDisplay').textContent=gasUrl;
-  renderMapUpdate();
-  renderEvents();
-  renderEventIdeas();
-  renderBoard();
-  renderHiroba();
-  const evDateEl=document.getElementById('evDate'); if(evDateEl) evDateEl.valueAsDate=new Date();
-  const imgEl=document.getElementById('hirobaImage');
-  if(imgEl){
-    imgEl.addEventListener('change',e=>{
-      const file=e.target.files[0]; if(!file)return;
-      const reader=new FileReader();
-      reader.onload=ev=>{
-        hirobaImageBase64=ev.target.result.split(',')[1];
-        document.getElementById('hirobaImagePreview').innerHTML='<img src="'+ev.target.result+'" style="width:100%;max-height:240px;object-fit:cover;border-radius:8px;">';
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-});
-let recognition=null, isListening=false, mediaRecorder=null, audioChunks=[];
-function initVoice(){
-  const btn=document.getElementById("btnVoice");
-  const status=document.getElementById("voiceStatus");
-  const statusText=document.getElementById("voiceStatusText");
-  const textarea=document.getElementById("userInput");
-  if(!btn||!textarea) return;
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  const hasNative =!!SR;
-  if(hasNative){
-    recognition=new SR(); recognition.lang="ja-JP"; recognition.interimResults=true; recognition.continuous=true;
-    let finalTranscript="";
-    recognition.onstart=()=>{ isListening=true; btn.classList.add("listening"); btn.textContent="⏹ 停止"; status.classList.remove("d-none"); statusText.textContent="聞き取り中…"; finalTranscript=textarea.value; };
-    recognition.onend=()=>{ isListening=false; btn.classList.remove("listening"); btn.textContent="🎙 音声入力"; status.classList.add("d-none"); };
-    recognition.onresult=(e)=>{ let interim=""; for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript; if(e.results[i].isFinal) finalTranscript+=t+" "; else interim+=t; } textarea.value=finalTranscript+interim; statusText.textContent=interim?`"${interim}"`:"聞き取り中…"; textarea.dispatchEvent(new Event('input')); };
-  }
-  async function startSafariRecord(){
-    try{
-      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-      mediaRecorder=new MediaRecorder(stream, {mimeType: MediaRecorder.isTypeSupported('audio/webm')?'audio/webm':'audio/mp4'});
-      audioChunks=[]; mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); };
-      mediaRecorder.onstop=async()=>{
-        statusText.textContent="Geminiで文字起こし中…";
-        const blob=new Blob(audioChunks, {type: mediaRecorder.mimeType});
-        const base64=await new Promise(r=>{ const fr=new FileReader(); fr.onload=()=>r(fr.result.split(',')[1]); fr.readAsDataURL(blob); });
-        try{
-          const res=await fetch(gasUrl, {method:"POST", headers:{"Content-Type":"text/plain"}, body: JSON.stringify({mode:"transcribe", audioBase64: base64, mimeType: blob.type})});
-          const data=await res.json();
-          const text = data.text || data.content || "";
-          if(text){ textarea.value = (textarea.value? textarea.value+" " : "") + text; textarea.dispatchEvent(new Event('input')); statusText.textContent="完了"; }
-          else { statusText.textContent="聞き取れませんでした"; }
-        }catch(e){ statusText.textContent="文字起こし失敗: "+e; }
-        setTimeout(()=>{ status.classList.add("d-none"); isListening=false; btn.classList.remove("listening"); btn.textContent="🎙 音声入力"; },1500);
-        stream.getTracks().forEach(t=>t.stop());
-      };
-      mediaRecorder.start(); isListening=true; btn.classList.add("listening"); btn.textContent="⏹ 停止"; status.classList.remove("d-none"); statusText.textContent="録音中…";
-    }catch(e){ alert("マイク許可が必要です: "+e); }
-  }
-  btn.addEventListener("click", ()=>{
-    if(isListening){
-      if(hasNative && recognition){ recognition.stop(); }
-      else if(mediaRecorder && mediaRecorder.state==="recording"){ mediaRecorder.stop(); }
-      return;
-    }
-    if(hasNative){ try{ recognition.start(); }catch(e){ startSafariRecord(); } }
-    else { startSafariRecord(); }
-  });
-}
-setTimeout(initVoice, 700);
 
-var GAS_7_DATA = [
-  {big:"BIG-1", mid:"防災訓練", title:"防災ラジオの配布", summary:"高齢者世帯に防災ラジオを配布し緊急時の情報伝達を確実に。防災無線が聞こえにくい地域でも確実に情報を得られるように、個別受信機の配布を検討。"},
-  {big:"BIG-2", mid:"通学路", title:"子ども見守り隊の復活", summary:"登下校時の見守り隊を復活させ地域で子どもを見守る。共働き世帯が増える中で地域全体で子どもの安全を守る取り組みを再構築する。"},
-  {big:"BIG-3", mid:"祭り", title:"ハロウィン仮装パトロール", summary:"ハロウィンで仮装しながら防犯パトロール。子どもも大人も楽しく参加できる防犯活動で、地域の安全意識を高めながら多世代交流を促進する。"},
-  {big:"BIG-4", mid:"公園美化", title:"公園のベンチ増設", summary:"高齢者が休めるベンチを公園に増設したい。急坂が多く休憩場所が少ないため、景観に配慮した木製ベンチを3カ所に設置してほしい。"},
-  {big:"BIG-5", mid:"駐車場", title:"駐輪場の整備", summary:"駅までの駐輪場を整備し放置自転車を減らす。第一種低層地域で大規模駐輪場が作れないため、小規模分散型の駐輪場を5カ所に検討する。"},
-  {big:"BIG-6", mid:"空き家活用", title:"空き家バンクの作成", summary:"空き家情報を集めたバンクを作り移住希望者に提供。大邸宅が多い地域特性を活かし、空き家を地域資源として活用する仕組みを構築する。"},
-  {big:"BIG-1", mid:"防災訓練", title:"防災グッズ展示会", summary:"防災グッズを集会所で展示し実際に触れてもらう機会を作る。高齢者にも使いやすい防災グッズを実際に見て触れて選べるようにする展示会を開催。"},
-  {big:"BIG-6", mid:"祭り", title:"両町合同イベントの模索", summary:"山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。"}
+function getGroqKey() {
+  var key = PropertiesService.getScriptProperties().getProperty('GROQ_API_KEY');
+  if (!key) {
+    try {
+      var cfg = getSheet('設定');
+      var vals = cfg.getRange('A1:B100').getValues();
+      for (var i = 0; i < vals.length; i++){
+        if (vals[i][0] === 'GROQ_API_KEY'){
+          return vals[i][1];
+        }
+      }
+    } catch (e) {}
+  }
+  return (key || '').trim();
+}
+
+function getYamateProfile() {
+  try {
+    var cfg = getSheet('設定');
+    var vals = cfg.getRange('A1:B100').getValues();
+    for (var i = 0; i < vals.length; i++){
+      if (vals[i][0] === 'YAMATE_PROFILE'){
+        return String(vals[i][1]||"").replace(/高齢化率35％|高齢化率３５％|35％|３５％|高齢化35%超/g,'多世代');
+      }
+    }
+  } catch (e) {}
+  return '北部:大邸宅・石垣・坂道多い / 南部:瀟洒・平坦 / 人口2000名・第一種低層・多世代・コンビニ不在で静穏を維持';
+}
+
+// ---------------------------------------------------------------------------
+// 初期24中分類マスタ
+// ---------------------------------------------------------------------------
+const INITIAL_24 = [
+ {big:"防災・防犯", mid:"安否確認体制"},
+ {big:"防災・防犯", mid:"自主防災訓練"},
+ {big:"防災・防犯", mid:"防犯パトロール"},
+ {big:"防災・防犯", mid:"災害備蓄強化"},
+ {big:"インフラ・環境", mid:"急斜面の安全"},
+ {big:"インフラ・環境", mid:"道路・側溝整備"},
+ {big:"インフラ・環境", mid:"ゴミステーション"},
+ {big:"インフラ・環境", mid:"緑化・景観保護"},
+ {big:"コミュニティ", mid:"世代間交流"},
+ {big:"コミュニティ", mid:"新住民の歓迎"},
+ {big:"コミュニティ", mid:"班長・役員負担"},
+ {big:"コミュニティ", mid:"見守りネットワーク"},
+ {big:"福祉・見守り", mid:"高齢者の孤立"},
+ {big:"福祉・見守り", mid:"子育て世代支援"},
+ {big:"福祉・見守り", mid:"ペット共生"},
+ {big:"福祉・見守り", mid:"健康増進活動"},
+ {big:"将来ビジョン", mid:"空き家・継承"},
+ {big:"将来ビジョン", mid:"自治会のDX"},
+ {big:"将来ビジョン", mid:"次世代の担い手"},
+ {big:"将来ビジョン", mid:"街の未来像"},
+ {big:"イベント・企画", mid:"夏祭り・餅つき"},
+ {big:"イベント・企画", mid:"清掃・美化イベント"},
+ {big:"イベント・企画", mid:"防災・防犯イベント"},
+ {big:"イベント・企画", mid:"子ども・多世代企画"},
 ];
-var __origInitData = initData;
-initData = async function(){
-  await __origInitData();
-  GAS_7_DATA.forEach(function(item){
-    if(!ALL_IDEAS.some(function(a){ return a.title===item.title; })){
-      var obj=createIdeaObject(item.big,item.mid,item.title,item.summary||item.title,'single',item.summary||item.title,{});
-      obj.isNew=true;
-      ALL_IDEAS.push(obj);
+
+// ---------------------------------------------------------------------------
+// プロンプト用カテゴリ一覧生成
+// ---------------------------------------------------------------------------
+function getCategoryPromptText_(){
+  var lines = INITIAL_24.map(function(o){ return "- "+o.big+" / "+o.mid; });
+  var bigs = [];
+  for(var i=0;i<INITIAL_24.length;i++){
+    if(bigs.indexOf(INITIAL_24[i].big)==-1){
+      bigs.push(INITIAL_24[i].big);
     }
-  });
-  if(!openBig) openBig=BASE_CATEGORIES[0].key;
-  openMidMap={}; openPostMap={};
-  renderBoard();
-  renderMapUpdateTree();
-  renderKentouBoardClean();
-  renderEventsClean();
-  renderEventIdeasClean();
-};
-function renderMapUpdate(){ return; }
-function renderMapUpdateTree(){
-  var wrap=document.getElementById('mapUpdateWrapTree');
-  if(!wrap) return;
-  wrap.innerHTML='';
-  var h=document.createElement('div');
-  h.style.cssText='margin:0 0 12px;padding:14px 18px;background:#23282a;color:#fff;border-radius:10px;';
-  h.innerHTML='<div style="font-size:16px;font-weight:900;">🗺 6つのテーマ｜共創アップデート（要約200字のみ）- 24新統合から</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">意見集約箱の下部へ移動</div>';
-  wrap.appendChild(h);
-  BASE_CATEGORIES.forEach(function(c){
-    var count=ALL_IDEAS.filter(function(i){ return i.big===c.key && !i.isNew; }).length;
-    var grid=document.createElement('div');
-    grid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;';
-    var left=document.createElement('div');
-    left.style.cssText='border:1.5px solid #d8dcc9;border-radius:12px;background:#fff;padding:12px;';
-    var summaryText=ALL_IDEAS.filter(function(i){ return i.big===c.key && !i.isNew; }).map(function(i){ return i.summary; }).join('。').slice(0,200);
-    if(summaryText.length<150) summaryText=(CO_CREATED[c.key].currentDesc||'').slice(0,200);
-    left.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="toggleBaseDesc(\''+c.key+'\')"><span><b>'+c.icon+' '+c.label+'</b> <span style="background:#2f7a6b;color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;">'+count+'件</span></span><span id="toggle-'+c.key+'-tree" style="font-size:11px;background:#eef0e4;padding:2px 8px;border-radius:999px;">▼ 詳細200字</span></div><div id="base-desc-'+c.key+'-tree" style="display:none;margin-top:12px;background:#eef0e4;padding:12px;border-radius:8px;white-space:pre-wrap;font-size:13px;line-height:1.8;">'+summaryText+'</div>';
-    var right=document.createElement('div');
-    right.style.cssText='border:2px solid #e8a33d;border-radius:12px;background:#fff;padding:12px;display:flex;flex-direction:column;justify-content:space-between;';
-    right.innerHTML='<div><div style="font-size:12px;font-weight:900;color:#c9821f;">🔄 共創アップデート</div><div style="font-size:11px;margin-top:8px;background:#fff8e1;padding:8px;border-radius:6px;">住民の声100字=200字で統合。5視点なし。</div></div><button type="button" style="margin-top:10px;background:#e8a33d;color:#000;padding:12px 14px;border-radius:8px;font-weight:900;border:none;cursor:pointer;" onclick="updateCoCreated(\''+c.key+'\');renderMapUpdateTree();">🔄 アップデート</button>';
-    grid.appendChild(left); grid.appendChild(right); wrap.appendChild(grid);
-  });
-}
-// ボタン機能 - 独立モジュール
-var eventIdeaCounts = {
-  'idea1': {want:3,help:3,lead:2,place:2,interest:2}, // 合計12で移行デモ
-  'idea2': {want:2,help:1,lead:1,place:0,interest:2},
-  'idea3': {want:0,help:3,lead:0,place:2,interest:1},
-  'idea4': {want:3,help:0,lead:2,place:1,interest:4},
-  'idea5': {want:1,help:1,lead:1,place:1,interest:1},
-  'idea6': {want:0,help:0,lead:0,place:3,interest:2},
-  'idea7': {want:1,help:1,lead:1,place:1,interest:1}
-};
-function incrementIdea(id, type){
+  }
+  var dynamicCats = [];
   try{
-    if(!eventIdeaCounts[id]) eventIdeaCounts[id]={want:0,help:0,lead:0,place:0,interest:0};
-    eventIdeaCounts[id][type]=(eventIdeaCounts[id][type]||0)+1;
-    renderEventIdeasClean();
-    renderKentouBoardClean();
-  }catch(e){ console.error(e); }
-}
-function toggleFlyer(id){
-  var el=document.getElementById(id);
-  if(!el) return;
-  el.style.display=el.style.display==='none'?'block':'none';
-}
-function fillFlyerFromIdea(id){
-  var map={
-    'idea1': {title:'夏祭り復活～3年ぶりに邸宅街に笑顔を～', summary:'夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流し、第一種低層の静穏な住宅地に配慮して音量を抑えた品格ある祭りとして実施。子どもから高齢者まで楽しめる屋台と防災意識を高める展示も併設します。'},
-    'idea2': {title:'石垣と邸宅街を守る美化活動', summary:'石垣や門構えが特徴の山手町では、美化活動は景観保全そのものです。急斜面の側溝清掃、石垣周辺の除草、生垣手入れ講習を継続し、邸宅街の品格を守ります。'},
-    'idea7': {title:'両町合同イベントの模索', summary:'山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。'}
-  };
-  var it=map[id]||map['idea1'];
-  var set=function(id,v){ var el=document.getElementById(id); if(el) el.value=v; };
-  set('flyTitle', it.title);
-  set('flyContent', it.summary);
-  set('flyOmoi','第一種低層の静穏な住宅地としての品格を守りながら、子どもから高齢者までが顔の見える関係を築き、山手町の誇りである石垣と邸宅街の景観を次世代に繋ぐ思いを込めて実施します。');
-  set('flyDate','2025年7月20日(日) 18:00-20:30');
-  set('flyPlace','中央公園（地図付き）');
-  set('flyTarget','子ども～高齢者まで 50名程度');
-  set('flyRain','小雨決行・荒天中止。中止判断は当日8時までに町内会LINEと掲示板でお知らせ。予備日7月27日(日)');
-  set('flyApply','①町内会LINE ②掲示板申込用紙 ③yamate@example.com 締切：7月10日まで 参加費無料 定員100名（先着順）');
-  set('flyBelong','動きやすい服装、飲み物、帽子、タオル');
-  set('flyEmergency','町内会長 090-XXXX-XXXX 集会所 078-XXXX-XXXX 緊急時 110番・119番');
-  set('flyContact','山手町町内会 〇〇まで');
-  document.getElementById('flyer-form-wrap').style.display='block';
-  document.getElementById('flyer-form').scrollIntoView({behavior:'smooth'});
-}
-function generateFlyer(){
-  var get=function(id){ return document.getElementById(id)?.value||''; };
-  var title=get('flyTitle');
-  var date=get('flyDate');
-  var place=get('flyPlace');
-  var target=get('flyTarget');
-  var content=get('flyContent');
-  var omoi=get('flyOmoi');
-  var rain=get('flyRain');
-  var apply=get('flyApply');
-  var belong=get('flyBelong');
-  var emergency=get('flyEmergency');
-  var contact=get('flyContact');
-  if(!title || content.length<20){ alert('タイトルと内容（100-150文字）を入力してください'); return; }
-  var backCoverBg = "data:image/png;base64,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";
-  var win=window.open('', '_blank');
-  win.document.write('<html><head><meta charset="utf-8"><title>'+title+'</title>'+
-    '<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">'+
-    '<style>'+
-    '@page{size:A4;margin:10mm;} body{font-family:"Zen Kaku Gothic New",sans-serif;margin:0;padding:0;background:#eef0e4;} .a4{width:210mm;min-height:297mm;margin:0 auto;background:#fff;box-shadow:0 0 20px rgba(0,0,0,0.2);position:relative;overflow:hidden;background-image:url('+backCoverBg+');background-size:100% 100%;background-position:center;background-repeat:no-repeat;}'+
-    '.hero{height:85mm;background:linear-gradient(135deg, rgba(47,122,107,0.92) 0%, rgba(26,77,66,0.85) 100%);color:#fff;padding:12mm 15mm 8mm;position:relative;}'+
-    '.logo{position:absolute;top:8mm;right:8mm;background:#fff;padding:3mm;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);} .logo img{width:18mm;height:18mm;}'+
-    '.hero-badge{position:absolute;top:8mm;left:15mm;background:#e8a33d;color:#000;padding:2mm 5mm;border-radius:999px;font-size:3mm;font-weight:900;}'+
-    '.hero h1{font-family:"Klee One";font-size:11mm;font-weight:900;line-height:1.2;margin-top:8mm;text-shadow:0 2px 4px rgba(0,0,0,0.3);} .hero .sub{font-size:4.5mm;margin-top:3mm;opacity:0.9;}'+
-    '.content{padding:6mm 15mm;background:rgba(255,255,255,0.92);margin:0;} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin:4mm 0;}'+
-    '.box{border:1.5px solid #d8dcc9;border-radius:3mm;padding:4mm;background:rgba(255,255,255,0.95);backdrop-filter:blur(2px);} .box.teal{border-color:#2f7a6b;background:rgba(240,250,248,0.95);} .box.amber{border-color:#e8a33d;background:rgba(255,252,240,0.95);}'+
-    '.box b{font-size:3.5mm;color:#2f7a6b;display:block;margin-bottom:2mm;} .box .txt{font-size:3.2mm;line-height:1.6;}'+
-    '.footer{margin-top:4mm;background:#23282a;color:#fff;padding:5mm 15mm;display:flex;justify-content:space-between;align-items:center;} .qr{width:20mm;height:20mm;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-size:2.5mm;border-radius:2mm;}'+
-    '.icons{font-size:8mm;letter-spacing:2mm;}'+
-    '@media print{.no-print{display:none;}}'+
-    '</style></head><body><div class="a4">'+
-    '<div class="hero"><div class="hero-badge">YAMATECHO OFFICIAL</div><div class="logo"><img src="./icon-512.png" onerror="this.innerHTML=\'<div style=font-size:4mm;>🏡</div>\'"><div style="font-size:2mm;text-align:center;">YAMATE</div></div>'+
-    '<h1>🎉 '+title+'</h1><div class="sub">第一種低層の静穏な住宅地に配慮した品格ある祭り</div><div style="margin-top:4mm;font-size:3.2mm;background:rgba(255,255,255,0.2);display:inline-block;padding:2mm 5mm;border-radius:999px;">ASHIYA CITY / YAMATECHO COMMUNITY FESTIVAL</div></div>'+
-    '<div class="content">'+
-    '<div class="grid2"><div class="box teal"><b>📅 日時</b><div class="txt">'+date+'</div><div class="txt" style="font-size:2.8mm;color:#666;margin-top:1mm;">'+target+'</div></div><div class="box teal"><b>📍 場所</b><div class="txt">'+place+'<br><span style="font-size:2.8mm;color:#666;">地図・QRコード付き</span></div></div></div>'+
-    '<div class="box"><b>■内容（100-150字）</b><div class="txt" style="margin-top:2mm;">'+content+'</div></div>'+
-    '<div class="box teal" style="border-left:4px solid #2f7a6b;"><b>💭 思い入れ・背景</b><div class="txt" style="margin-top:2mm;">'+omoi+'</div></div>'+
-    '<div class="grid2"><div class="box amber"><b>🌧 雨天時の扱い</b><div class="txt">'+rain+'</div></div><div class="box"><b>📝 申込方法と締切</b><div class="txt" style="white-space:pre-wrap;">'+apply+'</div></div></div>'+
-    '<div class="grid2"><div class="box"><b>🎒 持ち物</b><div class="txt">'+belong+'</div></div><div class="box"><b>🚨 緊急連絡先</b><div class="txt" style="white-space:pre-wrap;">'+emergency+'</div></div></div>'+
-    '<div class="box"><b>■問合せ</b><div class="txt">'+contact+'</div></div>'+
-    '</div>'+
-    '<div class="footer"><div><div style="font-size:2.8mm;opacity:0.7;">添付の背景絵柄付き・A4片面・icon-512.png使用・プロレベル・色・フォント・ボックス・イラスト</div><div style="font-size:3.5mm;font-weight:800;margin-top:1mm;">山手町町内会 | 品格ある邸宅街の景観を次世代へ</div></div><div style="text-align:center;"><div class="qr">QR<br>申込</div><div class="icons" style="margin-top:2mm;">🏮👘🎆<br>🌳🏡</div></div></div>'+
-    '<div style="text-align:center;padding:5mm;background:rgba(255,255,255,0.9);" class="no-print"><button onclick="window.print()" style="background:#2f7a6b;color:#fff;padding:4mm 10mm;border:none;border-radius:999px;font-weight:900;cursor:pointer;font-size:4mm;">🖨 印刷する / PDF保存</button></div>'+
-    '</div></body></html>');
-  win.document.close();
-}
-
-// 町内会で検討のボード - 応援10件以上が入っている、ダミー削除、チラシ作成フォーマットはデフォルト閉じ、実行プログラムは削除、プロレベルチラシ
-function renderKentouBoardClean(){
-  var wrap=document.getElementById('kentouWrap');
-  if(!wrap) return;
-  var html='';
-  html+='<div style="padding:18px 20px;background:#2f7a6b;color:#fff;border-radius:10px;margin-bottom:12px;"><div style="font-size:20px;font-weight:900;">🏘 町内会で検討のボード</div><div style="font-size:13px;color:#c7cdbb;margin-top:6px;">応援10個以上で自動移行・イベントページに移設・ダミー削除済み</div></div>';
-  // 応援10件以上 - 重要なので詳しく目立つように
-  var allIdeas={
-    'idea1': {title:'夏祭り復活', cat:'祭り', summary:'夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流し、第一種低層の静穏な住宅地に配慮して音量を抑えた品格ある祭りとして実施。子どもから高齢者まで楽しめる屋台と防災意識を高める展示も併設します。', total:12},
-    'idea7': {title:'両町合同イベントの模索', cat:'合同', summary:'山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。', total:11}
-  };
-  var moved=[];
-  Object.keys(eventIdeaCounts).forEach(function(id){
-    var c=eventIdeaCounts[id];
-    var total=(c.want||0)+(c.help||0)+(c.lead||0)+(c.place||0)+(c.interest||0);
-    if(total>=10 && allIdeas[id]){
-      moved.push({id:id, data:allIdeas[id], counts:c, total:total});
+    var shCat = getSheet('カテゴリ一覧');
+    if(shCat.getLastRow()>0){
+      var cvals = shCat.getDataRange().getValues();
+      for(var k=1;k<cvals.length;k++){
+        var b = String(cvals[k][0]||"").trim();
+        var m = String(cvals[k][1]||"").trim();
+        if(b && m){
+          var exists = false;
+          for(var e=0;e<INITIAL_24.length;e++){
+            if(INITIAL_24[e].big==b && INITIAL_24[e].mid==m){
+              exists=true;
+              break;
+            }
+          }
+          if(!exists){
+            dynamicCats.push("- "+b+" / "+m);
+          }
+        }
+      }
     }
-  });
-  if(moved.length>0){
-    html+='<div style="background:#fff;border:3px solid #e8a33d;border-radius:12px;padding:16px;margin-bottom:16px;">'+
-      '<div style="font-size:16px;font-weight:900;color:#c00;">🔥 応援10個以上で移行された企画 - 重要</div>';
-    moved.forEach(function(m){
-      html+='<div style="border:3px solid #2f7a6b;border-radius:12px;background:#fffcf0;padding:16px;margin-top:12px;">'+
-        '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;"><span style="font-size:18px;font-weight:900;">📌 '+m.data.title+'（応援'+m.total+'個で移行）</span><span style="background:#c00;color:#fff;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:900;">重要・町内会で検討中</span></div>'+
-        '<div style="margin-top:8px;font-size:11px;"><span style="background:#e8a33d;color:#000;padding:2px 8px;border-radius:999px;">'+m.data.cat+'</span> 🙋'+m.counts.want+' 🤝'+m.counts.help+' 🎤'+m.counts.lead+' 📍'+m.counts.place+' 👀'+m.counts.interest+' 合計'+m.total+'個</div>'+
-        '<div style="font-size:13px;background:#fff;padding:10px;border-radius:8px;margin-top:8px;line-height:1.7;"><b>■内容（100-150字）</b><br>'+m.data.summary+'</div>'+
-        '<div style="margin-top:10px;"><button type="button" onclick="fillFlyerFromIdea(\''+m.id+'\')" style="background:#2f7a6b;color:#fff;border:none;padding:12px 20px;border-radius:999px;font-weight:900;cursor:pointer;width:100%;">📄 この企画でチラシ作成フォーマットに入力（管理者が打ち込める）</button></div>'+
-        '</div>';
-    });
-    html+='</div>';
-  }
-  // チラシ作成フォーマット - デフォルト閉じ、プロレベル、別画面出力必須、背景画像・icon-512.png・色・フォント・ボックス
-  html+='<div style="background:#fff;border:3px solid #2f7a6b;border-radius:12px;padding:16px;margin-bottom:16px;">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:900;">📄 チラシ作成フォーマット - プロレベル（背景画像・icon-512.png・色・フォント・ボックス）</span></div>'+
-    '<div style="margin-top:12px;"><button type="button" onclick="toggleFlyer(\'flyer-form-wrap\')" style="background:#2f7a6b;color:#fff;border:none;padding:14px 24px;border-radius:999px;font-weight:900;font-size:14px;cursor:pointer;width:100%;">📄 チラシ作成フォーマットを開く - デフォルト閉じ・クリックで表示（機能します）</button>'+
-    '<div id="flyer-form-wrap" style="display:none;margin-top:12px;">'+
-    '<div id="flyer-form" style="display:grid;gap:10px;background:#f5f5f0;padding:16px;border-radius:10px;">'+
-    '<div><label style="font-weight:800;font-size:12px;">■タイトル：</label><input id="flyTitle" type="text" placeholder="例：夏祭り復活～3年ぶりに邸宅街に笑顔を～" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■日時：</label><input id="flyDate" type="text" placeholder="202x年x月xx日(日) 18:00-20:00" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■場所：</label><input id="flyPlace" type="text" placeholder="前山公園" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■対象：</label><input id="flyTarget" type="text" placeholder="子ども～高齢者まで 50名程度" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■持ち物：</label><input id="flyBelongings" type="text" placeholder="動きやすい服装、飲み物" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
-    '<div><label style="font-weight:800;font-size:12px;">■内容：</label><textarea id="flyContent" rows="3" placeholder="100-150文字で内容を入力" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>'+
-    '<div><label style="font-weight:800;font-size:12px;">■思い入れ：</label><textarea id="flyOmoi" rows="2" placeholder="なぜやるのか、どんな未来を作りたいか" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></textarea></div>'+
-    '<div><label style="font-weight:800;font-size:12px;">■雨天時の扱い：</label><input id="flyRain" type="text" placeholder="小雨決行・荒天中止、中止判断は当日8時までにLINEで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
-    '<div><label style="font-weight:800;font-size:12px;">■申込方法と締切：</label><input id="flyApply" type="text" placeholder="町内会LINE、掲示板、メール 締切：ｘ月ｘｘ日まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label style="font-weight:800;font-size:12px;">■緊急連絡先：</label><input id="flyEmergency" type="text" placeholder="町内会長 090-XXXX-XXXX" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div><div><label style="font-weight:800;font-size:12px;">■問合せ：</label><input id="flyContact" type="text" placeholder="山手町町内会 〇〇まで" style="width:100%;padding:8px;border:1.5px solid #ccc;border-radius:6px;"></div></div>'+
-    '<button type="button" onclick="generateFlyer()" style="background:linear-gradient(135deg,#2f7a6b 0%, #e8a33d 100%);color:#fff;border:none;padding:16px 24px;border-radius:999px;font-weight:900;font-size:16px;cursor:pointer;width:100%;margin-top:8px;">✨ プロレベルのA4チラシを別画面に出力する（背景画像・icon-512.png・色・フォント・ボックス）</button>'+
-    '</div></div></div></div>';
-  // ダミーの防災訓練の強化・ごみステーション美化は削除済み
-  wrap.innerHTML=html;
+  }catch(e){}
+  var allLines = lines.concat(dynamicCats);
+  return "大分類は必ず次から1つ："+bigs.join(",")+"\n中分類は必ず次のリストから選ぶ。該当なしはその他：\n"+allLines.join("\n")+"\n- その他";
 }
-function renderEventsClean(){
-  var up=document.getElementById('event-upcoming-list');
-  if(!up) return;
-  var sorted=[...EVENT_DATA].sort((a,b)=> new Date(a.date)-new Date(b.date));
-  var html='<div style="background:#23282a;color:#fff;padding:10px;border-radius:8px;margin-bottom:12px;font-weight:900;">📅 今後のイベント（'+sorted.length+'件・企画アイデアとは別内容・100-150字）</div>';
-  sorted.forEach(function(ev){
-    var d = ev.date ? new Date(ev.date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '日付未定';
-    html+='<div style="border:2px solid #e8a33d;border-radius:12px;background:#fff;margin-bottom:12px;padding:16px;">'+
-      '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;"><span style="font-size:13px;background:#e8a33d;color:#000;padding:4px 12px;border-radius:999px;font-weight:900;">📅 '+escapeHtml(d)+' ⏰ '+escapeHtml(ev.time||'')+'</span><span style="font-size:11px;background:#23282a;color:#fff;padding:3px 10px;border-radius:999px;">'+escapeHtml(ev.category)+' | '+escapeHtml(ev.status)+'</span></div>'+
-      '<div style="font-weight:900;font-size:16px;margin-top:8px;">'+escapeHtml(ev.title)+'</div>'+
-      '<div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:4px;">📍 '+escapeHtml(ev.place)+' | '+escapeHtml(ev.detail)+'</div>'+
-      '</div>';
-  });
-  up.innerHTML=html;
-}
-function renderEventIdeasClean(){
-  var wrap=document.getElementById('event-ideas-list');
-  if(!wrap) return;
-  var items=[
-    {id:'idea1', title:'夏祭り復活', cat:'祭り', summary:'夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流し、第一種低層の静穏な住宅地に配慮して音量を抑えた品格ある祭りとして実施。子どもから高齢者まで楽しめる屋台と防災意識を高める展示も併設します。'},
-    {id:'idea2', title:'石垣と邸宅街を守る美化活動', cat:'清掃', summary:'石垣や門構えが特徴の山手町では、美化活動は景観保全そのものです。急斜面の側溝清掃、石垣周辺の除草、生垣手入れ講習を継続し、邸宅街の品格を守ります。住民参加型で年4回実施し、景観保全の意識を高めます。'},
-    {id:'idea3', title:'急坂地域の防災・防犯を楽しく学ぶ', cat:'防災', summary:'急坂が多い山手町の防災・防犯を楽しく学ぶイベントを開催します。ハロウィン仮装防犯パトロールや炊き出し訓練、防災ラジオ配布を通じて、高齢者も子どもも参加できる防災意識向上の機会を作ります。'},
-    {id:'idea4', title:'邸宅の庭を活かした多世代交流', cat:'子ども', summary:'邸宅の庭を活かした多世代交流を推進します。広い庭を持つ邸宅が多い特性を活かし、庭での絵本読み聞かせや自然観察、ラジオ体操と朝活コーヒーで子どもから高齢者までが顔の見える関係を築きます。'},
-    {id:'idea5', title:'防犯パトロール', cat:'防犯', summary:'夜間の防犯パトロールを強化します。急坂が多く街灯が少ない山手町では、懐中電灯を持った見回りが重要です。子ども見守り隊と連携し、ハロウィン仮装パトロールなど楽しく参加できる防犯活動を実施します。'},
-    {id:'idea6', title:'空き家見学会', cat:'空き家', summary:'空き家バンクの空き家を見学するイベントを開催します。大邸宅が多い地域特性を活かし、空き家を地域資源として活用する方法を学びます。移住希望者向けに邸宅の歴史や景観保全の取り組みも紹介します。'},
-    {id:'idea7', title:'両町合同イベントの模索', cat:'合同', summary:'山手町と東芦屋町の合同イベントを企画したい。両町の住民が交流できる場を作り、石垣と邸宅街の景観保全や防災・防犯をテーマに多世代交流を促進する。第一種低層の静穏な住宅地の品格を保ちながら、両町の連携で新たなコミュニティを築くイベントを模索します。'}
-  ];
-  var html='<div style="background:#e8a33d;color:#000;padding:14px 18px;border-radius:8px;margin-bottom:12px;font-weight:900;font-size:14px;">💡 企画アイデア（タイトルと100-150字・今後のイベントとは別内容・ボタンあり・クリックで数字が増えます）</div>';
-  items.forEach(function(it){
-    var c=eventIdeaCounts[it.id]||{want:0,help:0,lead:0,place:0,interest:0};
-    var total=(c.want||0)+(c.help||0)+(c.lead||0)+(c.place||0)+(c.interest||0);
-    html+='<div style="border:1.5px solid #e8a33d;border-radius:10px;background:#fffcf0;padding:12px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;"><span style="font-weight:900;">'+escapeHtml(it.title)+'</span><span style="font-size:11px;background:#e8a33d;color:#000;padding:2px 8px;border-radius:999px;">'+escapeHtml(it.cat)+' 合計'+total+'/10</span></div><div style="font-size:12px;background:#fff8e1;padding:8px;border-radius:6px;margin-top:6px;">'+escapeHtml(it.summary)+'</div><div class="event-btn-group" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;overflow:visible;">'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'want\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🙋 やりたい '+c.want+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'help\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🤝 手伝える '+c.help+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'lead\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">🎤 仕切り '+c.lead+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'place\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">📍 場所 '+c.place+'</button>'+
-      '<button type="button" onclick="incrementIdea(\''+it.id+'\',\'interest\')" style="padding:7px 12px;border-radius:20px;border:1.5px solid #2f7a6b;background:#fff;font-size:12px;cursor:pointer;">👀 興味あり '+c.interest+'</button>'+
-      '</div></div>';
-  });
-  wrap.innerHTML=html;
-}
-var __origToggle = toggleBaseDesc;
-toggleBaseDesc = function(k){
-  var el=document.getElementById('base-desc-'+k+'-tree')||document.getElementById('base-desc-'+k);
-  if(!el) return; el.style.display=el.style.display==='none'?'block':'none';
-  var t=document.getElementById('toggle-'+k+'-tree')||document.getElementById('toggle-'+k);
-  if(t) t.textContent=el.style.display==='none'?'▼ 詳細200字':'▲ 閉じる';
-};
-var __origRenderBoard = renderBoard;
-renderBoard = function(){
-  var cork=document.getElementById('corkGrid');
-  if(!cork){ __origRenderBoard(); return; }
-  cork.innerHTML='';
-  var head=document.createElement('div');
-  head.style.cssText='background:#1a1a1a;color:#fff;padding:16px;border-radius:12px;margin-bottom:16px;';
-  head.innerHTML='<div style="font-weight:900;">📌 意見集約箱（声のボード）</div><div style="font-size:11px;color:#c7cdbb;margin-top:4px;">大分類 → 中分類 → 記事タイトル → 記事内容の順にクリックして開きます。</div>';
-  cork.appendChild(head);
-  var bigRow=document.createElement('div');
-  bigRow.style.cssText='display:grid;grid-template-columns:repeat(5, 1fr);gap:12px;margin-bottom:16px;';
-  BASE_CATEGORIES.forEach(function(c){
-    var count=ALL_IDEAS.filter(function(i){ return i.big===c.key; }).length;
-    var card=document.createElement('div');
-    card.style.cssText='border:'+(openBig===c.key?'2px solid #e8a33d':'1.5px solid #d8dcc9')+';border-radius:12px;background:#fff;padding:16px 8px;text-align:center;cursor:pointer;position:relative;';
-    card.innerHTML='<div style="font-size:24px;margin-top:6px;">'+(c.icon||'📌')+'</div><div style="font-size:11px;font-weight:700;margin-top:8px;line-height:1.3;">'+c.label+'</div><div style="display:inline-block;background:#2f7a6b;color:#fff;border-radius:999px;padding:1px 10px;font-size:11px;margin-top:6px;">'+count+'件</div>';
-    card.onclick=function(){ openBig=c.key; openMidMap={}; renderBoard(); renderMapUpdateTree(); };
-    bigRow.appendChild(card);
-  });
-  cork.appendChild(bigRow);
-  if(!openBig) return;
-  var selected=BASE_CATEGORIES.find(function(c){ return c.key===openBig; });
-  var detailWrap=document.createElement('div');
-  detailWrap.style.cssText='background:#fff;border-radius:12px;padding:16px;border:1.5px solid #d8dcc9;';
-  detailWrap.innerHTML='<div style="font-weight:900;font-size:14px;margin-bottom:12px;border-bottom:1px solid #eee;padding-bottom:8px;">📎 '+selected.label+'</div>';
-  var mids={};
-  ALL_IDEAS.filter(function(i){ return i.big===openBig; }).forEach(function(i){ mids[i.mid]=true; });
-  Object.keys(mids).forEach(function(mid){
-    var midCount=ALL_IDEAS.filter(function(i){ return i.big===openBig && i.mid===mid; }).length;
-    var isMidOpen=openMidMap[openBig+'__'+mid];
-    var midRow=document.createElement('div');
-    midRow.style.cssText='background:#f5f5f0;border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;';
-    midRow.innerHTML='<span style="font-weight:700;font-size:13px;">'+mid+'</span><span style="font-size:11px;color:#666;">'+midCount+'件 '+(isMidOpen?'▲':'▼')+'</span>';
-    midRow.onclick=function(){ openMidMap[openBig+'__'+mid]=!isMidOpen; renderBoard(); };
-    detailWrap.appendChild(midRow);
-    if(isMidOpen){
-      ALL_IDEAS.filter(function(i){ return i.big===openBig && i.mid===mid; }).forEach(function(idea){
-        var ideaRow=document.createElement('div');
-        ideaRow.style.cssText='margin-left:12px;margin-bottom:6px;background:#fff8e1;border-left:3px solid #e8a33d;border-radius:4px;padding:8px 10px;cursor:pointer;';
-        ideaRow.innerHTML='<div style="font-weight:700;font-size:12px;">'+idea.title+'</div><div id="idea-'+idea.id+'" style="display:'+(openPostMap[idea.id]?'block':'none')+';font-size:11px;margin-top:6px;background:#fff;padding:6px;border-radius:4px;">'+(idea.summary||'')+'</div>';
-        ideaRow.onclick=function(){ openPostMap[idea.id]=!openPostMap[idea.id]; var el=document.getElementById('idea-'+idea.id); if(el) el.style.display=el.style.display==='none'?'block':'none'; };
-        detailWrap.appendChild(ideaRow);
-      });
+
+// ---------------------------------------------------------------------------
+// AIの出力を正規化
+// ---------------------------------------------------------------------------
+function normalizeResult_(r, content, via){
+  var mid = (r["中分類"]||"").trim();
+  var big = (r["大分類"]||"").trim();
+  var allMasters = INITIAL_24.slice();
+  try{
+    var shCat = getSheet('カテゴリ一覧');
+    if(shCat.getLastRow()>0){
+      var cvals = shCat.getDataRange().getValues();
+      for(var k=1;k<cvals.length;k++){
+        var b = String(cvals[k][0]||"").trim();
+        var m = String(cvals[k][1]||"").trim();
+        if(b && m){
+          allMasters.push({big:b, mid:m});
+        }
+      }
     }
+  }catch(e){}
+  var found = null;
+  for(var i=0;i<allMasters.length;i++){
+    if(allMasters[i].mid===mid){
+      found=allMasters[i];
+      break;
+    }
+  }
+  if(!found){
+    return {
+      "大分類": big || "コミュニティ",
+      "中分類": "その他",
+      "推奨タイトル": r["推奨タイトル"]||String(content).slice(0,15),
+      "要約200": String(r["要約200"]||"").replace(/高齢化率35％|35％|高齢化35%超/g,'多世代'),
+      "核心": String(r["視点1_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+      "変化": String(r["視点2_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+      "成功事例": String(r["視点3_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+      "懸念点": String(r["視点4_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+      "問い": String(r["視点5_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+      "本質的トレードオフ": String(r["本質的トレードオフ"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+      "knowledge_used": via
+    };
+  }
+  return {
+    "大分類": found.big,
+    "中分類": found.mid,
+    "推奨タイトル": r["推奨タイトル"]||String(content).slice(0,15),
+    "要約200": String(r["要約200"]||"").replace(/高齢化率35％|35％|高齢化35%超/g,'多世代'),
+    "核心": String(r["視点1_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+    "変化": String(r["視点2_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+    "成功事例": String(r["視点3_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+    "懸念点": String(r["視点4_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+    "問い": String(r["視点5_本文"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+    "本質的トレードオフ": String(r["本質的トレードオフ"]||"").replace(/高齢化率35％|35％/g,'多世代'),
+    "knowledge_used": via
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Groq呼び出し（Groq 20b）
+// ---------------------------------------------------------------------------
+function callGroq_(prompt, model){
+  var apiKey = getGroqKey();
+  if(!apiKey){
+    throw new Error("GROQ_API_KEY未設定");
+  }
+  var url = "https://api.groq.com/openai/v1/chat/completions";
+  var res = UrlFetchApp.fetch(url, {
+    method:"post",
+    headers:{ "Authorization":"Bearer "+apiKey, "Content-Type":"application/json" },
+    payload: JSON.stringify({
+      model: model,
+      messages:[{role:"user", content: prompt}],
+      temperature:0.3,
+      max_tokens:1500,
+      response_format:{type:"json_object"}
+    }),
+    muteHttpExceptions:true
   });
-  cork.appendChild(detailWrap);
-  renderMapUpdateTree();
-};
-var __origShowTab = showEventTab;
-showEventTab = function(tab){
-  var up=document.getElementById('event-upcoming-list');
-  var ideas=document.getElementById('event-ideas-list');
-  if(!up||!ideas) return;
-  if(tab==='upcoming'){
-    up.style.display='block'; ideas.style.display='none';
-    var btnUp=document.getElementById('btn-upcoming'); if(btnUp) btnUp.style.background='#e8a33d';
-    var btnId=document.getElementById('btn-ideas'); if(btnId) btnId.style.background='#fff';
-  } else {
-    up.style.display='none'; ideas.style.display='block';
-    var btnUp=document.getElementById('btn-upcoming'); if(btnUp) btnUp.style.background='#fff';
-    var btnId=document.getElementById('btn-ideas'); if(btnId) btnId.style.background='#e8a33d';
-    renderEventIdeasClean();
+  if(res.getResponseCode()!==200){
+    throw new Error("Groq "+model+" "+res.getResponseCode()+" "+res.getContentText().slice(0,500));
   }
-};
-window.renderKentouBoard = renderKentouBoardClean;
-window.renderEventIdeas = renderEventIdeasClean;
-window.renderEventIdeasWithButtons = renderEventIdeasClean;
-window.renderEvents = renderEventsClean;
+  var json = JSON.parse(res.getContentText());
+  return json.choices[0].message.content;
+}
 
-var __origSubmit = submitEventForm;
-submitEventForm = function(){
-  var titleEl=document.getElementById('evTitle');
-  var title=titleEl?.value.trim()||'';
-  if(!title){ alert('タイトルを入力してください'); return; }
-  var detailEl=document.getElementById('evDetail');
-  var detail=detailEl?.value.trim()||'';
-  if(detail.length<100 || detail.length>150){
-    alert('イベント企画の内容は100-150文字にしてください。現在'+detail.length+'文字です。\n\nスプレッドシートのdetail欄が空になるのを防ぐため、100-150字で保存します。');
-    return;
+// Groq呼び出し（テキスト用、100-150字整理用）- json_objectなし
+function callGroqText_(prompt, model){
+  var apiKey = getGroqKey();
+  if(!apiKey){
+    throw new Error("GROQ_API_KEY未設定");
   }
-  var date=document.getElementById('evDate')?.value||new Date().toISOString().slice(0,10);
-  var newEv={id:'evt'+Date.now(),date,time:document.getElementById('evTime')?.value||'',title,place:document.getElementById('evPlace')?.value||'山手町',category:document.getElementById('evCategory')?.value||'定例',status:document.getElementById('evStatus')?.value||'予定',detail:detail};
-  EVENT_DATA.push(newEv);
-  try{ localStorage.setItem('EVENT_DATA', JSON.stringify(EVENT_DATA)); }catch(e){}
-  // GASにdetailを確実に送る（content, detail, summary全てに同じ100-150字を入れる）
-  if(typeof gasUrl !== 'undefined'){
-    fetch(gasUrl,{method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify({action:"postEventIdea", content:detail, title:title, summary:detail, detail:detail})}).then(r=>r.json()).then(j=>{
-      console.log('GAS saved:', j);
-      document.getElementById('evStatusMsg').textContent='✅ 保存成功: '+detail.length+'字でスプレッドシートに保存されました';
-    }).catch(e=>{ console.error(e); document.getElementById('evStatusMsg').textContent='GAS通信エラー: '+e.message; });
+  var url = "https://api.groq.com/openai/v1/chat/completions";
+  var res = UrlFetchApp.fetch(url, {
+    method:"post",
+    headers:{ "Authorization":"Bearer "+apiKey, "Content-Type":"application/json" },
+    payload: JSON.stringify({
+      model: model,
+      messages:[{role:"user", content: prompt}],
+      temperature:0.7,
+      max_tokens:300
+    }),
+    muteHttpExceptions:true
+  });
+  if(res.getResponseCode()!==200){
+    throw new Error("Groq "+model+" "+res.getResponseCode()+" "+res.getContentText().slice(0,500));
   }
-  renderEventsClean();
-  renderEventIdeasClean();
-  document.getElementById('eventFormCard').style.display='none';
-  titleEl.value=''; detailEl.value='';
-  showEventTab('upcoming');
-};
+  var json = JSON.parse(res.getContentText());
+  return json.choices[0].message.content;
+}
 
-window.addEventListener('load', function(){
-  setTimeout(function(){ renderMapUpdateTree(); renderKentouBoardClean(); renderEventsClean(); renderEventIdeasClean(); showEventTab('upcoming'); }, 500);
-});
+// ---------------------------------------------------------------------------
+// Gemini new API呼び出し（gemini-2.5-flash-lite）
+// ---------------------------------------------------------------------------
+function callGeminiNew_(prompt, model){
+  var apiKey = getApiKey();
+  if(!apiKey){
+    throw new Error("GEMINI_API_KEY未設定");
+  }
+  var endpoint = "https://generativelanguage.googleapis.com/v1beta/interactions?key="+apiKey;
+  var res = UrlFetchApp.fetch(endpoint, {
+    method:"post",
+    contentType:"application/json",
+    payload: JSON.stringify({ model:model, input: prompt }),
+    muteHttpExceptions:true
+  });
+  if(res.getResponseCode()!==200){
+    throw new Error("Gemini "+model+" "+res.getResponseCode()+" "+res.getContentText().slice(0,500));
+  }
+  var data = JSON.parse(res.getContentText());
+  var txt = data.output_text || "";
+  if(!txt && data.steps){
+    for(var s=0;s<data.steps.length;s++){
+      if(data.steps[s].content){
+        for(var c=0;c<data.steps[s].content.length;c++){
+          if(data.steps[s].content[c].text){
+            txt+=data.steps[s].content[c].text;
+          }
+        }
+      }
+    }
+  }
+  return txt;
+}
 
-</script>
-<footer style="margin-top:60px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
-  <div style="max-width:1120px;margin:0 auto;">
-    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
-      <div style="font-size:28px;">🏙</div>
-      <div>
-        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
-          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
-        </div>
-        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
-          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
-          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
-          誰もが参加できるオープンな活動を行っています。
-          <br>
-          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
-          <span style="opacity:.5;margin:0 6px;">/</span>
-          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>  
-</body>
-</html>
+// ---------------------------------------------------------------------------
+// ★追加: イベント企画を100-150字に賢く整理するLLM関数（Groq 20b → Gemini 2.5-flash-lite）
+// 場当たり的な if は使わない、どのような質問にも対応
+// ---------------------------------------------------------------------------
+function organizeEventTo100_150_(title, rawContent){
+  var prompt = `
+あなたは芦屋市山手町のイベント企画を整理する賢いアシスタントです。
+以下の質問・要望を、100-150文字のイベント企画文章に整理してください。
+
+【条件】
+- 文字数は必ず100-150文字にすること
+- 山手町の地域特性（石垣、邸宅街、急坂、第一種低層住居専用地域の静穏さ、公園、集会所）を踏まえること
+- イベントの目的、内容、期待される効果を含めること
+- 「高齢化率35％」「35％」という具体的な数値は出さないこと（「多世代」「高齢化が進む」など一般的な表現にすること）
+- 場当たり的な対応ではなく、どのような質問にも対応できる汎用的な整理をすること
+
+【タイトル】${title}
+【質問・要望】${rawContent}
+
+【出力】100-150文字の整理されたイベント企画文章のみを出力してください。余計な説明は不要です。
+`;
+
+  // Groq 20b を優先（現在使っているGroq 20b）
+  try{
+    var txt20 = callGroqText_(prompt, "openai/gpt-oss-20b");
+    return cleanOrganized_(txt20);
+  }catch(e){}
+
+  // Groq 120b
+  try{
+    Utilities.sleep(500);
+    var txt120 = callGroqText_(prompt, "openai/gpt-oss-120b");
+    return cleanOrganized_(txt120);
+  }catch(e){}
+
+  // Gemini 2.5-flash-lite にフォールバック（ご指定通り）
+  var geminiModels = ["gemini-2.5-flash-lite","gemini-flash-lite-latest","gemini-flash-latest"];
+  for(var i=0;i<geminiModels.length;i++){
+    try{
+      var txtGem = callGeminiNew_(prompt, geminiModels[i]);
+      return cleanOrganized_(txtGem);
+    }catch(e){
+      Utilities.sleep(1000);
+    }
+  }
+
+  // フォールバック（高齢化率35％は出さない）
+  var base = String(rawContent||"").replace(/高齢化率35％|高齢化率３５％|35％|３５％|高齢化35%超/g,'');
+  if(base.length < 100){
+    base = base + '。山手町の石垣と邸宅街の景観を活かし、急坂が多い地域特性に配慮しながら、第一種低層の静穏な住宅地の品格を保ちつつ、多世代が交流できるイベントとして具体化します。';
+  }
+  return base.slice(0,150);
+}
+
+function cleanOrganized_(text){
+  if(!text) return "";
+  var t = String(text).replace(/\n/g,'').trim();
+  // JSONが返ってきた場合もテキスト部分を抽出
+  var m = t.match(/\{[\s\S]*\}/);
+  if(m){
+    try{
+      var j = JSON.parse(m[0]);
+      t = j["要約200"] || j["本文"] || j["organized"] || t;
+    }catch(e){}
+  }
+  t = t.replace(/高齢化率35％|高齢化率３５％|35％|３５％|高齢化35%超/g,'多世代');
+  if(t.length < 100){
+    t = t + '。山手町の地域特性を活かし、住民同士の交流を深め、景観保全と安全なまちづくりを両立させるイベントとして具体化します。';
+  }
+  if(t.length > 150) t = t.slice(0,150);
+  return t;
+}
+
+// ---------------------------------------------------------------------------
+// 5視点分析本体（Groq 20b → Gemini 2.5-flash-lite）
+// ---------------------------------------------------------------------------
+function analyzeUltimate(content) {
+  var profile = getYamateProfile();
+  var categoryRule = getCategoryPromptText_();
+  var basePrompt = "あなたは芦屋市山手町の主任研究員です。\nプロファイル:\n"+profile+"\n\n住民の声:"+content+"\n\n必ずJSONのみで返してください。\n"+categoryRule+"\n各視点の本文は必ず90〜120文字で記述すること。\n{\n\"本質的トレードオフ\":\"40字で\",\n\"視点1_タイトル\":\"核心\",\n\"視点1_本文\":\"90〜120字\",\n\"視点2_タイトル\":\"変化\",\n\"視点2_本文\":\"90〜120字\",\n\"視点3_タイトル\":\"成功事例\",\n\"視点3_本文\":\"90〜120字\",\n\"視点4_タイトル\":\"懸念点\",\n\"視点4_本文\":\"90〜120字\",\n\"視点5_タイトル\":\"問い\",\n\"視点5_本文\":\"90〜120字\",\n\"要約200\":\"180〜220字\",\n\"大分類\":\"上記から1つ\",\n\"中分類\":\"上記から1つ、該当なしはその他\",\n\"推奨タイトル\":\"15字以内\"\n}";
+
+  // Groq 20b
+  try{
+    var txt = callGroq_(basePrompt, "openai/gpt-oss-20b");
+    var m = txt.match(/\{[\s\S]*\}/);
+    if(m){
+      return normalizeResult_(JSON.parse(m[0]), content, "groq:20b");
+    }
+  }catch(e){}
+
+  // Groq 120b
+  try{
+    Utilities.sleep(500);
+    var txt2 = callGroq_(basePrompt, "openai/gpt-oss-120b");
+    var m2 = txt2.match(/\{[\s\S]*\}/);
+    if(m2){
+      return normalizeResult_(JSON.parse(m2[0]), content, "groq:120b");
+    }
+  }catch(e){}
+
+  // Gemini フォールバック（gemini-2.5-flash-lite を優先）
+  var models = ["gemini-2.5-flash-lite","gemini-flash-lite-latest","gemini-flash-latest"];
+  for(var i=0;i<models.length;i++){
+    try{
+      var txt3 = callGeminiNew_(basePrompt, models[i]);
+      var m3 = txt3.match(/\{[\s\S]*\}/);
+      if(m3){
+        return normalizeResult_(JSON.parse(m3[0]), content, "gemini:"+models[i]);
+      }
+    }catch(e){
+      Utilities.sleep(1000);
+    }
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------
+// 列名から列番号を自動取得
+// ---------------------------------------------------------------------------
+function getColumnMap_(sheet){
+  if(!sheet || sheet.getLastRow()===0){
+    return {};
+  }
+  var lastCol = sheet.getLastColumn();
+  var headers = sheet.getRange(1,1,1,lastCol).getValues()[0];
+  var map = {};
+  for(var i=0;i<headers.length;i++){
+    var h = String(headers[i]||"").trim();
+    if(h){
+      map[h]=i+1;
+    }
+  }
+  return map;
+}
+
+// ---------------------------------------------------------------------------
+// その他3件で新中分類自動生成
+// ---------------------------------------------------------------------------
+function checkAndPromoteSonoTa_(bigLabel){
+  try{
+    var sh = getSheet('声のボード');
+    var colMap = getColumnMap_(sh);
+    if(!colMap.midLabel){
+      return null;
+    }
+    var vals = sh.getDataRange().getValues();
+    var sonoTaRows = [];
+    for(var i=1;i<vals.length;i++){
+      var cat = String(vals[i][(colMap.midLabel||4)-1]||"");
+      var big = String(vals[i][(colMap.bigLabel||3)-1]||"");
+      if(cat.indexOf("その他")>=0 && big.indexOf(bigLabel)>=0){
+        sonoTaRows.push({
+          row:i+1,
+          content: String(vals[i][(colMap.raw||7)-1]||""),
+          title: String(vals[i][(colMap.title||5)-1]||""),
+          summary: String(vals[i][(colMap.summary||6)-1]||"")
+        });
+      }
+    }
+    if(sonoTaRows.length < 3){
+      return null;
+    }
+    var last3 = sonoTaRows.slice(-3);
+    var newMid = last3[0].title.slice(0,12);
+    if(!newMid || newMid.length<2){
+      newMid = "新テーマ_"+new Date().getTime().toString().slice(-4);
+    }
+    var shCat = getSheetSafe_('カテゴリ一覧',['大分類','中分類','件数','最終更新']);
+    var cvals = shCat.getDataRange().getValues();
+    for(var j=1;j<cvals.length;j++){
+      if(String(cvals[j][1]).trim()===newMid){
+        return null;
+      }
+    }
+    shCat.appendRow([bigLabel, newMid, 3, new Date()]);
+    var mergedSummary = last3.map(function(o){ return o.summary; }).join("\n\n");
+    var mergedContent = last3.map(function(o){ return o.content; }).join("\n\n---\n\n");
+    if(colMap.title){
+      sh.getRange(last3[0].row, colMap.title).setValue(newMid+"（新統合）");
+    }
+    if(colMap.midLabel){
+      sh.getRange(last3[0].row, colMap.midLabel).setValue(newMid);
+    }
+    if(colMap.summary){
+      sh.getRange(last3[0].row, colMap.summary).setValue(mergedSummary.slice(0,5000));
+    }
+    if(colMap.raw){
+      sh.getRange(last3[0].row, colMap.raw).setValue(mergedContent.slice(0,5000));
+    }
+    for(var k=1;k<last3.length;k++){
+      if(colMap.midLabel){
+        sh.getRange(last3[k].row, colMap.midLabel).setValue(newMid+"（統合済）");
+      }
+    }
+    return {big: bigLabel, newMid: newMid, count: 3, baseRows: last3.map(function(o){return o.row;})};
+  }catch(e){
+    PropertiesService.getScriptProperties().setProperty('LAST_PROMOTE_ERROR', String(e));
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// doGet
+// ---------------------------------------------------------------------------
+function doGet(e) {
+  var action = (e && e.parameter && e.parameter.action) ? String(e.parameter.action).toLowerCase() : '';
+  
+  if (action === 'debug') {
+    var key = getApiKey();
+    var groq = getGroqKey();
+    return ContentService.createTextOutput(JSON.stringify({
+      status:"debug",
+      hasGeminiKey:key!=='',
+      hasGroqKey:groq!=='',
+      raw: PropertiesService.getScriptProperties().getProperty('LAST_POST_RAW') || "なし",
+      err: PropertiesService.getScriptProperties().getProperty('LAST_POST_ERROR') || "なし",
+      categories: INITIAL_24.length
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  if (action === 'test') {
+    var r = analyzeUltimate("大人と子供の交流を増やしたい");
+    return ContentService.createTextOutput(JSON.stringify({ status: r?"success":"error", result: r })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+    if (action === 'list') {
+    var events = [];
+    var shEv = getSheet('イベント');
+    if(shEv.getLastRow()>0){
+      var evVals = shEv.getDataRange().getValues();
+      for (var i = 1; i < evVals.length; i++){
+        if (evVals[i][0]){
+          var eid = evVals[i][0];
+          var counts = {want:0, help:0, lead:0, place:0, interest:0};
+          try{ counts = getJoinCounts_(eid); }catch(e){}
+          events.push({
+            id: eid,
+            date: evVals[i][1],
+            time: evVals[i][2],
+            title: evVals[i][3],
+            place: evVals[i][4],
+            category: evVals[i][5],
+            status: evVals[i][6],
+            detail: evVals[i][7],
+            counts: counts
+          });
+        }
+      }
+    }
+    var hiroba = [];
+    var shHi = getSheetSafe_('広場', ['timestamp','author','comment','category','image','toInstagram','status']);
+    if(shHi.getLastRow()>0){
+      var hiVals = shHi.getDataRange().getValues();
+      for (var j = 1; j < hiVals.length; j++){
+        if (hiVals[j][0]){
+          hiroba.push({
+            timestamp: hiVals[j][0],
+            author: hiVals[j][1],
+            comment: hiVals[j][2],
+            category: hiVals[j][3],
+            imageUrl: hiVals[j][4]
+          });
+        }
+      }
+    }
+    var ideas = [];
+    try{
+      var shBoard = getSheet('声のボード');
+      if(shBoard.getLastRow()>1){
+        var map = getColumnMap_(shBoard);
+        var bVals = shBoard.getDataRange().getValues();
+        for(var k=1;k<bVals.length;k++){
+          if(!bVals[k][0]) continue;
+          ideas.push({
+            timestamp: bVals[k][(map.timestamp||1)-1],
+            author: bVals[k][(map.author||2)-1],
+            bigLabel: bVals[k][(map.bigLabel||3)-1],
+            midLabel: bVals[k][(map.midLabel||4)-1],
+            title: bVals[k][(map.title||5)-1],
+            summary: bVals[k][(map.summary||6)-1],
+            raw: bVals[k][(map.raw||7)-1],
+            core: bVals[k][(map.core||8)-1],
+            change: bVals[k][(map.change||9)-1],
+            success: bVals[k][(map.success||10)-1],
+            concern: bVals[k][(map.concern||11)-1],
+            question: bVals[k][(map.question||12)-1]
+          });
+        }
+      }
+    }catch(e){}
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "success",
+      events: events,
+      data: hiroba,
+      ideas: ideas
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    status: "ok",
+    version:"v11.4 complete - Groq 20b + gemini-2.5-flash-lite + 100-150字LLM整理",
+    sheetId: SHEET_ID ? "set" : "default"
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ---------------------------------------------------------------------------
+// doPost - メイン処理（postEventIdeaで賢いLLM 100-150字整理）
+// ---------------------------------------------------------------------------
+function doPost(e){
+  try{
+    var body = "";
+    if(e.postData && e.postData.contents){
+      body = e.postData.contents;
+    }else if(e.parameter && e.parameter.payload){
+      body = e.parameter.payload;
+    }else{
+      body = JSON.stringify(e.parameter || {});
+    }
+    PropertiesService.getScriptProperties().setProperty('LAST_POST_RAW', body.slice(0, 4000));
+    var data = JSON.parse(body);
+
+    if(data.action === "postHiroba"){
+      var sh = getSheetSafe_('広場',['timestamp','author','comment','category','image','toInstagram','status']);
+      sh.appendRow([
+        new Date().toISOString(),
+        data.author || "匿名",
+        data.comment || "",
+        data.category || "その他",
+        data.imageBase64? "画像あり" : "",
+        data.toInstagram? "Instagram希望" : "",
+        "未処理"
+      ]);
+      return ContentService.createTextOutput(JSON.stringify({status:"success", action:"postHiroba"})).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // ★変更: イベント企画（賢いLLMで100-150字に整理してからイベントシートに単独格納）
+    if(data.action === "postEventIdea"){
+      var shEv = getSheetSafe_('イベント',['id','date','time','title','place','category','status','detail']);
+      var newId = 'evt'+Date.now();
+      var title = data.title || (data.content||"").slice(0,20) || "新規イベント企画";
+      var rawContent = data.content || data.summary || "";
+      // ★賢いLLMが100-150字に整理（Groq 20b → Gemini 2.5-flash-lite）
+      var organized = organizeEventTo100_150_(title, rawContent);
+      shEv.appendRow([
+        newId,
+        new Date().toISOString().slice(0,10),
+        "",
+        title,
+        "山手町",
+        "企画",
+        "アイデア募集中",
+        organized
+      ]);
+      return ContentService.createTextOutput(JSON.stringify({
+        status:"success",
+        action:"postEventIdea",
+        integrated:false,
+        organized: organized,
+        targetRow: shEv.getLastRow(),
+        category:"イベント・企画 / 新規",
+        reason:"イベント企画のため賢いLLMで100-150字に整理してイベントボードに単独格納"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if(data.action === "postIdea" || data.action === "postAnalysis"){
+      var analysis = data.analysis || {};
+      var big = analysis["大分類"] || "コミュニティ";
+      var mid = analysis["中分類"] || "その他";
+      var title = analysis["推奨タイトル"] || data.title || mid;
+      var summary = String(analysis["要約200"] || data.summary || data.content || "").replace(/高齢化率35％|35％|高齢化35%超/g,'多世代');
+      var raw = data.content || data.comment || "";
+      var core = String(analysis["核心"] || "").replace(/高齢化率35％|35％/g,'多世代');
+      var change = String(analysis["変化"] || "").replace(/高齢化率35％|35％/g,'多世代');
+      var success = String(analysis["成功事例"] || "").replace(/高齢化率35％|35％/g,'多世代');
+      var concern = String(analysis["懸念点"] || "").replace(/高齢化率35％|35％/g,'多世代');
+      var question = String(analysis["問い"] || "").replace(/高齢化率35％|35％/g,'多世代');
+      var tradeoff = String(analysis["本質的トレードオフ"] || "").replace(/高齢化率35％|35％/g,'多世代');
+      var knowledge = analysis["knowledge_used"] || "";
+
+      var sh2 = getSheet('声のボード');
+      var colMap = getColumnMap_(sh2);
+      if(!colMap.timestamp){
+        sh2.clear();
+        sh2.appendRow(['timestamp','author','bigLabel','midLabel','title','summary','raw','core','change','success','concern','question','tradeoff','knowledge_used']);
+        colMap = getColumnMap_(sh2);
+      }
+
+      var vals = sh2.getDataRange().getValues();
+      var targetRow = -1;
+
+      if(mid !== "その他"){
+        for(var i=vals.length-1; i>=1; i--){
+          var mLabel = String(vals[i][(colMap.midLabel||4)-1]||"");
+          var t = String(vals[i][(colMap.title||5)-1]||"");
+          if(mLabel.indexOf(mid)>=0 && t.indexOf("統合済")===-1){
+            targetRow = i+1;
+            break;
+          }
+        }
+      }
+
+      if(targetRow>0){
+        var oldSummary = String(sh2.getRange(targetRow, colMap.summary).getValue()||"");
+        var oldRaw = String(sh2.getRange(targetRow, colMap.raw).getValue()||"");
+        var newSummary = (oldSummary + "\n\n--- 新提案 "+new Date().toLocaleString('ja-JP')+" ---\n" + summary).slice(0,5000);
+        var newRaw = (oldRaw + "\n\n--- 新提案統合 ("+new Date().toLocaleString('ja-JP')+") ---\n" + raw).slice(0,5000);
+        sh2.getRange(targetRow, colMap.timestamp).setValue(new Date().toLocaleString('ja-JP'));
+        sh2.getRange(targetRow, colMap.author).setValue(data.author||"匿名");
+        sh2.getRange(targetRow, colMap.title).setValue(title+"（更新）");
+        sh2.getRange(targetRow, colMap.summary).setValue(newSummary);
+        sh2.getRange(targetRow, colMap.raw).setValue(newRaw);
+        if(colMap.core){
+          sh2.getRange(targetRow, colMap.core).setValue((core+"\n"+change).slice(0,5000));
+        }
+        if(colMap.tradeoff){
+          sh2.getRange(targetRow, colMap.tradeoff).setValue(tradeoff);
+        }
+      }else{
+        var maxCol = sh2.getLastColumn();
+        var row = [];
+        for(var c=1;c<=maxCol;c++){
+          row.push("");
+        }
+        if(colMap.timestamp) row[colMap.timestamp-1]=new Date().toLocaleString('ja-JP');
+        if(colMap.author) row[colMap.author-1]=data.author||"匿名";
+        if(colMap.bigLabel) row[colMap.bigLabel-1]=big;
+        if(colMap.midLabel) row[colMap.midLabel-1]=mid;
+        if(colMap.title) row[colMap.title-1]=title;
+        if(colMap.summary) row[colMap.summary-1]=summary;
+        if(colMap.raw) row[colMap.raw-1]=raw;
+        if(colMap.core) row[colMap.core-1]=core;
+        if(colMap.change) row[colMap.change-1]=change;
+        if(colMap.success) row[colMap.success-1]=success;
+        if(colMap.concern) row[colMap.concern-1]=concern;
+        if(colMap.question) row[colMap.question-1]=question;
+        if(colMap.tradeoff) row[colMap.tradeoff-1]=tradeoff;
+        if(colMap.knowledge_used) row[colMap.knowledge_used-1]=knowledge;
+        sh2.appendRow(row);
+        targetRow = sh2.getLastRow();
+      }
+
+      try{
+        var shCat = getSheetSafe_('カテゴリ一覧',['大分類','中分類','件数','最終更新']);
+        var cvals = shCat.getDataRange().getValues();
+        var fRow=-1;
+        for(var j=1;j<cvals.length;j++){
+          if(String(cvals[j][0]).trim()==big && String(cvals[j][1]).trim()==mid){
+            fRow=j+1;
+            break;
+          }
+        }
+        if(fRow>0){
+          shCat.getRange(fRow,3).setValue(Number(cvals[fRow-1][2]||0)+1);
+          shCat.getRange(fRow,4).setValue(new Date());
+        }else{
+          shCat.appendRow([big,mid,1,new Date()]);
+        }
+      }catch(e2){}
+
+      var promoted = null;
+      if(mid==="その他"){
+        promoted = checkAndPromoteSonoTa_(big);
+      }
+
+      return ContentService.createTextOutput(JSON.stringify({
+        status:"success",
+        action:"postIdea",
+        integrated:true,
+        targetRow: targetRow,
+        category:big+" / "+mid,
+        promoted: promoted,
+        reason: mid==="その他"? "その他に格納 3件で新中分類自動生成" : "「"+mid+"」に該当するため既存の新統合記事に統合し元記事を更新"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+   
+    if(data.action === "joinEvent"){
+      var r = handleJoinEvent_(data);
+      return ContentService.createTextOutput(JSON.stringify(r)).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if(data.action === "analyze"){
+      var result = analyzeUltimate(data.content || data.comment || "");
+      if(!result){
+        return ContentService.createTextOutput(JSON.stringify({status:"error", message:"analyze failed"})).setMimeType(ContentService.MimeType.JSON);
+      }
+      return ContentService.createTextOutput(JSON.stringify({status:"success", result: result})).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if(data.mode === "transcribe" || data.action === "transcribe"){
+      return transcribeAudio(data);
+    }
+
+    return ContentService.createTextOutput(JSON.stringify({status:"error", message:"unknown action: "+data.action})).setMimeType(ContentService.MimeType.JSON);
+  }catch(err){
+    PropertiesService.getScriptProperties().setProperty('LAST_POST_ERROR', String(err)+" stack:"+ (err.stack||""));
+    return ContentService.createTextOutput(JSON.stringify({status:"error", message:String(err)})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 文字起こし（gemini-2.5-flash-lite を優先）
+// ---------------------------------------------------------------------------
+function transcribeAudio(payload){
+  try{
+    var apiKey = getApiKey();
+    var endpoint = 'https://generativelanguage.googleapis.com/v1beta/interactions?key='+apiKey;
+    for(var i=0;i<2;i++){
+      var model = i==0? 'gemini-2.5-flash-lite':'gemini-flash-latest';
+      try{
+        var res = UrlFetchApp.fetch(endpoint, {
+          method:'post',
+          contentType:'application/json',
+          payload: JSON.stringify({
+            model: model,
+            input: [
+              {type:"text", text:"日本語で文字起こし結果のみを返してください"},
+              {type:"input_audio", audio: payload.audioBase64, mime_type: payload.mimeType || "audio/webm"}
+            ]
+          }),
+          muteHttpExceptions:true
+        });
+        if(res.getResponseCode()!==200) continue;
+        var data2=JSON.parse(res.getContentText());
+        var text=data2.output_text||"";
+        if(!text && data2.steps){
+          for(var s=0;s<data2.steps.length;s++){
+            if(data2.steps[s].content){
+              for(var c=0;c<data2.steps[s].content.length;c++){
+                if(data2.steps[s].content[c].text){
+                  text+=data2.steps[s].content[c].text;
+                }
+              }
+            }
+          }
+        }
+        return ContentService.createTextOutput(JSON.stringify({text:text, content:text, status:"success"})).setMimeType(ContentService.MimeType.JSON);
+      }catch(e){
+        continue;
+      }
+    }
+    return ContentService.createTextOutput(JSON.stringify({text:"", status:"error", message:"transcribe failed"})).setMimeType(ContentService.MimeType.JSON);
+  }catch(e){
+    return ContentService.createTextOutput(JSON.stringify({text:"", status:"error", error:String(e)})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// デバッグ用
+// ---------------------------------------------------------------------------
+function checkError(){
+  Logger.log("LAST_RAW: "+PropertiesService.getScriptProperties().getProperty('LAST_POST_RAW'));
+  Logger.log("LAST_ERR: "+PropertiesService.getScriptProperties().getProperty('LAST_POST_ERROR'));
+  Logger.log("PROMOTE_ERR: "+PropertiesService.getScriptProperties().getProperty('LAST_PROMOTE_ERROR'));
+}
+
+function debugWhere(){
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  var sh1 = ss.getSheetByName('広場');
+  var sh2 = ss.getSheetByName('声のボード');
+  var sh3 = ss.getSheetByName('イベント');
+  var sh4 = ss.getSheetByName('カテゴリ一覧');
+  Logger.log("広場:"+ (sh1? sh1.getLastRow():"無し"));
+  Logger.log("声のボード:"+ (sh2? sh2.getLastRow():"無し"));
+  Logger.log("イベント:"+ (sh3? sh3.getLastRow():"無し"));
+  Logger.log("カテゴリ一覧:"+ (sh4? sh4.getLastRow():"無し"));
+}
+
+function testAnalyze(){
+  var r = analyzeUltimate("大人と子供の交流を増やしたい");
+  Logger.log(JSON.stringify(r));
+}
+
+function testOrganize(){
+  var r = organizeEventTo100_150_("両町合同イベントの模索","山手町と東芦屋町の合同イベントをしたい何かアイディアありますか");
+  Logger.log(r);
+}
+
+// ---------------------------------------------------------------------------
+// 企画参加カウンター
+// ---------------------------------------------------------------------------
+function getJoinCounts_(eventId){
+  var sh = getSheetSafe_('企画参加',['eventId','type','count','updated']);
+  var vals = sh.getDataRange().getValues();
+  var counts = {want:0, help:0, lead:0, place:0, interest:0};
+  for(var i=1;i<vals.length;i++){
+    if(String(vals[i][0])===String(eventId)){
+      var t = String(vals[i][1]);
+      var c = Number(vals[i][2]||0);
+      if(t==='want') counts.want=c;
+      if(t==='help') counts.help=c;
+      if(t==='lead') counts.lead=c;
+      if(t==='place') counts.place=c;
+      if(t==='interest') counts.interest=c;
+    }
+  }
+  return counts;
+}
+
+function handleJoinEvent_(data){
+  var eventId = String(data.eventId||"");
+  var type = String(data.type||"");
+  if(!eventId ||!type) throw new Error("eventId/type required");
+
+  var sh = getSheetSafe_('企画参加',['eventId','type','count','updated']);
+  var vals = sh.getDataRange().getValues();
+  var row = -1;
+  for(var i=1;i<vals.length;i++){
+    if(String(vals[i][0])===eventId && String(vals[i][1])===type){
+      row = i+1; break;
+    }
+  }
+  var newCount = 1;
+  if(row>0){
+    newCount = Number(sh.getRange(row,3).getValue()||0)+1;
+    sh.getRange(row,3).setValue(newCount);
+    sh.getRange(row,4).setValue(new Date());
+  }else{
+    sh.appendRow([eventId, type, 1, new Date()]);
+  }
+  var counts = getJoinCounts_(eventId);
+
+  var aiPlan = "";
+  if(counts.want >= 3){
+    try{
+      var prompt = "イベントID:"+eventId+"の企画。参加状況: やりたい"+counts.want+"人、手伝える"+counts.help+"人、仕切り"+counts.lead+"人、場所提供"+counts.place+"人、興味あり"+counts.interest+"人。住民向けに実行可能性と次の1手を120字でJSONで。 {\"要約200\":\"...\"} 形式で。";
+      var txt = callGroqText_(prompt, "openai/gpt-oss-20b");
+      var m = txt.match(/\{[\s\S]*\}/);
+      if(m){
+        var j = JSON.parse(m[0]);
+        aiPlan = j["要約200"] || j["本文"] || txt.slice(0,200);
+      }else{
+        aiPlan = txt.slice(0,200);
+      }
+    }catch(e){
+      aiPlan = "現在 やりたい"+counts.want+"人、手伝える"+counts.help+"人、仕切り"+counts.lead+"人、場所提供"+counts.place+"人。実現に近づいています。";
+    }
+  }
+
+  var isReady = (counts.want >= 10) || (counts.want >=5 && counts.help >=2 && counts.place >=1) || (counts.want >=7 && counts.lead >=1);
+  var promotedToBoard = false;
+
+  if(isReady){
+    try{
+      var shEv = getSheet('イベント');
+      var evVals = shEv.getDataRange().getValues();
+      var evTitle = eventId;
+      for(var i=1;i<evVals.length;i++){
+        if(String(evVals[i][0])===eventId){
+          evTitle = evVals[i][3] || eventId;
+          var currentStatus = String(evVals[i][6]||"");
+          if(currentStatus.indexOf("検討中")===-1 && currentStatus.indexOf("自治会")===-1){
+            shEv.getRange(i+1,7).setValue("🔥 自治会検討中");
+            var shCheck = getSheet('声のボード');
+            var already = false;
+            if(shCheck.getLastRow()>0){
+              var chkVals = shCheck.getDataRange().getValues();
+              for(var c=1;c<chkVals.length;c++){
+                if(String(chkVals[c][0]).indexOf(eventId)>=0 || String(chkVals[c][4]).indexOf(eventId)>=0){
+                  if(String(chkVals[c][6]||"").indexOf(eventId)>=0) already=true;
+                }
+              }
+            }
+            if(!already){
+              var shBoard = getSheetSafe_('声のボード',['timestamp','author','bigLabel','midLabel','title','summary','raw','core','change','success','concern','question','tradeoff','knowledge_used']);
+              var colMap = getColumnMap_(shBoard);
+              var maxCol = shBoard.getLastColumn();
+              var rowArr = [];
+              for(var cc=1;cc<=maxCol;cc++) rowArr.push("");
+              if(colMap.timestamp) rowArr[colMap.timestamp-1]=new Date().toLocaleString('ja-JP');
+              if(colMap.author) rowArr[colMap.author-1]="住民有志（自動）";
+              if(colMap.bigLabel) rowArr[colMap.bigLabel-1]="イベント・企画";
+              if(colMap.midLabel) rowArr[colMap.midLabel-1]="正式検討入り";
+              if(colMap.title) rowArr[colMap.title-1]="🔥 [正式検討] "+evTitle+"（やりたい"+counts.want+"人）";
+              if(colMap.summary) rowArr[colMap.summary-1]="住民の実行意思が集まりました。やりたい"+counts.want+"人、手伝える"+counts.help+"人、仕切り"+counts.lead+"人、場所提供"+counts.place+"人、興味あり"+counts.interest+"人。自治会での実現検討を求めます。イベントID:"+eventId;
+              if(colMap.raw) rowArr[colMap.raw-1]="閾値達成: "+eventId+" / "+evTitle+" / counts:"+JSON.stringify(counts);
+              if(colMap.core) rowArr[colMap.core-1]="住民の自発的な実行意思が可視化された";
+              if(colMap.change) rowArr[colMap.change-1]="自治会が管理からプラットフォームへ変化";
+              if(colMap.success) rowArr[colMap.success-1]="他地域でも住民発案が自治会検討入りで実現";
+              if(colMap.concern) rowArr[colMap.concern-1]="場所と予算の確保が次の壁";
+              if(colMap.question) rowArr[colMap.question-1]="どう実現するか？";
+              if(colMap.tradeoff) rowArr[colMap.tradeoff-1]="自発性と自治会支援のトレードオフ";
+              if(colMap.knowledge_used) rowArr[colMap.knowledge_used-1]="threshold:auto "+JSON.stringify(counts);
+              shBoard.appendRow(rowArr);
+              promotedToBoard = true;
+            }
+          }
+          break;
+        }
+      }
+    }catch(e){
+      PropertiesService.getScriptProperties().setProperty('LAST_PROMOTE_ERROR', String(e));
+    }
+  }
+
+  return {status:"success", eventId:eventId, counts:counts, aiPlan:aiPlan, isReady:isReady, promoted:promotedToBoard};
+}
+
+function restoreInitialEvents(){
+  var sh = getSheet('イベント');
+  sh.clear();
+  sh.appendRow(['id','date','time','title','place','category','status','detail']);
+  sh.appendRow(['evt1','2026-06-07','09:00-11:00','一斉清掃＆ゴミ回収活動','山手町集会所集合','清掃','参加者募集中','毎月第一土曜の清掃活動。急斜面の側溝も重点的に清掃し、石垣や生垣が特徴の山手町の景観を守ります。']);
+  sh.appendRow(['evt2','2026-07-19','17:00-20:00','夏祭り2026','山手公園','季節','企画中','夏祭りを3年ぶりに復活させます。盆踊りと屋台で多世代が交流します。']);
+  sh.appendRow(['evt3','2026-08-02','06:30-07:00','ラジオ体操＆朝活コーヒー','山手公園','季節','参加者募集中','夏休み期間ラジオ体操。']);
+  sh.appendRow(['evt4','2026-10-25','14:00-16:00','ハロウィン仮装防犯パトロール','町内全域','企画','アイデア募集中','子ども達が仮装してパトロール。']);
+  sh.appendRow(['evt5','2026-12-14','10:00-13:00','餅つき大会＆防災炊き出し訓練','集会所前広場','季節','予定','年末恒例の餅つき大会。']);
+  sh.appendRow(['evt6','2026-09-20','10:00-12:00','防災訓練・安否確認訓練','集会所','防災','参加者募集中','安否確認訓練。']);
+}
