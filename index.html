@@ -197,10 +197,40 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <button type="button" onclick="showPage('flyerCreator')" class="bg-gradient-to-r from-amber-500 to-rose-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">🎨 チラシ自動生成スタジオ →</button>
 </div>
 </div>
-<div class="mt-6 bg-[#fefcf3] border border-amber-200 rounded-2xl p-5 flex justify-between items-center">
-<div><div class="font-black text-sm">💡 何が出来るか簡単に解説！</div><div class="text-xs text-slate-600">3ステップで分かる使い方</div></div>
-<button type="button" id="btnShowHowTo" class="bg-white border-2 border-amber-400 px-6 py-2.5 rounded-full text-sm font-black">📖 解説 →</button>
+<!-- Inline Visual 3-step Guidance -->
+<div class="mt-8 bg-gradient-to-r from-amber-50/90 via-orange-50/40 to-emerald-50/50 border-2 border-amber-200/80 rounded-[24px] p-6 shadow-sm">
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-2">
+      <span class="text-xl">💡</span>
+      <span class="font-black text-base text-slate-900">1分で分かる！未来のアイデア帳の使い方</span>
+    </div>
+    <button type="button" id="btnShowHowTo" class="text-xs bg-white border border-amber-300 text-amber-900 px-3.5 py-1.5 rounded-full font-bold shadow-sm hover:bg-amber-50">詳解ポップアップ →</button>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="bg-white/90 rounded-[20px] p-4 border border-teal-100 shadow-sm flex items-start gap-3">
+      <div class="w-9 h-9 rounded-2xl bg-teal-700 text-white font-black flex items-center justify-center text-sm shrink-0 shadow">1</div>
+      <div>
+        <div class="font-black text-sm text-slate-900">① 声を届ける</div>
+        <div class="text-xs text-slate-600 mt-1 leading-relaxed">音声・文字・ワンタップタグで日常の気づきや提案を投函。匿名投稿OK！</div>
+      </div>
+    </div>
+    <div class="bg-white/90 rounded-[20px] p-4 border border-amber-100 shadow-sm flex items-start gap-3">
+      <div class="w-9 h-9 rounded-2xl bg-amber-500 text-black font-black flex items-center justify-center text-sm shrink-0 shadow">2</div>
+      <div>
+        <div class="font-black text-sm text-slate-900">② AIが5視点＋200字要約</div>
+        <div class="text-xs text-slate-600 mt-1 leading-relaxed">AIが「5つの視点(各100字)」と「200字要約」に自動整理しテーマ別に分類。</div>
+      </div>
+    </div>
+    <div class="bg-white/90 rounded-[20px] p-4 border border-slate-200 shadow-sm flex items-start gap-3">
+      <div class="w-9 h-9 rounded-2xl bg-slate-900 text-white font-black flex items-center justify-center text-sm shrink-0 shadow">3</div>
+      <div>
+        <div class="font-black text-sm text-slate-900">③ イベント＆チラシ自動作成</div>
+        <div class="text-xs text-slate-600 mt-1 leading-relaxed">応援投票でイベント化！13項目自動反映＆AI絵付きの高品質チラシを10秒作成。</div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <div class="grid md:grid-cols-4 gap-4 mt-6">
 <div class="bg-white rounded-[24px] border border-slate-200 border-l-4 border-l-teal-700 p-6 shadow-sm hover:shadow-md transition-shadow">
 <div class="font-black">意見投稿</div>
@@ -233,6 +263,21 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <button type="button" id="btnVoiceStop" class="hidden px-4 py-2 bg-red-500 text-white rounded-full text-xs">停止</button>
 </div>
 <input id="authorName" placeholder="お名前（任意）" class="w-full p-3.5 border rounded-xl mb-3 bg-[#f8fafc] text-sm">
+
+<!-- One-tap Suggestion Chips -->
+<div class="mb-3">
+  <div class="text-xs font-bold text-slate-600 mb-2 flex items-center gap-1">
+    <span>💡 タップで簡単入力（よくある相談・提案タグ）:</span>
+  </div>
+  <div class="flex flex-wrap gap-2 text-xs font-medium">
+    <button type="button" onclick="appendOpinionSuggestion('坂道が急で高齢者や子供が歩くのが大変。ベンチや休憩スペースが欲しいです。')" class="px-3.5 py-1.5 bg-amber-50 text-amber-900 border border-amber-200 rounded-full hover:bg-amber-100 transition-colors shadow-sm">💡 坂道のベンチ・休憩所</button>
+    <button type="button" onclick="appendOpinionSuggestion('暗い通学路や夜道に防犯カメラや明るい街路灯を増設してほしいです。')" class="px-3.5 py-1.5 bg-teal-50 text-teal-900 border border-teal-200 rounded-full hover:bg-teal-100 transition-colors shadow-sm">🛡️ 防犯カメラ・街路灯</button>
+    <button type="button" onclick="appendOpinionSuggestion('急斜面の側溝の落葉詰まりが気になります。用具の共同管理と清掃イベントを提案します。')" class="px-3.5 py-1.5 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-full hover:bg-emerald-100 transition-colors shadow-sm">🌿 側溝の清掃・用具管理</button>
+    <button type="button" onclick="appendOpinionSuggestion('子供と大人が一緒に楽しめる季節の夏祭りやこども縁日を復活させたいです。')" class="px-3.5 py-1.5 bg-rose-50 text-rose-900 border border-rose-200 rounded-full hover:bg-rose-100 transition-colors shadow-sm">🤝 多世代・こども縁日</button>
+    <button type="button" onclick="appendOpinionSuggestion('ペットと気持ちよくお散歩できるマナー講習会やドッグランエリアがあると嬉しいです。')" class="px-3.5 py-1.5 bg-purple-50 text-purple-900 border border-purple-200 rounded-full hover:bg-purple-100 transition-colors shadow-sm">🐾 ペット共生・しつけ教室</button>
+  </div>
+</div>
+
 <textarea id="userInput" placeholder="例：坂道が急で高齢者や子供が歩くのが大変。ベンチや休憩スペースが欲しいです。" class="w-full min-h-[150px] p-4 border-2 rounded-xl text-sm"></textarea>
 <button type="button" id="btnPost" class="mt-4 bg-slate-900 text-white px-8 py-3.5 rounded-xl font-black text-sm">🤖 AIが整理して投稿 (5視点各100字＋200字要約)</button>
 <span id="loadingMsg" class="hidden text-sm ml-3 text-brand-600 font-bold">5視点＆200字要約を分析中...</span>
@@ -1020,8 +1065,32 @@ function renderEventCategoryGrid(){
 
 function filterEventCategory(cat){ openEventCat = cat || null; renderEventCategoryGrid(); renderEvents(); renderEventIdeas(); }
 
-function getJoinCount(id, type){ try{ var c = JSON.parse(localStorage.getItem('join_'+id)||'{}'); return c[type]||0; }catch(e){return 0;} }
-function hasJoined(id, type){ return getJoinCount(id, type) > 0; }
+function appendOpinionSuggestion(text){
+  var el = document.getElementById('userInput');
+  if(!el) return;
+  if(el.value.trim().length > 0){
+    el.value += ' ' + text;
+  } else {
+    el.value = text;
+  }
+}
+
+function showToast(msg){
+  var toast = document.getElementById('toastNotification');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'toastNotification';
+    toast.className = 'fixed top-20 right-5 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl font-bold text-xs flex items-center gap-2 transform transition-all duration-300 opacity-0 translate-y-[-10px] pointer-events-none';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = msg;
+  toast.classList.remove('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
+  toast.classList.add('opacity-100', 'translate-y-0');
+  setTimeout(function(){
+    toast.classList.remove('opacity-100', 'translate-y-0');
+    toast.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
+  }, 2500);
+}
 
 function joinEvent(event, id, type){
   if(event){ try{ event.stopPropagation(); event.preventDefault(); }catch(e){} }
@@ -1029,6 +1098,10 @@ function joinEvent(event, id, type){
   counts[type] = (counts[type]||0) + 1;
   try{ localStorage.setItem('join_'+id, JSON.stringify(counts)); }catch(e){}
   postToGAS({action:"joinEvent", eventId:id, type:type, count:counts[type]});
+  
+  var typeLabels = {want:'🙋 やりたい', help:'🤝 手使える', lead:'📋 仕切り', place:'📍 場所提供', interest:'👀 興味あり'};
+  showToast('🎉 「' + (typeLabels[type]||'応援') + '」に投票しました！（現在 ' + counts[type] + ' 票）');
+  
   renderEvents(); renderEventIdeas(); renderKentou();
 }
 
@@ -1566,6 +1639,31 @@ document.addEventListener('DOMContentLoaded', function(){
       </div>
     </div>
   </div>
-</footer>  
+</footer>
+
+<!-- Floating Mobile Bottom Navigation Bar -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-slate-200 shadow-2xl px-2 py-2 flex justify-around items-center">
+  <button type="button" onclick="showPage('home')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
+    <span class="text-lg">🏠</span>
+    <span class="text-[10px] font-bold">ホーム</span>
+  </button>
+  <button type="button" onclick="showPage('assist')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
+    <span class="text-lg">✍️</span>
+    <span class="text-[10px] font-bold">意見投稿</span>
+  </button>
+  <button type="button" onclick="showPage('tree')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
+    <span class="text-lg">📦</span>
+    <span class="text-[10px] font-bold">意見箱</span>
+  </button>
+  <button type="button" onclick="showPage('event')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
+    <span class="text-lg">🎉</span>
+    <span class="text-[10px] font-bold">イベント</span>
+  </button>
+  <button type="button" onclick="showPage('flyerCreator')" class="flex flex-col items-center justify-center p-1 text-amber-600 font-bold hover:text-amber-700 transition-colors">
+    <span class="text-lg">🎨</span>
+    <span class="text-[10px] font-bold">チラシ</span>
+  </button>
+</div>
+
 </body>
 </html>
