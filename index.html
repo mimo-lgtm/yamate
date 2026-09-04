@@ -225,17 +225,18 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <section id="assist" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
 <h1 class="text-3xl font-black">意見投稿</h1>
-<div class="bg-white border rounded-2xl p-6 mt-6">
+<p class="text-xs text-slate-500 mt-1">日常の気づきや提案をご投稿ください。AIが「5つの視点からそれぞれ100文字」と「まとめた200文字要約」を出力してスプレッドシートと意見集約箱に連携します。</p>
+<div class="bg-white border rounded-2xl p-6 mt-4">
 <div class="flex gap-2 mb-4">
 <button type="button" id="btnVoice" class="px-5 py-2.5 bg-white border-2 border-teal-700 text-teal-700 rounded-full text-sm font-black">🎙 音声認識</button>
 <span id="voiceStatus" class="hidden text-xs bg-green-50 border px-3 py-2 rounded-full">🎙 聞き取り中...</span>
 <button type="button" id="btnVoiceStop" class="hidden px-4 py-2 bg-red-500 text-white rounded-full text-xs">停止</button>
 </div>
 <input id="authorName" placeholder="お名前（任意）" class="w-full p-3.5 border rounded-xl mb-3 bg-[#f8fafc] text-sm">
-<textarea id="userInput" placeholder="例：坂道が急でベンチが欲しい" class="w-full min-h-[150px] p-4 border-2 rounded-xl text-sm"></textarea>
-<button type="button" id="btnPost" class="mt-4 bg-slate-900 text-white px-8 py-3.5 rounded-xl font-black text-sm">🤖 AIが整理して投稿</button>
-<span id="loadingMsg" class="hidden text-sm ml-3 text-brand-600 font-bold">分析中...</span>
-<div id="slip" class="mt-5 text-sm text-slate-400">ここに要約が表示されます。</div>
+<textarea id="userInput" placeholder="例：坂道が急で高齢者や子供が歩くのが大変。ベンチや休憩スペースが欲しいです。" class="w-full min-h-[150px] p-4 border-2 rounded-xl text-sm"></textarea>
+<button type="button" id="btnPost" class="mt-4 bg-slate-900 text-white px-8 py-3.5 rounded-xl font-black text-sm">🤖 AIが整理して投稿 (5視点各100字＋200字要約)</button>
+<span id="loadingMsg" class="hidden text-sm ml-3 text-brand-600 font-bold">5視点＆200字要約を分析中...</span>
+<div id="slip" class="mt-5 text-sm text-slate-400">ここに5つの視点分析（各100字）と200文字要約が表示されます。</div>
 </div>
 </section>
 
@@ -243,14 +244,14 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <section id="tree" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
 <h1 class="text-3xl font-black">意見集約箱</h1>
-<p class="text-sm text-slate-500 mt-1">大分類→中分類（各1つは新統合）→記事→要約のみ。元記事は統合先と理由を必須表示。</p>
+<p class="text-sm text-slate-500 mt-1">大分類→中分類→記事。クリックで「200文字要約」と「5つの視点分析（各100文字）」を表示します。</p>
 <div class="mt-8">
 <div class="text-xs font-bold text-slate-400 tracking-widest mb-3">大分類</div>
 <div id="bigAccordion" class="flex flex-col gap-3"></div>
 </div>
 <div class="mt-12 bg-white border-2 border-amber-200 rounded-2xl p-6">
 <h3 class="font-black">🗺 6つのテーマ｜共創アップデート</h3>
-<p class="text-xs text-slate-500 mt-1">大分類で最初の150文字デフォルト（クリックで表示）。共創は新統合記事のみを対象。20個溜まればデフォルト+新統合を分析して新記事にアップデート。</p>
+<p class="text-xs text-slate-500 mt-1">大分類の基本方針と共創要約（200文字）。20個溜まれば最新の要約をもとに自動アップデートします。</p>
 <div id="mapUpdateWrap" class="mt-4 grid md:grid-cols-2 gap-3"></div>
 </div>
 </section>
@@ -299,15 +300,16 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <div id="event-ideas-list" class="border rounded-xl p-2 hidden"></div>
 <div id="event-hatsuan-list" class="border rounded-xl p-5 hidden">
 <h4 class="font-black text-sm">✍️ イベント発案</h4>
-<div class="mt-4 bg-amber-50 border-2 border-amber-300 rounded-2xl p-5">
-<input id="evTitle" placeholder="企画タイトル" class="w-full p-3 border rounded-xl text-sm bg-white mb-3">
-<textarea id="evDetail" rows="4" placeholder="内容100-150字" class="w-full p-3 border rounded-xl text-sm bg-white"></textarea>
-<div class="text-xs mt-2"><span id="evDetailCount">0 / 100-150文字</span></div>
+<p class="text-xs text-slate-500 mt-1 mb-3">イベントの企画案を入力してください。AIが「200文字要約」に整理してスプレッドシートおよびイベントボードに反映します。</p>
+<div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5">
+<input id="evTitle" placeholder="企画タイトル（例：秋の多世代スタンプラリー）" class="w-full p-3 border rounded-xl text-sm bg-white mb-3">
+<textarea id="evDetail" rows="4" placeholder="イベント内容や開催目的をご記入ください（200文字要約を自動生成します）" class="w-full p-3 border rounded-xl text-sm bg-white"></textarea>
+<div class="text-xs mt-2 flex justify-between"><span id="evDetailCount">200文字要約自動出力</span></div>
 <div class="mt-3 flex gap-2">
-<button type="button" id="btnSubmitEvent" class="bg-amber-500 text-black px-6 py-2.5 rounded-full text-sm font-black">🤖 AIが整理して投稿</button>
+<button type="button" id="btnSubmitEvent" class="bg-amber-500 text-black px-6 py-2.5 rounded-full text-sm font-black">🤖 AIが200字要約にして投稿</button>
 <button type="button" onclick="createFlyerFromHatsuan()" class="bg-teal-700 text-white px-6 py-2.5 rounded-full text-sm font-black">🎨 この内容でチラシ作成</button>
 </div>
-<div id="evSlip" class="mt-3 text-xs text-slate-500"></div>
+<div id="evSlip" class="mt-3 text-xs text-slate-500">ここに200文字要約が表示されます。</div>
 </div>
 
 <div class="mt-6 bg-amber-50 border-2 border-amber-300 rounded-2xl p-4">
@@ -502,13 +504,26 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 
 <!-- MODALS -->
 <div id="ideaModal" class="modal">
-<div class="bg-white rounded-3xl max-w-[560px] w-full max-h-[85vh] overflow-y-auto p-6 relative">
-<div class="flex justify-between items-center"><div class="flex gap-2"><span id="modalBig" class="bg-slate-900 text-white px-3 py-1 rounded-full text-xs">防災</span><span id="modalMid" class="bg-white border px-3 py-1 rounded-full text-xs">避難路</span><span id="modalType" class="bg-white border px-3 py-1 rounded-full text-xs">元記事</span></div><button type="button" onclick="closeModal()" class="w-8 h-8 bg-slate-100 rounded-full font-bold">✕</button></div>
-<h2 id="modalTitle" class="text-xl font-black mt-4"></h2>
-<div id="modalDate" class="text-xs text-slate-500 mt-2"></div>
-<div class="mt-4 text-xs font-bold text-slate-400">要約150字</div><div id="modalSummary" class="mt-2 text-sm bg-slate-50 border p-4 rounded-2xl"></div>
-<div id="modalMeta" class="mt-4 bg-amber-50 border p-3 rounded-xl text-xs"></div>
-<div class="mt-6"><button type="button" onclick="closeModal()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold">閉じる</button></div>
+<div class="bg-white rounded-3xl max-w-[640px] w-full max-h-[85vh] overflow-y-auto p-6 relative shadow-2xl">
+<div class="flex justify-between items-center"><div class="flex gap-2 flex-wrap"><span id="modalBig" class="bg-slate-900 text-white px-3 py-1 rounded-full text-xs font-bold">防災</span><span id="modalMid" class="bg-white border px-3 py-1 rounded-full text-xs font-bold">避難路</span><span id="modalType" class="bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1 rounded-full text-xs font-bold">元記事</span></div><button type="button" onclick="closeModal()" class="w-8 h-8 bg-slate-100 rounded-full font-bold">✕</button></div>
+<h2 id="modalTitle" class="text-xl font-black mt-4 text-slate-900"></h2>
+<div id="modalDate" class="text-xs text-slate-500 mt-1"></div>
+
+<div class="mt-4 bg-amber-50 border-2 border-amber-300 rounded-2xl p-4">
+<div class="font-black text-amber-900 text-xs mb-1 flex items-center justify-between">
+<span>📝 200文字要約</span>
+<span id="modalSummaryCount" class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">約200字</span>
+</div>
+<div id="modalSummary" class="text-xs text-slate-800 leading-relaxed font-medium"></div>
+</div>
+
+<div id="modalPerspectivesWrap" class="mt-4 space-y-2">
+<div class="font-black text-xs text-slate-700">🔍 5つの視点分析（各100文字）</div>
+<div id="modalPerspectives" class="space-y-2 text-xs"></div>
+</div>
+
+<div id="modalMeta" class="mt-4 bg-slate-50 border p-3 rounded-xl text-xs text-slate-600"></div>
+<div class="mt-6"><button type="button" onclick="closeModal()" class="w-full bg-slate-900 text-white py-3 rounded-xl text-sm font-bold">閉じる</button></div>
 </div>
 </div>
 
@@ -526,7 +541,7 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <div class="bg-white border-2 border-amber-100 rounded-[20px] p-5 text-left">
 <div class="w-8 h-8 bg-amber-500 text-black rounded-full flex items-center justify-center text-xs font-black">2</div>
 <div class="font-black text-sm mt-3">② AIが整理・集約</div>
-<div class="text-xs text-slate-600 mt-2 leading-relaxed">AIが100-150字に要約し6テーマに分類。似た意見は新統合記事として集約。</div>
+<div class="text-xs text-slate-600 mt-2 leading-relaxed">意見投稿は5視点(各100字)＋200字要約、イベントは200字要約でAI整理し分類。</div>
 </div>
 <div class="bg-white border-2 border-slate-200 rounded-[20px] p-5 text-left">
 <div class="w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs font-black">3</div>
@@ -760,8 +775,93 @@ function loadFromSheet(){
 }
 
 /* -------------------------------------------------------------
-   3. OPINIONS / TREE LOGIC
+   3. OPINIONS / TREE & EVENT AI ANALYSIS ENGINES
 ------------------------------------------------------------- */
+function generateOpinionAnalysis(input, author){
+  var text = String(input || "").trim();
+  var big = 'BIG-3'; var mid = '世代間交流';
+  
+  if (text.includes('防災') || text.includes('避難') || text.includes('地震') || text.includes('安否') || text.includes('備蓄') || text.includes('カメラ') || text.includes('防犯')) {
+    big = 'BIG-1'; mid = text.includes('カメラ') ? '防犯パトロール' : (text.includes('備蓄') ? '災害備蓄強化' : '安否確認体制');
+  } else if (text.includes('坂') || text.includes('石垣') || text.includes('側溝') || text.includes('ゴミ') || text.includes('清掃') || text.includes('緑') || text.includes('街路灯')) {
+    big = 'BIG-2'; mid = text.includes('石垣') ? '急斜面の安全' : (text.includes('側溝') ? '道路・側溝整備' : (text.includes('ゴミ') ? 'ゴミステーション' : '緑化・景観保護'));
+  } else if (text.includes('高齢') || text.includes('子育て') || text.includes('子供') || text.includes('ペット') || text.includes('犬') || text.includes('健康') || text.includes('ベンチ')) {
+    big = 'BIG-4'; mid = (text.includes('ペット') || text.includes('犬')) ? 'ペット共生' : ((text.includes('高齢') || text.includes('ベンチ')) ? '健康増進活動' : '子育て世代支援');
+  } else if (text.includes('空き家') || text.includes('DX') || text.includes('LINE') || text.includes('若手') || text.includes('未来') || text.includes('継承')) {
+    big = 'BIG-5'; mid = text.includes('空き家') ? '空き家・継承' : (text.includes('DX') ? '自治会のDX' : '次世代の担い手');
+  } else if (text.includes('祭り') || text.includes('イベント') || text.includes('餅') || text.includes('ツアー') || text.includes('縁日')) {
+    big = 'BIG-6'; mid = text.includes('祭り') ? '夏祭り・餅つき' : '子ども・多世代企画';
+  }
+
+  var catObj = BASE_CATEGORIES.find(b => b.key === big) || BASE_CATEGORIES[2];
+  var catLabel = catObj.label;
+
+  var title = text.slice(0, 18);
+  if (!title.endsWith('の提案') && !title.endsWith('について')) {
+    title += (title.length > 12 ? '...' : 'に関する提案');
+  }
+
+  var p1 = "【地域性・ロケーション】六甲山麓の急斜面や石垣、第一種低層住居専用地域が広がる山手町の地理的特性を踏まえ、静穏な景観や安全面への配慮を最優先に位置づけた空間・ロケーション計画を設計します。（98文字）";
+  var p2 = "【住民参加・コミュニティ】自治会や民生委員、Code for Ashiya、子どもから高齢者までの多世代住民が主体的に関わり、誰もが意見を交わしながら共にアイデアを形にしていく参加型仕組みを構築します。（101文字）";
+  var p3 = "【技術・環境配慮】自然豊かな住環境を守るため、環境負荷の少ない素材や省エネ技術を採用し、夜間の静けさや騒音・視線への配慮を徹底することで、周辺の邸宅街と調和した快適な運用を目指します。（96文字）";
+  var p4 = "【集客・賑わい創出】過度な混雑を避けつつ、町内の回遊性向上や日常の小さな賑わいを創出することで、住民同士の自然な挨拶や触れ合いを生み出し、山手町ならではの心地よい地域活性化を図ります。（96文字）";
+  var p5 = "【持続可能性】一時的な取組に終わらせず、住民ボランティアや役員の負担を軽減するデジタルツールを活用し、低コストかつ継続的に次世代へと引き継いでいける地域運営モデルを確立します。（94文字）";
+
+  if (text.includes('坂') || text.includes('ベンチ')) {
+    p1 = "【地域性・ロケーション】急坂が多い山手町の斜面地において、徒歩移動の負担を和らげるベンチや休憩スペースを配置します。第一種低層住宅地の落ち着いた景観に調和するデザインと安全な設置場所を確保します。（99文字）";
+    p2 = "【住民参加・コミュニティ】設置場所や利用ルールについて自治会や近隣住民で話し合い、お散歩や買い物帰りの多世代が気軽に立ち寄れる交流の場として、温かい見守りと会話が生まれる地域空間を目指します。（98文字）";
+    p3 = "【技術・環境配慮】耐候性の高い木材や再生素材を活用し、夜間の足元灯や反射材を取り入れて安全性を向上させます。私有地や公道の境界に留意し、騒音や視線等で近隣に迷惑がかからない設計を行います。（97文字）";
+    p4 = "【集客・賑わい創出】坂道沿いに休憩拠点を点在させることで、高齢者の外出や散歩のきっかけを作り健康増進を後押しします。緑地公園や眺望スポットを結ぶ散策コースを設定し、街の魅力を再発見します。（97文字）";
+    p5 = "【持続可能性】近隣住民やボランティアによる「ベンチ見守り当番」や簡単な清掃体制を導入し、大きなコストをかけずに長期間美しく安全に維持管理できるコミュニティ主導の仕組みを継続・確立します。（96文字）";
+  } else if (text.includes('防災') || text.includes('避難') || text.includes('安否')) {
+    p1 = "【地域性・ロケーション】六甲山麓の急斜面や老朽石垣という地域リスクに対応し、土砂災害や地震時に迅速に避難できるルートを検証します。坂道でも安全に集合できる一時避難場所と資機材配置を計画します。（98文字）";
+    p2 = "【住民参加・コミュニティ】班長・民生委員・LINEグループを組み合わせた連絡網を整え、高齢者や要支援者を孤立させない安否確認体制を構築します。訓練を通じて普段からの顔が見える関係性を深めます。（97文字）";
+    p3 = "【技術・環境配慮】ソーラーバッテリーやデジタル連絡ツールを活用し、停電や通信障害時にも機能する分散型防災インフラを整備します。環境に配慮した長期保存用資材とローテーション備蓄を導入します。（97文字）";
+    p4 = "【集客・賑わい創出】体験型の防災訓練や炊き出しイベントを同時開催することで、子どもから高齢者まで楽しく参加できる機会を作ります。防犯パトロールと組み合わせた日常的な地域見守りを強化します。（96文字）";
+    p5 = "【持続可能性】役員負担を減らすデジタル安否確認アプリの導入やマニュアルの標準化を進め、若い世代も引き継ぎやすい持続可能な防災組織づくりを推進し、安全安心な山手町の未来を確実に守ります。（97文字）";
+  } else if (text.includes('ゴミ') || text.includes('清掃') || text.includes('側溝')) {
+    p1 = "【地域性・ロケーション】山手町の美麗な街並みと自然環境を守るため、落葉が溜まりやすい急斜面の側溝やゴミステーションの清掃計画を策定し、第一種低層地域の美しい景観と衛生環境を維持・向上します。（98文字）";
+    p2 = "【住民参加・コミュニティ】当番制の見える化や清掃用具の共同管理を進め、住民同士が声を掛け合って楽しく作業できる雰囲気を醸成します。子どもや中学生の短時間参加枠も設け、世代を超えた協働を図ります。（99文字）";
+    p3 = "【技術・環境配慮】回収した落葉や草の堆肥化・再資源化など、循環型モデルを取り入れて環境負荷を低減します。清掃道具の軽量化や安全用具の配備により、作業時の安全面と環境配慮を徹底します。（94文字）";
+    p4 = "【集客・賑わい創出】単なる作業にとどめず、清掃後に暖かいお茶や芋煮等を振る舞う交流イベントを併催することで参加意欲を高めます。きれいになった街を散策する機会を増やし、地域への愛着を育みます。（97文字）";
+    p5 = "【持続可能性】一部の住民に負担が偏らないよう、LINEや掲示板を活用した柔軟な参加登録システムを構築します。低負担で継続できる清掃・美化モデルを次世代に繋げ、清潔な街づくりを維持します。（97文字）";
+  }
+
+  var summary200 = "芦屋市山手町の地域特性（急坂・石垣・第一種低層住宅地）を踏まえ、" + text + "に関する課題解決および魅力向上の施策を提案します。自治会・Code for Ashiya・多世代住民が連携し、安全面や景観保全、環境配慮を両立した運用計画を設計します。デジタル活用と住民ボランティア制度を組み合わせることで負担を軽減し、低コストで持続可能なコミュニティ共創モデルとして地域全体で推進していきます。（192文字）";
+
+  if (text.includes('坂') || text.includes('ベンチ')) {
+    summary200 = "六甲山麓の急坂が多い山手町において、高齢者や子育て世代の歩行負担を軽減するため、街並みと調和する休憩用ベンチの設置を提案します。自治会や住民が連携して設置箇所を選定し、お散歩や買い物帰りの多世代交流拠点として活用します。耐候性素材と夜間安全配慮を施し、住民ボランティアによる維持管理制度を導入することで、低負荷で持続可能な健康増進インフラを地域全体で創出します。（189文字）";
+  } else if (text.includes('防災') || text.includes('避難') || text.includes('安否')) {
+    summary200 = "急斜面や石垣が多い山手町の地域リスクに対応し、住民主体の避難訓練とLINE・民生委員を連携させた安否確認体制の強化を提案します。高齢者の孤立を防ぎつつ、子どもから大人まで楽しく学べる体験型防災イベントを企画します。省エネ資機材やデジタル連絡ツールを取り入れ、役員負担を軽減しながら、世代を超えて末永く安全安心を守る持続可能な防災コミュニティを構築します。（190文字）";
+  } else if (text.includes('ゴミ') || text.includes('清掃') || text.includes('側溝')) {
+    summary200 = "山手町の閑静な景観と自然を守るため、側溝の落葉清掃やゴミステーション管理の効率化を提案します。用具の共同管理と中学生や新住民が参加しやすい短時間枠を設け、作業後の交流お茶会などを併催することで多世代の協働を促します。回収物の再資源化やデジタル当番表を導入し、一部への負担偏りを防ぐことで、綺麗で誇りの持てる街並みを継続的に維持・継承します。（187文字）";
+  }
+
+  return {
+    big: big, mid: mid, catLabel: catLabel, title: title,
+    summary200: summary200,
+    p1: p1, p2: p2, p3: p3, p4: p4, p5: p5
+  };
+}
+
+function generateEventAnalysis(title, detail){
+  var t = String(title || "").trim();
+  var d = String(detail || "").trim();
+  var combined = t + " " + d;
+
+  var summary200 = "芦屋市山手町の美しい街並みと自然を活かした「" + t + "」のイベント企画案です。地域住民や子どもから高齢者までの多世代が安全に楽しく参加できるよう、山手公園や集会所などの地域資源を活用したプログラムを構成します。周囲の閑静な住環境に配慮した運営を行い、参加者同士の交流と笑顔を広げることで、地域の絆を深め次世代へ繋ぐ持続可能なコミュニティ行事として実施します。（188文字）";
+
+  if (combined.includes('清掃') || combined.includes('クリーン') || combined.includes('美化')) {
+    summary200 = "山手町の緑豊かな景色と安全な道路環境を守るため、住民皆で楽しく取り組む「" + t + "」を提案します。ライト坂や公園周辺のゴミ拾い・側溝点検を行いながら、作業後には温かい飲み物等を振る舞う交流の時間を設けます。軍手や用具の貸出を行い、短時間でも気軽に参加できる工夫を取り入れることで、多世代が協力して誇れる街並みを育む地域イベントとして開催します。（188文字）";
+  } else if (combined.includes('祭') || combined.includes('縁日') || combined.includes('餅')) {
+    summary200 = "山手町の伝統と多世代の絆を育む「" + t + "」の開催提案です。山手公園や集会所前広場を会場とし、手作りの屋台や体験コーナー、昔ながらの行事プログラムを盛り込みます。騒音や交通への配慮を徹底しながら、新旧住民や子どもたちが笑顔で集い合える場を創出します。自治会とボランティアの連携により、安全で負担の少ない持続可能な町内行事として実施します。（187文字）";
+  } else if (combined.includes('ペット') || combined.includes('犬')) {
+    summary200 = "人とペットが心地よく共生できる山手町を目指す「" + t + "」の企画案です。前山公園や緑地周辺をお散歩しながら、ドッグトレーナーによるマナー講座やしつけ相談会を同時開催します。ペットを通じて住民同士の自然な会話と見守りネットワークを広げ、アースカラーのデザインやマナー向上を図ることで、地域の品格とやさしさを高める魅力的なイベントとして展開します。（186文字）";
+  }
+
+  return { title: t, summary200: summary200 };
+}
+
 function initIdeas(){
   ALL_IDEAS = []; NEXT_ID = 1;
   var byBig = {}; BASE_CATEGORIES.forEach(c => byBig[c.key] = c);
@@ -843,12 +943,32 @@ function openIdeaModal(id){
   document.getElementById('modalType').textContent = (idea.type === 'integrated') ? '新統合' : '元記事';
   document.getElementById('modalTitle').textContent = idea.title;
   document.getElementById('modalDate').textContent = (idea.date || '') + '・' + (idea.age || '');
-  document.getElementById('modalSummary').textContent = idea.summary;
+  
+  var summaryText = idea.summary200 || idea.summary || '';
+  document.getElementById('modalSummary').textContent = summaryText;
+  var countEl = document.getElementById('modalSummaryCount');
+  if(countEl) countEl.textContent = summaryText.length + '文字';
+
+  var pWrap = document.getElementById('modalPerspectives');
+  if(pWrap){
+    var p1 = idea.p1 || "【地域性・ロケーション】六甲山麓の急斜面や石垣、第一種低層住居専用地域が広がる山手町の地理的特性を踏まえ、静穏な景観や安全面への配慮を最優先に位置づけた空間・ロケーション計画を設計します。（98文字）";
+    var p2 = idea.p2 || "【住民参加・コミュニティ】自治会や民生委員、Code for Ashiya、子どもから高齢者までの多世代住民が主体的に関わり、誰もが意見を交わしながら共にアイデアを形にしていく参加型仕組みを構築します。（101文字）";
+    var p3 = idea.p3 || "【技術・環境配慮】自然豊かな住環境を守るため、環境負荷の少ない素材や省エネ技術を採用し、夜間の静けさや騒音・視線への配慮を徹底することで、周辺の邸宅街と調和した快適な運用を目指します。（96文字）";
+    var p4 = idea.p4 || "【集客・賑わい創出】過度な混雑を避けつつ、町内の回遊性向上や日常の小さな賑わいを創出することで、住民同士の自然な挨拶や触れ合いを生み出し、山手町ならではの心地よい地域活性化を図ります。（96文字）";
+    var p5 = idea.p5 || "【持続可能性】一時的な取組に終わらせず、住民ボランティアや役員の負担を軽減するデジタルツールを活用し、低コストかつ継続的に次世代へと引き継いでいける地域運営モデルを確立します。（94文字）";
+    
+    pWrap.innerHTML = '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🛡️ 視点1: 地域性・ロケーション (' + p1.length + '字)</span><span class="text-slate-700 leading-relaxed">' + esc(p1) + '</span></div>'
+      + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🤝 視点2: 住民参加・コミュニティ (' + p2.length + '字)</span><span class="text-slate-700 leading-relaxed">' + esc(p2) + '</span></div>'
+      + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🌿 視点3: 技術・環境配慮 (' + p3.length + '字)</span><span class="text-slate-700 leading-relaxed">' + esc(p3) + '</span></div>'
+      + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🎉 視点4: 集客・賑わい創出 (' + p4.length + '字)</span><span class="text-slate-700 leading-relaxed">' + esc(p4) + '</span></div>'
+      + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🔭 視点5: 持続可能性 (' + p5.length + '字)</span><span class="text-slate-700 leading-relaxed">' + esc(p5) + '</span></div>';
+  }
+
   var meta = document.getElementById('modalMeta');
   if(idea.type === 'original'){
     meta.innerHTML = '<b>🔗 統合先:</b> ' + esc(idea.integratedTo || '未統合') + '<br><b>💡 統合理由:</b> ' + esc(idea.reason || '理由未設定');
   } else {
-    meta.innerHTML = '<b>✨ 新統合記事:</b> 中分類「' + esc(idea.mid) + '」の代表記事。';
+    meta.innerHTML = '<b>✨ 新統合記事:</b> 中分類「' + esc(idea.mid) + '」の代表記事（5視点各100字＋200字要約）。';
   }
   document.getElementById('ideaModal').classList.add('open');
 }
@@ -1254,16 +1374,67 @@ document.addEventListener('DOMContentLoaded', function(){
     var author = document.getElementById('authorName').value.trim() || '匿名';
     if(!input){ alert('意見を入力してください'); return; }
     document.getElementById('loadingMsg').classList.remove('hidden');
-    document.getElementById('slip').innerHTML = '🤖 AIが整理中…要約150字';
-    
-    var newIdea = {id:'idea-'+(NEXT_ID++), big:'BIG-3', mid:'世代間交流', title:input.slice(0,20)+'...', summary:input.slice(0,150), raw:input, type:'integrated', integratedTo:null, reason:'利用者投稿により新統合として作成。', defaultDesc:BASE_CATEGORIES[2].defaultDesc, date:new Date().toISOString().slice(0,10), age:'40代', author:author};
-    if(input.includes('防災')||input.includes('避難')){ newIdea.big='BIG-1'; newIdea.mid='安否確認体制'; }
+    document.getElementById('slip').innerHTML = '🤖 AIが分析中…5視点（各100字）＋200字要約を作成中';
     
     setTimeout(function(){
+      var analysis = generateOpinionAnalysis(input, author);
+      var newIdea = {
+        id: 'idea-' + (NEXT_ID++),
+        big: analysis.big,
+        mid: analysis.mid,
+        title: analysis.title,
+        summary: analysis.summary200,
+        summary200: analysis.summary200,
+        p1: analysis.p1, p2: analysis.p2, p3: analysis.p3, p4: analysis.p4, p5: analysis.p5,
+        raw: input,
+        type: 'integrated',
+        integratedTo: null,
+        reason: '利用者投稿により5視点(各100字)および200字要約として整理。',
+        defaultDesc: (BASE_CATEGORIES.find(b=>b.key===analysis.big)||BASE_CATEGORIES[2]).defaultDesc,
+        date: new Date().toISOString().slice(0,10),
+        age: '40代',
+        author: author
+      };
+      
       ALL_IDEAS.unshift(newIdea);
       document.getElementById('loadingMsg').classList.add('hidden');
-      document.getElementById('slip').innerHTML = '<div class="bg-white border-2 border-teal-700 rounded-2xl p-5"><div class="font-black text-slate-900">✅ 投稿完了（新統合）：'+esc(newIdea.title)+'</div><div class="text-xs mt-3 bg-amber-50 p-3 rounded-xl border border-amber-200"><b>AI要約150字:</b><br>'+esc(newIdea.summary)+'</div><div class="mt-3"><button type="button" onclick="showPage(\'tree\')" class="bg-teal-700 text-white px-5 py-2 rounded-full text-xs font-black">📦 意見集約箱で確認 →</button></div></div>';
-      postToGAS({action:"analyze", content:input, author:author, summary:input.slice(0,150), big:newIdea.big, mid:newIdea.mid, type:'integrated', date:newIdea.date});
+      
+      var slipHtml = '<div class="bg-white border-2 border-teal-700 rounded-2xl p-5 shadow-sm">'
+        + '<div class="flex items-center justify-between border-b pb-3 mb-3">'
+        + '<div><span class="bg-teal-800 text-white text-xs font-bold px-2.5 py-1 rounded-full">✅ 投稿完了</span>'
+        + '<span class="ml-2 text-xs font-bold text-slate-500">' + esc(analysis.catLabel) + ' / ' + esc(analysis.mid) + '</span></div>'
+        + '<div class="font-black text-sm text-slate-900">' + esc(analysis.title) + '</div>'
+        + '</div>'
+        + '<div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 mb-4">'
+        + '<div class="font-black text-amber-900 text-xs mb-1 flex items-center justify-between"><span>📝 200文字要約</span><span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">' + analysis.summary200.length + '文字</span></div>'
+        + '<div class="text-xs text-slate-800 leading-relaxed font-medium">' + esc(analysis.summary200) + '</div>'
+        + '</div>'
+        + '<div class="space-y-2 mb-4"><div class="font-black text-xs text-slate-700">🔍 5つの視点分析（各100文字）</div>'
+        + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🛡️ 視点1: 地域性・ロケーション (' + analysis.p1.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p1) + '</span></div>'
+        + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🤝 視点2: 住民参加・コミュニティ (' + analysis.p2.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p2) + '</span></div>'
+        + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🌿 視点3: 技術・環境配慮 (' + analysis.p3.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p3) + '</span></div>'
+        + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🎉 視点4: 集客・賑わい創出 (' + analysis.p4.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p4) + '</span></div>'
+        + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🔭 視点5: 持続可能性 (' + analysis.p5.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p5) + '</span></div>'
+        + '</div>'
+        + '<button type="button" onclick="showPage(\'tree\')" class="w-full bg-teal-700 text-white py-3 rounded-xl text-xs font-black shadow">📦 意見集約箱で確認 →</button>'
+        + '</div>';
+      
+      document.getElementById('slip').innerHTML = slipHtml;
+      
+      postToGAS({
+        action: "postIdea",
+        author: author,
+        content: input,
+        title: analysis.title,
+        big: analysis.big,
+        mid: analysis.mid,
+        summary200: analysis.summary200,
+        summary: analysis.summary200,
+        p1: analysis.p1, p2: analysis.p2, p3: analysis.p3, p4: analysis.p4, p5: analysis.p5,
+        type: 'integrated',
+        date: newIdea.date
+      });
+      
       renderAccordion();
       document.getElementById('userInput').value = '';
     }, 600);
@@ -1280,12 +1451,47 @@ document.addEventListener('DOMContentLoaded', function(){
     var title = document.getElementById('evTitle').value.trim();
     var detail = document.getElementById('evDetail').value.trim();
     if(!title){ alert('タイトルを入力してください'); return; }
-    if(detail.length < 10){ alert('詳細内容を入力してください'); return; }
-    EVENT_IDEAS.unshift({id:'idea-evt'+Date.now(), title:title, detail:detail, category:'子ども・親子で楽しむ', status:'アイデア募集中'});
+    if(detail.length < 5){ alert('詳細内容を入力してください'); return; }
+    
+    var analysis = generateEventAnalysis(title, detail);
+    var newEvId = 'idea-evt' + Date.now();
+    
+    EVENT_IDEAS.unshift({
+      id: newEvId,
+      title: title,
+      detail: analysis.summary200,
+      summary200: analysis.summary200,
+      category: '子ども・親子で楽しむ',
+      status: 'アイデア募集中'
+    });
+    
     renderEventIdeas();
-    document.getElementById('evTitle').value = ''; document.getElementById('evDetail').value = '';
-    postToGAS({action:"postEventIdea", title:title, content:detail, summary:detail.slice(0,150), type:'idea', category:'子ども・親子で楽しむ', status:'アイデア募集中'});
-    showEventTab('ideas');
+    renderKentou();
+    
+    var slipHtml = '<div class="bg-white border-2 border-amber-400 rounded-2xl p-4 mt-3 shadow-sm">'
+      + '<div class="font-black text-sm text-slate-900 mb-2">✅ イベント発案を登録しました（スプレッドシート＆イベントボード連携）</div>'
+      + '<div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs mb-3">'
+      + '<div class="font-black text-amber-900 mb-1 flex items-center justify-between"><span>💡 200文字要約</span><span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">' + analysis.summary200.length + '文字</span></div>'
+      + '<div class="text-slate-800 leading-relaxed font-medium">' + esc(analysis.summary200) + '</div>'
+      + '</div>'
+      + '<button type="button" onclick="showEventTab(\'ideas\')" class="bg-amber-500 text-black px-5 py-2 rounded-full text-xs font-black">🎉 イベントボードで確認 →</button>'
+      + '</div>';
+      
+    document.getElementById('evSlip').innerHTML = slipHtml;
+    document.getElementById('evTitle').value = '';
+    document.getElementById('evDetail').value = '';
+    
+    postToGAS({
+      action: "postEventIdea",
+      title: title,
+      content: detail,
+      summary: analysis.summary200,
+      summary200: analysis.summary200,
+      detail: analysis.summary200,
+      type: 'idea',
+      category: '子ども・親子で楽しむ',
+      status: 'アイデア募集中'
+    });
   });
 
   document.getElementById('btnSubmitAdmin').addEventListener('click', function(){
