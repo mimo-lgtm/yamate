@@ -903,21 +903,26 @@ const FLYER_PRESETS = {
 function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
 function showPage(id){
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
   var target = document.getElementById(id);
   if(target) target.classList.add('active');
   var mnav = document.getElementById('mnav');
   if(mnav) mnav.classList.add('hidden');
 
-  // ★ここを変更（renderCoCreationUpdate を追加）
   if(id === 'tree'){
-    renderAccordion();
-    renderCoCreationUpdate();
+    try{ renderAccordion(); }catch(e){ console.log(e); }
+    try{ renderCoCreationUpdate(); }catch(e){ console.log(e); }
   }
-
-  if(id === 'event') { renderEventCategoryGrid(); showEventTab(currentTab || 'upcoming'); }
-  if(id === 'hiroba') renderHiroba();
-  if(id === 'flyerCreator') updateFlyerLivePreview();
+  if(id === 'event'){
+    try{ renderEventCategoryGrid(); }catch(e){}
+    try{ showEventTab(currentTab || 'upcoming'); }catch(e){}
+  }
+  if(id === 'hiroba'){
+    try{ renderHiroba(); }catch(e){}
+  }
+  if(id === 'flyerCreator'){
+    try{ updateFlyerLivePreview(); }catch(e){}
+  }
   window.scrollTo(0,0);
 }
 
