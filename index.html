@@ -1076,24 +1076,7 @@ function loadFromSheet(){
     .catch(function(e){ console.log("getEvents error", e); });
 }
 
-  // 実データ：イベント（ダミー絶対ダメ、スプレッドシート反映必須）
-  fetch(GAS_URL+"?action=getEvents").then(r=>r.json()).then(data=>{
-    console.log("getEvents:", data);
-    if(data && Array.isArray(data) && data.length>0){
-      EVENT_DATA = data.map(row=>({
-        id: row.id || 'evt-'+Date.now(),
-        date: row.date || new Date().toISOString().slice(0,10),
-        time: row.time || '10:00-12:00',
-        title: row.title || '新規イベント',
-        place: row.place || '山手町',
-        category: row.category || 'イベント・企画',
-        status: row.status || '予定',
-        detail: row.detail || row.summary || ''
-      }));
-      try{ renderEvents(); renderEventCategoryGrid(); }catch(e){}
-    }
-  }).catch(e=>{ console.log("getEvents error", e); });
-}
+  
 
 
 /* -------------------------------------------------------------
