@@ -908,24 +908,21 @@ function showPage(id){
   if(target) target.classList.add('active');
   var mnav = document.getElementById('mnav');
   if(mnav) mnav.classList.add('hidden');
-
   if(id === 'tree'){
     try{ renderAccordion(); }catch(e){ console.log(e); }
-    try{ renderCoCreationUpdate(); }catch(e){ console.log(e); }
+    try{ if(typeof renderCoCreationUpdate === 'function') renderCoCreationUpdate(); }catch(e){ console.log(e); }
   }
   if(id === 'event'){
-    try{ renderEventCategoryGrid(); }catch(e){}
-    try{ showEventTab(currentTab || 'upcoming'); }catch(e){}
+    try{ renderEventCategoryGrid(); showEventTab(currentTab || 'upcoming'); }catch(e){ console.log(e); }
   }
   if(id === 'hiroba'){
-    try{ renderHiroba(); }catch(e){}
+    try{ renderHiroba(); }catch(e){ console.log(e); }
   }
   if(id === 'flyerCreator'){
-    try{ updateFlyerLivePreview(); }catch(e){}
+    try{ updateFlyerLivePreview(); }catch(e){ console.log(e); }
   }
   window.scrollTo(0,0);
 }
-
 function postToGAS(payload){
   try{
     payload.timestamp = new Date().toISOString();
