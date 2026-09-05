@@ -1046,31 +1046,46 @@ function loadFromSheet(){
     .catch(function(e){ console.log("getIdeas error", e); });
 
   // イベント
+    // イベント：idea- 始まり＝企画、それ以外＝今後のイベント
   fetch(GAS_URL+"?action=getEvents")
     .then(function(r){ return r.json(); })
     .then(function(data){
       console.log("getEvents:", data);
       if(!data || !Array.isArray(data) || data.length===0) return;
 
-      EVENT_DATA = data.map(function(row){
-        return {
-          id: row.id || ('evt-'+Date.now()),
+      var upcoming = [];
+      var ideas = [];
+
+      data.forEach(function(row){
+        var item = {
+          id: String(row.id || ('evt-'+Date.now())),
           date: row.date || '',
           time: row.time || '',
           title: row.title || '新規イベント',
           place: row.place || '山手町',
           category: row.category || 'イベント・企画',
-          status: row.status || '予定',
+          status: row.status || '',
           detail: row.detail || row.summary || ''
         };
+        if(item.id.indexOf('idea-') === 0){
+          ideas.push(item);
+        } else {
+          upcoming.push(item);
+        }
       });
+
+      EVENT_DATA = upcoming;
+      EVENT_IDEAS = ideas;
 
       try{
         renderEvents();
+        renderEventIdeas();
         renderEventCategoryGrid();
         renderKentou();
         var uc = document.getElementById('upcomingCount');
+        var ic = document.getElementById('ideasCount');
         if(uc) uc.textContent = EVENT_DATA.length + '件';
+        if(ic) ic.textContent = EVENT_IDEAS.length + '件';
       }catch(e){ console.log(e); }
     })
     .catch(function(e){ console.log("getEvents error", e); });
