@@ -331,11 +331,21 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <h1 class="text-3xl font-black">意見集約箱</h1>
 <p class="text-sm text-slate-500 mt-1">大分類→中分類→記事。クリックで「200文字要約」と「5つの視点分析（各100文字）」を表示します。</p>
 <div class="mt-8">
-<div class="text-xs font-bold text-slate-400 tracking-widest mb-3">大分類</div>
-<div id="bigAccordion" class="flex flex-col gap-3"></div>
-<div id="coCreationUpdate" class="mt-6 grid md:grid-cols-2 gap-3"></div>
-<div id="kyosoUpdate" class="mt-4 text-xs text-slate-500"></div>
+  <div class="text-xs font-bold text-slate-400 tracking-widest mb-3">大分類</div>
+  <div id="bigAccordion" class="flex flex-col gap-3"></div>
 </div>
+
+<!-- ★ここから共創アップデート（追加・置き換え） -->
+<div class="mt-10">
+  <div class="bg-slate-900 text-white rounded-2xl px-5 py-4 mb-4">
+    <div class="font-black text-base">🗺 6つのテーマ｜共創アップデート</div>
+    <div class="text-xs opacity-80 mt-1">各テーマ4中分類＝24新統合が初期搭載</div>
+  </div>
+  <div id="coCreationUpdate" class="grid md:grid-cols-2 gap-3"></div>
+  <div id="kyosoUpdate" class="mt-4 text-xs text-slate-500"></div>
+</div>
+<!-- ★ここまで -->
+
 </section>
 <section id="hiroba" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
@@ -898,7 +908,13 @@ function showPage(id){
   if(target) target.classList.add('active');
   var mnav = document.getElementById('mnav');
   if(mnav) mnav.classList.add('hidden');
-  if(id === 'tree') renderAccordion();
+
+  // ★ここを変更（renderCoCreationUpdate を追加）
+  if(id === 'tree'){
+    renderAccordion();
+    renderCoCreationUpdate();
+  }
+
   if(id === 'event') { renderEventCategoryGrid(); showEventTab(currentTab || 'upcoming'); }
   if(id === 'hiroba') renderHiroba();
   if(id === 'flyerCreator') updateFlyerLivePreview();
@@ -1299,26 +1315,35 @@ function toggleKyoso(key){ var el = document.getElementById('co-kyoso-'+key); if
 
 function renderCoCreationUpdate(){
   try{
-    var grid=document.getElementById('coCreationGrid');
-    var status=document.getElementById('coCreationStatus');
+    var grid = document.getElementById('coCreationUpdate'); // ★ HTMLのIDに合わせる
     if(!grid) return;
-    var html='';
+    var html = '';
     BASE_CATEGORIES.forEach(function(cat){
-      var count=0; try{ count=ALL_IDEAS.filter(function(i){ return i.big===cat.label; }).length; }catch(e){}
-      var integrated=null; try{ integrated=ALL_IDEAS.filter(function(i){ return i.big===cat.label && i.type==='integrated'; })[0]; }catch(e){}
-      // デフォルト記事は150-200文字のdefaultDescを使用、各中分類に新統合1つ以上ある前提
-      var defaultDesc = cat.defaultDesc || "";
-      var displayText = integrated ? (integrated.summary200||integrated.summary||defaultDesc) : defaultDesc;
-      if(displayText.length > 80) displayText = displayText.slice(0,80) + "...";
-      var len = integrated ? (integrated.summary200||"").length : defaultDesc.length;
-      var integratedCount = 0; try{ integratedCount = ALL_IDEAS.filter(function(i){ return i.big===cat.label && i.type==='integrated'; }).length; }catch(e){}
-      html+='<div class="border-2 rounded-2xl p-4 bg-white cursor-pointer hover:shadow" onclick="openIdeaModal(\''+(integrated?integrated.id:'')+'\')"><div class="flex justify-between items-center"><span class="font-black text-xs">'+cat.icon+' '+cat.label+'</span><span class="bg-teal-50 border px-2 py-0.5 rounded-full text-[10px]">'+count+'件 / 新統合'+integratedCount+'</span></div><div class="mt-2 text-[11px] text-slate-700 leading-relaxed">'+displayText+'<br><span class="text-[10px] text-slate-500">'+len+'字 | 150-200字のデフォルト記事 | クリックで表示</span></div><div class="mt-2 w-full bg-slate-100 rounded-full h-1.5"><div class="bg-teal-600 h-1.5 rounded-full" style="width:'+Math.min(100, (integratedCount>0?100:count*5))+'%"></div></div></div>';
-    });
-    grid.innerHTML=html;
-    if(status) status.textContent='最終更新: '+new Date().toLocaleString('ja-JP')+' | 合計 '+(ALL_IDEAS?ALL_IDEAS.length:0)+'件 | デフォルト24個は新統合、150-200字、各中分類に1つ以上 | 上部削除済み';
-  }catch(e){ console.log(e); }
-}
+      var items = ALL_IDEAS.filter(function(i){ return i.big === cat.label; });
+      var integrated = items.filter(function(i){ return i.type === 'integrated'; });
+      var summary = (integrated[0] && (integrated[0].summary200 || integrated[0].summary))
+        || cat.defaultDesc
+        || '';
+      if(summary.length > 100) summary = summary.slice(0,100) + '…';
 
+      html += '<div class="bg-white border-2 border-amber-200 rounded-2xl p-4 flex flex-col gap-2">'
+        + '<div class="flex justify-between items-center">'
+        +   '<div class="font-black text-sm">'+cat.icon+' '+esc(cat.label)
+        +   ' <span class="bg-teal-100 text-teal-800 text-[10px] px-2 py-0.5 rounded-full">'+items.length+'件</span></div>'
+        +   '<button type="button" onclick="toggleBig(\''+cat.key+'\'); showPage(\'tree\');" class="text-xs border rounded-full px-3 py-1">▼ 詳細</button>'
+        + '</div>'
+        + '<div class="bg-amber-50 border border-amber-100 rounded-xl p-3 text-xs text-slate-700 leading-relaxed">'
+        +   '<div class="font-bold text-amber-800 mb-1">共創アップデート</div>'
+        +   esc(summary || '住民の声100字＝200字で統合。5視点は表示しません。')
+        + '</div>'
+        + '<button type="button" onclick="openIdeaModal(\''+(integrated[0]?integrated[0].id:'')+'\')" class="w-full bg-amber-500 text-black py-2.5 rounded-xl text-sm font-black">アップデート</button>'
+        + '</div>';
+    });
+    grid.innerHTML = html;
+    var st = document.getElementById('kyosoUpdate');
+    if(st) st.textContent = '最終更新: ' + new Date().toLocaleString('ja-JP') + ' | 合計 ' + ALL_IDEAS.length + '件';
+  }catch(e){ console.log('renderCoCreationUpdate error', e); }
+}
 function openIdeaModal(id){
   try{
     var idea = null;
