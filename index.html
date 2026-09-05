@@ -329,13 +329,25 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
 <section id="tree" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
 <h1 class="text-3xl font-black">意見集約箱</h1>
-<p class="text-sm text-slate-500 mt-1">大分類→中分類→記事。クリックで「200文字要約」と「5つの視点分析（各100文字）」を表示します。</p>
-<div class="mt-8">
-  <div class="text-xs font-bold text-slate-400 tracking-widest mb-3">大分類</div>
+<p class="text-sm text-slate-500 mt-1">大分類 → 中分類 → 投稿タイトル。クリックで200字要約と5視点を表示します。</p>
+
+<div id="storeNotice" class="hidden mt-4 bg-teal-50 border-2 border-teal-600 rounded-2xl p-4">
+  <div class="font-black text-sm text-teal-900" id="storeNoticeTitle">投稿を格納しました</div>
+  <div class="text-xs text-slate-700 mt-1" id="storeNoticeBody"></div>
+</div>
+
+<div class="mt-4 flex gap-2 text-[11px] font-bold flex-wrap">
+  <span class="px-3 py-1 rounded-full bg-amber-300 text-black">👑 新統合</span>
+  <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-800 border border-sky-300">📝 単独提案</span>
+  <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-500 border">📎 元記事</span>
+</div>
+
+<div class="mt-6">
+  <div class="text-xs font-bold text-slate-400 tracking-widest mb-3">大分類（6）</div>
   <div id="bigAccordion" class="flex flex-col gap-3"></div>
 </div>
 
-<!-- ★ここから共創アップデート（追加・置き換え） -->
+<!-- 共創アップデート（残す） -->
 <div class="mt-10">
   <div class="bg-slate-900 text-white rounded-2xl px-5 py-4 mb-4">
     <div class="font-black text-base">🗺 6つのテーマ｜共創アップデート</div>
@@ -344,8 +356,6 @@ main{padding-bottom:250px;min-height:70vh;overflow:visible;}
   <div id="coCreationUpdate" class="grid md:grid-cols-2 gap-3"></div>
   <div id="kyosoUpdate" class="mt-4 text-xs text-slate-500"></div>
 </div>
-<!-- ★ここまで -->
-
 </section>
 <section id="hiroba" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
@@ -1262,39 +1272,84 @@ function initIdeas(){
 }
 
 
+
+function ideaBigMatches(idea, cat){
+  return idea.big === cat.key || idea.big === cat.label || idea.bigLabel === cat.label;
+}
+function ideaBadge(idea){
+  if(idea.type === 'integrated'){
+    return '<span class="absolute top-2 left-2 bg-amber-400 text-black text-[10px] font-black px-2 py-0.5 rounded-full">👑 新統合</span>';
+  }
+  if(idea.type === 'original'){
+    return '<span class="absolute top-2 left-2 bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">📎 元記事</span>';
+  }
+  return '<span class="absolute top-2 left-2 bg-sky-200 text-sky-900 text-[10px] font-bold px-2 py-0.5 rounded-full">📝 単独提案</span>';
+}
+function ideaCardClass(idea){
+  if(idea.type === 'integrated') return 'border-2 border-amber-400 bg-amber-50';
+  if(idea.type === 'original') return 'border border-slate-200 bg-slate-50 opacity-90';
+  return 'border-2 border-sky-300 bg-sky-50';
+}
+function midsForBig(cat){
+  var list = [];
+  INITIAL_24.forEach(function(x){
+    if((x.big === cat.label || x.big === cat.key) && list.indexOf(x.mid) === -1) list.push(x.mid);
+  });
+  ALL_IDEAS.forEach(function(i){
+    if(ideaBigMatches(i, cat) && i.mid && list.indexOf(i.mid) === -1) list.push(i.mid);
+  });
+  if(list.indexOf('その他') === -1) list.push('その他');
+  return list;
+}
+function articleRow(idea){
+  var merged = idea.integratedTo
+    ? '<div class="text-[10px] text-slate-500 mt-1">→ 統合先：'+esc(idea.integratedTo)+'</div>'
+    : '';
+  return '<div onclick="openIdeaModal(\''+idea.id+'\')" class="relative pt-7 p-3 rounded-xl cursor-pointer hover:shadow '+ideaCardClass(idea)+'">'
+    + ideaBadge(idea)
+    + '<div class="font-bold text-sm">'+esc(idea.title||'')+'</div>'
+    + '<div class="text-[11px] text-slate-600 mt-1 line-clamp-2">'+esc((idea.summary200||idea.summary||'').slice(0,80))+'</div>'
+    + merged
+    + '</div>';
+}
 function renderAccordion(){
   var container = document.getElementById('bigAccordion');
   if(!container) return;
   var html = '';
   BASE_CATEGORIES.forEach(function(cat){
-    // ★ big はラベル文字列で比較
-    var countAll = ALL_IDEAS.filter(function(i){ return i.big === cat.label; }).length;
+    var items = ALL_IDEAS.filter(function(i){ return ideaBigMatches(i, cat); });
     var isOpen = openBig === cat.key;
     html += '<div class="bg-white border rounded-2xl overflow-hidden '+(isOpen?'border-2 border-slate-900 shadow':'')+'">';
-    html += '<button type="button" onclick="toggleBig(\''+cat.key+'\')" class="w-full flex justify-between items-center p-4 text-left '+(isOpen?'bg-slate-900 text-white':'bg-white hover:bg-slate-50')+'"><span class="flex items-center gap-2"><span>'+cat.icon+'</span><span class="font-bold">'+esc(cat.label)+'</span></span><span class="flex items-center gap-2"><span class="bg-white text-black px-2.5 py-1 rounded-full text-xs border">'+countAll+'件</span><span class="text-xs">'+(isOpen?'▲':'▼')+'</span></span></button>';
+    html += '<button type="button" onclick="toggleBig(\''+cat.key+'\')" class="w-full flex justify-between items-center p-4 text-left '+(isOpen?'bg-slate-900 text-white':'hover:bg-slate-50')+'">'
+      + '<span class="flex items-center gap-2"><span>'+cat.icon+'</span><span class="font-bold">'+esc(cat.label)+'</span></span>'
+      + '<span class="text-xs '+(isOpen?'text-white':'text-slate-500')+'">'+items.length+'件 '+(isOpen?'▲':'▼')+'</span></button>';
     if(isOpen){
-      var mids = [];
-      ALL_IDEAS.forEach(function(i){
-        if(i.big === cat.label && mids.indexOf(i.mid) === -1) mids.push(i.mid);
-      });
-      html += '<div class="bg-slate-50 p-3 flex flex-col gap-2"><div class="text-xs font-bold text-slate-400 mb-1">中分類リスト</div>';
-      mids.forEach(function(mid){
-        var midCount = ALL_IDEAS.filter(function(i){ return i.big === cat.label && i.mid === mid; }).length;
+      html += '<div class="bg-slate-50 p-3 flex flex-col gap-2">';
+      midsForBig(cat).forEach(function(mid){
+        var midItems = items.filter(function(i){ return i.mid === mid; });
+        var visible = midItems.filter(function(i){ return i.type !== 'original'; });
+        var originals = midItems.filter(function(i){ return i.type === 'original'; });
         var isMidOpen = openMid === mid;
         html += '<div class="bg-white border rounded-xl overflow-hidden">';
-        html += '<button type="button" onclick="toggleMid(\''+esc(mid)+'\')" class="w-full flex justify-between items-center p-3 text-left '+(isMidOpen?'bg-amber-50 font-bold':'hover:bg-slate-50')+'"><span class="text-sm">'+esc(mid)+'</span><span class="flex items-center gap-2"><span class="text-xs bg-slate-100 px-2 py-1 rounded-full">'+midCount+'件</span><span class="text-xs">'+(isMidOpen?'▲':'▼')+'</span></span></button>';
+        html += '<button type="button" onclick="toggleMid(\''+String(mid).replace(/'/g,'')+'\')" class="w-full flex justify-between items-center p-3 text-left '+(isMidOpen?'bg-amber-50 font-bold':'hover:bg-slate-50')+'">'
+          + '<span class="text-sm">'+esc(mid)+'</span>'
+          + '<span class="text-xs text-slate-500">'+visible.length+'件'+(originals.length?' / 元記事'+originals.length:'')+' '+(isMidOpen?'▲':'▼')+'</span></button>';
         if(isMidOpen){
-          var articles = ALL_IDEAS.filter(function(i){ return i.big === cat.label && i.mid === mid; });
-          html += '<div class="p-2 bg-white flex flex-col gap-2">';
-          articles.forEach(function(idea){
-            var badge = idea.type === 'integrated'
-              ? '<span class="bg-gradient-to-r from-yellow-300 to-yellow-100 text-black px-2 py-1 rounded-full text-[10px] font-bold">新統合</span>'
-              : '<span class="bg-white border px-2 py-1 rounded-full text-[10px]">元記事</span>';
-            html += '<div onclick="openIdeaModal(\''+idea.id+'\')" class="border rounded-xl p-3 cursor-pointer hover:shadow bg-white">'
-              + '<div class="flex justify-between gap-2"><div class="font-bold text-sm">'+esc(idea.title)+'</div>'+badge+'</div>'
-              + '<div class="text-xs text-slate-500 mt-1">'+esc((idea.summary||'').slice(0,60))+'…</div>'
-              + '</div>';
-          });
+          html += '<div class="p-2 flex flex-col gap-2">';
+          visible.sort(function(a,b){
+            if(a.type === b.type) return 0;
+            return a.type === 'integrated' ? -1 : 1;
+          }).forEach(function(idea){ html += articleRow(idea); });
+          if(originals.length){
+            var oid = 'orig-'+cat.key+'-'+String(mid).replace(/[^a-zA-Z0-9\u3040-\u9fff]/g,'');
+            html += '<button type="button" onclick="var el=document.getElementById(\''+oid+'\'); if(el) el.classList.toggle(\'hidden\');" class="text-[11px] text-slate-500 underline text-left">📎 元記事を表示（'+originals.length+'件）</button>';
+            html += '<div id="'+oid+'" class="hidden flex flex-col gap-2">';
+            originals.forEach(function(idea){ html += articleRow(idea); });
+            html += '</div>';
+          }
+          if(!visible.length && !originals.length){
+            html += '<div class="text-xs text-slate-400 p-2">まだ投稿がありません</div>';
+          }
           html += '</div>';
         }
         html += '</div>';
@@ -1305,6 +1360,145 @@ function renderAccordion(){
   });
   container.innerHTML = html;
 }
+
+
+function storeLastOpinionToTree(){
+  var pack = window._lastOpinion;
+  if(!pack || !pack.analysis){ alert('先にAI分析を実行してください'); return; }
+  var a = pack.analysis;
+  classifyAndStore({
+    title: a.title,
+    summary200: a.summary200,
+    raw: pack.input,
+    big: a.big,
+    catLabel: a.catLabel,
+    mid: a.mid,
+    core: a.p1, change: a.p2, success: a.p3, concern: a.p4, question: a.p5,
+    author: pack.author
+  });
+  document.getElementById('userInput').value = '';
+}
+
+function similarText(a, b){
+  a = String(a||''); b = String(b||'');
+  if(!a || !b) return false;
+  if(a.slice(0,8) && b.indexOf(a.slice(0,8)) >= 0) return true;
+  var keys = ['防災','避難','安否','防犯','ベンチ','坂','ゴミ','清掃','祭り','空き家','見守り','サロン','DX','ペット','子ども','交流'];
+  var hits = 0;
+  keys.forEach(function(k){ if(a.indexOf(k)>=0 && b.indexOf(k)>=0) hits++; });
+  return hits >= 2;
+}
+function classifyAndStore(payload){
+  var bigLabel = payload.catLabel || payload.bigLabel || '';
+  var cat = BASE_CATEGORIES.find(function(c){ return c.label===bigLabel || c.key===payload.big; }) || BASE_CATEGORIES[2];
+  var bigKey = cat.key;
+  var mid = payload.mid || 'その他';
+  var known = midsForBig(cat).filter(function(m){ return m !== 'その他'; });
+  if(known.indexOf(mid) === -1) mid = 'その他';
+
+  var integrated = ALL_IDEAS.filter(function(i){
+    return ideaBigMatches(i, cat) && i.mid===mid && i.type==='integrated';
+  });
+  var resultType = 'standalone';
+  var integratedTo = '';
+  for(var i=0;i<integrated.length;i++){
+    var t = (integrated[i].title||'') + ' ' + (integrated[i].summary||'');
+    var s = (payload.title||'') + ' ' + (payload.summary200||payload.raw||'');
+    if(similarText(s, t)){
+      resultType = 'original';
+      integratedTo = integrated[i].title;
+      var add = String(payload.summary200||'');
+      integrated[i].summary = String(integrated[i].summary||'') + (add ? ('\n\n--- 追記 ---\n'+add) : '');
+      integrated[i].summary200 = String(integrated[i].summary200||integrated[i].summary||'').slice(0,200);
+      break;
+    }
+  }
+  var newIdea = {
+    id: 'idea-' + Date.now(),
+    big: bigKey,
+    bigLabel: cat.label,
+    mid: mid,
+    title: payload.title,
+    summary: payload.summary200,
+    summary200: payload.summary200,
+    raw: payload.raw,
+    core: payload.core, change: payload.change,
+    success: payload.success, concern: payload.concern, question: payload.question,
+    p1: payload.core, p2: payload.change, p3: payload.success, p4: payload.concern, p5: payload.question,
+    type: resultType,
+    integratedTo: integratedTo || null,
+    author: payload.author || '匿名',
+    date: new Date().toISOString().slice(0,10)
+  };
+  ALL_IDEAS.unshift(newIdea);
+
+  if(resultType === 'standalone'){
+    var stands = ALL_IDEAS.filter(function(i){
+      return ideaBigMatches(i, cat) && i.mid===mid && i.type==='standalone';
+    });
+    if(stands.length >= 3){
+      var newest3 = stands.slice(0,3);
+      var newMid = mid;
+      if(mid === 'その他') newMid = String(payload.title||'新テーマ').slice(0,12);
+      var integ = {
+        id: 'integrated-' + Date.now(),
+        big: bigKey,
+        bigLabel: cat.label,
+        mid: newMid,
+        title: cat.label + '・' + newMid + 'の共創（新統合）',
+        summary: newest3.map(function(x){ return x.summary200||x.summary||''; }).join(' ').slice(0,200),
+        summary200: newest3.map(function(x){ return x.summary200||x.summary||''; }).join(' ').slice(0,200),
+        type: 'integrated',
+        date: new Date().toISOString().slice(0,10)
+      };
+      ALL_IDEAS.unshift(integ);
+      newest3.forEach(function(x){
+        x.type = 'original';
+        x.integratedTo = integ.title;
+        if(mid === 'その他') x.mid = newMid;
+      });
+      mid = newMid;
+      resultType = 'integrated';
+      newIdea = integ;
+    }
+  }
+
+  try{
+    postToGAS({
+      action: 'postIdea',
+      author: payload.author || '匿名',
+      title: payload.title,
+      content: payload.raw,
+      big: cat.label,
+      mid: mid,
+      summary200: payload.summary200,
+      summary: payload.summary200,
+      p1: payload.core, p2: payload.change, p3: payload.success,
+      p4: payload.concern, p5: payload.question,
+      type: newIdea.type,
+      integratedTo: newIdea.integratedTo || ''
+    });
+  }catch(e){ console.log(e); }
+
+  openBig = bigKey;
+  openMid = mid;
+  showPage('tree');
+  renderAccordion();
+  try{ renderCoCreationUpdate(); }catch(e){}
+
+  var notice = document.getElementById('storeNotice');
+  if(notice){
+    notice.classList.remove('hidden');
+    var ttl = document.getElementById('storeNoticeTitle');
+    var body = document.getElementById('storeNoticeBody');
+    if(ttl) ttl.textContent =
+      resultType==='original' ? '既存の新統合に統合しました' :
+      (newIdea.type==='integrated' && resultType==='integrated') ? '新しい新統合を作成しました' : '単独提案として格納しました';
+    if(body) body.textContent = '格納先：' + cat.label + ' ＞ ' + mid + ' ＞ ' + (payload.title||'');
+  }
+  return newIdea;
+}
+
 function toggleBig(key){ openBig = (openBig === key) ? null : key; openMid = null; renderAccordion(); }
 function toggleMid(mid){ openMid = (openMid === mid) ? null : mid; renderAccordion(); }
 function openDefaultModal(key){ var el = document.getElementById('co-default-'+key); if(el) el.classList.toggle('hidden'); }
@@ -1319,7 +1513,7 @@ function renderCoCreationUpdate(){
     if(!grid) return;
     var html = '';
     BASE_CATEGORIES.forEach(function(cat){
-      var items = ALL_IDEAS.filter(function(i){ return i.big === cat.label; });
+      var items = ALL_IDEAS.filter(function(i){ return typeof ideaBigMatches==='function' ? ideaBigMatches(i, cat) : (i.big===cat.label || i.big===cat.key || i.bigLabel===cat.label); });
       var integrated = items.filter(function(i){ return i.type === 'integrated'; });
       var summary = (integrated[0] && (integrated[0].summary200 || integrated[0].summary))
         || cat.defaultDesc
@@ -1949,25 +2143,7 @@ document.addEventListener('DOMContentLoaded', function(){
     
     setTimeout(function(){
       var analysis = generateOpinionAnalysis(input, author);
-      var newIdea = {
-        id: 'idea-' + (NEXT_ID++),
-        big: analysis.big,
-        mid: analysis.mid,
-        title: analysis.title,
-        summary: analysis.summary200,
-        summary200: analysis.summary200,
-        p1: analysis.p1, p2: analysis.p2, p3: analysis.p3, p4: analysis.p4, p5: analysis.p5,
-        raw: input,
-        type: 'integrated',
-        integratedTo: null,
-        reason: '利用者投稿により5視点(各100字)および200字要約として整理。',
-        defaultDesc: (BASE_CATEGORIES.find(b=>b.key===analysis.big)||BASE_CATEGORIES[2]).defaultDesc,
-        date: new Date().toISOString().slice(0,10),
-        age: '40代',
-        author: author
-      };
-      
-      ALL_IDEAS.unshift(newIdea);
+      window._lastOpinion = {analysis: analysis, input: input, author: author};
       document.getElementById('loadingMsg').classList.add('hidden');
       
       var slipHtml = '<div class="bg-white border-2 border-teal-700 rounded-2xl p-5 shadow-sm">'
@@ -1987,27 +2163,10 @@ document.addEventListener('DOMContentLoaded', function(){
         + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🎉 視点4: 集客・賑わい創出 (' + analysis.p4.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p4) + '</span></div>'
         + '<div class="bg-slate-50 border rounded-xl p-3"><span class="font-bold text-teal-800 block mb-1">🔭 視点5: 持続可能性 (' + analysis.p5.length + '字)</span><span class="text-xs text-slate-700 leading-relaxed">' + esc(analysis.p5) + '</span></div>'
         + '</div>'
-        + '<button type="button" onclick="showPage(\'tree\')" class="w-full bg-teal-700 text-white py-3 rounded-xl text-xs font-black shadow">📦 意見集約箱で確認 →</button>'
+        + '<button type="button" onclick="storeLastOpinionToTree()" class="w-full bg-teal-700 text-white py-3 rounded-xl text-xs font-black shadow">📦 意見集約箱へ投稿する</button>'
         + '</div>';
       
       document.getElementById('slip').innerHTML = slipHtml;
-      
-      postToGAS({
-        action: "postIdea",
-        author: author,
-        content: input,
-        title: analysis.title,
-        big: analysis.big,
-        mid: analysis.mid,
-        summary200: analysis.summary200,
-        summary: analysis.summary200,
-        p1: analysis.p1, p2: analysis.p2, p3: analysis.p3, p4: analysis.p4, p5: analysis.p5,
-        type: 'integrated',
-        date: newIdea.date
-      });
-      
-      renderAccordion();
-      document.getElementById('userInput').value = '';
     }, 600);
   });
 
