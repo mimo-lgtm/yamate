@@ -2025,7 +2025,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(detail.length < 5){ alert('詳細内容を入力してください'); return; }
     
     var analysis = generateEventAnalysis(title, detail);
-    var newEvId = 'idea-evt' + Date.now();
+    var newEvId = 'idea-' + Date.now();
     
     EVENT_IDEAS.unshift({
       id: newEvId,
