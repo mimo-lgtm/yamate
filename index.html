@@ -994,9 +994,13 @@ function loadFromSheet(){
     .then(function(r){ return r.json(); })
     .then(function(data){
       console.log("getIdeas:", data);
-      if(!data || !Array.isArray(data) || data.length===0) return;
+      if(!data || !Array.isArray(data) || data.length===0){
+        ensureDefaultIntegrated24();
+        try{ renderAccordion(); }catch(e){}
+        return;
+      }
 
-      ALL_IDEAS = [];
+      // シートの投稿を追加（初期の新統合・サンプルは消さない）
       data.forEach(function(row){
         var bigLabel = row.bigLabel || row.big || "コミュニティ";
         var midLabel = row.midLabel || row.mid || "その他";
@@ -1021,7 +1025,7 @@ function loadFromSheet(){
           p3: row.success || row.p3 || "",
           p4: row.concern || row.p4 || "",
           p5: row.question || row.p5 || "",
-          type: row.type || "integrated",
+          type: (row.type === 'original' || row.type === 'standalone' || row.type === 'integrated') ? row.type : 'standalone',
           date: row.date || String(row.timestamp||"").slice(0,10) || new Date().toISOString().slice(0,10),
           author: row.author || ""
         });
@@ -1223,14 +1227,16 @@ function generateEventAnalysis(title, detail){
 }
 
 function ensureDefaultIntegrated24(){
-  INITIAL_24.forEach(function(item){
+  // 各大分類×4中分類：新統合1＋単独提案サンプル＋元記事サンプルを保証
+  INITIAL_24.forEach(function(item, idx){
     var cat = BASE_CATEGORIES.find(function(c){ return c.label === item.big; });
     if(!cat) return;
-    var exists = ALL_IDEAS.some(function(a){
-      return a.type==='integrated' && a.mid===item.mid && (a.big===cat.key || a.big===cat.label || a.bigLabel===cat.label);
-    });
-    if(!exists){
-      var summary200 = (cat.defaultDesc || '').slice(0,200);
+    var matchBig = function(a){
+      return a.mid===item.mid && (a.big===cat.key || a.big===cat.label || a.bigLabel===cat.label);
+    };
+    var hasInteg = ALL_IDEAS.some(function(a){ return matchBig(a) && a.type==='integrated'; });
+    if(!hasInteg){
+      var summary200 = String(cat.defaultDesc||'').slice(0,200);
       ALL_IDEAS.push({
         id: 'integrated-'+cat.key+'-'+item.mid,
         big: cat.key,
@@ -1240,91 +1246,78 @@ function ensureDefaultIntegrated24(){
         summary: summary200,
         summary200: summary200,
         type: 'integrated',
+        integratedTo: null,
         date: '2026-05-01'
+      });
+    }
+    var hasStand = ALL_IDEAS.some(function(a){ return matchBig(a) && a.type==='standalone'; });
+    if(!hasStand){
+      ALL_IDEAS.push({
+        id: 'standalone-'+cat.key+'-'+item.mid,
+        big: cat.key,
+        bigLabel: cat.label,
+        mid: item.mid,
+        title: item.mid+'についての住民提案',
+        summary: item.mid+'に関して、山手町で取り組みたいという単独の提案です。具体的な場所・時間・担い手を話し合いながら、無理のない形で試行することを目指します。',
+        summary200: (item.mid+'に関して、山手町で取り組みたいという単独の提案です。具体的な場所・時間・担い手を話し合いながら、無理のない形で試行することを目指します。').slice(0,200),
+        type: 'standalone',
+        date: '2026-05-10'
+      });
+    }
+    var hasOrig = ALL_IDEAS.some(function(a){ return matchBig(a) && a.type==='original'; });
+    if(!hasOrig){
+      var integTitle = cat.label+'・'+item.mid+'の共創（新統合）';
+      ALL_IDEAS.push({
+        id: 'original-'+cat.key+'-'+item.mid,
+        big: cat.key,
+        bigLabel: cat.label,
+        mid: item.mid,
+        title: '（統合済）'+item.mid+'の以前の提案',
+        summary: 'この提案は新統合「'+integTitle+'」に統合されました。',
+        summary200: ('この提案は新統合「'+integTitle+'」に統合されました。内容は新統合記事側に集約されています。').slice(0,200),
+        type: 'original',
+        integratedTo: integTitle,
+        date: '2026-04-20'
       });
     }
   });
 }
 function initIdeas(){
-  ALL_IDEAS = []; NEXT_ID = 1;
-  var byBig = {}; BASE_CATEGORIES.forEach(function(c){ byBig[c.key] = c; });
-  var byLabel = {}; BASE_CATEGORIES.forEach(function(c){ byLabel[c.label] = c; });
-  
-  console.log('=== initIdeas開始 - 中分類に一つは新統合が必要 ===');
-  console.log('BASE_CATEGORIES:', BASE_CATEGORIES.map(function(b){return b.label;}));
-  console.log('INITIAL_24:', INITIAL_24.length + '件');
-  
-  // INITIAL_24の各中分類に一つは新統合を作成
-  var midToIntegrated = {};
-  INITIAL_24.forEach(function(item){
-    var bigKey = null;
-    for(var k in byBig){ if(byBig[k].label===item.big){ bigKey=k; break; } }
-    if(!bigKey) bigKey = 'BIG-3';
-    var mid = item.mid;
-    if(!midToIntegrated[mid]){
-      var base = byBig[bigKey];
-      var integratedTitle = base.label + 'の共創：' + mid + '（新統合）';
-      var summary200 = base.defaultDesc + ' ' + mid + 'に関する地域の声を集約し、AIが150-200字に要約。タイトルと200字要約がスプレッドシートに格納されているか検証済み。中分類「' + mid + '」の代表記事として、元記事はこの新統合に統合。';
-      if(summary200.length>200) summary200 = summary200.slice(0,200);
-      ALL_IDEAS.push({
-        id:'idea-'+(NEXT_ID++),
-        big: bigKey,
-        bigLabel: base.label,
-        mid: mid,
-        title: integratedTitle,
-        summary: summary200,
-        summary200: summary200,
-        raw: integratedTitle,
-        type: 'integrated',
-        integratedTo: null,
-        reason: '中分類「'+mid+'」の代表として新統合。各中分類に一つは新統合が必要という要件を満たす。',
-        defaultDesc: base.defaultDesc,
-        date: '2026-05-01',
-        age: '40代'
-      });
-      midToIntegrated[mid] = true;
-    }
-  });
-  
-  console.log('✓ 新統合作成:', Object.keys(midToIntegrated).length + '件（中分類ごとに1つ）');
-  
-  // ORIGINAL_24を元記事として追加（各中分類の元記事は新統合に統合）
+  ALL_IDEAS = [];
+  NEXT_ID = 1;
+  ensureDefaultIntegrated24();
   if(typeof ORIGINAL_24 !== 'undefined'){
-    ORIGINAL_24.forEach(function(o){
-      var bigKey = null;
-      for(var k in byBig){ if(byBig[k].label===o.big || byBig[k].key===o.big){ bigKey=k; break; } }
-      if(!bigKey) bigKey = 'BIG-3';
-      var base = byBig[bigKey];
-      var integratedTitle = base.label + 'の共創：' + o.mid + '（新統合）';
+    ORIGINAL_24.forEach(function(o, i){
+      var cat = null;
+      if(String(o.big).indexOf('BIG-')===0){
+        cat = BASE_CATEGORIES.find(function(c){ return c.key===o.big; });
+      } else {
+        cat = BASE_CATEGORIES.find(function(c){ return c.label===o.big; });
+      }
+      if(!cat) cat = BASE_CATEGORIES[0];
+      var mids = INITIAL_24.filter(function(x){ return x.big===cat.label; }).map(function(x){ return x.mid; });
+      var mid = mids[i % Math.max(mids.length,1)] || 'その他';
+      var integTitle = cat.label+'・'+mid+'の共創（新統合）';
       ALL_IDEAS.push({
-        id:'idea-'+(NEXT_ID++),
-        big: bigKey,
-        bigLabel: base.label,
-        mid: o.mid,
-        title: o.title,
-        summary: o.summary,
-        summary200: (o.summary + ' ' + base.defaultDesc).slice(0,200),
-        raw: o.title,
+        id: 'orig24-'+(i+1),
+        big: cat.key,
+        bigLabel: cat.label,
+        mid: mid,
+        title: o.title || ('元記事'+(i+1)),
+        summary: o.summary || '',
+        summary200: String(o.summary||'').slice(0,200),
         type: 'original',
-        integratedTo: integratedTitle,
-        reason: '同一中分類「'+o.mid+'」に該当するため、新統合記事「'+integratedTitle+'」に統合。中分類に一つは新統合が必要。',
-        defaultDesc: base.defaultDesc,
-        date: o.date,
-        age: o.age
+        integratedTo: integTitle,
+        date: o.date || '2026-04-01',
+        age: o.age || ''
       });
     });
   }
-  
-  // 検証：中分類ごとに新統合が1つあるか
-  var mids = {};
-  ALL_IDEAS.forEach(function(a){ if(!mids[a.mid]) mids[a.mid]={integrated:0, original:0}; if(a.type==='integrated') mids[a.mid].integrated++; else mids[a.mid].original++; });
-  console.log('=== 中分類ごとの新統合検証 ===');
-  for(var mid in mids){
-    console.log(mid + ': 新統合' + mids[mid].integrated + '件, 元記事' + mids[mid].original + '件 - ' + (mids[mid].integrated>=1 ? '✓ OK' : '❌ NG'));
-  }
+  console.log('initIdeas完了', ALL_IDEAS.length, '件 / 新統合',
+    ALL_IDEAS.filter(function(a){return a.type==='integrated';}).length,
+    '単独', ALL_IDEAS.filter(function(a){return a.type==='standalone';}).length,
+    '元記事', ALL_IDEAS.filter(function(a){return a.type==='original';}).length);
 }
-
-
 
 function ideaBigMatches(idea, cat){
   return idea.big === cat.key || idea.big === cat.label || idea.bigLabel === cat.label;
@@ -1394,7 +1387,7 @@ function renderAccordion(){
           }).forEach(function(idea){ html += articleRow(idea); });
           if(originals.length){
             var oid = 'orig-'+cat.key+'-'+String(mid).replace(/[^a-zA-Z0-9\u3040-\u9fff]/g,'');
-            html += '<button type="button" onclick="var el=document.getElementById(\''+oid+'\'); if(el) el.classList.toggle(\'hidden\');" class="text-[11px] text-slate-500 underline text-left">📎 元記事を表示（'+originals.length+'件）</button>';
+            html += '<button type="button" onclick="var el=document.getElementById(\''+oid+'\'); if(el) el.classList.toggle(\'hidden\');" class="text-[11px] text-slate-500 underline text-left">📁 元記事フォルダを開く（'+originals.length+'件）</button>';
             html += '<div id="'+oid+'" class="hidden flex flex-col gap-2">';
             originals.forEach(function(idea){ html += articleRow(idea); });
             html += '</div>';
@@ -2294,36 +2287,46 @@ document.addEventListener('DOMContentLoaded', function(){
     try{
       if(GAS_URL && GAS_URL.indexOf('https')===0){
         triedCloud = true;
-        fetch(GAS_URL, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {'Content-Type': 'text/plain;charset=utf-8'},
-          body: JSON.stringify({action:'analyze', content: input, author: author})
-        }).then(function(r){ return r.json(); }).then(function(data){
+        // GETでanalyze（doPostはブラウザからCORSで読めないため）
+        var analyzeUrl = GAS_URL + '?action=analyze&content=' + encodeURIComponent(input);
+        console.log('cloud analyze GET:', analyzeUrl.slice(0, 120)+'...');
+        fetch(analyzeUrl, { method: 'GET', redirect: 'follow' })
+        .then(function(r){
+          console.log('analyze HTTP status', r.status);
+          return r.text();
+        })
+        .then(function(txt){
+          console.log('analyze raw head:', String(txt).slice(0, 200));
+          var data = null;
+          try{ data = JSON.parse(txt); }catch(e){ throw new Error('JSON parse failed'); }
           if(data && data.status==='success' && data.result){
             var r = data.result;
             var analysis = {
               big: r['大分類'] || 'コミュニティ',
               mid: r['中分類'] || 'その他',
               title: r['推奨タイトル'] || input.slice(0,18),
-              summary200: r['要約200'] || '',
-              p1: r['視点1_本文'] || '',
-              p2: r['視点2_本文'] || '',
-              p3: r['視点3_本文'] || '',
-              p4: r['視点4_本文'] || '',
-              p5: r['視点5_本文'] || '',
+              summary200: String(r['要約200'] || '').slice(0,200),
+              p1: r['視点1_本文'] || r['核心'] || '',
+              p2: r['視点2_本文'] || r['変化'] || '',
+              p3: r['視点3_本文'] || r['成功事例'] || '',
+              p4: r['視点4_本文'] || r['懸念点'] || '',
+              p5: r['視点5_本文'] || r['問い'] || '',
               catLabel: r['大分類'] || 'コミュニティ'
             };
-            // big key 解決
             var cat = BASE_CATEGORIES.find(function(c){ return c.label===analysis.catLabel; });
             if(cat) analysis.big = cat.key;
-            finishWithAnalysis(analysis, data.result.knowledge_used || 'cloud-AI');
+            // mid がINITIAL_24に無ければその他
+            var mids = INITIAL_24.filter(function(x){ return x.big===analysis.catLabel; }).map(function(x){ return x.mid; });
+            if(mids.indexOf(analysis.mid)===-1) analysis.mid = 'その他';
+            finishWithAnalysis(analysis, r.knowledge_used || 'cloud-AI');
           } else {
-            finishWithAnalysis(generateOpinionAnalysis(input, author), 'local');
+            console.log('analyze not success', data);
+            var msg = (data && data.message) ? data.message : 'no result';
+            finishWithAnalysis(generateOpinionAnalysis(input, author), 'local(' + msg + ')');
           }
         }).catch(function(e){
           console.log('cloud analyze failed', e);
-          finishWithAnalysis(generateOpinionAnalysis(input, author), 'local');
+          finishWithAnalysis(generateOpinionAnalysis(input, author), 'local-error');
         });
         return;
       }
