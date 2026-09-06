@@ -420,6 +420,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <textarea id="evDetail" rows="4" placeholder="イベント内容や開催目的をご記入ください（200文字要約を自動生成します）" class="w-full p-3 border rounded-xl text-sm bg-white"></textarea>
 <div class="text-xs mt-2 flex justify-between"><span id="evDetailCount">200文字要約自動出力</span></div>
 <div class="mt-3 flex gap-2">
+<button type="button" id="btnVoiceEvent" class="bg-white border-2 border-amber-500 text-amber-900 px-5 py-2.5 rounded-full text-sm font-black">🎙 音声で入力</button>
 <button type="button" id="btnSubmitEvent" class="bg-amber-500 text-black px-6 py-2.5 rounded-full text-sm font-black">🤖 AIが200字要約にして投稿</button>
 <button type="button" onclick="createFlyerFromHatsuan()" class="bg-teal-700 text-white px-6 py-2.5 rounded-full text-sm font-black">🎨 この内容でチラシ作成</button>
 </div>
@@ -956,7 +957,7 @@ function postToGAS(payload){
       fetch(GAS_URL, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload)})
         .then(function(r){ return r.text(); }).then(function(t){
           console.log('GASレスポンス:', t.slice(0,200));
-          try{ setTimeout(function(){ loadFromSheet(); }, 1500); }catch(e){}
+          try{ setTimeout(function(){ /* 投稿直後の再取得は統合デフォルトを消さないよう ensure 付き */ loadFromSheet(); }, 2500); }catch(e){}
         })
         .catch(function(e){ console.log('GAS error - スプレッドシート連携失敗:', e); });
     } else {
@@ -1055,6 +1056,8 @@ function loadFromSheet(){
         });
       }
 
+      // シートの投稿を残しつつ、24新統合が無ければ補完（消えないように）
+      ensureDefaultIntegrated24();
       try{ renderAccordion(); }catch(e){ console.log(e); }
       try{ renderCoCreationUpdate(); }catch(e){ console.log(e); }
     })
@@ -1124,7 +1127,7 @@ function generateOpinionAnalysis(input, author){
     big = 'BIG-4'; mid = (text.includes('ペット') || text.includes('犬')) ? 'ペット共生' : ((text.includes('高齢') || text.includes('ベンチ')) ? '健康増進活動' : '子育て世代支援');
   } else if (text.includes('空き家') || text.includes('DX') || text.includes('LINE') || text.includes('若手') || text.includes('未来') || text.includes('継承')) {
     big = 'BIG-5'; mid = text.includes('空き家') ? '空き家・継承' : (text.includes('DX') ? '自治会のDX' : '次世代の担い手');
-  } else if (text.includes('祭り') || text.includes('イベント') || text.includes('餅') || text.includes('ツアー') || text.includes('縁日')) {
+  } else if (text.includes('祭り') || text.includes('イベント') || text.includes('餅') || text.includes('音楽') || text.includes('コンサート') || text.includes('ツアー') || text.includes('縁日')) {
     big = 'BIG-6'; mid = text.includes('祭り') ? '夏祭り・餅つき' : '子ども・多世代企画';
   }
 
@@ -1162,7 +1165,12 @@ function generateOpinionAnalysis(input, author){
     p5 = "【持続可能性】一部の住民に負担が偏らないよう、LINEや掲示板を活用した柔軟な参加登録システムを構築します。低負担で継続できる清掃・美化モデルを次世代に繋げ、清潔な街づくりを維持します。（97文字）";
   }
 
-  var summary200 = "芦屋市山手町の地域特性（急坂・石垣・第一種低層住宅地）を踏まえ、" + text + "に関する課題解決および魅力向上の施策を提案します。自治会・Code for Ashiya・多世代住民が連携し、安全面や景観保全、環境配慮を両立した運用計画を設計します。デジタル活用と住民ボランティア制度を組み合わせることで負担を軽減し、低コストで持続可能なコミュニティ共創モデルとして地域全体で推進していきます。（192文字）";
+  // 投稿本文を中心に要約（テンプレ固定文をやめる）
+  var core = text.replace(/\s+/g,' ').trim();
+  if(core.length > 90) core = core.slice(0, 90);
+  var summary200 = "【提案】" + core + "。山手町の閑静な住環境と多世代のつながりを活かし、住民主体で安全に楽しめる形を設計します。自治会・有志・関係団体が役割分担し、準備から当日運営まで負担を分散。参加しやすい時間帯と場所を選び、継続できる地域の文化・交流の場として定着を目指します。";
+  if(summary200.length > 200) summary200 = summary200.slice(0,200);
+  if(summary200.length < 150) summary200 = (summary200 + " まずは小規模な試行から始め、参加者の声を次に活かします。").slice(0,200);
 
   if (text.includes('坂') || text.includes('ベンチ')) {
     summary200 = "六甲山麓の急坂が多い山手町において、高齢者や子育て世代の歩行負担を軽減するため、街並みと調和する休憩用ベンチの設置を提案します。自治会や住民が連携して設置箇所を選定し、お散歩や買い物帰りの多世代交流拠点として活用します。耐候性素材と夜間安全配慮を施し、住民ボランティアによる維持管理制度を導入することで、低負荷で持続可能な健康増進インフラを地域全体で創出します。（189文字）";
@@ -1212,6 +1220,30 @@ function generateEventAnalysis(title, detail){
     category: category,
     via: 'local-rules'
   };
+}
+
+function ensureDefaultIntegrated24(){
+  INITIAL_24.forEach(function(item){
+    var cat = BASE_CATEGORIES.find(function(c){ return c.label === item.big; });
+    if(!cat) return;
+    var exists = ALL_IDEAS.some(function(a){
+      return a.type==='integrated' && a.mid===item.mid && (a.big===cat.key || a.big===cat.label || a.bigLabel===cat.label);
+    });
+    if(!exists){
+      var summary200 = (cat.defaultDesc || '').slice(0,200);
+      ALL_IDEAS.push({
+        id: 'integrated-'+cat.key+'-'+item.mid,
+        big: cat.key,
+        bigLabel: cat.label,
+        mid: item.mid,
+        title: cat.label+'・'+item.mid+'の共創（新統合）',
+        summary: summary200,
+        summary200: summary200,
+        type: 'integrated',
+        date: '2026-05-01'
+      });
+    }
+  });
 }
 function initIdeas(){
   ALL_IDEAS = []; NEXT_ID = 1;
@@ -1312,14 +1344,13 @@ function ideaCardClass(idea){
   return 'border-2 border-sky-300 bg-sky-50';
 }
 function midsForBig(cat){
+  // 各大分類：INITIAL_24の中分類ちょうど4つ ＋ 「その他」のみ
   var list = [];
   INITIAL_24.forEach(function(x){
-    if((x.big === cat.label || x.big === cat.key) && list.indexOf(x.mid) === -1) list.push(x.mid);
+    if(x.big === cat.label && list.indexOf(x.mid) === -1) list.push(x.mid);
   });
-  ALL_IDEAS.forEach(function(i){
-    if(ideaBigMatches(i, cat) && i.mid && list.indexOf(i.mid) === -1) list.push(i.mid);
-  });
-  if(list.indexOf('その他') === -1) list.push('その他');
+  list = list.slice(0, 4);
+  list.push('その他');
   return list;
 }
 function articleRow(idea){
@@ -1583,34 +1614,41 @@ function renderCoCreationUpdate(){
   }catch(e){ console.log('renderCoCreationUpdate error', e); }
 }
 function toggleKyosoDetail(key){
-  var cat = BASE_CATEGORIES.find(function(c){ return c.key === key; });
-  var box = document.getElementById('kyoso-detail-'+key);
-  var t = document.getElementById('kyoso-text-'+key);
-  if(!box) return;
-  var opening = box.classList.contains('hidden');
-  box.classList.toggle('hidden');
-  // 詳細＝デフォルト文章（元の文章）を表示
-  if(opening && t && cat){
-    var orig = String(cat.defaultDesc || '');
-    t.innerHTML = '<div class="font-bold text-amber-900 mb-1">📄 デフォルト（元の文章）</div><div>'+esc(orig)+'</div><div class="text-[10px] text-slate-500 mt-1">'+orig.length+'字</div>';
-  }
+  try{
+    var cat = BASE_CATEGORIES.find(function(c){ return c.key === key; });
+    var box = document.getElementById('kyoso-detail-'+key);
+    var t = document.getElementById('kyoso-text-'+key);
+    if(!box){ console.log('kyoso detail box missing', key); return; }
+    var opening = box.classList.contains('hidden');
+    if(opening) box.classList.remove('hidden'); else box.classList.add('hidden');
+    if(opening && t && cat){
+      var orig = String(cat.defaultDesc || '');
+      t.innerHTML = '<div class="font-bold text-amber-900 mb-1">📄 デフォルト（元の文章）</div><div>'+esc(orig)+'</div><div class="text-[10px] text-slate-500 mt-1">'+orig.length+'字</div>';
+    }
+  }catch(e){ console.log('toggleKyosoDetail', e); }
 }
 function runKyosoUpdate(key){
-  var cat = BASE_CATEGORIES.find(function(c){ return c.key === key; });
-  if(!cat) return;
-  // 共創アップデート＝デフォルト50%＋新統合50%の内容合成
-  var text = buildKyosoText(cat);
-  var box = document.getElementById('kyoso-detail-'+key);
-  var t = document.getElementById('kyoso-text-'+key);
-  if(box) box.classList.remove('hidden');
-  if(t){
-    t.innerHTML = '<div class="font-bold text-amber-900 mb-1">🔄 共創アップデート結果（デフォルト50%＋新統合50%）</div><div>'+esc(text)+'</div><div class="text-[10px] text-slate-500 mt-1">'+text.length+'字</div>';
-  }
-  if(!window._kyosoCache) window._kyosoCache = {};
-  window._kyosoCache[key] = text;
-  var st = document.getElementById('kyosoUpdate');
-  if(st) st.textContent = cat.label + ' を共創アップデートしました（'+new Date().toLocaleTimeString('ja-JP')+'）';
+  try{
+    var cat = BASE_CATEGORIES.find(function(c){ return c.key === key; });
+    if(!cat){ alert('テーマが見つかりません'); return; }
+    var text = buildKyosoText(cat);
+    var box = document.getElementById('kyoso-detail-'+key);
+    var t = document.getElementById('kyoso-text-'+key);
+    if(box) box.classList.remove('hidden');
+    if(t){
+      t.innerHTML = '<div class="font-bold text-amber-900 mb-1">🔄 共創アップデート（デフォルト50%＋新統合50%）</div><div>'+esc(text)+'</div><div class="text-[10px] text-slate-500 mt-1">'+text.length+'字</div>';
+    } else {
+      alert(cat.label + '\n\n' + text);
+    }
+    if(!window._kyosoCache) window._kyosoCache = {};
+    window._kyosoCache[key] = text;
+    var st = document.getElementById('kyosoUpdate');
+    if(st) st.textContent = cat.label + ' を共創アップデートしました（'+new Date().toLocaleTimeString('ja-JP')+'）';
+  }catch(e){ console.log('runKyosoUpdate', e); alert('アップデートに失敗: '+e.message); }
 }
+window.toggleKyosoDetail = toggleKyosoDetail;
+window.runKyosoUpdate = runKyosoUpdate;
+
 function openIdeaModal(id){
   try{
     var idea = null;
@@ -2302,6 +2340,36 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('btnToggleAdmin').addEventListener('click', function(){ document.getElementById('adminEventForm').classList.toggle('hidden'); });
 
   // Event Submit
+  
+  // Event voice recognition
+  (function(){
+    var recEv = null;
+    var btnVE = document.getElementById('btnVoiceEvent');
+    if(btnVE){
+      btnVE.addEventListener('click', function(){
+        if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){
+          alert('Chrome等の音声認識対応ブラウザをご利用ください'); return;
+        }
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recEv = new SR();
+        recEv.lang = 'ja-JP';
+        recEv.onstart = function(){ btnVE.textContent = '🎙 聞き取り中…'; };
+        recEv.onend = function(){ btnVE.textContent = '🎙 音声で入力'; };
+        recEv.onresult = function(e){
+          var t = e.results[0][0].transcript;
+          var titleEl = document.getElementById('evTitle');
+          var detailEl = document.getElementById('evDetail');
+          if(detailEl){
+            detailEl.value = (detailEl.value ? detailEl.value + ' ' : '') + t;
+          } else if(titleEl){
+            titleEl.value = (titleEl.value ? titleEl.value + ' ' : '') + t;
+          }
+        };
+        recEv.start();
+      });
+    }
+  })();
+
   document.getElementById('btnSubmitEvent').addEventListener('click', function(){
     var title = document.getElementById('evTitle').value.trim();
     var detail = document.getElementById('evDetail').value.trim();
