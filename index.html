@@ -190,7 +190,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <section id="home" class="page active">
 <div class="bg-white rounded-[24px] border shadow-sm p-8 md:p-10 relative overflow-hidden">
 <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-800 to-amber-400"></div>
-<h1 class="text-3xl md:text-4xl font-black leading-[1.15]">山手町の小さな気づきと<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 via-emerald-600 to-amber-500">未来のアイデア帳 </span></h1>
+<h1 class="text-3xl md:text-4xl font-black leading-[1.15]">山手町の小さな気づきと<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 via-emerald-600 to-amber-500">未来のアイデア帳 & チラシ自動生成</span></h1>
 <p class="text-sm text-slate-600 mt-4 max-w-[680px] leading-relaxed">
 人口約2000名、六甲山麓の閑静な第一種低層住居専用地域・山手町。<br>
 小さな気づきをAIが整理してテーマ別に分類。さらに、イベント企画から<b>13項目自動反映＆分類別6テーマ＆AIイラスト2枚付きのA4高品質チラシ</b>を10秒で自動生成できます。<br>
@@ -670,26 +670,8 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 </div>
 
-<footer style="margin-top:24px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
-  <div style="max-width:1120px;margin:0 auto;">
-    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
-      <div style="font-size:28px;">🏙</div>
-      <div>
-        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
-          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
-        </div>
-        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
-          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
-          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
-          誰もが参加できるオープンな活動を行っています。
-          <br>
-          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
-          <span style="opacity:.5;margin:0 6px;">/</span>
-          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
-        </p>
-      </div>
-    </div>
-  </div>
+<footer style="background:white;border-top:2px solid #e2e8f0;padding:24px 16px 88px;text-align:center;font-size:12px;color:#94a3b8;line-height:1.8;margin-top:24px;">
+芦屋市山手町 - 未来のアイデア帳 | ASHIYA YAMATECHO FUTURE NOTEBOOK<br>© 2026 Code for Ashiya Civic Tech Project
 </footer>
 
 <!-- COMPLETE, BUG-FREE JAVASCRIPT LOGIC -->
@@ -764,7 +746,7 @@ const ORIGINAL_24 = [
 {big:"BIG-3",mid:"新住民の歓迎",title:"新住民への情報提供と歓迎",summary:"新住民向けウェルカムパッケージとアテンド制度の提案。",date:"2026-04-07",age:"30代"},
 {big:"BIG-3",mid:"班長・役員負担",title:"班長・役員負担の軽減",summary:"班長業務のマニュアル化と2人体制の提案。",date:"2026-04-06",age:"60代"},
 {big:"BIG-3",mid:"見守りネットワーク",title:"見守りネットワークの強化",summary:"ラジオ体操など日常接点を活用した自然な見守りの提案。",date:"2026-04-05",age:"70代"},
-{big:"BIG-4",mid:"高齢者の孤立",title:"高齢者の孤立防止と居場所",summary:"高齢者の孤立防止として集会所お茶会や散歩コース設定を提案。",date:"2026-04-04",age:"80代"},
+{big:"BIG-4",mid:"高齢者の見守り",title:"高齢者の見守り防止と居場所",summary:"高齢者の見守り防止として集会所お茶会や散歩コース設定を提案。",date:"2026-04-04",age:"80代"},
 {big:"BIG-4",mid:"子育て世代支援",title:"子育て世代の交流と支援",summary:"親子参加型バスツアーなど子育て世代交流の提案。",date:"2026-04-03",age:"30代"},
 {big:"BIG-4",mid:"ペット共生",title:"ペットとの共生マナー",summary:"ペット共生ルールブックと一時開放エリア設定の提案。",date:"2026-04-02",age:"40代"},
 {big:"BIG-4",mid:"健康増進活動",title:"健康増進と坂道対策",summary:"ベンチ設置と平坦ルート設定による健康増進提案。",date:"2026-04-01",age:"60代"},
@@ -1185,7 +1167,7 @@ function generateOpinionAnalysis(input, author){
   if (text.includes('坂') || text.includes('ベンチ')) {
     summary200 = "六甲山麓の急坂が多い山手町において、高齢者や子育て世代の歩行負担を軽減するため、街並みと調和する休憩用ベンチの設置を提案します。自治会や住民が連携して設置箇所を選定し、お散歩や買い物帰りの多世代交流拠点として活用します。耐候性素材と夜間安全配慮を施し、住民ボランティアによる維持管理制度を導入することで、低負荷で持続可能な健康増進インフラを地域全体で創出します。（189文字）";
   } else if (text.includes('防災') || text.includes('避難') || text.includes('安否')) {
-    summary200 = "急斜面や石垣が多い山手町の地域リスクに対応し、住民主体の避難訓練とLINE・民生委員を連携させた安否確認体制の強化を提案します。高齢者の孤立を防ぎつつ、子どもから大人まで楽しく学べる体験型防災イベントを企画します。省エネ資機材やデジタル連絡ツールを取り入れ、役員負担を軽減しながら、世代を超えて末永く安全安心を守る持続可能な防災コミュニティを構築します。（190文字）";
+    summary200 = "急斜面や石垣が多い山手町の地域リスクに対応し、住民主体の避難訓練とLINE・民生委員を連携させた安否確認体制の強化を提案します。高齢者の見守りを防ぎつつ、子どもから大人まで楽しく学べる体験型防災イベントを企画します。省エネ資機材やデジタル連絡ツールを取り入れ、役員負担を軽減しながら、世代を超えて末永く安全安心を守る持続可能な防災コミュニティを構築します。（190文字）";
   } else if (text.includes('ゴミ') || text.includes('清掃') || text.includes('側溝')) {
     summary200 = "山手町の閑静な景観と自然を守るため、側溝の落葉清掃やゴミステーション管理の効率化を提案します。用具の共同管理と中学生や新住民が参加しやすい短時間枠を設け、作業後の交流お茶会などを併催することで多世代の協働を促します。回収物の再資源化やデジタル当番表を導入し、一部への負担偏りを防ぐことで、綺麗で誇りの持てる街並みを継続的に維持・継承します。（187文字）";
   }
@@ -1202,19 +1184,35 @@ function generateEventAnalysis(title, detail){
   var d = String(detail || "").trim();
   var combined = t + " " + d;
 
-  var summary200 = "芦屋市山手町の美しい街並みと自然を活かした「" + t + "」のイベント企画案です。地域住民や子どもから高齢者までの多世代が安全に楽しく参加できるよう、山手公園や集会所などの地域資源を活用したプログラムを構成します。周囲の閑静な住環境に配慮した運営を行い、参加者同士の交流と笑顔を広げることで、地域の絆を深め次世代へ繋ぐ持続可能なコミュニティ行事として実施します。（188文字）";
+  // カテゴリ推定（イベント6種）
+  var category = EVENT_PHOTO_CATEGORIES[5]; // 一般
+  if(/ペット|犬|わん|猫|しつけ/.test(combined)) category = EVENT_PHOTO_CATEGORIES[4];
+  else if(/子ども|親子|縁日|ラジオ体操|キッズ|子供/.test(combined)) category = EVENT_PHOTO_CATEGORIES[1];
+  else if(/食|マルシェ|お茶|カフェ|餅|集ま|料理|BBQ|バザー/.test(combined)) category = EVENT_PHOTO_CATEGORIES[2];
+  else if(/趣味|学び|講座|ギャラリー|写真|音楽|読書|ハイキング/.test(combined)) category = EVENT_PHOTO_CATEGORIES[3];
+  else if(/季節|祭|イルミ|花見|夏祭|盆踊|掃除|清掃|美化|日常/.test(combined)) category = EVENT_PHOTO_CATEGORIES[0];
+  else if(/防災|防犯|合同|コミュニティ|町内|自治/.test(combined)) category = EVENT_PHOTO_CATEGORIES[5];
 
-  if (combined.includes('清掃') || combined.includes('クリーン') || combined.includes('美化')) {
-    summary200 = "山手町の緑豊かな景色と安全な道路環境を守るため、住民皆で楽しく取り組む「" + t + "」を提案します。ライト坂や公園周辺のゴミ拾い・側溝点検を行いながら、作業後には温かい飲み物等を振る舞う交流の時間を設けます。軍手や用具の貸出を行い、短時間でも気軽に参加できる工夫を取り入れることで、多世代が協力して誇れる街並みを育む地域イベントとして開催します。（188文字）";
-  } else if (combined.includes('祭') || combined.includes('縁日') || combined.includes('餅')) {
-    summary200 = "山手町の伝統と多世代の絆を育む「" + t + "」の開催提案です。山手公園や集会所前広場を会場とし、手作りの屋台や体験コーナー、昔ながらの行事プログラムを盛り込みます。騒音や交通への配慮を徹底しながら、新旧住民や子どもたちが笑顔で集い合える場を創出します。自治会とボランティアの連携により、安全で負担の少ない持続可能な町内行事として実施します。（187文字）";
-  } else if (combined.includes('ペット') || combined.includes('犬')) {
-    summary200 = "人とペットが心地よく共生できる山手町を目指す「" + t + "」の企画案です。前山公園や緑地周辺をお散歩しながら、ドッグトレーナーによるマナー講座やしつけ相談会を同時開催します。ペットを通じて住民同士の自然な会話と見守りネットワークを広げ、アースカラーのデザインやマナー向上を図ることで、地域の品格とやさしさを高める魅力的なイベントとして展開します。（186文字）";
+  var summary200 = "芦屋市山手町の美しい街並みと自然を活かした「" + t + "」のイベント企画案です。地域住民や子どもから高齢者までの多世代が安全に楽しく参加できるよう、山手公園や集会所などの地域資源を活用したプログラムを構成します。周囲の閑静な住環境に配慮した運営を行い、参加者同士の交流と笑顔を広げることで、地域の絆を深め次世代へ繋ぐ持続可能なコミュニティ行事として実施します。";
+
+  if (/清掃|クリーン|美化/.test(combined)) {
+    summary200 = "山手町の緑豊かな景色と安全な道路環境を守るため、住民皆で楽しく取り組む「" + t + "」を提案します。ライト坂や公園周辺のゴミ拾い・側溝点検を行いながら、作業後には温かい飲み物等を振る舞う交流の時間を設けます。軍手や用具の貸出を行い、短時間でも気軽に参加できる工夫を取り入れることで、多世代が協力して誇れる街並みを育む地域イベントとして開催します。";
+  } else if (/祭|縁日|餅/.test(combined)) {
+    summary200 = "山手町の伝統と多世代の絆を育む「" + t + "」の開催提案です。山手公園や集会所前広場を会場とし、手作りの屋台や体験コーナー、昔ながらの行事プログラムを盛り込みます。騒音や交通への配慮を徹底しながら、新旧住民や子どもたちが笑顔で集い合える場を創出します。自治会とボランティアの連携により、安全で負担の少ない持続可能な町内行事として実施します。";
+  } else if (/ペット|犬|しつけ/.test(combined)) {
+    summary200 = "人とペットが心地よく共生できる山手町を目指す「" + t + "」の企画案です。前山公園や緑地周辺をお散歩しながら、ドッグトレーナーによるマナー講座やしつけ相談会を同時開催します。ペットを通じて住民同士の自然な会話と見守りネットワークを広げ、アースカラーのデザインやマナー向上を図ることで、地域の品格とやさしさを高める魅力的なイベントとして展開します。";
+  } else if (/子ども|親子|キッズ|子供/.test(combined)) {
+    summary200 = "子どもと親が安心して楽しめる山手町の「" + t + "」企画です。公園や集会所を活用し、短時間でも参加しやすいプログラムを用意します。多世代の見守りのもと、遊び・学び・交流を組み合わせ、家族づれでも負担の少ない運営を心がけます。閑静な住環境に配慮しつつ、笑顔が広がる地域の居場所づくりとして実施します。";
   }
+  if(summary200.length > 200) summary200 = summary200.slice(0, 200);
+  if(summary200.length < 150) summary200 = (summary200 + " 山手町の静穏な住環境に配慮し、住民参加で継続できる形を目指します。").slice(0,200);
 
-  return { title: t, summary200: summary200 };
+  return {
+    summary200: summary200,
+    category: category,
+    via: 'local-rules'
+  };
 }
-
 function initIdeas(){
   ALL_IDEAS = []; NEXT_ID = 1;
   var byBig = {}; BASE_CATEGORIES.forEach(function(c){ byBig[c.key] = c; });
@@ -1585,22 +1583,33 @@ function renderCoCreationUpdate(){
   }catch(e){ console.log('renderCoCreationUpdate error', e); }
 }
 function toggleKyosoDetail(key){
-  var el = document.getElementById('kyoso-detail-'+key);
-  if(el) el.classList.toggle('hidden');
+  var cat = BASE_CATEGORIES.find(function(c){ return c.key === key; });
+  var box = document.getElementById('kyoso-detail-'+key);
+  var t = document.getElementById('kyoso-text-'+key);
+  if(!box) return;
+  var opening = box.classList.contains('hidden');
+  box.classList.toggle('hidden');
+  // 詳細＝デフォルト文章（元の文章）を表示
+  if(opening && t && cat){
+    var orig = String(cat.defaultDesc || '');
+    t.innerHTML = '<div class="font-bold text-amber-900 mb-1">📄 デフォルト（元の文章）</div><div>'+esc(orig)+'</div><div class="text-[10px] text-slate-500 mt-1">'+orig.length+'字</div>';
+  }
 }
 function runKyosoUpdate(key){
   var cat = BASE_CATEGORIES.find(function(c){ return c.key === key; });
   if(!cat) return;
+  // 共創アップデート＝デフォルト50%＋新統合50%の内容合成
   var text = buildKyosoText(cat);
   var box = document.getElementById('kyoso-detail-'+key);
   var t = document.getElementById('kyoso-text-'+key);
   if(box) box.classList.remove('hidden');
-  if(t) t.textContent = text + '（'+text.length+'字）';
-  // 大分類の代表メモとして保持（再描画で消えないよう window に）
+  if(t){
+    t.innerHTML = '<div class="font-bold text-amber-900 mb-1">🔄 共創アップデート結果（デフォルト50%＋新統合50%）</div><div>'+esc(text)+'</div><div class="text-[10px] text-slate-500 mt-1">'+text.length+'字</div>';
+  }
   if(!window._kyosoCache) window._kyosoCache = {};
   window._kyosoCache[key] = text;
   var st = document.getElementById('kyosoUpdate');
-  if(st) st.textContent = cat.label + ' をアップデートしました（'+new Date().toLocaleTimeString('ja-JP')+'）';
+  if(st) st.textContent = cat.label + ' を共創アップデートしました（'+new Date().toLocaleTimeString('ja-JP')+'）';
 }
 function openIdeaModal(id){
   try{
@@ -2307,7 +2316,7 @@ document.addEventListener('DOMContentLoaded', function(){
       title: title,
       detail: analysis.summary200,
       summary200: analysis.summary200,
-      category: EVENT_PHOTO_CATEGORIES[1],
+      category: analysis.category || EVENT_PHOTO_CATEGORIES[5],
       status: 'アイデア募集中'
     });
     
@@ -2335,7 +2344,7 @@ document.addEventListener('DOMContentLoaded', function(){
       summary200: analysis.summary200,
       detail: analysis.summary200,
       type: 'idea',
-      category: EVENT_PHOTO_CATEGORIES[1],
+      category: analysis.category || EVENT_PHOTO_CATEGORIES[5],
       status: 'アイデア募集中'
     });
   });
@@ -2402,7 +2411,27 @@ document.addEventListener('DOMContentLoaded', function(){
   window.showEventTab = showEventTab;
 });
 </script>
-
+<footer style="margin-top:24px;background:#23282a;color:#eef0e4;padding:28px 20px;border-top:4px solid #e8a33d;">
+  <div style="max-width:1120px;margin:0 auto;">
+    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="font-size:28px;">🏙</div>
+      <div>
+        <div style="font-weight:800;font-size:15px;letter-spacing:.04em;margin-bottom:6px;">
+          運営：Code for Ashiya <span style="font-weight:400;font-size:11px;opacity:.7;border:1px solid #e8a33d;color:#e8a33d;padding:2px 8px;border-radius:999px;margin-left:8px;">Civic Tech</span>
+        </div>
+        <p style="font-size:12.5px;line-height:1.9;color:#c7cdbb;margin:0;max-width:720px;">
+          Code for Ashiya は、芦屋の課題をテクノロジーの力で解決する市民によるシビックテックコミュニティです。
+          特定の政党・企業・団体に属さず、<b style="color:#fff;">中立性・公平性・公共性・透明性</b>を原則に、
+          誰もが参加できるオープンな活動を行っています。
+          <br>
+          <a href="https://github.com/mimo-lgtm" target="_blank" rel="noopener" style="color:#e8a33d;text-decoration:underline;">GitHubで活動を見る</a>
+          <span style="opacity:.5;margin:0 6px;">/</span>
+          本サイトは住民の声を可視化する非公式の実験的プラットフォームです。
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <!-- Floating Mobile Bottom Navigation Bar -->
 <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-slate-200 shadow-2xl px-2 py-2 flex justify-around items-center">
