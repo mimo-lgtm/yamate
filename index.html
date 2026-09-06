@@ -2322,6 +2322,13 @@ document.addEventListener('DOMContentLoaded', function(){
           } else {
             console.log('analyze not success', data);
             var msg = (data && data.message) ? data.message : 'no result';
+            if(data && data.hasGeminiKey === false && data.hasGroqKey === false){
+              msg += ' [APIキー未設定]';
+            }
+            if(data && data.errorDetail){
+              console.log('analyze errorDetail:', data.errorDetail);
+              msg += ' :: ' + String(data.errorDetail).slice(0, 150);
+            }
             finishWithAnalysis(generateOpinionAnalysis(input, author), 'local(' + msg + ')');
           }
         }).catch(function(e){
