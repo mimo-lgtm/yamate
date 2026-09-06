@@ -1584,7 +1584,7 @@ function runKyosoUpdate(key){
   var st = document.getElementById('kyosoUpdate');
   if(st) st.textContent = cat.label + ' をアップデートしました（'+new Date().toLocaleTimeString('ja-JP')+'）';
 }
-function openIdeaModalfunction openIdeaModal(id){
+function openIdeaModal(id){
   try{
     var idea = null;
     for(var i=0;i<ALL_IDEAS.length;i++){ if(String(ALL_IDEAS[i].id)===String(id)){ idea=ALL_IDEAS[i]; break; } }
@@ -1787,7 +1787,7 @@ function renderEventCategoryGrid(){
   html += '<button type="button" onclick="filterEventCategory(\'\')" class="border rounded-xl p-3 text-left text-sm bg-white '+(!openEventCat?'border-2 border-teal-700 bg-teal-50 font-black':'')+'"><div class="font-bold">すべて</div><div class="text-xs">'+source.length+'件</div></button>';
   grid.innerHTML = html;
 }
-function filterEventCategoryfunction filterEventCategory(cat){ openEventCat = cat || null; renderEventCategoryGrid(); renderEvents(); renderEventIdeas(); }
+function filterEventCategory(cat){ openEventCat = cat || null; renderEventCategoryGrid(); renderEvents(); renderEventIdeas(); }
 function eventMatchesOpenCat(e){
   if(!openEventCat) return true;
   return normalizeEventCategory(e.category) === openEventCat;
