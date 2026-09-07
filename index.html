@@ -7,6 +7,13 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>芦屋市山手町の小さな気づきと未来のアイデア帳</title>
+<link rel="icon" href="./icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#2f7a6b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="山手町">
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <!-- html2pdf.js & html2canvas for High-Res PDF & PNG Export -->
@@ -167,9 +174,12 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
 <div class="max-w-[1240px] mx-auto px-5 py-3 flex justify-between items-center">
-<div class="cursor-pointer" onclick="showPage('home')">
+<div class="cursor-pointer flex items-center gap-2.5" onclick="showPage('home')">
+<img src="./icon-192.png" alt="山手町" class="w-9 h-9 rounded-xl flex-shrink-0">
+<div>
 <div class="font-black text-[18px]">芦屋市 山手町</div>
 <div class="text-[10px] tracking-[0.25em] text-teal-700 font-bold">ASHIYA YAMATECHO FUTURE NOTEBOOK</div>
+</div>
 </div>
 <nav class="hidden lg:flex gap-2">
 <button type="button" onclick="showPage('home')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-teal-700 text-white">🏠 ホーム</button>
@@ -200,7 +210,10 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <section id="home" class="page active">
 <div class="bg-white rounded-[24px] border shadow-sm p-8 md:p-10 relative overflow-hidden">
 <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-800 to-amber-400"></div>
+<div class="flex items-center gap-4 mb-1">
+<img src="./icon-192.png" alt="山手町" class="w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-sm flex-shrink-0">
 <h1 class="text-3xl md:text-4xl font-black leading-[1.15]">山手町の小さな気づきと<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 via-emerald-600 to-amber-500">未来のアイデア帳 & チラシ自動生成</span></h1>
+</div>
 <p class="text-sm text-slate-600 mt-4 max-w-[680px] leading-relaxed">
 六甲山麓の閑静な第一種低層住居専用地域・山手町。<br>
 のアプリは、あなたの「小さな気づき」をAIが読みやすく整理してくれます。<br>日常の風景をスマホで写真に撮って投稿するだけで、インスタグラムにも自動で反映できます。<br>「こんなイベントをやりたい」という思いつきを伝えると、AIが企画提案書にまでまとめてくれる優れものです。<br>
@@ -950,6 +963,25 @@ function showPage(id){
   }
   window.scrollTo(0,0);
 }
+// GASの応答を実際に読み取って待つ版（postToGASは no-cors のため応答を読めない。
+// こちらは mode を指定せず通常のCORS対応fetchにし、Content-Type: text/plain でプリフライトを回避する）
+function postToGASAndWait(payload){
+  payload.timestamp = new Date().toISOString();
+  if(!(typeof GAS_URL !== 'undefined' && GAS_URL && GAS_URL.indexOf('XXXX') === -1 && GAS_URL.indexOf('https') === 0)){
+    return Promise.resolve(null);
+  }
+  return fetch(GAS_URL, {
+    method: "POST",
+    headers: {"Content-Type": "text/plain;charset=utf-8"},
+    body: JSON.stringify(payload)
+  })
+  .then(function(r){ return r.text(); })
+  .then(function(txt){
+    try{ return JSON.parse(txt); }catch(e){ console.log('postToGASAndWait: JSON parse failed', txt.slice(0,200)); return null; }
+  })
+  .catch(function(e){ console.log('postToGASAndWait error', e); return null; });
+}
+
 function postToGAS(payload){
   try{
     payload.timestamp = new Date().toISOString();
@@ -2396,36 +2428,39 @@ document.addEventListener('DOMContentLoaded', function(){
     var detail = document.getElementById('evDetail').value.trim();
     if(!title){ alert('タイトルを入力してください'); return; }
     if(detail.length < 5){ alert('詳細内容を入力してください'); return; }
-    
-    var analysis = generateEventAnalysis(title, detail);
-    var newEvId = 'idea-' + Date.now();
-    
-    EVENT_IDEAS.unshift({
-      id: newEvId,
-      title: title,
-      detail: analysis.summary200,
-      summary200: analysis.summary200,
-      category: analysis.category || EVENT_PHOTO_CATEGORIES[5],
-      status: 'アイデア募集中'
-    });
-    
-    renderEventIdeas();
-    renderKentou();
-    
-    var slipHtml = '<div class="bg-white border-2 border-amber-400 rounded-2xl p-4 mt-3 shadow-sm">'
-      + '<div class="font-black text-sm text-slate-900 mb-2">✅ イベント発案を登録しました（スプレッドシート＆イベントボード連携）</div>'
-      + '<div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs mb-3">'
-      + '<div class="font-black text-amber-900 mb-1 flex items-center justify-between"><span>💡 200文字要約</span><span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">' + analysis.summary200.length + '文字</span></div>'
-      + '<div class="text-slate-800 leading-relaxed font-medium">' + esc(analysis.summary200) + '</div>'
-      + '</div>'
-      + '<button type="button" onclick="showEventTab(\'ideas\')" class="bg-amber-500 text-black px-5 py-2 rounded-full text-xs font-black">🎉 イベントボードで確認 →</button>'
-      + '</div>';
-      
-    document.getElementById('evSlip').innerHTML = slipHtml;
+
+    var analysis = generateEventAnalysis(title, detail); // カテゴリ判定とネットワーク失敗時の保険にのみ使用
     document.getElementById('evTitle').value = '';
     document.getElementById('evDetail').value = '';
-    
-    postToGAS({
+
+    document.getElementById('evSlip').innerHTML =
+      '<div class="bg-white border-2 border-amber-300 rounded-2xl p-4 mt-3 shadow-sm text-xs text-amber-800 font-bold">🤖 AIが企画を200字に整理中…（数秒お待ちください）</div>';
+
+    function showEventSlip(summary200, via, realId){
+      var viaLabel = via ? (' <span class="text-[10px] text-slate-400">via '+esc(via)+'</span>') : '';
+      var slipHtml = '<div class="bg-white border-2 border-amber-400 rounded-2xl p-4 mt-3 shadow-sm">'
+        + '<div class="font-black text-sm text-slate-900 mb-2">✅ イベント発案を登録しました（スプレッドシート＆イベントボード連携）'+viaLabel+'</div>'
+        + '<div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs mb-3">'
+        + '<div class="font-black text-amber-900 mb-1 flex items-center justify-between"><span>💡 200文字要約</span><span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">' + summary200.length + '文字</span></div>'
+        + '<div class="text-slate-800 leading-relaxed font-medium">' + esc(summary200) + '</div>'
+        + '</div>'
+        + '<button type="button" onclick="showEventTab(\'ideas\')" class="bg-amber-500 text-black px-5 py-2 rounded-full text-xs font-black">🎉 イベントボードで確認 →</button>'
+        + '</div>';
+      document.getElementById('evSlip').innerHTML = slipHtml;
+
+      EVENT_IDEAS.unshift({
+        id: realId || ('idea-' + Date.now()),
+        title: title,
+        detail: summary200,
+        summary200: summary200,
+        category: analysis.category || EVENT_PHOTO_CATEGORIES[5],
+        status: 'アイデア募集中'
+      });
+      renderEventIdeas();
+      renderKentou();
+    }
+
+    postToGASAndWait({
       action: "postEventIdea",
       title: title,
       content: detail,
@@ -2435,6 +2470,26 @@ document.addEventListener('DOMContentLoaded', function(){
       type: 'idea',
       category: analysis.category || EVENT_PHOTO_CATEGORIES[5],
       status: 'アイデア募集中'
+    }).then(function(data){
+      if(data && data.status === 'success' && data.organized){
+        showEventSlip(data.organized, data.knowledge_used || 'cloud-AI', data.id);
+      } else {
+        // サーバーから正しい応答が読めなかった場合のみローカル整理にフォールバック
+        console.log('postEventIdea: サーバー応答が読めなかったためローカル表示にフォールバック', data);
+        showEventSlip(analysis.summary200, 'local（サーバー応答なし）', null);
+        // 念のため、応答を読めない no-cors 経由でも送信して保存を保証する
+        postToGAS({
+          action: "postEventIdea",
+          title: title,
+          content: detail,
+          summary: analysis.summary200,
+          summary200: analysis.summary200,
+          detail: detail,
+          type: 'idea',
+          category: analysis.category || EVENT_PHOTO_CATEGORIES[5],
+          status: 'アイデア募集中'
+        });
+      }
     });
   });
 
@@ -2560,6 +2615,16 @@ document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
     <span class="text-[10px] font-bold">チラシ</span>
   </button>
 </div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(err){
+      console.log('SW registration failed:', err);
+    });
+  });
+}
+</script>
 
 </body>
 </html>
