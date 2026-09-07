@@ -188,8 +188,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <button type="button" onclick="showPage('hiroba')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white border">📸 写真投稿</button>
 <button type="button" onclick="showPage('event')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white border">🎉 イベント</button>
 <button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city','_blank')" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏠 町内会サイト</button>
-<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏛 芦屋市の課題</button>
-<button type="button" onclick="showPage('flyerCreator')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-sm">🎨 チラシ作成</button>
+<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏛 芦屋市の課題</button> <button type="button" onclick="showPage('flyerCreator')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-sm">🎨 チラシ作成</button>
 </nav>
 <button type="button" onclick="document.getElementById('mnav').classList.toggle('hidden')" class="lg:hidden w-9 h-9 border rounded-xl">☰</button>
 </div>
@@ -208,6 +207,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 
 <main class="pt-6">
 
+<!-- PAGE 1: HOME -->
 <!-- PAGE 1: HOME -->
 <section id="home" class="page active">
 <div class="bg-white rounded-[24px] border shadow-sm p-8 md:p-10 relative overflow-hidden">
@@ -359,6 +359,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 
 </section>
 
+
 <!-- PAGE 2: OPINION POST -->
 <section id="assist" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
@@ -373,18 +374,18 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <input id="authorName" placeholder="お名前（任意）" class="w-full p-3.5 border rounded-xl mb-3 bg-[#f8fafc] text-sm">
 
 
-<!-- One-tap Suggestion Chips - 高次元・広範囲な提案タグ 6分類 - 日常ではなく高次元 -->
+<!-- カテゴリ選択ボタン - タップした大分類をAI分析より優先させる（中分類以降はAIが判定） -->
 <div class="mb-3">
   <div class="text-xs font-bold text-slate-600 mb-2 flex items-center gap-1">
-    <span>💡 タップで簡単入力（よくある相談・提案タグ）:</span>
+    <span>🏷️ カテゴリを選ぶ（任意・選ぶとAIより優先されます）:</span>
   </div>
-  <div class="flex flex-wrap gap-2 text-xs font-bold">
-    <button type="button" onclick="appendOpinionSuggestion('🛡 防災・防犯：急坂と石垣が多い急斜面地における災害時の迅速対応、三重連絡網とブロック別安否確認マップ整備、坂道を避けた避難訓練や分散備蓄、防犯パトロール体制について')" class="px-4 py-2 bg-white border-2 border-red-200 rounded-full hover:bg-red-50">🛡 防災・防犯</button>
-    <button type="button" onclick="appendOpinionSuggestion('🌿 インフラ・環境：景観に調和した天然木ベンチや手すり、滑り止め舗装、道路・側溝の蓋付き更新、電柱地中化、目隠し型ゴミステーションなど品格ある生活環境維持について')" class="px-4 py-2 bg-white border-2 border-green-200 rounded-full hover:bg-green-50">🌿 インフラ・環境</button>
-    <button type="button" onclick="appendOpinionSuggestion('🤝 コミュニティ：人口2000名の小さな町での多世代交流、新住民歓迎、旧家と新住民の特性に配慮した緩やかな参加促進、ハロウィン仮装パトロールなど開かれた地域コミュニティについて')" class="px-4 py-2 bg-white border-2 border-blue-200 rounded-full hover:bg-blue-50">🤝 コミュニティ</button>
-    <button type="button" onclick="appendOpinionSuggestion('🧡 福祉・見守り：高齢化率35％超の急坂地域での孤立防止、常設サロンや移動サロン、健康麻雀、庭遊びプロジェクト、ベビーカー支援など共生型支援体制について')" class="px-4 py-2 bg-white border-2 border-orange-200 rounded-full hover:bg-orange-50">🧡 福祉・見守り</button>
-    <button type="button" onclick="appendOpinionSuggestion('🔭 将来ビジョン：回覧板デジタル化やLINE活用の自治会DX、空き家バンク作成や多世代シェアハウス利活用、景観保全と次世代継承を両立する持続可能な未来像について')" class="px-4 py-2 bg-white border-2 border-violet-200 rounded-full hover:bg-violet-50">🔭 将来ビジョン</button>
-    <button type="button" onclick="appendOpinionSuggestion('🎉 イベント・企画：夏祭り盆踊りや屋台、側溝清掃・美化活動、防災炊き出し訓練を兼ねた餅つき、ハロウィン仮装防犯パトロール、邸宅庭での絵本読み聞かせなど文化イベントについて')" class="px-4 py-2 bg-white border-2 border-amber-200 rounded-full hover:bg-amber-50">🎉 イベント・企画</button>
+  <div class="flex flex-wrap gap-2 text-xs font-bold" id="opinionCategoryPicker">
+    <button type="button" data-big="BIG-1" onclick="selectOpinionCategory('BIG-1', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-red-200 rounded-full hover:bg-red-50">🛡 防災・防犯</button>
+    <button type="button" data-big="BIG-2" onclick="selectOpinionCategory('BIG-2', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-green-200 rounded-full hover:bg-green-50">🌿 インフラ・環境</button>
+    <button type="button" data-big="BIG-3" onclick="selectOpinionCategory('BIG-3', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-blue-200 rounded-full hover:bg-blue-50">🤝 コミュニティ</button>
+    <button type="button" data-big="BIG-4" onclick="selectOpinionCategory('BIG-4', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-orange-200 rounded-full hover:bg-orange-50">🧡 福祉・見守り</button>
+    <button type="button" data-big="BIG-5" onclick="selectOpinionCategory('BIG-5', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-violet-200 rounded-full hover:bg-violet-50">🔭 将来ビジョン</button>
+    <button type="button" data-big="BIG-6" onclick="selectOpinionCategory('BIG-6', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-amber-200 rounded-full hover:bg-amber-50">🎉 イベント・企画</button>
   </div>
 </div>
 
@@ -1087,12 +1088,20 @@ function loadFromSheet(){
         var midLabel = row.midLabel || row.mid || "その他";
         var summary200 = String(row.summary || row.content || row.raw || "");
         if(summary200.length > 200) summary200 = summary200.slice(0,200);
+        var rowTitle = row.title || summary200.slice(0,20) || "無題";
+
+        // 投稿直後にローカルへ即時追加した仮エントリと同一内容なら、
+        // 重複させずに置き換える（意見集約箱に同じ投稿が2件並ぶのを防止）
+        var dupIdx = ALL_IDEAS.findIndex(function(x){
+          return x._local && x.title === rowTitle && x.summary200 === summary200;
+        });
+        if(dupIdx !== -1){ ALL_IDEAS.splice(dupIdx, 1); }
 
         ALL_IDEAS.push({
           id: row.id || ('sheet-'+Date.now()+Math.random()),
           big: bigLabel,          // 必ずラベル文字列
           mid: midLabel,
-          title: row.title || summary200.slice(0,20) || "無題",
+          title: rowTitle,
           summary: summary200,
           summary200: summary200,
           raw: row.raw || row.content || "",
@@ -1503,6 +1512,10 @@ function storeLastOpinionToTree(){
     author: pack.author
   });
   document.getElementById('userInput').value = '';
+  _selectedOpinionBig = null;
+  document.querySelectorAll('#opinionCategoryPicker .opinion-cat-btn').forEach(function(b){
+    b.classList.remove('ring-2','ring-offset-1','ring-teal-600','bg-teal-50');
+  });
 }
 
 function similarText(a, b){
@@ -1554,7 +1567,8 @@ function classifyAndStore(payload){
     type: resultType,
     integratedTo: integratedTo || null,
     author: payload.author || '匿名',
-    date: new Date().toISOString().slice(0,10)
+    date: new Date().toISOString().slice(0,10),
+    _local: true
   };
   ALL_IDEAS.unshift(newIdea);
 
@@ -1932,14 +1946,19 @@ function eventMatchesOpenCat(e){
   return normalizeEventCategory(e.category) === openEventCat;
 }
 
-function appendOpinionSuggestion(text){
-  var el = document.getElementById('userInput');
-  if(!el) return;
-  if(el.value.trim().length > 0){
-    el.value += ' ' + text;
-  } else {
-    el.value = text;
+// カテゴリ選択（トグル）：選んだ大分類をAI分析より優先させるため保持しておく
+var _selectedOpinionBig = null;
+function selectOpinionCategory(bigKey, btnEl){
+  var buttons = document.querySelectorAll('#opinionCategoryPicker .opinion-cat-btn');
+  if(_selectedOpinionBig === bigKey){
+    // 同じボタンをもう一度押したら選択解除（AI任せに戻す）
+    _selectedOpinionBig = null;
+    buttons.forEach(function(b){ b.classList.remove('ring-2','ring-offset-1','ring-teal-600','bg-teal-50'); });
+    return;
   }
+  _selectedOpinionBig = bigKey;
+  buttons.forEach(function(b){ b.classList.remove('ring-2','ring-offset-1','ring-teal-600','bg-teal-50'); });
+  if(btnEl){ btnEl.classList.add('ring-2','ring-offset-1','ring-teal-600','bg-teal-50'); }
 }
 
 function showToast(msg){
@@ -2337,6 +2356,18 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('slip').innerHTML = '🤖 AIが分析中…5視点＋200字要約を作成中（可能ならクラウドAI）';
 
     function finishWithAnalysis(analysis, via){
+      // ユーザーが大分類ボタンを選んでいれば、AI判定より優先する（中分類以降はAIの判定を維持）
+      if(_selectedOpinionBig){
+        var overrideCat = BASE_CATEGORIES.find(function(c){ return c.key === _selectedOpinionBig; });
+        if(overrideCat && analysis.catLabel !== overrideCat.label){
+          analysis.catLabel = overrideCat.label;
+          analysis.big = overrideCat.key;
+          // 大分類が変わったので、中分類がその大分類に存在するか再チェック
+          var validMids = INITIAL_24.filter(function(x){ return x.big===overrideCat.label; }).map(function(x){ return x.mid; });
+          if(validMids.indexOf(analysis.mid) === -1) analysis.mid = 'その他';
+          via = (via || '') + ' + カテゴリ手動選択';
+        }
+      }
       window._lastOpinion = {analysis: analysis, input: input, author: author};
       document.getElementById('loadingMsg').classList.add('hidden');
       var viaLabel = via ? (' <span class="text-[10px] text-slate-400">via '+via+'</span>') : '';
@@ -2609,7 +2640,7 @@ document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
           <span style="font-weight:700;font-size:10.5px;color:#b45309;background:#fef3c7;border:1px solid #fde68a;padding:2px 10px;border-radius:999px;">Civic Tech</span>
         </div>
         <p style="font-size:12.5px;line-height:1.9;color:#475569;margin:0 0 12px;max-width:640px;">
-          芦屋の課題を、テクノロジーの力で解決！。特定の政党・企業・団体に属さず、住民有志が集まって活動するシビックテック・コミュニティです。
+          芦屋の課題を、テクノロジーの力で解決。特定の政党・企業・団体に属さず、住民有志が集まって活動するシビックテック・コミュニティです。
         </p>
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
           <span style="font-size:10.5px;font-weight:700;color:#334155;background:#f1f5f9;padding:3px 10px;border-radius:999px;">中立性</span>
@@ -2618,7 +2649,6 @@ document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
           <span style="font-size:10.5px;font-weight:700;color:#334155;background:#f1f5f9;padding:3px 10px;border-radius:999px;">透明性</span>
         </div>
         <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12px;">
-          
           <span style="color:#94a3b8;">本サイトは住民の声を可視化する非公式の実験的プラットフォームです</span>
         </div>
       </div>
