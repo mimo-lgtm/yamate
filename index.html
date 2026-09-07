@@ -187,6 +187,8 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <button type="button" onclick="showPage('tree')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white border">📦 意見集約箱</button>
 <button type="button" onclick="showPage('hiroba')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white border">📸 写真投稿</button>
 <button type="button" onclick="showPage('event')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-white border">🎉 イベント</button>
+<button type="button" onclick="window.open('https://sites.google.com/view/yamatechoasiya-city','_blank')" style="background:#fff;color:#2f7a6b;border:2px solid #2f7a6b;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏠 町内会サイト</button>
+<button type="button" onclick="window.open('https://mimo-lgtm.github.io/ashiya-issues/','_blank')" style="background:#e8a33d;color:#1b1f1d;border:2px solid #e8a33d;padding:9px 16px;border-radius:6px;font-weight:800;font-size:12px;cursor:pointer;">🏛 芦屋市の課題</button>
 <button type="button" onclick="showPage('flyerCreator')" class="px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-sm">🎨 チラシ作成</button>
 </nav>
 <button type="button" onclick="document.getElementById('mnav').classList.toggle('hidden')" class="lg:hidden w-9 h-9 border rounded-xl">☰</button>
@@ -214,11 +216,47 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <img src="./icon-192.png" alt="山手町" class="w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-sm flex-shrink-0">
 <h1 class="text-3xl md:text-4xl font-black leading-[1.15]">山手町の小さな気づきと<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-800 via-emerald-600 to-amber-500">未来のアイデア帳 & チラシ自動生成</span></h1>
 </div>
-<p class="text-sm text-slate-600 mt-4 max-w-[680px] leading-relaxed">
-六甲山麓の閑静な第一種低層住居専用地域・山手町。<br>
-のアプリは、あなたの「小さな気づき」をAIが読みやすく整理してくれます。<br>日常の風景をスマホで写真に撮って投稿するだけで、インスタグラムにも自動で反映できます。<br>「こんなイベントをやりたい」という思いつきを伝えると、AIが企画提案書にまでまとめてくれる優れものです。<br>
-あなたの日常のポータルとして、気づきを記録し、地域の交流を生み出すお手伝いをします。<br><span class="text-xs text-slate-500 mt-2 inline-block">※匿名投稿OK・音声入力対応・写真投稿対応。</span>
-</p>
+<div class="max-w-[680px] mt-4 p-5 bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-100">
+  
+  <!-- リード文（強調） -->
+  <p class="text-sm sm:text-base font-bold text-slate-800 leading-snug">
+    ✨ このアプリは、あなたの<strong class="font-bold text-red-600">「小さな気づき」</strong>をAIが読みやすく整理してくれます。
+  </p>
+
+  <!-- 特徴のリスト（行間を狭く調整） -->
+  <div class="mt-2.5 space-y-2 text-xs sm:text-sm text-slate-600 leading-snug">
+    
+    <div class="flex items-start gap-2">
+      <p>📸日常の風景をスマホで写真に撮って投稿するだけで、<strong class="font-bold text-red-600">インスタグラムにも自動で反映</strong>できます。</p>
+    </div>
+
+    <div class="flex items-start gap-2">
+      <p>💡「こんなイベントをやりたい」という思いつきを伝えると、AIが<strong class="font-bold text-red-600">企画提案書にまでまとめてくれる</strong>優れもの！</p>
+    </div>
+
+  </div>
+
+  <!-- まとめとタグライン -->
+  <div class="mt-3.5 pt-3 border-t border-slate-100">
+    <p class="text-xs sm:text-sm font-medium text-slate-700 leading-snug">
+      あなたの<strong class="font-bold text-red-600">日常のポータルとして、気づきを記録し、地域の交流を生み出すお手伝い</strong>をします。
+    </p>
+    
+    <!-- 補足バッジ -->
+    <div class="mt-3 flex flex-wrap gap-2">
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600">
+        ✨ 匿名投稿OK
+      </span>
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600">
+        🎤 音声入力対応
+      </span>
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600">
+        🖼️ 写真投稿対応
+      </span>
+    </div>
+  </div>
+
+</div>
 <div class="mt-5 flex gap-2 flex-wrap">
 <span class="bg-teal-800 text-white px-4 py-1.5 rounded-full text-xs font-bold">意見集約箱 31件</span>
 <span class="bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-black">イベント 13件</span>
@@ -247,7 +285,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
         <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">意見投稿</div>
         <div class="text-[11px] text-teal-700 font-bold mt-0.5 mb-3">気づきをそのまま、声に</div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-          「こうなってほしい！」とか、地域に提案したいこと。どんな文章の意見でも大丈夫！AIが<strong>5つの視点（各100字）</strong>と<strong>200字の要約</strong>に自動整理し、テーマ別に分類してくれます。
+        「ここ、もっとこうだったらいいのになぁ…」地域をより良くするためのあなたのひらめきや率直な想いを、そのまま言葉にしてください。AIが5つの視点で200字にギュッと要約・整理し、テーマごとにわかりやすく分類してくれます。
         </p>
         <div class="flex flex-wrap gap-1.5 mt-4 mb-3">
           <span class="bg-teal-50 text-teal-700 text-[10px] font-bold px-2.5 py-1 rounded-full">🎤 音声入力</span>
@@ -278,7 +316,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
         <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">写真投稿広場</div>
         <div class="text-[11px] text-slate-600 font-bold mt-0.5 mb-3">日常の一枚を、町の記録に</div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-          「あぁ、ちょっとココいい感じ♡」日常のちょっとした風景や、町のいいところを写真で残しませんか？アプリに登録するだけで、Instagramへの自動投稿も可能。あなたの写真が全国に広がるかも！
+          「あぁ、ちょっとココいい感じ♡」日常のふとした風景や町の素敵な瞬間を、スマホでパシャリと撮影してシェアしませんか？Instagramへの自動投稿機能もついているから、あなたの視点から見つけた魅力を、手軽に全国へ発信できます！
         </p>
         <div class="flex flex-wrap gap-1.5 mt-4 mb-4">
           <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full">📸 その場で投稿</span>
@@ -298,7 +336,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
         <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">イベントボード</div>
         <div class="text-[11px] text-amber-700 font-bold mt-0.5 mb-3">思いつきを、企画書に</div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-          「こんなことやれないかなぁ！」という企画案があれば、思いつきでもOK。AIが立派な企画書に仕上げてくれます。みんなの応援投票でイベント化できます。
+        どんなに小さな思いつきのアイデアでも大歓迎です。あなたの一歩をAIが頼もしい企画書にブラッシュアップ！みんなからの「応援投票」が集まれば、本当にイベントとして形にできます。
         </p>
         <div class="flex flex-wrap gap-1.5 mt-4 mb-4">
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">📋 13項目を自動反映</span>
