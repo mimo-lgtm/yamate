@@ -1,4 +1,4 @@
-const CACHE_NAME = "yamate-v2";
+const CACHE_NAME = "yamate-v3";
 const urlsToCache = [
   "./",
   "./index.html",
