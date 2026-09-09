@@ -316,11 +316,15 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-slate-800"></div>
       <div class="p-5 flex flex-col flex-1">
-        <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-2xl mb-4" title="スマホで撮影中">📷</div>
-        <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">写真投稿広場</div>
-        <div class="text-[11px] text-slate-600 font-bold mt-0.5 mb-3">日常の一枚を、町の記録に</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 flex-shrink-0 rounded-2xl bg-slate-100 flex items-center justify-center text-2xl" title="スマホで撮影中">📷</div>
+          <div>
+            <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">写真投稿広場</div>
+            <div class="text-[11px] text-slate-600 font-bold">日常の一枚を、町の記録に</div>
+          </div>
+        </div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-        <strong> 「あぁ、ちょっとココいい感じ♡」</strong>日常のふとした風景や町の素敵な瞬間を、スマホでパシャリと撮影してシェアしませんか？Instagramへの自動投稿機能もついているから、あなたの視点から見つけた魅力を、手軽に全国へ発信できます！
+          「あぁ、ちょっとココいい感じ♡」日常のちょっとした風景や、町のいいところを写真で残しませんか？アプリに登録するだけで、Instagramへの自動投稿も可能。あなたの写真が全国に広がるかも！
         </p>
         <div class="flex flex-wrap gap-1.5 mt-4 mb-4">
           <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full">📸 その場で投稿</span>
@@ -332,23 +336,28 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
       </div>
     </div>
 
-    <!-- ③ イベントボード -->
+     <!-- ③ イベントボード -->
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-gradient-to-r from-amber-500 to-rose-500"></div>
       <div class="p-5 flex flex-col flex-1">
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-100 to-rose-100 flex items-center justify-center text-2xl mb-4" title="思い切りの笑顔">😄</div>
-        <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">イベントボード</div>
-        <div class="text-[11px] text-amber-700 font-bold mt-0.5 mb-3">思いつきを、企画書に</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 flex-shrink-0 rounded-2xl bg-gradient-to-br from-amber-100 to-rose-100 flex items-center justify-center text-2xl" title="思い切りの笑顔">😄</div>
+          <div>
+            <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">イベントボード</div>
+            <div class="text-[11px] text-amber-700 font-bold">思いつきを、企画書に</div>
+          </div>
+        </div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-        <strong>「みんなでこんなことやれたら楽しそう！」</strong>どんなに小さな思いつきのアイデアでも大歓迎です。あなたの一歩をAIが頼もしい企画書にブラッシュアップ！みんなからの「応援投票」が集まれば、本当にイベントとして形にできます。
+          「こんなことやれないかなぁ！」という企画案があれば、思いつきでもOK。AIが立派な企画書に仕上げてくれます。みんなの応援投票でイベント化できます。
         </p>
         <div class="flex flex-wrap gap-1.5 mt-4 mb-4">
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">📋 13項目を自動反映</span>
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">🗳️ 応援投票で実現</span>
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">🎨 チラシは10秒</span>
         </div>
-                <div class="flex flex-col gap-2">
-          <button type="button" onclick="showPage('event','hatsuan')" class="w-full bg-amber-500 text-black py-4 rounded-xl font-black text-base shadow-md hover:bg-amber-400 hover:shadow-lg transition-all animate-pulse">
+        <div class="flex flex-col gap-2">
+          <button type="button" onclick="showPage('event','hatsuan')" class="relative w-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white py-5 rounded-2xl font-black text-lg shadow-lg ring-4 ring-amber-200 hover:ring-amber-300 hover:scale-[1.02] transition-all animate-pulse">
+            <span class="absolute -top-2 -right-2 bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow">NEW</span>
             💡 企画を発案する →
           </button>
           <button type="button" onclick="showPage('flyerCreator')" class="w-full bg-white border-2 border-amber-300 text-amber-800 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-50 transition-colors">
@@ -357,10 +366,9 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
         </div>
       </div>
     </div>
-
+ 
   </div>
 </div>
-
 </section>
 
 
