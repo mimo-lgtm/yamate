@@ -281,9 +281,13 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-teal-700"></div>
       <div class="p-5 flex flex-col flex-1">
-        <div class="w-14 h-14 rounded-2xl bg-teal-50 flex items-center justify-center text-2xl mb-4" title="思いついた！">💡</div>
-        <div class="font-black text-base text-slate-900" style="font-family:'Zen Maru Gothic',sans-serif;">意見投稿</div>
-        <div class="text-[11px] text-teal-700 font-bold mt-0.5 mb-3">気づきをそのまま、声に</div>
+       <div class="flex items-center gap-3 mb-3">
+  <div class="w-12 h-12 ...">💡</div>
+  <div>
+    <div class="font-black ...">意見投稿</div>
+    <div class="text-[11px] ...">気づきをそのまま、声に</div>
+  </div>
+</div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
        <strong>「ここ、もっとこうだったらいいのになぁ…」</strong> 地域をより良くするためのあなたのひらめきや率直な想いを、そのまま言葉にしてください。AIが5つの視点で200字にギュッと要約・整理し、テーマごとにわかりやすく分類してくれます。
         </p>
@@ -344,9 +348,9 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">🎨 チラシは10秒</span>
         </div>
         <div class="flex flex-col gap-2">
-          <button type="button" onclick="showPage('event')" class="w-full bg-amber-500 text-black py-3 rounded-xl font-black text-sm hover:bg-amber-400 transition-colors">
-            🎉 イベント発案・閲覧 →
-          </button>
+<button onclick="showPage('event','ideas')" class="... py-4 ... text-base ... shadow-md hover:shadow-lg ... animate-pulse">
+  💡 企画を発案する →
+</button>
           <button type="button" onclick="showPage('flyerCreator')" class="w-full bg-white border-2 border-amber-300 text-amber-800 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-50 transition-colors">
             🎨 チラシ作成スタジオへ
           </button>
@@ -982,7 +986,7 @@ const FLYER_PRESETS = {
 ------------------------------------------------------------- */
 function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
-function showPage(id){
+function showPage(id, eventTab){
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
   var target = document.getElementById(id);
   if(target) target.classList.add('active');
@@ -993,7 +997,7 @@ function showPage(id){
     try{ if(typeof renderCoCreationUpdate === 'function') renderCoCreationUpdate(); }catch(e){ console.log(e); }
   }
   if(id === 'event'){
-    try{ renderEventCategoryGrid(); showEventTab(currentTab || 'upcoming'); }catch(e){ console.log(e); }
+    try{ renderEventCategoryGrid(); showEventTab(eventTab || currentTab || 'upcoming'); }catch(e){ console.log(e); }
   }
   if(id === 'hiroba'){
     try{ renderHiroba(); }catch(e){ console.log(e); }
@@ -2675,7 +2679,7 @@ document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
     <span class="text-lg">📸</span>
     <span class="text-[10px] font-bold">写真投稿</span>
   </button>
-  <button type="button" onclick="showPage('event')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
+  <button type="button" onclick="showPage('event','ideas')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
     <span class="text-lg">🎉</span>
     <span class="text-[10px] font-bold">イベント</span>
   </button>
