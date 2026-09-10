@@ -377,11 +377,22 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
 <h1 class="text-3xl font-black">意見投稿</h1>
 <p class="text-xs text-slate-500 mt-1">日常の気づきや提案をご投稿ください。AIが「5つの視点からそれぞれ100文字」と「まとめた200文字要約」を出力してスプレッドシートと意見集約箱に連携します。</p>
-<div class="bg-white border rounded-2xl p-6 mt-4">
-<div class="flex gap-2 mb-4">
-<button type="button" id="btnVoice" class="px-5 py-2.5 bg-white border-2 border-teal-700 text-teal-700 rounded-full text-sm font-black">🎙 音声認識</button>
-<span id="voiceStatus" class="hidden text-xs bg-green-50 border px-3 py-2 rounded-full">🎙 聞き取り中...</span>
-<button type="button" id="btnVoiceStop" class="hidden px-4 py-2 bg-red-500 text-white rounded-full text-xs">停止</button>
+<div class="bg-white border rounded-2xl p-6 mt-6">
+<div class="mb-3 text-sm font-bold text-rose-700 flex items-center gap-1.5">
+  <span class="text-lg">🌟</span>
+  <span>あなたの「こんなことやりたい」を待ってます！下の「発案」ボタンから気軽に投稿してみませんか？</span>
+</div>
+
+<div class="bg-white border rounded-2xl p-6 mt-6">
+<div class="mb-3 text-sm font-bold text-rose-700 flex items-center gap-1.5">
+  <span class="text-lg">🌟</span>
+  <span>あなたの「こんなことやりたい」を待ってます！下の「発案」ボタンから気軽に投稿してみませんか？</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<button type="button" id="btn-upcoming" class="px-5 py-2.5 rounded-full bg-teal-700 text-white font-black text-sm">📅 今後のイベント <span id="upcomingCount">6件</span></button>
+<button type="button" id="btn-ideas" class="px-5 py-2.5 rounded-full bg-white border font-bold text-sm">💡 企画 <span id="ideasCount">7件</span></button>
+<button type="button" id="btn-hatsuan" class="relative px-7 py-3.5 rounded-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white font-black text-base shadow-lg ring-4 ring-amber-200 animate-pulse">✍️ 発案する</button>
+<button type="button" onclick="showPage('flyerCreator')" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold text-sm shadow-sm">🎨 チラシ自動作成</button>
 </div>
 <input id="authorName" placeholder="お名前（任意）" class="w-full p-3.5 border rounded-xl mb-3 bg-[#f8fafc] text-sm">
  
@@ -1909,9 +1920,10 @@ function showEventTab(tab){
   document.getElementById('event-ideas-list').classList.add('hidden');
   document.getElementById('event-hatsuan-list').classList.add('hidden');
   
+  var hatsuanBase = 'relative px-7 py-3.5 rounded-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white font-black text-base shadow-lg ring-4';
   document.getElementById('btn-upcoming').className = 'px-5 py-2.5 rounded-full bg-white border font-bold text-sm';
   document.getElementById('btn-ideas').className = 'px-5 py-2.5 rounded-full bg-white border font-bold text-sm';
-  document.getElementById('btn-hatsuan').className = 'px-5 py-2.5 rounded-full bg-white border font-bold text-sm';
+  document.getElementById('btn-hatsuan').className = hatsuanBase + ' ring-amber-200 animate-pulse';
   
   if(tab === 'upcoming'){
     document.getElementById('event-upcoming-list').classList.remove('hidden');
@@ -1921,11 +1933,10 @@ function showEventTab(tab){
     document.getElementById('btn-ideas').className = 'px-5 py-2.5 rounded-full bg-teal-700 text-white font-black text-sm';
   } else {
     document.getElementById('event-hatsuan-list').classList.remove('hidden');
-    document.getElementById('btn-hatsuan').className = 'px-5 py-2.5 rounded-full bg-teal-700 text-white font-black text-sm';
+    document.getElementById('btn-hatsuan').className = hatsuanBase + ' ring-rose-300 scale-105';
   }
   renderEventCategoryGrid(); renderEvents(); renderEventIdeas();
 }
- 
 function normalizeEventCategory(cat){
   var s = String(cat||'');
   if(/季節|日常の風景|イルミ|祭/.test(s) && !/子ども|親子/.test(s)) return EVENT_PHOTO_CATEGORIES[0];
