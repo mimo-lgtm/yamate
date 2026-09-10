@@ -26,7 +26,7 @@
 <style>
 html{overflow-y:auto;scroll-behavior:smooth;}
 body{font-family:"Noto Sans JP",sans-serif;background:#f6f7f6;color:#0f172a;min-height:100vh;overflow:visible;padding-bottom:0;}
-
+ 
 .page{display:none;max-width:1240px;margin:0 auto;padding:0 16px 96px;min-height:auto;overflow:visible;}
 .page.active{display:block;padding-bottom:96px;overflow:visible;}
 main{padding-bottom:0;min-height:auto;overflow:visible;}
@@ -37,7 +37,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 .lg\:hidden.fixed.bottom-0{padding-bottom:env(safe-area-inset-bottom,0);}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;padding:16px;}
 .modal.open{display:flex;}
-
+ 
 /* -------------------------------------------------------------
    A4 Flyer Canvas & Theme Styling Engine
 ------------------------------------------------------------- */
@@ -51,7 +51,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   overflow: visible; 
   transition: all 0.3s ease;
 }
-
+ 
 /* Theme 1: 季節の行事 (Seasonal Events) */
 .theme-seasonal {
   font-family: 'Kaisei Opti', 'Shippori Mincho', serif;
@@ -69,7 +69,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   background-color: #fffcf5;
   border-radius: 8px;
 }
-
+ 
 /* Theme 2: 子ども・親子で楽しむ (For Kids & Parents) */
 .theme-kids {
   font-family: 'Zen Maru Gothic', sans-serif;
@@ -89,7 +89,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(250, 204, 21, 0.3);
 }
-
+ 
 /* Theme 3: 食べる・集まる (Eat & Gather) */
 .theme-eat {
   font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif;
@@ -107,7 +107,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   border: 2px dashed #ea580c;
   border-radius: 12px;
 }
-
+ 
 /* Theme 4: 趣味・学びをシェア (Hobbies & Learning) */
 .theme-hobby {
   font-family: 'Noto Sans JP', sans-serif;
@@ -125,7 +125,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   border-left: 4px solid #059669;
   border-radius: 4px;
 }
-
+ 
 /* Theme 5: ペットと一緒に (With Pets) */
 .theme-pet {
   font-family: 'Zen Maru Gothic', sans-serif;
@@ -144,7 +144,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   border: 2px solid #86efac;
   border-radius: 16px;
 }
-
+ 
 /* Theme 6: 一般・地域コミュニティ (General Community) */
 .theme-general {
   font-family: 'Noto Sans JP', sans-serif;
@@ -171,7 +171,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </style>
 </head>
 <body>
-
+ 
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
 <div class="max-w-[1240px] mx-auto px-5 py-3 flex justify-between items-center">
 <div class="cursor-pointer flex items-center gap-2.5" onclick="showPage('home')">
@@ -204,9 +204,9 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 <div class="h-[2px] bg-gradient-to-r from-teal-800 to-amber-400"></div>
 </header>
-
+ 
 <main class="pt-6">
-
+ 
 <!-- PAGE 1: HOME -->
 <!-- PAGE 1: HOME -->
 <section id="home" class="page active">
@@ -229,13 +229,13 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     <div class="flex items-start gap-2">
       <p>📸日常の風景をスマホで写真に撮って投稿するだけで、<strong class="font-bold text-red-600">インスタグラムにも自動で反映</strong>できる</p>
     </div>
-
+ 
     <div class="flex items-start gap-2">
       <p>💡「こんなイベントをやりたい」という思いつきを、AIが<strong class="font-bold text-red-600">企画提案書にまでまとめてくれる</strong></p>
     </div>
-
+ 
   </div>
-
+ 
   <!-- まとめとタグライン -->
   <div class="mt-3.5 pt-3 border-t border-slate-100">
     <p class="text-xs sm:text-sm font-medium text-slate-700 leading-snug">
@@ -255,7 +255,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
       </span>
     </div>
   </div>
-
+ 
 </div>
 <div class="mt-5 flex gap-2 flex-wrap">
 <span class="bg-teal-800 text-white px-4 py-1.5 rounded-full text-xs font-bold">意見集約箱 31件</span>
@@ -273,10 +273,10 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     </div>
     <button type="button" id="btnShowHowTo" class="text-xs bg-white border border-amber-300 text-amber-900 px-3.5 py-1.5 rounded-full font-bold shadow-sm hover:bg-amber-50">詳解ポップアップ →</button>
   </div>
-
+ 
   <!-- 3つの大きなカード -->
   <div class="grid md:grid-cols-3 gap-5">
-
+ 
     <!-- ① 意見投稿 -->
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-teal-700"></div>
@@ -311,7 +311,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
         </button>
       </div>
     </div>
-
+ 
     <!-- ② 写真投稿広場 -->
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-slate-800"></div>
@@ -335,7 +335,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
         </button>
       </div>
     </div>
-
+ 
      <!-- ③ イベントボード -->
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-gradient-to-r from-amber-500 to-rose-500"></div>
@@ -370,8 +370,8 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   </div>
 </div>
 </section>
-
-
+ 
+ 
 <!-- PAGE 2: OPINION POST -->
 <section id="assist" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
@@ -384,8 +384,8 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <button type="button" id="btnVoiceStop" class="hidden px-4 py-2 bg-red-500 text-white rounded-full text-xs">停止</button>
 </div>
 <input id="authorName" placeholder="お名前（任意）" class="w-full p-3.5 border rounded-xl mb-3 bg-[#f8fafc] text-sm">
-
-
+ 
+ 
 <!-- カテゴリ選択ボタン - タップした大分類をAI分析より優先させる（中分類以降はAIが判定） -->
 <div class="mb-3">
   <div class="text-xs font-bold text-slate-600 mb-2 flex items-center gap-1">
@@ -400,37 +400,37 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     <button type="button" data-big="BIG-6" onclick="selectOpinionCategory('BIG-6', this)" class="opinion-cat-btn px-4 py-2 bg-white border-2 border-amber-200 rounded-full hover:bg-amber-50">🎉 イベント・企画</button>
   </div>
 </div>
-
-
+ 
+ 
 <textarea id="userInput" placeholder="例：坂道が急で高齢者や子供が歩くのが大変。ベンチや休憩スペースが欲しいです。" class="w-full min-h-[150px] p-4 border-2 rounded-xl text-sm"></textarea>
 <button type="button" id="btnPost" class="mt-4 bg-slate-900 text-white px-8 py-3.5 rounded-xl font-black text-sm">🤖 AIが整理して投稿 (5視点各100字＋200字要約)</button>
 <span id="loadingMsg" class="hidden text-sm ml-3 text-brand-600 font-bold">5視点＆200字要約を分析中...</span>
 <div id="slip" class="mt-5 text-sm text-slate-400">ここに5つの視点分析（各100字）と200文字要約が表示されます。</div>
 </div>
 </section>
-
+ 
 <!-- PAGE 3: OPINION TREE -->
 <section id="tree" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
 <h1 class="text-3xl font-black">意見集約箱</h1>
 <p class="text-sm text-slate-500 mt-1">大分類 → 中分類 → 投稿タイトル。クリックで200字要約と5視点を表示します。</p>
-
+ 
 <div id="storeNotice" class="hidden mt-4 bg-teal-50 border-2 border-teal-600 rounded-2xl p-4">
   <div class="font-black text-sm text-teal-900" id="storeNoticeTitle">投稿を格納しました</div>
   <div class="text-xs text-slate-700 mt-1" id="storeNoticeBody"></div>
 </div>
-
+ 
 <div class="mt-4 flex gap-2 text-[11px] font-bold flex-wrap">
   <span class="px-3 py-1 rounded-full bg-amber-300 text-black">👑 新統合</span>
   <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-800 border border-sky-300">📝 単独提案</span>
   <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-500 border">📎 元記事</span>
 </div>
-
+ 
 <div class="mt-6">
   <div class="text-xs font-bold text-slate-400 tracking-widest mb-3">大分類（6）</div>
   <div id="bigAccordion" class="flex flex-col gap-3"></div>
 </div>
-
+ 
 <!-- 共創アップデート（残す） -->
 <div class="mt-10">
   <div class="bg-slate-900 text-white rounded-2xl px-5 py-4 mb-4">
@@ -475,8 +475,8 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 </div>
 </section>
-
-
+ 
+ 
 <!-- PAGE 5: EVENT -->
 <section id="event" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
@@ -505,7 +505,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 <div id="evSlip" class="mt-3 text-xs text-slate-500">ここに200文字要約が表示されます。</div>
 </div>
-
+ 
 <div class="mt-6 bg-amber-50 border-2 border-amber-300 rounded-2xl p-4">
 <div class="font-black text-sm">📅 管理者がイベントを追加できるフォーマット（スプレッドシート連携）</div>
 <button type="button" id="btnToggleAdmin" class="mt-3 bg-white border-2 px-5 py-2.5 rounded-full text-xs font-bold">▼ 管理者：今後のイベントを書き込む（クリックで表示）</button>
@@ -523,19 +523,19 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 </div>
 </div>
-
+ 
 <div class="mt-8 bg-white border-2 border-teal-700 rounded-2xl overflow-hidden">
 <div class="bg-teal-800 text-white p-4"><div class="font-black">📋 町内会で検討のボード</div></div>
 <div class="p-3"><div id="kentouWrap"></div></div>
 </div>
 </section>
-
+ 
 <!-- PAGE 6: FLYER CREATOR (13 FIELDS + 6 LAYOUTS + DUAL ILLUSTRATIONS + HIGH RES EXPORT) -->
 <section id="flyerCreator" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button> / <button type="button" onclick="showPage('event')">イベントへ</button></div>
 <h1 class="text-3xl font-black">🎨 プロレベル チラシ自動生成スタジオ</h1>
 <p class="text-sm text-slate-600 mt-2">13の必須項目入力 ＋ 6分類別デザインテンプレート自動切替 ＋ 2枚のAI/写真イラスト ＋ A4高画質PDF/PNG出力</p>
-
+ 
 <!-- Fast Presets -->
 <div class="mt-4 bg-amber-50/80 border border-amber-200 rounded-2xl p-4 flex items-center justify-between flex-wrap gap-2">
 <span class="font-bold text-xs text-amber-900">⚡ ワンクリック・サンプルデータ一括入力:</span>
@@ -547,16 +547,16 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <button type="button" onclick="fillFlyerPreset('clean')" class="px-3 py-1.5 bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-lg">🧹 クリーン清掃</button>
 </div>
 </div>
-
+ 
 <div class="grid lg:grid-cols-12 gap-6 mt-6">
-
+ 
 <!-- Left Form Column (5 Cols) -->
 <div class="lg:col-span-5 bg-white border-2 border-slate-200 rounded-[24px] p-6 space-y-4 text-xs">
 <h3 class="font-black text-sm border-b pb-2 flex justify-between items-center">
 <span>📝 13項目入力フォーム</span>
 <span class="text-[10px] text-teal-600 font-bold">即プレビュー反映</span>
 </h3>
-
+ 
 <div>
 <label class="text-xs font-bold block mb-1">⑬ 分類 (デザインテンプレートが自動変化) *</label>
 <select id="flyerF_category" onchange="updateFlyerLivePreview()" class="w-full p-3 border-2 border-amber-300 bg-amber-50 rounded-xl text-sm font-bold text-slate-900">
@@ -568,30 +568,30 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <option value="general">🏛️ 一般・地域コミュニティ（クリーン・標準）</option>
 </select>
 </div>
-
+ 
 <div><label class="text-xs font-bold block mb-1">① タイトル *</label><input id="flyerF_title" oninput="updateFlyerLivePreview()" value="山手町 わんわん秋のお散歩＆愛犬しつけ教室" placeholder="例：山手町 夏祭り2026" class="w-full p-3 border rounded-xl text-sm font-bold"></div>
 <div><label class="text-xs font-bold block mb-1">② 内容 *</label><textarea id="flyerF_content" oninput="updateFlyerLivePreview()" rows="3" class="w-full p-3 border rounded-xl text-sm">マナーを守ってペットと一緒に山手公園周辺をお散歩！プロのドッグトレーナーによるワンポイントレッスンも同時開催。</textarea></div>
 <div><label class="text-xs font-bold block mb-1">⑧ 主催者の思い入れ・メッセージ</label><input id="flyerF_feel" oninput="updateFlyerLivePreview()" value="人とペットが心地よく暮らせる山手町を目指して！" class="w-full p-2.5 border rounded-xl text-xs"></div>
-
+ 
 <div class="grid grid-cols-2 gap-2">
 <div><label class="text-xs font-bold block mb-1">③ 対象</label><input id="flyerF_target" oninput="updateFlyerLivePreview()" value="山手町住民・ペット連れの方" class="w-full p-2.5 border rounded-xl text-xs"></div>
 <div><label class="text-xs font-bold block mb-1">④ 日程 *</label><input id="flyerF_date" oninput="updateFlyerLivePreview()" value="2026年10月11日(日)" class="w-full p-2.5 border rounded-xl text-xs"></div>
 </div>
-
+ 
 <div class="grid grid-cols-2 gap-2">
 <div><label class="text-xs font-bold block mb-1">⑤ 時間 *</label><input id="flyerF_time" oninput="updateFlyerLivePreview()" value="10:00 - 12:00" class="w-full p-2.5 border rounded-xl text-xs"></div>
 <div><label class="text-xs font-bold block mb-1">⑥ 場所 *</label><input id="flyerF_place" oninput="updateFlyerLivePreview()" value="山手公園 広場" class="w-full p-2.5 border rounded-xl text-xs"></div>
 </div>
-
+ 
 <div class="grid grid-cols-2 gap-2">
 <div><label class="text-xs font-bold block mb-1">⑦ 集合場所</label><input id="flyerF_meet" oninput="updateFlyerLivePreview()" value="山手公園 時計台前 (9:45)" class="w-full p-2.5 border rounded-xl text-xs"></div>
 <div><label class="text-xs font-bold block mb-1">⑩ 費用</label><input id="flyerF_fee" oninput="updateFlyerLivePreview()" value="無料 (おやつ付き)" class="w-full p-2.5 border rounded-xl text-xs"></div>
 </div>
-
+ 
 <div><label class="text-xs font-bold block mb-1">⑨ 雨天時の扱い</label><input id="flyerF_rain" oninput="updateFlyerLivePreview()" value="小雨決行 / 荒天時は山手集会所にて講習会" class="w-full p-2.5 border rounded-xl text-xs"></div>
 <div><label class="text-xs font-bold block mb-1">⑪ 申込方法と締切</label><input id="flyerF_apply" oninput="updateFlyerLivePreview()" value="10月5日(金)までに自治会HPまたはお電話にて受付" class="w-full p-2.5 border rounded-xl text-xs"></div>
 <div><label class="text-xs font-bold block mb-1">⑫ 緊急連絡先</label><input id="flyerF_emergency" oninput="updateFlyerLivePreview()" value="山手町コミュニティ事務局 (TEL: 0797-XX-XXXX)" class="w-full p-2.5 border rounded-xl text-xs"></div>
-
+ 
 <div class="p-3 bg-slate-50 border rounded-xl space-y-2">
 <span class="font-bold text-slate-800 block text-xs">📸 【イラスト①】投稿写真のイラスト化</span>
 <input type="file" id="flyerF_image" accept="image/*" onchange="handleFlyerPhotoUpload(event)" class="w-full text-xs">
@@ -605,12 +605,12 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </select>
 </div>
 </div>
-
+ 
 <div class="mt-4 flex gap-2">
 <button type="button" onclick="updateFlyerLivePreview()" class="flex-1 bg-teal-700 text-white py-3 rounded-full text-sm font-black shadow">✨ プレビュー更新</button>
 </div>
 </div>
-
+ 
 <!-- Right Live Canvas Column (7 Cols) -->
 <div class="lg:col-span-7 bg-slate-900 p-6 rounded-[24px] flex flex-col items-center justify-start overflow-y-auto">
 <div class="w-full flex justify-between items-center mb-4 text-xs text-white">
@@ -623,9 +623,9 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <button type="button" onclick="downloadFlyerPDF()" class="bg-gradient-to-r from-amber-500 to-rose-500 text-white px-4 py-1.5 rounded-full text-xs font-black shadow hover:from-amber-600">📄 A4高画質PDF</button>
 </div>
 </div>
-
+ 
 <div id="flyerExportWrapper" class="w-full max-w-[560px] bg-slate-800 p-2 rounded-xl shadow-2xl">
-
+ 
 <div id="flyerPreviewCanvas" class="a4-container theme-pet p-5 flex flex-col justify-between space-y-2">
  
 <!-- Header -->
@@ -694,16 +694,16 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
  
 </section>
-
+ 
 </main>
-
+ 
 <!-- MODALS -->
 <div id="ideaModal" class="modal">
 <div class="bg-white rounded-3xl max-w-[640px] w-full max-h-[85vh] overflow-y-auto p-6 relative shadow-2xl">
 <div class="flex justify-between items-center"><div class="flex gap-2 flex-wrap"><span id="modalBig" class="bg-slate-900 text-white px-3 py-1 rounded-full text-xs font-bold">防災</span><span id="modalMid" class="bg-white border px-3 py-1 rounded-full text-xs font-bold">避難路</span><span id="modalType" class="bg-amber-100 text-amber-900 border border-amber-300 px-3 py-1 rounded-full text-xs font-bold">元記事</span></div><button type="button" onclick="closeModal()" class="w-8 h-8 bg-slate-100 rounded-full font-bold">✕</button></div>
 <h2 id="modalTitle" class="text-xl font-black mt-4 text-slate-900"></h2>
 <div id="modalDate" class="text-xs text-slate-500 mt-1"></div>
-
+ 
 <div class="mt-4 bg-amber-50 border-2 border-amber-300 rounded-2xl p-4">
 <div class="font-black text-amber-900 text-xs mb-1 flex items-center justify-between">
 <span>📝 200文字要約</span>
@@ -711,17 +711,17 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 <div id="modalSummary" class="text-xs text-slate-800 leading-relaxed font-medium"></div>
 </div>
-
+ 
 <div id="modalPerspectivesWrap" class="mt-4 space-y-2">
 <div class="font-black text-xs text-slate-700">🔍 5つの視点分析（各100文字）</div>
 <div id="modalPerspectives" class="space-y-2 text-xs"></div>
 </div>
-
+ 
 <div id="modalMeta" class="mt-4 bg-slate-50 border p-3 rounded-xl text-xs text-slate-600"></div>
 <div class="mt-6"><button type="button" onclick="closeModal()" class="w-full bg-slate-900 text-white py-3 rounded-xl text-sm font-bold">閉じる</button></div>
 </div>
 </div>
-
+ 
 <div id="howtoModal" class="modal">
 <div class="bg-[#fefcf3] rounded-[24px] max-w-[920px] w-full border-2 border-amber-200 p-8 relative shadow-xl">
 <button type="button" onclick="closeHowto()" class="absolute top-4 right-4 w-8 h-8 bg-white border rounded-full font-bold">✕</button>
@@ -750,7 +750,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 </div>
 </div>
-
+ 
 <!-- COMPLETE, BUG-FREE JAVASCRIPT LOGIC -->
 <script>
 /* -------------------------------------------------------------
@@ -765,7 +765,7 @@ const BASE_CATEGORIES = [
 {key:"BIG-5",label:"将来ビジョン",icon:"🔭",defaultDesc:"人口減少と高齢化が進む中、紙ベースの運営や役員負担の軽減を図るため、回覧板のデジタル化やLINE・クラウドを活用した自治会DXを推進します。大邸宅の空き家化に対しては、空き家バンクの作成や多世代シェアハウス等への利活用を促進し、景観保全と次世代への継承を両立します。また、短時間ボランティア制度や景観学習、次世代リーダー育成講座を通じて、山手町ならではの瀟洒な街並みと静穏な暮らしを100年先へつなぐ持続可能な将来ビジョンを描きます。"},
 {key:"BIG-6",label:"イベント・企画",icon:"🎉",defaultDesc:"3年ぶりに復活した夏祭りの盆踊りや屋台を通じて、音量を抑えた品格ある多世代交流を推進します。また、石垣や門構えを守る側溝清掃・除草などの美化活動や、防災炊き出し訓練を兼ねた餅つき、ハロウィン仮装防犯パトロールなど、家族で楽しく学べる体験型イベントを開催。さらに、広い邸宅の庭を活かした絵本読み聞かせや星空観察、ペットと参加できるドッグヨガなど、第一種低層住居専用地域の特性を活かした独自の企画で地域の絆を深めます。"}
 ];
-
+ 
 const INITIAL_24 = [
   {big:"防災・防犯", mid:"安否確認体制"},
   {big:"防災・防犯", mid:"自主防災訓練"},
@@ -792,7 +792,7 @@ const INITIAL_24 = [
   {big:"イベント・企画", mid:"防災・防犯イベント"},
   {big:"イベント・企画", mid:"子ども・多世代企画"}
 ];
-
+ 
 const EVENT_PHOTO_CATEGORIES = [
 "🌸 季節の行事　日常の風景",
 "🎈 子ども・親子で楽しむ",
@@ -801,11 +801,11 @@ const EVENT_PHOTO_CATEGORIES = [
 "🐾 ペットと一緒に",
 "🏛️ 一般・地域コミュニティ"
 ];
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 const ORIGINAL_24 = [
 {big:"BIG-1",mid:"安否確認体制",title:"避難所運営を住民主体で考えたい",summary:"住民主体の避難所運営マニュアル作成と役割分担、炊き出し訓練の提案です。",date:"2026-04-20",age:"60代"},
 {big:"BIG-1",mid:"見守りカメラ",title:"通学路に防犯カメラの増設を",summary:"通学路の暗所対策として防犯カメラ増設と危険箇所マップ作成の要望。",date:"2026-04-18",age:"40代"},
@@ -832,7 +832,7 @@ const ORIGINAL_24 = [
 {big:"BIG-5",mid:"次世代の担い手",title:"次世代の担い手育成",summary:"中学生短時間参加枠など若手参画の仕組み提案。",date:"2026-03-29",age:"20代"},
 {big:"BIG-5",mid:"街の未来像",title:"街の未来像の共有",summary:"10年後の山手町未来像を住民で共有するビジョン共創提案。",date:"2026-03-28",age:"60代"}
 ];
-
+ 
 const NEW_7 = [
 {big:"BIG-1",mid:"安否確認体制",title:"安否確認のデジタル化",summary:"LINEグループと民生委員連携による三重連絡網とデジタル安否確認の提案。",date:"2026-05-01",age:"30代"},
 {big:"BIG-2",mid:"道路・側溝整備",title:"側溝清掃の用具共同管理",summary:"側溝の落葉詰まりで用具共同管理と当番見える化、イベント化を提案。",date:"2026-05-02",age:"40代"},
@@ -842,14 +842,14 @@ const NEW_7 = [
 {big:"BIG-6",mid:"清掃・美化イベント",title:"芋煮イベント70個完売",summary:"70個のお芋が完売した芋煮イベントの成功分析と継続提案。",date:"2026-05-06",age:"40代"},
 {big:"BIG-6",mid:"防災・防犯イベント",title:"防犯バッグと腕章の周知",summary:"オリジナルバッグと腕章作成による防犯意識向上提案。",date:"2026-05-07",age:"50代"}
 ];
-
+ 
 const INITIAL_HIROBA = [
 {timestamp:"2026-05-10T10:00:00",author:"環境美化委員会",summary:"ゴールデンウィークの一日、皆で清掃活動に励みました。",category:"季節の行事",imageUrl:"https://www.city.ashiya.lg.jp/kodomo/kodomohoiku/images/iwazonohoukatu01.jpg",description:"先日来の強風のために、落葉が多く、雑草も元気に出てきています。初めて清掃活動に参加された方も一緒に、五月晴れの緑地公園で楽しく清掃しました！"},
 {timestamp:"2026-05-09T16:00:00",author:"イベント班",summary:"春の一日、緑地清掃とイベントにご参加いただき、ありがとうございました。",category:"食べる・集まる",imageUrl:"https://www.sapporo.travel/cms/wp-content/uploads/2025/10/%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E7%84%BC%E3%81%8D%E8%8A%8B%E3%83%86%E3%83%A9%E3%82%B92024-19-1200x900.jpg",description:"70個のお芋が全部きれいに無くなりました！"},
 {timestamp:"2026-05-08T09:00:00",author:"イベント班",summary:"子ども12名、大人40名の参加者は全員、大満足のバスツアーでした。",category:"子ども・親子で楽しむ",imageUrl:"https://prtimes.jp/i/607/559/resize/d607-559-107882-0.jpg",description:"圧巻は、西日本ではここ『須磨シ―ワールド』でしかみることのできない「オルカショー」。体重が3トンの“ステラ”と“ラン”の親子が巨体で見せてくれる数々の“芸”（パフォーマンス）は、巨大だけにその愛らしさ愛おしさが何十倍にも感じられました。帰路のお買い物も含めて、老若男女、笑顔のバスツアーでした！！"},
 {timestamp:"2026-05-07T14:00:00",author:"防犯委員",summary:"”地域で自分の街は自分で守る”",category:"季節の行事",imageUrl:"https://www.city.itako.lg.jp/data/img/2-1325645820_14.jpg",description:"防犯委員で、山手町町内会のオリジナルバッグを作成しました。山手町内の防犯、町の結束、不審者が近寄りにくい町づくり。そして子供達を守る！を目的に作成致しました。腕章を付けている人は山手町の人！安全な人だと子供達にもわかりやすくするため、キャラクターを作り、そのキャラクターを取り入れ子供達に認識してもらいやすいデザインにしました。画像を子供達に見せて「この腕章をつけてる人は町の人だよ〜」「困ったら声かけていいんだよ〜」とお伝えしてもらえると助かります♡"}
 ];
-
+ 
 let EVENT_DATA = [
 {id:"evt001", date:"2026-06-15", time:"18:00-20:00", title:"山手町の静穏イルミ", place:"山手町内", category:"🌸 季節の行事　日常の風景", status:"予定", detail:"第一種低層住居専用地域の静穏を守りつつ、足元を照らす優しい光のイルミネーションを企画。騒音や光害に配慮し、六甲山麓の景観と調和した上品な演出で、冬の夜の安全と賑わいを両立。住民の合意形成を経て、環境負荷の少ないLEDとタイマー制御で運用します。山手町の品格を損なわない、温かな光の共創を目指します。"},
 {id:"evt002", date:"2026-09-20", time:"15:00-19:00", title:"山手町の秋祭り企画", place:"山手集会所", category:"🎈 子ども・親子で楽しむ", status:"企画中", detail:"3年ぶりに復活した夏祭りの成功を受け、秋の収穫祭を企画。子ども神輿や屋台、盆踊りを音量に配慮した形で実施。旧家と新住民が共に楽しめるよう、景観講座や歓迎コーナーも設置。広い邸宅の庭を活用した絵本読み聞かせや、ペットと参加できるコーナーも用意し、多世代が笑顔で集う品格ある秋祭りを目指します。"},
@@ -858,15 +858,15 @@ let EVENT_DATA = [
 {id:"evt005", date:"2026-08-10", time:"09:00-11:00", title:"公園でのドッグ活動", place:"山手公園", category:"🐾 ペットと一緒に", status:"参加者募集中", detail:"ペットと共生する山手町を目指し、公園でのドッグ活動を企画。しつけ教室やマナー向上講座、ドッグランの暫定利用など、人とペットが心地よく過ごせるルール作りを住民と共に考える。広い庭や緑豊かな環境を活かし、散歩コースや休憩ベンチを整備。子どもや高齢者も安心して参加できるよう、時間帯やエリア分けを工夫し、互いに配慮し合う共生のモデルを構築します。"},
 {id:"evt006", date:"2026-09-05", time:"14:00-16:00", title:"城山マッピングの是非", place:"城山周辺", category:"☕ 食べる・集まる", status:"企画中", detail:"城山周辺の歴史的景観や緑地の保全と、地域活性化のためのマッピング企画の是非を住民と共に考える勉強会。プロジェクションマッピングの光や音が、第一種低層住居専用地域の静穏や生態系に与える影響を学ぶ。歴史散策や星空観察など、光を使わない代替案も含め、住民の声を可視化。品格ある邸宅街の価値を次世代へ継承するため、持続可能で環境に配慮した企画の在り方を模索します。"}
 ];
-
+ 
 let EVENT_IDEAS=[
 {id:'idea-evt1',title:'山手町こども縁日を復活させたい',detail:'かつて行われていた夏の縁日を小規模で復活。',category:'子ども・親子で楽しむ',status:'アイデア募集中'},
 {id:'idea-evt2',title:'山手・奥池合同ハイキング',detail:'隣接町内会との合同ハイキング。',category:'趣味・学びをシェア',status:'アイデア募集中'},
 {id:'idea-evt3',title:'空き家で週末ギャラリー＆お茶会',detail:'空き家を週末だけ開放。写真や子どもの絵を展示。',category:'食べる・集まる',status:'アイデア募集中'},
 {id:'idea-evt4',title:'（スプレッドシートから読み込み中）',detail:'実データをスプレッドシートから取得中、ダミーではありません',category:'イベント・企画',status:'読み込み中'}
 ];
-
-
+ 
+ 
 let ALL_IDEAS = [];
 (function initIntegrated24(){
   var mids = [
@@ -897,14 +897,14 @@ let ALL_IDEAS = [];
   });
 })();
 let hirobaPosts = [];
-
+ 
 let NEXT_ID = 1;
 let openBig = "BIG-1";
 let openMid = null;
 let openEventCat = null;
 let currentTab = 'upcoming';
 let flyerIllustCache1 = '';
-
+ 
 /* Preset Sample Data for Flyer Generator */
 const FLYER_PRESETS = {
   pet: {
@@ -988,12 +988,12 @@ const FLYER_PRESETS = {
     photo: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=500&auto=format&fit=crop&q=80'
   }
 };
-
+ 
 /* -------------------------------------------------------------
    2. UTILS & PAGE SWITCHER
 ------------------------------------------------------------- */
 function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-
+ 
 function showPage(id, eventTab){
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
   var target = document.getElementById(id);
@@ -1033,7 +1033,7 @@ function postToGASAndWait(payload){
   })
   .catch(function(e){ console.log('postToGASAndWait error', e); return null; });
 }
-
+ 
 function postToGAS(payload){
   try{
     payload.timestamp = new Date().toISOString();
@@ -1060,7 +1060,7 @@ function postToGAS(payload){
     }
   }catch(e){ console.log('postToGAS error', e); }
 }
-
+ 
 function verifySpreadsheetStorage(){
   console.log('=== スプレッドシート格納検証（ローカル）===');
   console.log('ALL_IDEAS件数:', ALL_IDEAS.length);
@@ -1077,13 +1077,13 @@ function verifySpreadsheetStorage(){
   console.log('GAS_URL:', GAS_URL);
   return {titleOk: titleOk, summaryOk: summaryOk, total: ALL_IDEAS.length};
 }
-
-
-
+ 
+ 
+ 
 function loadFromSheet(){
   if(!GAS_URL || GAS_URL.indexOf('XXXX')!==-1) return;
   console.log("スプレッドシートから実データ取得開始:", GAS_URL);
-
+ 
   // 意見（声のボード）
   fetch(GAS_URL+"?action=getIdeas")
     .then(function(r){ return r.json(); })
@@ -1094,7 +1094,7 @@ function loadFromSheet(){
         try{ renderAccordion(); }catch(e){}
         return;
       }
-
+ 
       // シートの投稿を追加（初期の新統合・サンプルは消さない）
       data.forEach(function(row){
         var bigLabel = row.bigLabel || row.big || "コミュニティ";
@@ -1102,14 +1102,14 @@ function loadFromSheet(){
         var summary200 = String(row.summary || row.content || row.raw || "");
         if(summary200.length > 200) summary200 = summary200.slice(0,200);
         var rowTitle = row.title || summary200.slice(0,20) || "無題";
-
+ 
         // 投稿直後にローカルへ即時追加した仮エントリと同一内容なら、
         // 重複させずに置き換える（意見集約箱に同じ投稿が2件並ぶのを防止）
         var dupIdx = ALL_IDEAS.findIndex(function(x){
           return x._local && x.title === rowTitle && x.summary200 === summary200;
         });
         if(dupIdx !== -1){ ALL_IDEAS.splice(dupIdx, 1); }
-
+ 
         ALL_IDEAS.push({
           id: row.id || ('sheet-'+Date.now()+Math.random()),
           big: bigLabel,          // 必ずラベル文字列
@@ -1133,7 +1133,7 @@ function loadFromSheet(){
           author: row.author || ""
         });
       });
-
+ 
       // 24件未満ならテーマ別の初期枠を補充（big は label）
       if(ALL_IDEAS.filter(function(a){return a.type==='integrated';}).length < 24){
         var mids = [
@@ -1162,14 +1162,14 @@ function loadFromSheet(){
           });
         });
       }
-
+ 
       // シートの投稿を残しつつ、24新統合が無ければ補完（消えないように）
       ensureDefaultIntegrated24();
       try{ renderAccordion(); }catch(e){ console.log(e); }
       try{ renderCoCreationUpdate(); }catch(e){ console.log(e); }
     })
     .catch(function(e){ console.log("getIdeas error", e); });
-
+ 
   // イベント
     // イベント：idea- 始まり＝企画、それ以外＝今後のイベント
   fetch(GAS_URL+"?action=getEvents")
@@ -1177,10 +1177,10 @@ function loadFromSheet(){
     .then(function(data){
       console.log("getEvents:", data);
       if(!data || !Array.isArray(data) || data.length===0) return;
-
+ 
       var upcoming = [];
       var ideas = [];
-
+ 
       data.forEach(function(row){
         var item = {
           id: String(row.id || ('evt-'+Date.now())),
@@ -1198,10 +1198,10 @@ function loadFromSheet(){
           upcoming.push(item);
         }
       });
-
+ 
       EVENT_DATA = upcoming;
       EVENT_IDEAS = ideas;
-
+ 
       try{
         renderEvents();
         renderEventIdeas();
@@ -1215,10 +1215,10 @@ function loadFromSheet(){
     })
     .catch(function(e){ console.log("getEvents error", e); });
 }
-
+ 
   
-
-
+ 
+ 
 /* -------------------------------------------------------------
    3. OPINIONS / TREE & EVENT AI ANALYSIS ENGINES
 ------------------------------------------------------------- */
@@ -1237,21 +1237,21 @@ function generateOpinionAnalysis(input, author){
   } else if (text.includes('祭り') || text.includes('イベント') || text.includes('餅') || text.includes('音楽') || text.includes('コンサート') || text.includes('ツアー') || text.includes('縁日')) {
     big = 'BIG-6'; mid = text.includes('祭り') ? '夏祭り・餅つき' : '子ども・多世代企画';
   }
-
+ 
   var catObj = BASE_CATEGORIES.find(b => b.key === big) || BASE_CATEGORIES[2];
   var catLabel = catObj.label;
-
+ 
   var title = text.slice(0, 18);
   if (!title.endsWith('の提案') && !title.endsWith('について')) {
     title += (title.length > 12 ? '...' : 'に関する提案');
   }
-
+ 
   var p1 = "【地域性・ロケーション】六甲山麓の急斜面や石垣、第一種低層住居専用地域が広がる山手町の地理的特性を踏まえ、静穏な景観や安全面への配慮を最優先に位置づけた空間・ロケーション計画を設計します。（98文字）";
   var p2 = "【住民参加・コミュニティ】自治会や民生委員、Code for Ashiya、子どもから高齢者までの多世代住民が主体的に関わり、誰もが意見を交わしながら共にアイデアを形にしていく参加型仕組みを構築します。（101文字）";
   var p3 = "【技術・環境配慮】自然豊かな住環境を守るため、環境負荷の少ない素材や省エネ技術を採用し、夜間の静けさや騒音・視線への配慮を徹底することで、周辺の邸宅街と調和した快適な運用を目指します。（96文字）";
   var p4 = "【集客・賑わい創出】過度な混雑を避けつつ、町内の回遊性向上や日常の小さな賑わいを創出することで、住民同士の自然な挨拶や触れ合いを生み出し、山手町ならではの心地よい地域活性化を図ります。（96文字）";
   var p5 = "【持続可能性】一時的な取組に終わらせず、住民ボランティアや役員の負担を軽減するデジタルツールを活用し、低コストかつ継続的に次世代へと引き継いでいける地域運営モデルを確立します。（94文字）";
-
+ 
   if (text.includes('坂') || text.includes('ベンチ')) {
     p1 = "【地域性・ロケーション】急坂が多い山手町の斜面地において、徒歩移動の負担を和らげるベンチや休憩スペースを配置します。第一種低層住宅地の落ち着いた景観に調和するデザインと安全な設置場所を確保します。（99文字）";
     p2 = "【住民参加・コミュニティ】設置場所や利用ルールについて自治会や近隣住民で話し合い、お散歩や買い物帰りの多世代が気軽に立ち寄れる交流の場として、温かい見守りと会話が生まれる地域空間を目指します。（98文字）";
@@ -1271,14 +1271,14 @@ function generateOpinionAnalysis(input, author){
     p4 = "【集客・賑わい創出】単なる作業にとどめず、清掃後に暖かいお茶や芋煮等を振る舞う交流イベントを併催することで参加意欲を高めます。きれいになった街を散策する機会を増やし、地域への愛着を育みます。（97文字）";
     p5 = "【持続可能性】一部の住民に負担が偏らないよう、LINEや掲示板を活用した柔軟な参加登録システムを構築します。低負担で継続できる清掃・美化モデルを次世代に繋げ、清潔な街づくりを維持します。（97文字）";
   }
-
+ 
   // 投稿本文を中心に要約（テンプレ固定文をやめる）
   var core = text.replace(/\s+/g,' ').trim();
   if(core.length > 90) core = core.slice(0, 90);
   var summary200 = "【提案】" + core + "。山手町の閑静な住環境と多世代のつながりを活かし、住民主体で安全に楽しめる形を設計します。自治会・有志・関係団体が役割分担し、準備から当日運営まで負担を分散。参加しやすい時間帯と場所を選び、継続できる地域の文化・交流の場として定着を目指します。";
   if(summary200.length > 200) summary200 = summary200.slice(0,200);
   if(summary200.length < 150) summary200 = (summary200 + " まずは小規模な試行から始め、参加者の声を次に活かします。").slice(0,200);
-
+ 
   if (text.includes('坂') || text.includes('ベンチ')) {
     summary200 = "六甲山麓の急坂が多い山手町において、高齢者や子育て世代の歩行負担を軽減するため、街並みと調和する休憩用ベンチの設置を提案します。自治会や住民が連携して設置箇所を選定し、お散歩や買い物帰りの多世代交流拠点として活用します。耐候性素材と夜間安全配慮を施し、住民ボランティアによる維持管理制度を導入することで、低負荷で持続可能な健康増進インフラを地域全体で創出します。（189文字）";
   } else if (text.includes('防災') || text.includes('避難') || text.includes('安否')) {
@@ -1286,19 +1286,19 @@ function generateOpinionAnalysis(input, author){
   } else if (text.includes('ゴミ') || text.includes('清掃') || text.includes('側溝')) {
     summary200 = "山手町の閑静な景観と自然を守るため、側溝の落葉清掃やゴミステーション管理の効率化を提案します。用具の共同管理と中学生や新住民が参加しやすい短時間枠を設け、作業後の交流お茶会などを併催することで多世代の協働を促します。回収物の再資源化やデジタル当番表を導入し、一部への負担偏りを防ぐことで、綺麗で誇りの持てる街並みを継続的に維持・継承します。（187文字）";
   }
-
+ 
   return {
     big: big, mid: mid, catLabel: catLabel, title: title,
     summary200: summary200,
     p1: p1, p2: p2, p3: p3, p4: p4, p5: p5
   };
 }
-
+ 
 function generateEventAnalysis(title, detail){
   var t = String(title || "").trim();
   var d = String(detail || "").trim();
   var combined = t + " " + d;
-
+ 
   // カテゴリ推定（イベント6種）
   var category = EVENT_PHOTO_CATEGORIES[5]; // 一般
   if(/ペット|犬|わん|猫|しつけ/.test(combined)) category = EVENT_PHOTO_CATEGORIES[4];
@@ -1307,9 +1307,9 @@ function generateEventAnalysis(title, detail){
   else if(/趣味|学び|講座|ギャラリー|写真|音楽|読書|ハイキング/.test(combined)) category = EVENT_PHOTO_CATEGORIES[3];
   else if(/季節|祭|イルミ|花見|夏祭|盆踊|掃除|清掃|美化|日常/.test(combined)) category = EVENT_PHOTO_CATEGORIES[0];
   else if(/防災|防犯|合同|コミュニティ|町内|自治/.test(combined)) category = EVENT_PHOTO_CATEGORIES[5];
-
+ 
   var summary200 = "芦屋市山手町の美しい街並みと自然を活かした「" + t + "」のイベント企画案です。地域住民や子どもから高齢者までの多世代が安全に楽しく参加できるよう、山手公園や集会所などの地域資源を活用したプログラムを構成します。周囲の閑静な住環境に配慮した運営を行い、参加者同士の交流と笑顔を広げることで、地域の絆を深め次世代へ繋ぐ持続可能なコミュニティ行事として実施します。";
-
+ 
   if (/清掃|クリーン|美化/.test(combined)) {
     summary200 = "山手町の緑豊かな景色と安全な道路環境を守るため、住民皆で楽しく取り組む「" + t + "」を提案します。ライト坂や公園周辺のゴミ拾い・側溝点検を行いながら、作業後には温かい飲み物等を振る舞う交流の時間を設けます。軍手や用具の貸出を行い、短時間でも気軽に参加できる工夫を取り入れることで、多世代が協力して誇れる街並みを育む地域イベントとして開催します。";
   } else if (/祭|縁日|餅/.test(combined)) {
@@ -1321,14 +1321,14 @@ function generateEventAnalysis(title, detail){
   }
   if(summary200.length > 200) summary200 = summary200.slice(0, 200);
   if(summary200.length < 150) summary200 = (summary200 + " 山手町の静穏な住環境に配慮し、住民参加で継続できる形を目指します。").slice(0,200);
-
+ 
   return {
     summary200: summary200,
     category: category,
     via: 'local-rules'
   };
 }
-
+ 
 function ensureDefaultIntegrated24(){
   // 各大分類×4中分類：新統合1＋単独提案サンプル＋元記事サンプルを保証
   INITIAL_24.forEach(function(item, idx){
@@ -1421,7 +1421,7 @@ function initIdeas(){
     '単独', ALL_IDEAS.filter(function(a){return a.type==='standalone';}).length,
     '元記事', ALL_IDEAS.filter(function(a){return a.type==='original';}).length);
 }
-
+ 
 function ideaBigMatches(idea, cat){
   return idea.big === cat.key || idea.big === cat.label || idea.bigLabel === cat.label;
 }
@@ -1508,8 +1508,8 @@ function renderAccordion(){
   });
   container.innerHTML = html;
 }
-
-
+ 
+ 
 function storeLastOpinionToTree(){
   var pack = window._lastOpinion;
   if(!pack || !pack.analysis){ alert('先にAI分析を実行してください'); return; }
@@ -1530,7 +1530,7 @@ function storeLastOpinionToTree(){
     b.classList.remove('ring-2','ring-offset-1','ring-teal-600','bg-teal-50');
   });
 }
-
+ 
 function similarText(a, b){
   a = String(a||''); b = String(b||'');
   if(!a || !b) return false;
@@ -1547,7 +1547,7 @@ function classifyAndStore(payload){
   var mid = payload.mid || 'その他';
   var known = midsForBig(cat).filter(function(m){ return m !== 'その他'; });
   if(known.indexOf(mid) === -1) mid = 'その他';
-
+ 
   var integrated = ALL_IDEAS.filter(function(i){
     return ideaBigMatches(i, cat) && i.mid===mid && i.type==='integrated';
   });
@@ -1584,7 +1584,7 @@ function classifyAndStore(payload){
     _local: true
   };
   ALL_IDEAS.unshift(newIdea);
-
+ 
   if(resultType === 'standalone'){
     var stands = ALL_IDEAS.filter(function(i){
       return ideaBigMatches(i, cat) && i.mid===mid && i.type==='standalone';
@@ -1615,7 +1615,7 @@ function classifyAndStore(payload){
       newIdea = integ;
     }
   }
-
+ 
   try{
     postToGAS({
       action: 'postIdea',
@@ -1634,13 +1634,13 @@ function classifyAndStore(payload){
       integratedTo: newIdea.integratedTo || ''
     });
   }catch(e){ console.log(e); }
-
+ 
   openBig = bigKey;
   openMid = mid;
   showPage('tree');
   renderAccordion();
   try{ renderCoCreationUpdate(); }catch(e){}
-
+ 
   var notice = document.getElementById('storeNotice');
   if(notice){
     notice.classList.remove('hidden');
@@ -1653,15 +1653,15 @@ function classifyAndStore(payload){
   }
   return newIdea;
 }
-
+ 
 function toggleBig(key){ openBig = (openBig === key) ? null : key; openMid = null; renderAccordion(); }
 function toggleMid(mid){ openMid = (openMid === mid) ? null : mid; renderAccordion(); }
 function openDefaultModal(key){ var el = document.getElementById('co-default-'+key); if(el) el.classList.toggle('hidden'); }
 function toggleKyoso(key){ var el = document.getElementById('co-kyoso-'+key); if(el) el.classList.toggle('hidden'); }
-
-
-
-
+ 
+ 
+ 
+ 
 function buildKyosoText(cat){
   // デフォルト50% + 当該大分類の新統合すべて50%（内容ベースで合成）
   var def = String(cat.defaultDesc || '');
@@ -1749,7 +1749,7 @@ function runKyosoUpdate(key){
 }
 window.toggleKyosoDetail = toggleKyosoDetail;
 window.runKyosoUpdate = runKyosoUpdate;
-
+ 
 function openIdeaModal(id){
   try{
     var idea = null;
@@ -1821,7 +1821,7 @@ function openIdeaModal(id){
     console.log('✓ openIdeaModal成功:', id, summaryText.length+'字');
   }catch(e){ console.log('openIdeaModal error', e); }
 }
-
+ 
 function closeModal(){ 
   try{
     var modal = document.getElementById('ideaModal');
@@ -1842,7 +1842,7 @@ function closeHowto(){
     if(m){ m.classList.remove('open'); m.style.display='none'; }
   }catch(e){}
 }
-
+ 
 // 音声認識 完全修正版
 function initVoiceRecognition(){
   try{
@@ -1894,9 +1894,9 @@ function initVoiceRecognition(){
     }
   }catch(e){ console.log('voice init error',e); }
 }
-
+ 
 function closeHowto(){ document.getElementById('howtoModal').classList.remove('open'); }
-
+ 
 /* -------------------------------------------------------------
    4. EVENT BOARD LOGIC
 ------------------------------------------------------------- */
@@ -1922,7 +1922,7 @@ function showEventTab(tab){
   }
   renderEventCategoryGrid(); renderEvents(); renderEventIdeas();
 }
-
+ 
 function normalizeEventCategory(cat){
   var s = String(cat||'');
   if(/季節|日常の風景|イルミ|祭/.test(s) && !/子ども|親子/.test(s)) return EVENT_PHOTO_CATEGORIES[0];
@@ -1958,7 +1958,7 @@ function eventMatchesOpenCat(e){
   if(!openEventCat) return true;
   return normalizeEventCategory(e.category) === openEventCat;
 }
-
+ 
 // カテゴリ選択（トグル）：選んだ大分類をAI分析より優先させるため保持しておく
 var _selectedOpinionBig = null;
 function selectOpinionCategory(bigKey, btnEl){
@@ -1973,7 +1973,7 @@ function selectOpinionCategory(bigKey, btnEl){
   buttons.forEach(function(b){ b.classList.remove('ring-2','ring-offset-1','ring-teal-600','bg-teal-50'); });
   if(btnEl){ btnEl.classList.add('ring-2','ring-offset-1','ring-teal-600','bg-teal-50'); }
 }
-
+ 
 function showToast(msg){
   var toast = document.getElementById('toastNotification');
   if(!toast){
@@ -1990,7 +1990,7 @@ function showToast(msg){
     toast.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
   }, 2500);
 }
-
+ 
 function joinEvent(event, id, type){
   try{
     if(event){ event.stopPropagation(); event.preventDefault(); }
@@ -2013,8 +2013,8 @@ function joinEvent(event, id, type){
     console.log('joinEvent - 画面変わらない仕様（前回同様）:', id, type, counts[type]);
   }catch(e){ console.log('joinEvent error', e); }
 }
-
-
+ 
+ 
 function hasJoined(id, type){
   try{
     var c={}; 
@@ -2022,7 +2022,7 @@ function hasJoined(id, type){
     return (c[type]||0)>0;
   }catch(e){ return false; }
 }
-
+ 
 function getSupportBtnClass(id, type){
   var joined = hasJoined(id, type);
   var base = 'px-3 py-1.5 rounded-full text-xs font-bold border ';
@@ -2033,10 +2033,10 @@ function getSupportBtnClass(id, type){
   if(type==='place') return base + 'bg-emerald-600 border-emerald-700 text-white font-black';
   return base + 'bg-slate-800 border-slate-900 text-white font-black';
 }
-
+ 
 function getJoinCount(id, type){ try{ var c={}; try{ c=JSON.parse(localStorage.getItem("join_"+id)||"{}"); }catch(e){} if(type) return c[type]||0; var total=0; for(var k in c){ total+=c[k]; } return total; }catch(e){ return 0; } }
 function toggleEventDetail(id){ var el = document.getElementById('event-detail-'+id); if(el) el.classList.toggle('hidden'); }
-
+ 
 function renderEvents(){
   var el = document.getElementById('event-upcoming-list'); if(!el) return;
   var filtered = EVENT_DATA; if(openEventCat) filtered = filtered.filter(function(e){ return eventMatchesOpenCat(e); });
@@ -2058,7 +2058,7 @@ function renderEvents(){
   });
   el.innerHTML = html;
 }
-
+ 
 function renderEventIdeas(){
   var el = document.getElementById('event-ideas-list'); if(!el) return;
   var filtered = EVENT_IDEAS; if(openEventCat) filtered = filtered.filter(function(e){ return eventMatchesOpenCat(e); });
@@ -2080,7 +2080,7 @@ function renderEventIdeas(){
   });
   el.innerHTML = html;
 }
-
+ 
 function renderKentou(){
   var wrap = document.getElementById('kentouWrap'); if(!wrap) return;
   var all = EVENT_DATA.concat(EVENT_IDEAS);
@@ -2105,7 +2105,7 @@ function renderKentou(){
   });
   wrap.innerHTML = html;
 }
-
+ 
 /* -------------------------------------------------------------
    5. PHOTO GALLERY (HIROBA) LOGIC
 ------------------------------------------------------------- */
@@ -2120,7 +2120,7 @@ function getHirobaCatIcon(cat){
   }
   return '📸';
 }
-
+ 
 function renderHiroba(){
   var container = document.getElementById('hirobaList'); if(!container) return;
   var cats = []; hirobaPosts.forEach(p => { if(cats.indexOf(p.category) === -1) cats.push(p.category); });
@@ -2150,7 +2150,7 @@ function renderHiroba(){
   });
   container.innerHTML = html;
 }
-
+ 
 function toggleHirobaCat(cat){ openHirobaCat = (openHirobaCat === cat) ? null : cat; openHirobaArticle = null; renderHiroba(); }
 function toggleHirobaArticle(ts){ openHirobaArticle = (openHirobaArticle === ts) ? null : ts; renderHiroba(); }
 /* -------------------------------------------------------------
@@ -2177,7 +2177,7 @@ function fillFlyerPreset(key){
   }
   updateFlyerLivePreview();
 }
-
+ 
 function createFlyerFromHatsuan(){
   var title = document.getElementById('evTitle').value;
   var detail = document.getElementById('evDetail').value;
@@ -2185,7 +2185,7 @@ function createFlyerFromHatsuan(){
   if(detail) document.getElementById('flyerF_content').value = detail;
   showPage('flyerCreator');
 }
-
+ 
 function createFlyerFromEventObj(id){
   var ev = EVENT_DATA.concat(EVENT_IDEAS).find(x => x.id === id);
   if(ev){
@@ -2199,7 +2199,7 @@ function createFlyerFromEventObj(id){
   }
   showPage('flyerCreator');
 }
-
+ 
 function createFlyerFromHirobaPost(ts){
   var post = hirobaPosts.find(p => p.timestamp === ts);
   if(post){
@@ -2209,7 +2209,7 @@ function createFlyerFromHirobaPost(ts){
   }
   showPage('flyerCreator');
 }
-
+ 
 function handleFlyerPhotoUpload(e){
   var file = e.target.files[0];
   if(!file) return;
@@ -2221,7 +2221,7 @@ function handleFlyerPhotoUpload(e){
   };
   reader.readAsDataURL(file);
 }
-
+ 
 function applyFlyerPhotoFilter(){
   var filter = document.getElementById('flyerF_filterStyle').value;
   var img = document.getElementById('pPhotoImg');
@@ -2235,12 +2235,12 @@ function applyFlyerPhotoFilter(){
     img.style.filter = 'none';
   }
 }
-
+ 
 function renderFlyerAIGraphic(category, titleText){
   var container = document.getElementById('pAiGraphicContainer'); if(!container) return;
   var svgContent = '';
   var s = (category + " " + titleText).toLowerCase();
-
+ 
   if (category === 'pet' || s.includes('犬') || s.includes('ペット')) {
     svgContent = `<svg viewBox="0 0 100 100" class="w-20 h-20 text-emerald-600 drop-shadow"><circle cx="50" cy="55" r="28" fill="#fde047" opacity="0.4"/><path d="M30,55 Q50,75 70,55" fill="none" stroke="#854d0e" stroke-width="4" stroke-linecap="round"/><circle cx="28" cy="35" r="8" fill="#854d0e"/><circle cx="72" cy="35" r="8" fill="#854d0e"/><circle cx="40" cy="25" r="6" fill="#854d0e"/><circle cx="60" cy="25" r="6" fill="#854d0e"/><path d="M38,62 Q50,78 62,62" fill="#ef4444"/></svg>`;
   } else if (category === 'hobby' || s.includes('バス') || s.includes('ツアー')) {
@@ -2254,14 +2254,14 @@ function renderFlyerAIGraphic(category, titleText){
   }
   container.innerHTML = svgContent;
 }
-
+ 
 function updateFlyerLivePreview(){
   var cat = document.getElementById('flyerF_category').value;
   var canvas = document.getElementById('flyerPreviewCanvas');
   var categoryBadge = document.getElementById('pCategoryBadge');
-
+ 
   canvas.className = 'a4-container p-6 flex flex-col justify-between space-y-3 theme-' + cat;
-
+ 
   const themeNames = {
     seasonal: '🌸 季節の行事',
     kids: '🎈 子ども・親子',
@@ -2270,9 +2270,9 @@ function updateFlyerLivePreview(){
     pet: '🐾 ペットと一緒に',
     general: '🏛️ 一般・コミュニティ'
   };
-
+ 
   categoryBadge.textContent = themeNames[cat] || '一般';
-
+ 
   document.getElementById('pTitle').textContent = document.getElementById('flyerF_title').value || 'イベントタイトル';
   document.getElementById('pContent').textContent = document.getElementById('flyerF_content').value || '詳細内容';
   
@@ -2284,7 +2284,7 @@ function updateFlyerLivePreview(){
   } else {
     pBadge.classList.add('hidden');
   }
-
+ 
   document.getElementById('pDate').textContent = document.getElementById('flyerF_date').value || '日時未設定';
   document.getElementById('pTime').textContent = document.getElementById('flyerF_time').value || '時間未設定';
   document.getElementById('pLocation').textContent = document.getElementById('flyerF_place').value || '場所未設定';
@@ -2294,10 +2294,10 @@ function updateFlyerLivePreview(){
   document.getElementById('pRain').textContent = document.getElementById('flyerF_rain').value || '小雨決行';
   document.getElementById('pApply').textContent = document.getElementById('flyerF_apply').value || '事前申込不要';
   document.getElementById('pContact').textContent = document.getElementById('flyerF_emergency').value || '事務局';
-
+ 
   renderFlyerAIGraphic(cat, document.getElementById('flyerF_title').value);
 }
-
+ 
 function downloadFlyerPDF(){
   var element = document.getElementById('flyerPreviewCanvas');
   var title = document.getElementById('flyerF_title').value || 'yamate_flyer';
@@ -2310,7 +2310,7 @@ function downloadFlyerPDF(){
   };
   html2pdf().set(opt).from(element).save();
 }
-
+ 
 function downloadFlyerPNG(){
   var element = document.getElementById('flyerPreviewCanvas');
   var title = document.getElementById('flyerF_title').value || 'yamate_flyer';
@@ -2321,7 +2321,7 @@ function downloadFlyerPNG(){
     link.click();
   });
 }
-
+ 
 /* -------------------------------------------------------------
    7. INITIALIZATION ON DOM LOAD
 ------------------------------------------------------------- */
@@ -2342,7 +2342,7 @@ document.addEventListener('DOMContentLoaded', function(){
   
   document.getElementById('upcomingCount').textContent = EVENT_DATA.length + '件';
   document.getElementById('ideasCount').textContent = EVENT_IDEAS.length + '件';
-
+ 
   // Attach Input Listeners for Real-time Flyer Updating
   const flyerInputIds = ["flyerF_title","flyerF_content","flyerF_target","flyerF_date","flyerF_time","flyerF_place","flyerF_meet","flyerF_feel","flyerF_rain","flyerF_fee","flyerF_apply","flyerF_emergency","flyerF_category"];
   flyerInputIds.forEach(id => {
@@ -2352,7 +2352,7 @@ document.addEventListener('DOMContentLoaded', function(){
       el.addEventListener('change', updateFlyerLivePreview);
     }
   });
-
+ 
   // Modal Triggers
   document.getElementById('btnShowHowTo').addEventListener('click', function(){ document.getElementById('howtoModal').classList.add('open'); });
   
@@ -2368,7 +2368,7 @@ document.addEventListener('DOMContentLoaded', function(){
     recognition.start();
   });
   document.getElementById('btnVoiceStop').addEventListener('click', function(){ if(recognition) recognition.stop(); });
-
+ 
   // Post Voice Opinion
   document.getElementById('btnPost').addEventListener('click', function(){
     var input = document.getElementById('userInput').value.trim();
@@ -2376,7 +2376,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(!input){ alert('意見を入力してください'); return; }
     document.getElementById('loadingMsg').classList.remove('hidden');
     document.getElementById('slip').innerHTML = '🤖 AIが分析中…5視点＋200字要約を作成中（可能ならクラウドAI）';
-
+ 
     function finishWithAnalysis(analysis, via){
       // ユーザーが大分類ボタンを選んでいれば、AI判定より優先する（中分類以降はAIの判定を維持）
       if(_selectedOpinionBig){
@@ -2415,7 +2415,7 @@ document.addEventListener('DOMContentLoaded', function(){
         + '</div>';
       document.getElementById('slip').innerHTML = slipHtml;
     }
-
+ 
     // まず GAS の analyze を試す（本番AI）。失敗時はローカル整理
     var triedCloud = false;
     try{
@@ -2476,13 +2476,13 @@ document.addEventListener('DOMContentLoaded', function(){
       finishWithAnalysis(generateOpinionAnalysis(input, author), 'local');
     }, 400);
   });
-
+ 
   // Event Tab Buttons
   document.getElementById('btn-upcoming').addEventListener('click', function(){ showEventTab('upcoming'); });
   document.getElementById('btn-ideas').addEventListener('click', function(){ showEventTab('ideas'); });
   document.getElementById('btn-hatsuan').addEventListener('click', function(){ showEventTab('hatsuan'); });
   document.getElementById('btnToggleAdmin').addEventListener('click', function(){ document.getElementById('adminEventForm').classList.toggle('hidden'); });
-
+ 
   // Event Submit
   
   // Event voice recognition
@@ -2513,20 +2513,20 @@ document.addEventListener('DOMContentLoaded', function(){
       });
     }
   })();
-
+ 
   document.getElementById('btnSubmitEvent').addEventListener('click', function(){
     var title = document.getElementById('evTitle').value.trim();
     var detail = document.getElementById('evDetail').value.trim();
     if(!title){ alert('タイトルを入力してください'); return; }
     if(detail.length < 5){ alert('詳細内容を入力してください'); return; }
-
+ 
     var analysis = generateEventAnalysis(title, detail); // カテゴリ判定とネットワーク失敗時の保険にのみ使用
     document.getElementById('evTitle').value = '';
     document.getElementById('evDetail').value = '';
-
+ 
     document.getElementById('evSlip').innerHTML =
       '<div class="bg-white border-2 border-amber-300 rounded-2xl p-4 mt-3 shadow-sm text-xs text-amber-800 font-bold">🤖 AIが企画を200字に整理中…（数秒お待ちください）</div>';
-
+ 
     function showEventSlip(summary200, via, realId){
       var viaLabel = via ? (' <span class="text-[10px] text-slate-400">via '+esc(via)+'</span>') : '';
       var slipHtml = '<div class="bg-white border-2 border-amber-400 rounded-2xl p-4 mt-3 shadow-sm">'
@@ -2538,7 +2538,7 @@ document.addEventListener('DOMContentLoaded', function(){
         + '<button type="button" onclick="showEventTab(\'ideas\')" class="bg-amber-500 text-black px-5 py-2 rounded-full text-xs font-black">🎉 イベントボードで確認 →</button>'
         + '</div>';
       document.getElementById('evSlip').innerHTML = slipHtml;
-
+ 
       EVENT_IDEAS.unshift({
         id: realId || ('idea-' + Date.now()),
         title: title,
@@ -2550,7 +2550,7 @@ document.addEventListener('DOMContentLoaded', function(){
       renderEventIdeas();
       renderKentou();
     }
-
+ 
     postToGASAndWait({
       action: "postEventIdea",
       title: title,
@@ -2583,7 +2583,7 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     });
   });
-
+ 
   document.getElementById('btnSubmitAdmin').addEventListener('click', function(){
     var title = document.getElementById('evTitleAdmin').value.trim();
     if(!title){ alert('タイトルを入力してください'); return; }
@@ -2598,14 +2598,14 @@ document.addEventListener('DOMContentLoaded', function(){
     postToGAS({action:"postEvent", title:title, detail:detail, date:date, time:time, place:place, type:'event', category:EVENT_PHOTO_CATEGORIES[2], status:status});
     showEventTab('upcoming');
   });
-
+ 
   // Hiroba Form
   document.getElementById('btnInstaPermission').addEventListener('click', function(){
     var cb = document.getElementById('instaPermission');
     cb.checked = !cb.checked;
     document.getElementById('instaStatus').textContent = cb.checked ? '✅ 許可設定オン' : '❌ 許可設定オフ';
   });
-
+ 
   document.getElementById('btnSubmitHiroba').addEventListener('click', function(){
     var author = document.getElementById('hirobaAuthor').value.trim() || '匿名';
     var cat = document.getElementById('hirobaCategory').value || '季節の行事';
@@ -2620,7 +2620,7 @@ document.addEventListener('DOMContentLoaded', function(){
     postToGAS({action:"postHiroba", author:author, comment:detail, category:cat, summary:summary, imageUrl:imgUrl, instaPermission:insta});
     document.getElementById('hirobaStatus').textContent = '✅ 投稿完了しました';
   });
-
+ 
   document.getElementById('hirobaImage').addEventListener('change', function(e){
     var file = e.target.files[0]; if(!file) return;
     var reader = new FileReader();
@@ -2677,7 +2677,7 @@ document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
     </div>
   </div>
 </footer>
-
+ 
 <!-- Floating Mobile Bottom Navigation Bar -->
 <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-t border-slate-200 shadow-2xl px-2 py-2 flex justify-around items-center">
   <button type="button" onclick="showPage('home')" class="flex flex-col items-center justify-center p-1 text-slate-700 hover:text-teal-800 transition-colors">
@@ -2705,7 +2705,7 @@ document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
     <span class="text-[10px] font-bold">チラシ</span>
   </button>
 </div>
-
+ 
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function(){
@@ -2715,6 +2715,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-
+ 
 </body>
 </html>
