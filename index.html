@@ -2109,7 +2109,17 @@ function renderKentou(){
 /* -------------------------------------------------------------
    5. PHOTO GALLERY (HIROBA) LOGIC
 ------------------------------------------------------------- */
-var openHirobaCat = null; var openHirobaArticle = null;
+function getHirobaCatIcon(cat){
+  for(var i=0;i<EVENT_PHOTO_CATEGORIES.length;i++){
+    var full = EVENT_PHOTO_CATEGORIES[i];
+    var label = full.replace(/^\S+\s*/, '').trim();
+    if(cat && (cat.indexOf(label) !== -1 || label.indexOf(cat) !== -1)){
+      var iconMatch = full.match(/^(\S+)/);
+      return iconMatch ? iconMatch[1] : '📸';
+    }
+  }
+  return '📸';
+}
 
 function renderHiroba(){
   var container = document.getElementById('hirobaList'); if(!container) return;
@@ -2119,7 +2129,7 @@ function renderHiroba(){
     var count = hirobaPosts.filter(p => p.category === cat).length;
     var isOpen = (openHirobaCat === cat);
     html += '<div class="bg-white border rounded-2xl overflow-hidden mb-3 '+(isOpen?'border-2 border-slate-900 shadow':'')+'">';
-    html += '<button type="button" onclick="toggleHirobaCat(\''+esc(cat)+'\')" class="w-full flex justify-between items-center p-4 text-left '+(isOpen?'bg-slate-900 text-white':'bg-white hover:bg-slate-50')+'"><span class="font-bold flex items-center gap-2">📸 '+esc(cat)+'</span><span class="bg-white text-black px-2.5 py-1 rounded-full text-xs border">'+count+'件</span></button>';
+    html += '<button type="button" onclick="toggleHirobaCat(\''+esc(cat)+'\')" class="w-full flex justify-between items-center p-4 text-left '+(isOpen?'bg-slate-900 text-white':'bg-white hover:bg-slate-50')+'"><span class="font-bold flex items-center gap-2">'+getHirobaCatIcon(cat)+' '+esc(cat)+'</span><span class="bg-white text-black px-2.5 py-1 rounded-full text-xs border">'+count+'件</span></button>';
     if(isOpen){
       html += '<div class="bg-slate-50 p-3 flex flex-col gap-2">';
       var articles = hirobaPosts.filter(p => p.category === cat);
@@ -2143,7 +2153,6 @@ function renderHiroba(){
 
 function toggleHirobaCat(cat){ openHirobaCat = (openHirobaCat === cat) ? null : cat; openHirobaArticle = null; renderHiroba(); }
 function toggleHirobaArticle(ts){ openHirobaArticle = (openHirobaArticle === ts) ? null : ts; renderHiroba(); }
-
 /* -------------------------------------------------------------
    6. FLYER AUTOMATION STUDIO ENGINE
 ------------------------------------------------------------- */
