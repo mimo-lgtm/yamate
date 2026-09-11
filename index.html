@@ -274,7 +274,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     <button type="button" id="btnShowHowTo" class="text-xs bg-white border border-amber-300 text-amber-900 px-3.5 py-1.5 rounded-full font-bold shadow-sm hover:bg-amber-50">詳解ポップアップ →</button>
   </div>
 
-   <!-- 3つの大きなカード -->
+  <!-- 3つの大きなカード -->
   <div class="grid md:grid-cols-3 gap-5">
 
     <!-- ① 意見投稿 -->
@@ -385,6 +385,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 </div>
 </section>
 
+
 <!-- PAGE 2: OPINION POST -->
 <section id="assist" class="page">
 <div class="text-sm text-slate-500 mb-2"><button type="button" onclick="showPage('home')">← ホーム</button></div>
@@ -459,7 +460,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <h1 class="text-3xl font-black">写真投稿広場</h1>
 
 <div class="mt-4">
-<button id="btnToggleFlow3Hiroba" class="w-full sm:w-auto py-2 px-4 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
+<button type="button" id="btnToggleFlow3Hiroba" class="w-full sm:w-auto py-2 px-4 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
   ▼ 使い方の流れを見る
 </button>
 <div id="flow3WrapHiroba" class="hidden mt-3 max-w-2xl">
@@ -510,7 +511,7 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 <h1 class="text-3xl font-black">イベントボード</h1>
 
 <div class="mt-4">
-<button id="btnToggleFlow3Event" class="w-full sm:w-auto py-2 px-4 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
+<button type="button" id="btnToggleFlow3Event" class="w-full sm:w-auto py-2 px-4 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
   ▼ 使い方の流れを見る
 </button>
 <div id="flow3WrapEvent" class="hidden mt-3 max-w-2xl">
@@ -528,9 +529,9 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
   <span>あなたの「こんなことやりたい」を待ってます！下の「発案」ボタンから気軽に投稿してみませんか？</span>
 </div>
 <div class="flex gap-2 mb-4 overflow-x-auto flex-nowrap pb-1 -mx-1 px-1">
-<button type="button" id="btn-upcoming" class="flex-shrink-0 px-5 py-2.5 rounded-full bg-teal-700 text-white font-black text-sm whitespace-nowrap">📅 今後のイベント <span id="upcomingCount">6件</span></button>
-<button type="button" id="btn-ideas" class="flex-shrink-0 px-5 py-2.5 rounded-full bg-white border font-bold text-sm whitespace-nowrap">💡 企画 <span id="ideasCount">7件</span></button>
-<button type="button" id="btn-hatsuan" class="relative flex-shrink-0 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white font-black text-sm shadow-md whitespace-nowrap">
+<button type="button" id="btn-upcoming" onclick="showEventTab('upcoming')" class="flex-shrink-0 px-5 py-2.5 rounded-full bg-teal-700 text-white font-black text-sm whitespace-nowrap">📅 今後のイベント <span id="upcomingCount">6件</span></button>
+<button type="button" id="btn-ideas" onclick="showEventTab('ideas')" class="flex-shrink-0 px-5 py-2.5 rounded-full bg-white border font-bold text-sm whitespace-nowrap">💡 企画 <span id="ideasCount">7件</span></button>
+<button type="button" id="btn-hatsuan" onclick="showEventTab('hatsuan')" class="relative flex-shrink-0 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white font-black text-sm shadow-md whitespace-nowrap">
   ✍️ 発案
   <span class="absolute -top-2.5 -right-2 bg-white text-rose-600 text-[9px] font-black px-2 py-0.5 rounded-full shadow border border-rose-200 animate-bounce">👆クリック</span>
 </button>
@@ -1950,10 +1951,14 @@ function closeHowto(){ document.getElementById('howtoModal').classList.remove('o
    4. EVENT BOARD LOGIC
 ------------------------------------------------------------- */
 function showEventTab(tab){
-  currentTab = tab;
-  document.getElementById('event-upcoming-list').classList.add('hidden');
-  document.getElementById('event-ideas-list').classList.add('hidden');
-  document.getElementById('event-hatsuan-list').classList.add('hidden');
+  currentTab = tab || 'upcoming';
+  var upcomingList = document.getElementById('event-upcoming-list');
+  var ideasList = document.getElementById('event-ideas-list');
+  var hatsuanList = document.getElementById('event-hatsuan-list');
+  if(!upcomingList || !ideasList || !hatsuanList){ return; }
+  upcomingList.classList.add('hidden');
+  ideasList.classList.add('hidden');
+  hatsuanList.classList.add('hidden');
   
   var baseBtn = 'flex-shrink-0 px-5 py-2.5 rounded-full bg-white border font-bold text-sm whitespace-nowrap';
   var activeBtn = 'flex-shrink-0 px-5 py-2.5 rounded-full bg-teal-700 text-white font-black text-sm whitespace-nowrap';
@@ -2683,24 +2688,21 @@ document.addEventListener('DOMContentLoaded', function(){
     };
     reader.readAsDataURL(file);
   });
-document.getElementById('btnToggleFlow3')?.addEventListener('click', function(){
-  var w=document.getElementById('flow3Wrap');
-  if(!w) return;
-  w.classList.toggle('hidden');
-  this.textContent = w.classList.contains('hidden')? '▼ 使い方の流れを見る' : '▲ 閉じる';
-});
-document.getElementById('btnToggleFlow3Hiroba')?.addEventListener('click', function(){
-  var w=document.getElementById('flow3WrapHiroba');
-  if(!w) return;
-  w.classList.toggle('hidden');
-  this.textContent = w.classList.contains('hidden')? '▼ 使い方の流れを見る' : '▲ 閉じる';
-});
-document.getElementById('btnToggleFlow3Event')?.addEventListener('click', function(){
-  var w=document.getElementById('flow3WrapEvent');
-  if(!w) return;
-  w.classList.toggle('hidden');
-  this.textContent = w.classList.contains('hidden')? '▼ 使い方の流れを見る' : '▲ 閉じる';
-});
+function bindFlowToggle(btnId, wrapId){
+  var btn = document.getElementById(btnId);
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var w = document.getElementById(wrapId);
+    if(!w) return;
+    w.classList.toggle('hidden');
+    this.textContent = w.classList.contains('hidden') ? '▼ 使い方の流れを見る' : '▲ 閉じる';
+  });
+}
+bindFlowToggle('btnToggleFlow3', 'flow3Wrap');
+bindFlowToggle('btnToggleFlow3Hiroba', 'flow3WrapHiroba');
+bindFlowToggle('btnToggleFlow3Event', 'flow3WrapEvent');
+bindFlowToggle('btnToggleFlow3HomeHiroba', 'flow3WrapHomeHiroba');
+bindFlowToggle('btnToggleFlow3HomeEvent', 'flow3WrapHomeEvent');
   // Load backend sheet data
   loadFromSheet();
   updateFlyerLivePreview();
