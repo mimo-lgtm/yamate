@@ -168,6 +168,12 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
 .flow-step h4{font-size:12px;font-weight:800;margin:2px 0;}
 .flow-step p{font-size:10px;color:#64748b;line-height:1.4;}
 @media(max-width:640px){ .flow3{flex-direction:column;} }  
+ #eventTabBtns{display:flex;flex-direction:column;gap:8px;width:100%;}
+#eventTabBtns > button{width:100%;box-sizing:border-box;text-align:center;}
+@media(min-width:768px){
+  #eventTabBtns{flex-direction:row;flex-wrap:wrap;}
+  #eventTabBtns > button{width:auto;}
+} 
 </style>
 </head>
 <body>
