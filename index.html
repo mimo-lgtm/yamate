@@ -274,29 +274,29 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
     <button type="button" id="btnShowHowTo" class="text-xs bg-white border border-amber-300 text-amber-900 px-3.5 py-1.5 rounded-full font-bold shadow-sm hover:bg-amber-50">詳解ポップアップ →</button>
   </div>
 
-  <!-- 3つの大きなカード -->
+   <!-- 3つの大きなカード -->
   <div class="grid md:grid-cols-3 gap-5">
 
     <!-- ① 意見投稿 -->
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-teal-700"></div>
       <div class="p-5 flex flex-col flex-1">
-       <div class="flex items-center gap-3 mb-3">
-  <div class="w-12 h-12 ...">💡</div>
-  <div>
-    <div class="font-black ...">意見投稿</div>
-    <div class="text-[11px] ...">気づきをそのまま、声に</div>
-  </div>
-</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 flex-shrink-0 rounded-2xl bg-teal-50 flex items-center justify-center text-2xl">💡</div>
+          <div>
+            <div class="font-black text-base text-slate-900">意見投稿</div>
+            <div class="text-[11px] text-slate-600 font-bold">気づきをそのまま、声に</div>
+          </div>
+        </div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-       <strong class="font-bold text-red-600">「ここ、もっとこうだったらいいのになぁ…」</strong> 地域をより良くするためのあなたのひらめきや率直な想いを、そのまま言葉にしてください。AIが5つの視点で200字にギュッと要約・整理し、テーマごとにわかりやすく分類してくれます。
+          <strong class="font-bold text-red-600">「ここ、もっとこうだったらいいのになぁ…」</strong> 地域をより良くするためのあなたのひらめきや率直な想いを、そのまま言葉にしてください。AIが5つの視点で200字にギュッと要約・整理し、テーマごとにわかりやすく分類してくれます。
         </p>
         <div class="flex flex-wrap gap-1.5 mt-4 mb-3">
           <span class="bg-teal-50 text-teal-700 text-[10px] font-bold px-2.5 py-1 rounded-full">🎤 音声入力</span>
           <span class="bg-teal-50 text-teal-700 text-[10px] font-bold px-2.5 py-1 rounded-full">🏷️ ワンタップタグ</span>
           <span class="bg-teal-50 text-teal-700 text-[10px] font-bold px-2.5 py-1 rounded-full">🙈 匿名OK</span>
         </div>
-        <button id="btnToggleFlow3" class="w-full py-2 px-3 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
+        <button type="button" id="btnToggleFlow3" class="w-full py-2 px-3 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
           ▼ 使い方の流れを見る
         </button>
         <div id="flow3Wrap" class="hidden mt-3">
@@ -324,19 +324,29 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
           </div>
         </div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-         <strong class="font-bold text-red-600">「あぁ、ちょっとココいい感じ♡」</strong> 日常のちょっとした風景や、町のいいところを写真で残しませんか？アプリに登録するだけで、Instagramへの自動投稿も可能。あなたの写真が全国に広がるかも！
+          <strong class="font-bold text-red-600">「あぁ、ちょっとココいい感じ♡」</strong> 日常のちょっとした風景や、町のいいところを写真で残しませんか？アプリに登録するだけで、Instagramへの自動投稿も可能。あなたの写真が全国に広がるかも！
         </p>
-        <div class="flex flex-wrap gap-1.5 mt-4 mb-4">
+        <div class="flex flex-wrap gap-1.5 mt-4 mb-3">
           <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full">📸 その場で投稿</span>
           <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-1 rounded-full">🔗 Instagram自動連携</span>
         </div>
-        <button type="button" onclick="showPage('hiroba')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-black text-sm hover:bg-slate-800 transition-colors">
-          📸 写真を投稿 →
+        <button type="button" id="btnToggleFlow3HomeHiroba" class="w-full py-2 px-3 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
+          ▼ 使い方の流れを見る
+        </button>
+        <div id="flow3WrapHomeHiroba" class="hidden mt-3">
+          <div class="flow3">
+            <div class="flow-step"><div class="num">STEP 01</div><div class="ic">📸</div><h4>写真をパシャッと撮る</h4><p>お気に入りの景色や瞬間を、その場でスマホ撮影</p></div>
+            <div class="flow-step"><div class="num">STEP 02</div><div class="ic">🏷️</div><h4>カテゴリと一言を添える</h4><p>6つのテーマから選び、短いコメントを添えるだけ</p></div>
+            <div class="flow-step"><div class="num">STEP 03</div><div class="ic">📲</div><h4>Instagramにも（任意）</h4><p>「投稿の許可」をONにすれば自動でシェアされます</p></div>
+          </div>
+        </div>
+        <button type="button" onclick="showPage('hiroba')" class="mt-4 w-full bg-slate-900 text-white py-3 rounded-xl font-black text-sm hover:bg-slate-800 transition-colors">
+          写真を投稿 →
         </button>
       </div>
     </div>
 
-     <!-- ③ イベントボード -->
+    <!-- ③ イベントボード -->
     <div class="group relative bg-white rounded-[22px] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all flex flex-col overflow-hidden">
       <div class="h-[5px] bg-gradient-to-r from-amber-500 to-rose-500"></div>
       <div class="p-5 flex flex-col flex-1">
@@ -348,28 +358,32 @@ main{padding-bottom:0;min-height:auto;overflow:visible;}
           </div>
         </div>
         <p class="text-xs text-slate-600 leading-relaxed flex-1">
-         <strong class="font-bold text-red-600">「こんなことやれないかなぁ！」</strong> という企画案があれば、思いつきでもOK。AIが立派な企画書に仕上げてくれます。みんなの応援投票でイベント化できます。
+          <strong class="font-bold text-red-600">「こんなことやれないかなぁ！」</strong> という企画案があれば、思いつきでもOK。AIが立派な企画書に仕上げてくれます。みんなの応援投票でイベント化できます。
         </p>
-        <div class="flex flex-wrap gap-1.5 mt-4 mb-4">
+        <div class="flex flex-wrap gap-1.5 mt-4 mb-3">
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">📋 13項目を自動反映</span>
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">🗳️ 応援投票で実現</span>
           <span class="bg-amber-50 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-full">🎨 チラシは10秒</span>
         </div>
-        <div class="flex flex-col gap-2">
-          <button type="button" onclick="showPage('event','hatsuan')" class="w-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white py-3 rounded-xl font-black text-sm hover:brightness-105 transition-all">
-            💡 イベント発案 →
-          </button>
-          <button type="button" onclick="showPage('flyerCreator')" class="w-full bg-white border-2 border-amber-300 text-amber-800 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-50 transition-colors">
-            🎨 チラシ作成スタジオへ
-          </button>
+        <button type="button" id="btnToggleFlow3HomeEvent" class="w-full py-2 px-3 rounded-full bg-white border border-teal-200 text-teal-700 text-xs font-bold hover:bg-teal-50">
+          ▼ 使い方の流れを見る
+        </button>
+        <div id="flow3WrapHomeEvent" class="hidden mt-3">
+          <div class="flow3">
+            <div class="flow-step"><div class="num">STEP 01</div><div class="ic">💡</div><h4>思いつきを書く</h4><p>企画タイトルと内容を入力するだけでOK</p></div>
+            <div class="flow-step"><div class="num">STEP 02</div><div class="ic">🤖</div><h4>AIが200字に整理</h4><p>内容を自動で企画書らしい文章にまとめます</p></div>
+            <div class="flow-step"><div class="num">STEP 03</div><div class="ic">🗳️</div><h4>応援投票で実現へ</h4><p>賛同が集まれば本当にイベントとして形になります</p></div>
+          </div>
         </div>
+        <button type="button" onclick="showPage('event','hatsuan')" class="mt-4 w-full bg-gradient-to-r from-rose-500 via-amber-500 to-orange-500 text-white py-3 rounded-xl font-black text-sm hover:brightness-105 transition-all">
+          イベント発案 →
+        </button>
       </div>
     </div>
- 
+
   </div>
 </div>
 </section>
-
 
 <!-- PAGE 2: OPINION POST -->
 <section id="assist" class="page">
